@@ -1,25 +1,25 @@
-New log file opened at Mon Jun 01 15:56:50 PDT 2015 by 20515@Weis-MBP.sv.cmu.local
-Taking next connection to: 56084
-New client attempting to connect on port: 56085-56084
-  Address = /10.0.23.60:56084
-This client on port 56085 has uuid fd5a7068-35c1-4f5e-903a-cecd361fdccc configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-fd5a7068-35c1-4f5e-903a-cecd361fdccc
-Taking next connection to: 56084
-New client attempting to connect on port: 56086-56084
-  Address = /10.0.23.60:56084
-Handshake exception on socket: 56086
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.io.EOFException
-	at java.io.DataInputStream.readInt(DataInputStream.java:392)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 56084
-New client attempting to connect on port: 56087-56084
-  Address = /10.0.23.60:56084
-This client on port 56087 has uuid f6b3187a-a240-434d-811a-d62addb7ef91 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-fd5a7068-35c1-4f5e-903a-cecd361fdccc, activator-f6b3187a-a240-434d-811a-d62addb7ef91
-Taking next connection to: 56084
+New log file opened at Mon Jun 01 16:03:21 PDT 2015 by 20789@Weis-MBP.sv.cmu.local
+Taking next connection to: 56141
+New client attempting to connect on port: 56142-56141
+  Address = /10.0.23.60:56141
+This client on port 56142 has uuid f7880655-abc1-4845-97eb-0d80b73e823b configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-f7880655-abc1-4845-97eb-0d80b73e823b
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56141

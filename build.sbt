@@ -1,4 +1,4 @@
-name := """JPL-backend"""
+name := """climate-service"""
 
 version := "1.0-SNAPSHOT"
 
