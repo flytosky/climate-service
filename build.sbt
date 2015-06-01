@@ -21,3 +21,6 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-core" % "1.10.19" % "test",
   "mysql" % "mysql-connector-java" % "5.1.34"
 )
+
+
+fork in run := true
