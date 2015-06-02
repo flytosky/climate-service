@@ -1,0 +1,202 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Climate Service</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<h2 class="text-center">Service: 2-D Variable Map</h2>
+
+<p class="text-center col-md-8 col-md-offset-2">This service generates a map of a 2-dimensional variable with time
+    averaging and spatial
+    subsetting. Select a data source (model or observation), a variable name, a time range, and a spatial range
+    (lat-lon box) below.
+</p>
+
+<div class="container col-md-6">
+    <form>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="col-md-2">Parameter Name</th>
+                <th class="col-md-4">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>data source</td>
+                <td>
+                    <select class="form-control">
+                        <option>NASA/MODIS</option>
+                        <option>NASA/AMSRE</option>
+                        <option>NASA/TRMM</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>variable name</td>
+                <td>
+                    <select class="form-control">
+                        <option>Total Cloud Fraction</option>
+                        <option>Surface Temperature</option>
+                        <option>Sea Surface Temperature</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>start year-month</td>
+                <td><input type="text" class="form-control" id="startYearMonth" placeholder="2004-01"></td>
+            </tr>
+            <tr>
+                <td>end year-month</td>
+                <td><input type="text" class="form-control" id="endYearMonth" placeholder="2004-12"></td>
+            </tr>
+            <tr>
+                <td>select months</td>
+                <td>
+                    <div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox1" value="option1" checked> 1
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2" checked> 2
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox3" value="option3" checked> 3
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox4" value="option1" checked> 4&nbsp;&nbsp;
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox5" value="option2" checked> 5&nbsp;&nbsp;
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox6" value="option3" checked> 6&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox7" value="option1" checked> 7
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox8" value="option2" checked> 8
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox9" value="option3" checked> 9
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox10" value="option1" checked> 10
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox11" value="option2" checked> 11
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox12" value="option3" checked> 12
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>start lat (deg)</td>
+                <td><input type="text" class="form-control" id="startLat" placeholder="-90"></td>
+            </tr>
+            <tr>
+                <td>end lat (deg)</td>
+                <td><input type="text" class="form-control" id="endLat" placeholder="90"></td>
+            </tr>
+            <tr>
+                <td>start lon (deg)</td>
+                <td><input type="text" class="form-control" id="startLon" placeholder="0"></td>
+            </tr>
+            <tr>
+                <td>end long (deg)</td>
+                <td><input type="text" class="form-control" id="endLon" placeholder="360"></td>
+            </tr>
+            <tr>
+                <td>color scale</td>
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> linear
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> logarithmic
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>execution purpose</td>
+                <td>
+                    <textarea class="form-control" rows="5" id="executionPurpose">
+                    </textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">Get Plot</button>
+        </div>
+    </form>
+</div>
+
+<div class="container col-md-6">
+    <form>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Output</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a href="http://einstein.sv.cmu.edu:9002/static/twoDimMap/6879a2eedd1910f4c45e6213d342e066/nasa_modis_clt_200401_200412_Annual.jpeg">
+                        <img src="http://einstein.sv.cmu.edu:9002/static/twoDimMap/6879a2eedd1910f4c45e6213d342e066/nasa_modis_clt_200401_200412_Annual.jpeg"
+                             class="img-responsive">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="http://einstein.sv.cmu.edu:9002/static/twoDimMap/6879a2eedd1910f4c45e6213d342e066/nasa_modis_clt_200401_200412_Annual.jpeg">
+                        <textarea class="form-control" rows="3" id="comment">http://einstein.sv.cmu.edu:9002/static/twoDimMap/6879a2eedd1910f4c45e6213d342e066/nasa_modis_clt_200401_200412_Annual.jpeg</textarea>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea class="form-control" rows="10" id="comment">
+                        {
+    "dataUrl": "http://einstein.sv.cmu.edu:9002/static/twoDimMap/3cce4d6630dd6a3f9b9b2155a2d95ff6/nasa_modis_clt_200401_200412_JFMAJASOND.nc",
+    "message": "program name: octaveWrapper\nsourceName: nasa_modis\nvarName: clt\nstartTimeStr: 200401\nstopTimeStr: 200412\nlonRange: 0,360\nlonRange: 0.000000\nlonRange: 360.000000\nlatRange: -90,90\n1. NASA_MODIS\n2. clt\n3. 200401\n4. 200412\n5. 0,360\n6. -90,90\n7. 1,2,3,4,7,8,9,10,11,12\n8. /media/sdb/trunk/services/svc/svc/static/twoDimMap/3cce4d6630dd6a3f9b9b2155a2d95ff6\n9. 0\nstart year = 2000.000000\n, month = 3.000000\nstop year = 2011.000000\n, month = 9.000000\nfigFile: nasa_modis_clt_200401_200412_JFMAJASOND.jpeg\nfigFilePath: /media/sdb/trunk/services/svc/svc/static/twoDimMap/3cce4d6630dd6a3f9b9b2155a2d95ff6/nasa_modis_clt_200401_200412_JFMAJASOND.jpeg\ndataFile: nasa_modis_clt_200401_200412_JFMAJASOND.nc\ndataFilePath: /media/sdb/trunk/services/svc/svc/static/twoDimMap/3cce4d6630dd6a3f9b9b2155a2d95ff6/nasa_modis_clt_200401_200412_JFMAJASOND.nc\nnumber of month = 12\nnumber of files = 1\n+-----------------------------------------------------------------------------+\n|                                                                             |\n|       Total Cloud Fraction, 2004/01-2004/12 climatology (%), JFMAJASOND     |\n|   latitude(deg)                                                             |\n|         +-----------------------------------------------------------+       |\n|         | ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++|       |\n|      50 |+++++++         ++    +++++++++++++++++++++++++++++++  ++++|       |\n|         |++++++++++ ++      ++++++             ++    +++++++   ++ ++|       |\n|         | +++++++++++ +++ +++++          ++     +++++++++++      ++ |       |\n|       0 |+++ +++++  +++++++++++                     +++++++++    +++|       |\n|         |++  ++++       +++++++++++++ +              ++++  ++++     |       |\n|         | ++ ++++++        ++++++++++ +    +            +  +++      |       |\n|         |  +++     ++      +++++++  ++++               +++++        |       |\n|     -50 |+         ++                                  ++++++ +    +|       |\n|         |++++++++++++++++++++++++++++    +++++++++++++++++++++++++++|       |\n|         +-----------------------------------------------------------+       |\n|         0      50       100     150     200      250     300     350        |\n|                                longitude(deg)                               |\n|         +-----------------------------------------------------------+       |\n|         +-----------------------------------------------------------+       |\n|            10    20     30    40     50    60    70     80    90            |\n|                           Total Cloud Fraction (%)                          |\n|                                                                             |\n+-----------------------------------------------------------------------------+\n\n  scalar structure containing the fields:\n\n    Name = /\n    Format = classic\n    Dimensions =\n\n      1x2 struct array containing the fields:\n\n        Name\n        Length\n        Unlimited\n\n    Variables =\n\n      1x3 struct array containing the fields:\n\n        Name\n        Datatype\n        Dimensions\n        Attributes\n\n",
+    "success": true,
+    "url": "http://einstein.sv.cmu.edu:9002/static/twoDimMap/3cce4d6630dd6a3f9b9b2155a2d95ff6/nasa_modis_clt_200401_200412_JFMAJASOND.jpeg"
+}
+                    </textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">Download Data</button>
+        </div>
+    </form>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
