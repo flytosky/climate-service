@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@(climateServiceForm: play.data.Form[models.ClimateService])
+@import helper._
+
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Add a New Climate Service</title>
-
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/assets/javascripts/parameter.js"></script>
 
     <!-- Bootstrap -->
@@ -26,34 +30,39 @@
 <div class="container col-md-6">
     <h2>Add</h2>
 
-    <form>
+    <!-- <form> -->
+    @form(routes.ClimateServiceController.addClimateService()) {
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" id="name" placeholder="2-D-Variable-Map">
+            <input type="text" class="form-control" id="name" name="name" placeholder="2-D-Variable-Map">
         </div>
         <div class="form-group">
             <label>Purpose</label>
-            <input type="text" class="form-control" id="purpose" placeholder="climate service description">
+            <input type="text" class="form-control" id="purpose" name="purpose" placeholder="climate service description">
         </div>
         <div class="form-group">
             <label>Web Service API</label>
-            <input type="text" class="form-control" id="url" placeholder="cmac/web/twoDimMap">
+            <input type="text" class="form-control" id="url" name="url" placeholder="cmac/web/twoDimMap">
         </div>
         <div class="form-group">
             <label>Scenario</label>
-            <input type="text" class="form-control" id="scenario" placeholder="12">
+            <input type="text" class="form-control" id="scenario" name="scenario" placeholder="12">
         </div>
         <div class="form-group">
             <label>Version</label>
-            <input type="text" class="form-control" id="version" placeholder="1">
+            <input type="text" class="form-control" id="version" name="version" placeholder="1">
         </div>
         <div class="form-group">
-            <label>Root Service</label>
-            <input type="text" class="form-control" id="rootService" placeholder="2">
+            <label>Root Service Id</label>
+            <input type="text" class="form-control" id="rootServiceId" name="rootServiceId" placeholder="2">
         </div>
         <div class="form-group">
             <label>Homepage URL</label>
             <input type="text" class="form-control" id="homepage" placeholder="http://www.google.com">
+        </div>
+        <div class="form-group">
+            <!-- <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#confirm">Add a Climate Service</button> -->
+            <button type="submit" class="btn btn-success btn-lg" id="addAClimateService">Add a Climate Service</button>
         </div>
         <div class="well">
             <form>
@@ -85,10 +94,8 @@
                 </div>
             </form>
         </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#confirm">Add a Climate Service</button>
-        </div>
-    </form>
+        
+    <!--</form>  --> }
 </div>
 
 <!-- Modal -->
@@ -105,7 +112,7 @@
                 <p>Are you sure you want to add this climate service?</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="Javascript:window.location.href='/climateService/add'">Submit</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

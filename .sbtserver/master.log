@@ -1,5 +1,5 @@
-New log file opened at Mon Jun 01 16:47:21 PDT 2015 by 21290@Weis-MBP.sv.cmu.local
-jvm 21290@Weis-MBP.sv.cmu.local
+New log file opened at Thu Jun 18 13:55:59 PDT 2015 by 1453@Weis-MBP.sv.cmu.local
+jvm 1453@Weis-MBP.sv.cmu.local
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=24.65-b04
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.7
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:PermSize=64m, -XX:MaxPermSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in /Users/weiwang/climate-service/project, returning: (climate-service-build)
 Loading project definition from /Users/weiwang/climate-service/project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@38e1bd2f, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@6e357ec9, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,321 +65,9 @@ Set current project to climate-service (in build file:/Users/weiwang/climate-ser
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> {file:/Users/weiwang/climate-service/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@4e915af4, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Read from stdout: Compiling 3 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 3 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Running cached compiler 55b23d2d, interfacing (CompilerInterface) with Scala compiler version 2.11.4
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
-	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: two errors found
-two errors found
-Compilation failed (CompilerInterface)
-Read from stdout: (compile:compileIncremental) Compilation failed
-(compile:31mcompileIncremental0m) Compilation failed
-Total time: 6 s, completed Jun 1, 2015 4:47:33 PM
-> server-post-command-error-handler
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/Users/weiwang/climate-service/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@6c214907, check cycles: false
-Total time: 0 s, completed Jun 1, 2015 4:47:33 PM
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/Users/weiwang/climate-service/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@42f9d919, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Read from stdout: Compiling 3 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 3 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Running cached compiler 5d59a011, interfacing (CompilerInterface) with Scala compiler version 2.11.4
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
-	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: two errors found
-two errors found
-Compilation failed (CompilerInterface)
-Read from stdout: (compile:compileIncremental) Compilation failed
-(compile:31mcompileIncremental0m) Compilation failed
-Total time: 2 s, completed Jun 1, 2015 4:47:36 PM
-> server-post-command-error-handler
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/Users/weiwang/climate-service/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@2fad6aa1, check cycles: false
-Total time: 0 s, completed Jun 1, 2015 4:47:36 PM
-> server-post-command-cleanup
-> server-handle-next-server-request
 > compile
 Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@793ad420, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Read from stdout: Compiling 3 Scala sources and 2 Java sources to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 3 Scala sources and 2 Java sources to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Running cached compiler 5706df49, interfacing (CompilerInterface) with Scala compiler version 2.11.4
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
-	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: /Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-/Users/weiwang/climate-service/conf/routes:6: value addAClimateService is not a member of object controllers.Application
-Read from stdout: GET     /                           controllers.Application.addAClimateService()
-GET     /                           controllers.Application.addAClimateService()
-Read from stdout: two errors found
-two errors found
-Compilation failed (CompilerInterface)
-Read from stdout: (compile:compileIncremental) Compilation failed
-(compile:31mcompileIncremental0m) Compilation failed
-Total time: 1 s, completed Jun 1, 2015 4:48:39 PM
-> server-post-command-error-handler
-> server-post-command-cleanup
-> server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@86d6c9a, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/app/controllers/Application.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-
-Read from stdout: Compiling 3 Scala sources and 2 Java sources to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 3 Scala sources and 2 Java sources to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Running cached compiler 52dabe11, interfacing (CompilerInterface) with Scala compiler version 2.11.4
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
-	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Scala compilation took 3.204254 s
-Attempting to call com.sun.tools.javac.api.JavacTool@28838294 directly...
-Java compilation took 0.386278 s
-Java analysis took 0.00514 s
-Java compile + analysis took 0.397169 s
-Invalidating /Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala...
-Invalidating (transitively) by inheritance from /Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala...
-Initial set of included nodes: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-Invalidated by transitive inheritance dependency: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
-The /Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala source file has the following regular definitions changed:
-	notify, format, addAClimateService, wait, $asInstanceOf, productArity, equals, asInstanceOf, f, synchronized, _display_, $isInstanceOf, ref, canEqual, productPrefix, notifyAll, readResolve, isInstanceOf, apply, ==, clone, copy, toString, !=, getClass, copy$default$1, render, ne, eq, productIterator, ##, finalize, productElement, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala...
-Invalidating (transitively) by inheritance from /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala...
-Initial set of included nodes: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-Invalidated by transitive inheritance dependency: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
-The /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala source file has the following regular definitions changed:
-	addAClimateService, index.
-All member reference dependencies will be considered within this context.
-None of the modified names appears in /Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/main.template.scala. This dependency is not being considered for invalidation.
-New invalidations:
-	Set()
-Initial set of included nodes: Set()
-Previously invalidated, but (transitively) depend on new invalidations:
-	Set()
-All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-Total time: 4 s, completed Jun 1, 2015 4:49:01 PM
-> server-post-command-cleanup
-> server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@785f0f9a, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-
-Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Attempting to call com.sun.tools.javac.api.JavacTool@1d0a3bf4 directly...
-Read from stdout: /Users/weiwang/climate-service/app/controllers/Application.java:15: method render in class views.html.addAClimateService cannot be applied to given types;
-Read from stdout: required: no arguments
-Read from stdout: found: java.lang.String
-Read from stdout: reason: actual and formal argument lists differ in length
-/Users/weiwang/climate-service/app/controllers/Application.java:15: method render in class views.html.addAClimateService cannot be applied to given types;
-  required: no arguments
-  found: java.lang.String
-  reason: actual and formal argument lists differ in length
-Read from stdout: addAClimateService.render
-addAClimateService.render
-Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
-(compile:31mcompileIncremental0m) javac returned nonzero exit code
-Total time: 0 s, completed Jun 1, 2015 4:49:11 PM
-> server-post-command-error-handler
-> server-post-command-cleanup
-> server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@509d6d0, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/Application.java)
-
-Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Attempting to call com.sun.tools.javac.api.JavacTool@67b9ac62 directly...
-Java compilation took 0.070313 s
-Java analysis took 0.00249 s
-Java compile + analysis took 0.076238 s
-New invalidations:
-	Set()
-Initial set of included nodes: Set()
-Previously invalidated, but (transitively) depend on new invalidations:
-	Set()
-All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-Total time: 0 s, completed Jun 1, 2015 4:49:14 PM
-> server-post-command-cleanup
-> server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@493a390c, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@6bd30afa, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -396,12 +84,12 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 0 s, completed Jun 1, 2015 4:49:23 PM
+Total time: 1 s, completed Jun 18, 2015 1:56:07 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@57cc97d8, check cycles: false
+> {file:/Users/weiwang/climate-service/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@5a8081b4, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -418,30 +106,58 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 0 s, completed Jun 1, 2015 4:50:20 PM
+Total time: 1 s, completed Jun 18, 2015 1:56:08 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@7b891faf, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 1:56:08 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@28b9e654, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed Jun 18, 2015 1:56:09 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > backgroundRun
 Evaluating tasks: compile:backgroundRun
-Running task... Cancel: sbt.server.ServerTaskCancellation@4adda4f3, check cycles: false
-Total time: 0 s, completed Jun 1, 2015 4:50:25 PM
+Running task... Cancel: sbt.server.ServerTaskCancellation@76e6855e, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:19:42 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/Users/weiwang/climate-service/}root/*:playForkConfig
 Evaluating tasks: *:playForkConfig
-Running task... Cancel: sbt.server.ServerTaskCancellation@5606ff11, check cycles: false
-Total time: 0 s, completed Jun 1, 2015 4:50:28 PM
+Running task... Cancel: sbt.server.ServerTaskCancellation@35a21c3, check cycles: false
+Total time: 1 s, completed Jun 18, 2015 2:19:46 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > root/playForkNotifyStart http://localhost:9000
 Evaluating tasks: *:playForkNotifyStart
-Running task... Cancel: sbt.server.ServerTaskCancellation@237020dc, check cycles: false
-Total time: 0 s, completed Jun 1, 2015 4:50:29 PM
+Running task... Cancel: sbt.server.ServerTaskCancellation@25e84052, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:19:46 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/Users/weiwang/climate-service/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@64ccd4b0, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@2dd39772, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -461,37 +177,711 @@ All initially invalidated sources: Set()
 Copy resource mappings: 
 	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
 	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
-Total time: 1 s, completed Jun 1, 2015 4:50:32 PM
+Total time: 2 s, completed Jun 18, 2015 2:19:51 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/Users/weiwang/climate-service/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@19926789, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@c72f486, check cycles: false
 
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+	modified: Set()
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+Initial directly invalidated sources: Set()
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+All initially invalidated sources: Set()
 
-Read from stdout: Compiling 1 Scala source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 1 Scala source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:35:02 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@1b81bbad, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@ae72053 directly...
+Read from stdout: /Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:136: variable response is already defined in method serviceModels()
+/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:136: variable response is already defined in method serviceModels()
+Read from stdout: JsonNode response = RESTfulCalls.postAPI(
+Read from stdout: 				url.substring(1, url.length() - 1), (JsonNode) object);
+JsonNode response = RESTfulCalls.postAPI(
+				url.substring(1, url.length() - 1), (JsonNode) object);
+Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
+(compile:compileIncremental) javac returned nonzero exit code
+Total time: 2 s, completed Jun 18, 2015 2:44:56 PM
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@4188eab7, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@3b07da52 directly...
+Java compilation took 0.244865 s
+Java analysis took 0.216649 s
+Java compile + analysis took 0.470241 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 2 s, completed Jun 18, 2015 2:44:59 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@3d45d628, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@300020f6 directly...
+Java compilation took 0.422395 s
+Java analysis took 0.088056 s
+Java compile + analysis took 0.526268 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 2 s, completed Jun 18, 2015 2:46:40 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@6392e8cd, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed Jun 18, 2015 2:46:47 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@3692682d, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:46:54 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 1
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@349eec53, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:48:11 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@7714b3d5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed Jun 18, 2015 2:48:30 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@34832db9, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:48:33 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@a2e0ecb, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:48:36 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@4e6c5530, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:48:37 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1b795929, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:48:42 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@16aa88bf, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@6056eeb3 directly...
+Read from stdout: /Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:136: cannot find symbol
+Read from stdout: symbol:   variable response
+Read from stdout: location: class controllers.ClimateServiceController
+/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:136: cannot find symbol
+  symbol:   variable response
+  location: class controllers.ClimateServiceController
+Read from stdout: response
+response
+Read from stdout: /Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:139: cannot find symbol
+Read from stdout: symbol:   variable response
+Read from stdout: location: class controllers.ClimateServiceController
+/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:139: cannot find symbol
+  symbol:   variable response
+  location: class controllers.ClimateServiceController
+Read from stdout: response
+response
+Read from stdout: /Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:143: cannot find symbol
+Read from stdout: symbol:   variable response
+Read from stdout: location: class controllers.ClimateServiceController
+/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java:143: cannot find symbol
+  symbol:   variable response
+  location: class controllers.ClimateServiceController
+Read from stdout: response
+response
+Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
+(compile:compileIncremental) javac returned nonzero exit code
+Total time: 1 s, completed Jun 18, 2015 2:49:41 PM
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@6824c196, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@1acfa65f directly...
+Java compilation took 0.226299 s
+Java analysis took 0.165277 s
+Java compile + analysis took 0.409075 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed Jun 18, 2015 2:49:43 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@45f57625, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@5bb45a6f directly...
+Java compilation took 0.030346 s
+Java analysis took 0.006017 s
+Java compile + analysis took 0.040321 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed Jun 18, 2015 2:49:59 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@219ec895, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed Jun 18, 2015 2:50:12 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 2
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@1dd14358, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:50:16 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@4e77f4e7, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:50:23 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@65d2fd3d, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:50:26 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@4b4179c8, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:50:27 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@75f5a6e3, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:50:30 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 3
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@6310b75, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:53:35 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@3924e1c6, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed Jun 18, 2015 2:53:42 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@34ff584e, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:53:46 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@52ceb5d8, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:53:49 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@4e551e38, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 2:53:50 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@77c293b5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:53:59 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@1b524c6b, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@2c995fed directly...
+Java compilation took 0.069508 s
+Java analysis took 0.006275 s
+Java compile + analysis took 0.079812 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed Jun 18, 2015 2:57:18 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@7e6b48c0, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@7066c201 directly...
+Java compilation took 0.036326 s
+Java analysis took 0.007347 s
+Java compile + analysis took 0.051525 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 0 s, completed Jun 18, 2015 2:57:24 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@6e90efe2, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 1 s, completed Jun 18, 2015 2:58:05 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@6fdea9c5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@3cef237e directly...
+Java compilation took 0.029528 s
+Java analysis took 0.005278 s
+Java compile + analysis took 0.038062 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 0 s, completed Jun 18, 2015 3:15:05 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@7ffc3228, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@32b2abb0 directly...
+Java compilation took 0.033374 s
+Java analysis took 0.005634 s
+Java compile + analysis took 0.043229 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 0 s, completed Jun 18, 2015 3:15:08 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 4
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@24b4fbde, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 3:21:14 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@2829d69b, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_routing.scala, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/controllers/routes.java, /Users/weiwang/climate-service/target/scala-2.11/src_managed/main/routes_reverseRouting.scala)
+
+Read from stdout: Compiling 2 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 2 Scala sources and 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
 Getting compiler-interface from component compiler for Scala 2.11.4
 Other repositories:
 Default repositories:
 Getting compiler-interface from component compiler for Scala 2.11.4
 Other repositories:
 Default repositories:
-Running cached compiler 2b85c065, interfacing (CompilerInterface) with Scala compiler version 2.11.4
+Running cached compiler 456bcb3a, interfacing (CompilerInterface) with Scala compiler version 2.11.4
 Calling Scala compiler with arguments  (CompilerInterface):
 	-deprecation
 	-unchecked
@@ -500,67 +890,269 @@ Calling Scala compiler with arguments  (CompilerInterface):
 	-bootclasspath
 	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
 	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Scala compilation took 0.859983 s
+	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.8.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.1.3.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.9.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
+Scala compilation took 7.390146 s
+Attempting to call com.sun.tools.javac.api.JavacTool@2d41dc2 directly...
+Java compilation took 0.031428 s
+Java analysis took 0.012553 s
+Java compile + analysis took 0.047076 s
 New invalidations:
 	Set()
 Initial set of included nodes: Set()
 Previously invalidated, but (transitively) depend on new invalidations:
 	Set()
 All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-Copy resource mappings: 
-	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
-	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
-Total time: 2 s, completed Jun 1, 2015 4:51:54 PM
+Total time: 8 s, completed Jun 18, 2015 3:21:29 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@1bd0ee9c, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 3:21:55 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/Users/weiwang/climate-service/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@4c32274, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 3:21:58 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@767ac9a7, check cycles: false
+Total time: 0 s, completed Jun 18, 2015 3:21:59 PM
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/Users/weiwang/climate-service/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@30d6a8c3, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@526fd458, check cycles: false
 
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+	modified: Set()
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+Initial directly invalidated sources: Set()
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set(/Users/weiwang/climate-service/target/scala-2.11/twirl/main/views/html/addAClimateService.template.scala)
+All initially invalidated sources: Set()
 
-Read from stdout: Compiling 1 Scala source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Compiling 1 Scala source to /Users/weiwang/climate-service/target/scala-2.11/classes...
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.4
-Other repositories:
-Default repositories:
-Running cached compiler 78f8563a, interfacing (CompilerInterface) with Scala compiler version 2.11.4
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.4.jar
-	-classpath
-	/Users/weiwang/climate-service/target/scala-2.11/classes:/Users/weiwang/.ivy2/cache/com.typesafe.play/twirl-api_2.11/jars/twirl-api_2.11-1.0.2.jar:/Users/weiwang/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/build-link/jars/build-link-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-exceptions/jars/play-exceptions-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-iteratees_2.11/jars/play-iteratees_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.scala-stm/scala-stm_2.11/jars/scala-stm_2.11-0.7.jar:/Users/weiwang/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-json_2.11/jars/play-json_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-functional_2.11/jars/play-functional_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-datacommons_2.11/jars/play-datacommons_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/joda-time/joda-time/jars/joda-time-2.3.jar:/Users/weiwang/.ivy2/cache/org.joda/joda-convert/jars/joda-convert-1.6.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.3.2.jar:/Users/weiwang/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.3.2.jar:/Users/weiwang/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar:/Users/weiwang/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-1.0.1.jar:/Users/weiwang/.ivy2/cache/io.netty/netty/bundles/netty-3.9.3.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.netty/netty-http-pipelining/jars/netty-http-pipelining-1.1.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.6.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.1.1.jar:/Users/weiwang/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.11/jars/akka-slf4j_2.11-2.3.4.jar:/Users/weiwang/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar:/Users/weiwang/.ivy2/cache/xerces/xercesImpl/jars/xercesImpl-2.11.0.jar:/Users/weiwang/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.4.01.jar:/Users/weiwang/.ivy2/cache/javax.transaction/jta/jars/jta-1.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java_2.11/jars/play-java_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.13.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-validator/jars/hibernate-validator-5.0.3.Final.jar:/Users/weiwang/.ivy2/cache/javax.validation/validation-api/jars/validation-api-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/com.fasterxml/classmate/bundles/classmate-1.0.0.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging/jars/jboss-logging-3.2.0.Final.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-context/jars/spring-context-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-aop/jars/spring-aop-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/aopalliance/aopalliance/jars/aopalliance-1.0.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-beans/jars/spring-beans-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-core/jars/spring-core-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-expression/jars/spring-expression-4.1.4.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.19.0-GA.jar:/Users/weiwang/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.8.jar:/Users/weiwang/.ivy2/cache/com.google.guava/guava/bundles/guava-16.0.1.jar:/Users/weiwang/.ivy2/cache/dom4j/dom4j/jars/dom4j-1.6.1.jar:/Users/weiwang/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-2.0.3.jar:/Users/weiwang/.ivy2/cache/org.apache.tomcat/tomcat-servlet-api/jars/tomcat-servlet-api-8.0.5.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jdbc_2.11/jars/play-java-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-jdbc_2.11/jars/play-jdbc_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.jolbox/bonecp/bundles/bonecp-0.8.0.RELEASE.jar:/Users/weiwang/.ivy2/cache/com.h2database/h2/jars/h2-1.3.175.jar:/Users/weiwang/.ivy2/cache/tyrex/tyrex/jars/tyrex-1.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ebean_2.11/jars/play-java-ebean_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm/jars/avaje-ebeanorm-3.3.4.jar:/Users/weiwang/.ivy2/cache/org.avaje.ebeanorm/avaje-ebeanorm-agent/jars/avaje-ebeanorm-agent-3.2.2.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-cache_2.11/jars/play-cache_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/net.sf.ehcache/ehcache-core/jars/ehcache-core-2.6.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-ws_2.11/jars/play-java-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-ws_2.11/jars/play-ws_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/com.ning/async-http-client/jars/async-http-client-1.8.15.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-core/jars/signpost-core-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/oauth.signpost/signpost-commonshttp4/jars/signpost-commonshttp4-1.2.1.2.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.0.1.jar:/Users/weiwang/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.0.1.jar:/Users/weiwang/.ivy2/cache/com.typesafe.play/play-java-jpa_2.11/jars/play-java-jpa_2.11-2.3.8.jar:/Users/weiwang/.ivy2/cache/javax.inject/javax.inject/jars/javax.inject-1.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-jpa/jars/spring-data-jpa-1.7.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework.data/spring-data-commons/jars/spring-data-commons-1.9.1.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-orm/jars/spring-orm-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-jdbc/jars/spring-jdbc-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.springframework/spring-tx/jars/spring-tx-4.0.7.RELEASE.jar:/Users/weiwang/.ivy2/cache/org.aspectj/aspectjrt/jars/aspectjrt-1.8.2.jar:/Users/weiwang/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.7.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-entitymanager/jars/hibernate-entitymanager-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.logging/jboss-logging-annotations/jars/jboss-logging-annotations-1.2.0.Beta1.jar:/Users/weiwang/.ivy2/cache/org.hibernate/hibernate-core/jars/hibernate-core-4.3.7.Final.jar:/Users/weiwang/.ivy2/cache/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec/jars/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.common/hibernate-commons-annotations/jars/hibernate-commons-annotations-4.0.5.Final.jar:/Users/weiwang/.ivy2/cache/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/jars/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/weiwang/.ivy2/cache/antlr/antlr/jars/antlr-2.7.7.jar:/Users/weiwang/.ivy2/cache/org.jboss/jandex/jars/jandex-1.1.0.Final.jar:/Users/weiwang/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.34.jar
-Scala compilation took 0.73542 s
+Copy resource mappings: 
+	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
+	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
+Total time: 0 s, completed Jun 18, 2015 3:22:07 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@7eab2318, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@52473141 directly...
+Read from stdout: /Users/weiwang/climate-service/app/utils/Constants.java:10: <identifier> expected
+/Users/weiwang/climate-service/app/utils/Constants.java:10: <identifier> expected
+Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
+(compile:compileIncremental) javac returned nonzero exit code
+Total time: 1 s, completed Jun 18, 2015 3:27:13 PM
+> server-post-command-error-handler
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@274d9f69, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@395a34bc directly...
+Java compilation took 0.040101 s
+Java analysis took 0.006096 s
+Java compile + analysis took 0.049987 s
+Invalidating /Users/weiwang/climate-service/app/utils/Constants.java...
+Invalidating (transitively) by inheritance from /Users/weiwang/climate-service/app/utils/Constants.java...
+Initial set of included nodes: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+Invalidated by transitive inheritance dependency: Set(/Users/weiwang/climate-service/app/utils/Constants.java)
+The /Users/weiwang/climate-service/app/utils/Constants.java source file has the following regular definitions changed:
+	LOCAL_HOST_PORT.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: /Users/weiwang/climate-service/app/utils/Constants.java
 New invalidations:
 	Set()
 Initial set of included nodes: Set()
 Previously invalidated, but (transitively) depend on new invalidations:
 	Set()
 All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-Copy resource mappings: 
-	(/Users/weiwang/climate-service/conf/application.conf,/Users/weiwang/climate-service/target/scala-2.11/classes/application.conf)
-	(/Users/weiwang/climate-service/conf/routes,/Users/weiwang/climate-service/target/scala-2.11/classes/routes)
-Total time: 1 s, completed Jun 1, 2015 4:53:02 PM
+Total time: 0 s, completed Jun 18, 2015 3:27:33 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@581bb96d, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@7065184c directly...
+Java compilation took 0.094398 s
+Java analysis took 0.072431 s
+Java compile + analysis took 0.171947 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 0 s, completed Jun 18, 2015 3:27:48 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@35c0f224, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@70bd32cc directly...
+Java compilation took 0.089491 s
+Java analysis took 0.065972 s
+Java compile + analysis took 0.16045 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed Jun 18, 2015 3:27:59 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@62c8a780, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@7014893c directly...
+Java compilation took 0.102874 s
+Java analysis took 0.072675 s
+Java compile + analysis took 0.179566 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed Jun 18, 2015 3:39:31 PM
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@25293d02, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(/Users/weiwang/climate-service/app/controllers/ClimateServiceController.java)
+
+Read from stdout: Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Compiling 1 Java source to /Users/weiwang/climate-service/target/scala-2.11/classes...
+Attempting to call com.sun.tools.javac.api.JavacTool@25095e4a directly...
+Java compilation took 0.075025 s
+Java analysis took 0.059674 s
+Java compile + analysis took 0.138179 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 0 s, completed Jun 18, 2015 3:39:53 PM
 > server-post-command-cleanup
 > server-handle-next-server-request

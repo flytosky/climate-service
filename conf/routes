@@ -3,7 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.addAClimateService()
+GET     /                           controllers.ClimateServiceController.addAClimateService()							
+GET		/testPage					controllers.Application.showClimateService()
+
+# Climate Service
+GET		/climateService/allServices					controllers.ClimateServiceController.showAllClimateServices()
+GET		/climateService/add							controllers.ClimateServiceController.addClimateService()
+POST	/climateService/savePage					controllers.ClimateServiceController.passPageStr()
+POST	/assets/html/climateService/serviceModels	controllers.ClimateServiceController.serviceModels()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

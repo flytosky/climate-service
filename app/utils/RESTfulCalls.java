@@ -39,6 +39,8 @@ public class RESTfulCalls {
 	}
 	
 	public static JsonNode postAPI(String apiString, JsonNode jsonData) {
+		System.out.println("apiString: " + apiString);
+		System.out.println("jsonData: " + jsonData.get("purpose"));
 		Promise<WSResponse> responsePromise = WS.url(apiString).post(jsonData);
 		final Promise<JsonNode> bodyPromise = responsePromise.map(new Function<WSResponse, JsonNode>() {
 					public JsonNode apply(WSResponse response)
