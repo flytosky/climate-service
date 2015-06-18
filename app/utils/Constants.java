@@ -6,7 +6,7 @@ public class Constants {
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
-	public static final String LOCAL_HOST_PORT = "9032";
+	public static final String LOCAL_HOST_PORT = ":9032";
 	public static final String CMU_BACKEND_PORT = ":9035"; 
 
 	// API Call format
