@@ -59,7 +59,7 @@ public class ClimateServiceController extends Controller {
 			oneService.setPurpose(json.path("purpose").asText());
 			// URL here is the dynamic page url
 			String name = json.path("name").asText();
-			String pageUrl = Constants.URL_HOST + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
+			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
 					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
 			oneService.setUrl(pageUrl);
 			// newService.setCreateTime(json.path("createTime").asText());
