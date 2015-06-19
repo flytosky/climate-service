@@ -297,6 +297,10 @@ function sendValues(url) {
         	case "INPUT":
         		value = temp[i].getElementsByTagName("input")[0].value;
 	    	    console.log("input test: " + value);
+	    	    if (value == null || value.length == 0) {
+	    	    	value = temp[i].getElementsByTagName("input")[0].getAttribute("placeholder");
+	    	    	console.log("value after using placeholder: " + value);
+	    	    }
 	    	    break;
         	case "SELECT":
         		var selects = temp[i].getElementsByTagName("td")[1].getElementsByTagName("select")[0].getElementsByTagName("option");

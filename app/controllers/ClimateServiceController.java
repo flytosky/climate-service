@@ -34,7 +34,7 @@ public class ClimateServiceController extends Controller {
 			.form(ClimateService.class);
 
 	public static Result addAClimateService() {
-		return ok(addAClimateService.render(climateServiceForm));
+		return ok(registerAClimateService.render(climateServiceForm));
 	}
 
 	public static Result showAllClimateServices() {
