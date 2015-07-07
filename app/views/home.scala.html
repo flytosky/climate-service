@@ -1,0 +1,35 @@
+@import helper._ 
+
+@main("Home") {
+
+<div class="jumbotron">
+	<div class="row">
+
+		<div class="col-lg-6">
+			</br></br>
+			<img src="/assets/images/JPL_Cover.jpg" height="430" width="500" />
+		</div>
+		<div class="col-lg-6">
+			<h1>Climate Model Analysis</h1>
+			<p> JPL has provided a repository of web services for multi-aspect
+				physics-based and phenomenon-oriented phenomenon-oriented climate
+				model performance evaluation and diagnosis through the comprehensive
+				and synergistic use of multiple observational data, reanalysis data,
+				and model outputs.</p>
+			<p>
+				<a class="btn btn-lg btn-default" href="/climate/tutorial"
+					role="button">Getting Started &raquo;</a>
+			</p>
+			<!-- @if(!session.get("username")){ -->
+			<p>We will help you learn the available web services, how to use
+				them, and help you to design your climate analytics workflows.
+			<p>
+				@if(false){ <a class="btn btn-primary" href="climate/register"
+					role="button">Register &raquo;</a> }
+			</p>
+			<!-- } -->
+		</div>
+	</div>
+</div>
+
+}

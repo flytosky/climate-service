@@ -32,7 +32,11 @@ public class ClimateServiceController extends Controller {
 
 	final static Form<ClimateService> climateServiceForm = Form
 			.form(ClimateService.class);
-
+	
+	public static Result home() {
+		return ok(home.render());
+	} 
+	
 	public static Result addAClimateService() {
 		return ok(registerAClimateService.render(climateServiceForm));
 	}

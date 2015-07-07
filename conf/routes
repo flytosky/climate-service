@@ -3,12 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.ClimateServiceController.addAClimateService()							
+GET		/							controllers.ClimateServiceController.home()						
 GET		/testPage					controllers.Application.showClimateService()
 
 # Climate Service
 GET		/climateService/allServices					controllers.ClimateServiceController.showAllClimateServices()
 GET		/climateService/add							controllers.ClimateServiceController.addClimateService()
+GET     /climateService/addAClimateService          controllers.ClimateServiceController.addAClimateService()	
 POST	/climateService/savePage					controllers.ClimateServiceController.passPageStr()
 POST	/assets/html/climateService/serviceModels	controllers.ClimateServiceController.serviceModels()
 
