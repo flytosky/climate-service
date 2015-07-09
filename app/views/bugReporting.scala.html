@@ -1,0 +1,48 @@
+@(bugReportForm: play.data.Form[BugReport])
+
+@import helper._
+
+@main("Bug Reporting") {
+        
+    @helper.form(action = routes.BugReportController.newReport) {
+        
+        <fieldset>
+            <legend>Bug Report</legend>
+            
+            @inputText(
+                bugReportForm("name"), 
+                '_label -> "Your name",                 
+                '_error -> bugReportForm.globalError                                
+            )
+            @inputText(
+                bugReportForm("title"), 
+                '_label -> "Bug Title",                 
+                '_error -> bugReportForm.globalError                                
+            )
+            @inputText(
+                bugReportForm("email"), 
+                '_label -> "Email",
+                '_helper -> "You must be a registered user to report a bug",                 
+                '_error -> bugReportForm.globalError                                
+            )
+            @inputText(
+                bugReportForm("organization"), 
+                '_label -> "Organization",                 
+                '_error -> bugReportForm.globalError                                
+            )
+            @textarea(
+                bugReportForm("description"), 
+                '_label -> "Description", 'cols -> 65, 'rows -> 7                                               
+            )
+           
+        </fieldset>
+        
+      
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Submit">
+            <a href="@routes.ClimateServiceController.home()" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

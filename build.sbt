@@ -17,7 +17,7 @@ libraryDependencies ++= Seq(
   "javax.inject" % "javax.inject" % "1",
   "org.springframework.data" % "spring-data-jpa" % "1.7.1.RELEASE",
   "org.springframework" % "spring-expression" % "4.1.4.RELEASE",
-  "org.hibernate" % "hibernate-entitymanager" % "4.3.7.Final",
+  "org.hibernate" % "hibernate-entitymanager" % "3.6.9.Final",
   "org.mockito" % "mockito-core" % "1.10.19" % "test",
   "mysql" % "mysql-connector-java" % "5.1.34"
 )

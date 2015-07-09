@@ -20,3 +20,14 @@ GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServic
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# About
+GET     /aboutUs					controllers.AboutController.aboutUs()
+GET     /aboutProject				controllers.AboutController.aboutProject()
+
+# BugReporting
+GET         /bugs                                                controllers.BugReportController.reports()
+GET         /newReport                                           controllers.BugReportController.newReport()
+GET         /bug/list                                            controllers.BugReportController.list()
+POST        /delete/report                                       controllers.BugReportController.deleteReport()
+POST        /solve/report                                        controllers.BugReportController.solveReport()
