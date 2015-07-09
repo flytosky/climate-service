@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import models.ClimateService;
+import play.Logger;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -24,6 +27,7 @@ import utils.Constants;
 import utils.RESTfulCalls;
 import utils.RESTfulCalls.ResponseType;
 import views.html.*;
+import models.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -256,7 +260,7 @@ public class ClimateServiceController extends Controller {
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
 
 		JsonNode climateServicesNode = RESTfulCalls
-				.getAPI(Constants.URL_SERVER
+				.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT
 						+ Constants.GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL);
 		//System.out.print(GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL);
@@ -291,7 +295,7 @@ public class ClimateServiceController extends Controller {
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
 
 		JsonNode climateServicesNode = RESTfulCalls
-				.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
+				.getAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
 
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
@@ -326,5 +330,40 @@ public class ClimateServiceController extends Controller {
 		return ok(mostPopularServices.render(getMostPopular(),
 				climateServiceForm));
 	}
+	
+	public static List<ClimateService> getMostRecentlyUsed() {
 
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+
+		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL);
+		
+		if (climateServicesNode == null || climateServicesNode.has("error")
+				|| !climateServicesNode.isArray()) {
+			return climateServices;
+		}
+
+		// parse the json string into object
+		for (int i = 0; i < climateServicesNode.size(); i++) {
+			JsonNode json = climateServicesNode.path(i);
+			ClimateService newService = new ClimateService();
+			newService.setId(json.get("id").asLong());
+			newService.setName(json.get("name").asText());
+			newService.setPurpose(json.findPath("purpose").asText());
+			newService.setUrl(json.findPath("url").asText());
+			//newService.setCreateTime(json.findPath("createTime").asText());
+			newService.setScenario(json.findPath("scenario").asText());
+			newService.setVersionNo(json.findPath("versionNo").asText());
+			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
+			climateServices.add(newService);
+		}
+		return climateServices;
+	}
+	
+	public static Result mostRecentlyUsedClimateServices() {
+		return ok(mostRecentlyUsedServices.render(getMostRecentlyUsed(),
+				climateServiceForm));
+	}
+	
 }

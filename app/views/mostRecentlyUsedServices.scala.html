@@ -1,10 +1,20 @@
-@(climateServices: List[models.ClimateService], climateServiceForm: play.data.Form[models.ClimateService])
+@(climateServices: List[ClimateService], climateServiceForm: play.data.Form[ClimateService])
 
 @import helper._
 
-@main("Climate Services") { 
+@scripts = {
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		//alert($("#url").text());
+	});
+	</script>
+}
+
+@main("Climate Services", scripts) {
+	  
 	 
-    <h1>@climateServices.size() Most Recently Added Climate Services</h1>
+    <h1>@climateServices.size() Most Recently Used Climate Services</h1>
 		<table class="table table-striped table-bordered table-condensed ex2">
 	<tr>
 		<td class="col-md-2">Climate Service Name</td>
@@ -26,7 +36,7 @@
 		
 		<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
 				<a href = "@climateService.getUrl()">
-				@climateService.getUrl()</a> </span></td>
+				@climateService.getUrl() </a></span></td>
 				
 		<td><span class="@climateService.getName() editable" data-name='scenario'>
 				@climateService.getScenario() </span></td>
