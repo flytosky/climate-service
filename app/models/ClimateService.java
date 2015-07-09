@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import utils.Constants;
+import utils.RESTfulCalls;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Entity
 public class ClimateService {
@@ -51,6 +58,10 @@ public class ClimateService {
 		this.versionNo = versionNo;
 	}
 
+	public void setId(long id){
+		this.id = id;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -118,7 +129,7 @@ public class ClimateService {
 	public void setVersionNo(String versionNo) {
 		this.versionNo = versionNo;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ClimateService [id=" + id + ", rootServiceId=" + rootServiceId
@@ -126,5 +137,4 @@ public class ClimateService {
 				+ ", url=" + url + ", scenario=" + scenario + ", createTime="
 				+ createTime + ", versionNo=" + versionNo + "]";
 	}
-
 }

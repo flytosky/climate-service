@@ -1,5 +1,4 @@
 package utils;
-
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
@@ -16,6 +15,9 @@ public class Constants {
 	// climate service
 	public static final String ADD_CLIMATE_SERVICE = "/climateService/addClimateService";
 	public static final String GET_ALL_CLIMATE_SERVICES = "/climateService/getAllClimateServices/json";
+	
+	public static final String GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByLatestAccessTime/json";
+	public static final String GET_CLIMATE_SERVICES_CALL = "/climateService/getAllClimateServices/json";
 	
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";
