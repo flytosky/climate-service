@@ -15,6 +15,7 @@ public class Constants {
 	// climate service
 	public static final String ADD_CLIMATE_SERVICE = "/climateService/addClimateService";
 	public static final String GET_ALL_CLIMATE_SERVICES = "/climateService/getAllClimateServices/json";
+	public static final String GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByCreateTime/json";
 	
 	public static final String GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByLatestAccessTime/json";
 	public static final String GET_CLIMATE_SERVICES_CALL = "/climateService/getAllClimateServices/json";

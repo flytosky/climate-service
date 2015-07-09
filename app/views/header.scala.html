@@ -8,7 +8,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" style="padding-bottom: 0;" href="#">
+				<a class="navbar-brand" style="padding-bottom: 0;" href="/">
 					<div>
 					<img src='@routes.Assets.at("images/NASA_JPL_logo.png")' style="height: 30px; width: 180px;">&nbsp&nbsp
 					<img src='@routes.Assets.at("images/logo.png")' style="height: 15px; width: 200px;">
@@ -23,10 +23,10 @@
 							Web Service<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Most Recently Added</a></li>
+							<li><a href="@routes.ClimateServiceController.mostRecentlyAddedClimateServices()">Most Recently Added</a></li>
 							<li><a href="@routes.ClimateServiceController.mostRecentlyUsedClimateServices">Most Recently Used</a></li>
 							<li><a href="#">Most Popular</a></li>
-							<li><a href="#">Service List</a></li>
+							<li><a href="@routes.ClimateServiceController.showAllClimateServices()">Service List</a></li>
 							@if(true) {
 								<li><a href="@routes.ClimateServiceController.addAClimateService()">Register A Service</a></li>
 							}
