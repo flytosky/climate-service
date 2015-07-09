@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('#addAClimateService').click(function() {
+		console.log("beeping");
 		myElement = document.getElementById("tbody");
 		name = document.getElementById("name").value;
 		purpose = document.getElementById("purpose").value;
@@ -15,7 +16,7 @@ $(document).ready(function() {
 		};
 		
 		$.ajax({
-			url: "climateService/savePage",
+			url: "savePage",
 			data: JSON.stringify(obj),
 			headers: {
 				'Content-Type': 'application/json'

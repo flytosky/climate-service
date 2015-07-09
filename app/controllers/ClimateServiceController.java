@@ -169,7 +169,9 @@ public class ClimateServiceController extends Controller {
 		JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.SAVE_CLIMATE_SERVICE_PAGE, jsonData);
-
+		
+		
+		System.out.println("WARNING!!!!!!");
 		// save page in front-end
 		savePage(str, name, purpose, url);
 
@@ -216,7 +218,7 @@ public class ClimateServiceController extends Controller {
 				+ ".html";
 
 		File theDir = new File("public/html");
-
+		
 		// if the directory does not exist, create it
 		if (!theDir.exists()) {
 			System.out.println("creating directory: public/html");

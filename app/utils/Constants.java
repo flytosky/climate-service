@@ -2,12 +2,13 @@ package utils;
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	public static final String URL_SERVER = "http://localhost";
+	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
-	public static final String LOCAL_HOST_PORT = ":9032";
-	public static final String CMU_BACKEND_PORT = ":9035"; 
+	public static final String LOCAL_HOST_PORT = ":9000";
+	public static final String CMU_BACKEND_PORT = ":9088"; 
 
 	// API Call format
 	public static final String FORMAT = "json";

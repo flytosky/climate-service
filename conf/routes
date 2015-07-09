@@ -7,11 +7,11 @@ GET		/							controllers.ClimateServiceController.home()
 GET		/testPage					controllers.Application.showClimateService()
 
 # Climate Service
-GET		/climateService/allServices					controllers.ClimateServiceController.showAllClimateServices()
-GET		/climateService/add							controllers.ClimateServiceController.addClimateService()
-GET     /climateService/addAClimateService          controllers.ClimateServiceController.addAClimateService()	
-POST	/climateService/savePage					controllers.ClimateServiceController.passPageStr()
-POST	/assets/html/climateService/serviceModels	controllers.ClimateServiceController.serviceModels()
+GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
+GET		/climateService/add											controllers.ClimateServiceController.addClimateService()
+GET     /climateService/addAClimateService          			controllers.ClimateServiceController.addAClimateService()	
+POST	/climateService/savePage									controllers.ClimateServiceController.passPageStr()
+POST	/assets/html/climateService/serviceModels		controllers.ClimateServiceController.serviceModels()
 
 GET     /climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
 GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
