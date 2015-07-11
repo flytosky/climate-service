@@ -32,6 +32,9 @@ public class Constants {
 	public static final String NEW_GET_A_SERVICE_LOG = "/getServiceExecutionLogs/";
 	public static final String SERVICE_EXECUTION_LOG_QUERY = "queryServiceExecutionLogs";
 	public static final String SERVICE_EXECUTION_LOG_GET= "getServiceExecutionLog/";
+
+	// dataset
+	public static final String GET_ALL_DATASETS = "/dataset/getAllDatasets/json";
 	
 	// http://www.freeformatter.com/java-dotnet-escape.html
 	// html head

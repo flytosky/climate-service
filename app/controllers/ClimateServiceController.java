@@ -56,7 +56,8 @@ public class ClimateServiceController extends Controller {
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
 				|| !climateServicesNode.isArray()) {
-			System.out.println("All climate services format has error!");
+			return ok(allClimateServices.render(climateServicesList,
+				climateServiceForm));
 		}
 
 		// parse the json string into object
@@ -132,7 +133,8 @@ public class ClimateServiceController extends Controller {
 		System.out.println("JSON data: " + jsonData);
 		String url = jsonData.get("climateServiceCallUrl").toString();
 		System.out.println("JPL climate service model call url: " + url);
-
+		
+		// transfer JsonNode to Object
 		ObjectNode object = (ObjectNode) jsonData;
 		object.remove("climateServiceCallUrl");
 
