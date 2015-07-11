@@ -17,6 +17,8 @@ GET     /climateService/mostPopularServices						controllers.ClimateServiceContr
 GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
 GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
 
+# Service Execution Log
+GET     /serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

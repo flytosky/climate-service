@@ -6,7 +6,6 @@ import play.libs.F.Function;
 import play.libs.F.Promise;
 import play.libs.ws.WS;
 import play.libs.ws.WSResponse;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -21,6 +20,31 @@ public class RESTfulCalls {
 		Promise<WSResponse> responsePromise = WS.url(apiString).get();
 		final Promise<JsonNode> bodyPromise = responsePromise.map(new Function<WSResponse, JsonNode>() {
 					public JsonNode apply(WSResponse response) {
+						if (response.getStatus() == 200
+								|| response.getStatus() == 201) {
+							return response.asJson();
+						} else { // no response from the server
+							Logger.info(""+response.getStatus());
+							return createResponse(ResponseType.GETERROR);
+						}
+					}
+				});
+
+		try {
+			return bodyPromise.get(10000L);
+		} catch (Exception e) {
+			return createResponse(ResponseType.TIMEOUT);
+		}
+	}
+	
+	public static JsonNode getAPIParameter(String apiString, String paraName, String para) {
+		Promise<WSResponse> responsePromise = WS.url(apiString).setQueryParameter(paraName, para).get();
+//		System.out.println(responsePromise.toString());
+		final Promise<JsonNode> bodyPromise = responsePromise
+				.map(new Function<WSResponse, JsonNode>() {
+					@Override
+					public JsonNode apply(WSResponse response)
+							throws Throwable {
 						if (response.getStatus() == 200
 								|| response.getStatus() == 201) {
 							return response.asJson();

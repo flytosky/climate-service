@@ -2,13 +2,14 @@ package utils;
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	public static final String URL_SERVER = "http://localhost";
-	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	//public static final String URL_HOST = "http://einstein.sv.cmu.edu";
+	//public static final String URL_SERVER = "http://localhost";
+	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
 	public static final String LOCAL_HOST_PORT = ":9000";
-	public static final String CMU_BACKEND_PORT = ":9088"; 
+	public static final String CMU_BACKEND_PORT = ":9035"; 
 
 	// API Call format
 	public static final String FORMAT = "json";
@@ -25,6 +26,12 @@ public class Constants {
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";
 	
+	//climate service log for Old Backend to Test
+	public static final String GET_ALL_SERVICE_LOG = "/serviceExecutionLog/getAllServiceExecutionLog";	
+	public static final String SERVICE_EXECUTION_LOG = "/serviceExecutionLog/";
+	public static final String NEW_GET_A_SERVICE_LOG = "/getServiceExecutionLogs/";
+	public static final String SERVICE_EXECUTION_LOG_QUERY = "queryServiceExecutionLogs";
+	public static final String SERVICE_EXECUTION_LOG_GET= "getServiceExecutionLog/";
 	
 	// http://www.freeformatter.com/java-dotnet-escape.html
 	// html head
