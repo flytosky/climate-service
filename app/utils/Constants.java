@@ -1,14 +1,14 @@
 package utils;
-
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	public static final String URL_SERVER = "http://localhost";
+	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
-	public static final String LOCAL_HOST_PORT = ":9032";
-	public static final String CMU_BACKEND_PORT = ":9035"; 
+	public static final String LOCAL_HOST_PORT = ":9000";
+	public static final String CMU_BACKEND_PORT = ":9088"; 
 
 	// API Call format
 	public static final String FORMAT = "json";
@@ -16,6 +16,11 @@ public class Constants {
 	// climate service
 	public static final String ADD_CLIMATE_SERVICE = "/climateService/addClimateService";
 	public static final String GET_ALL_CLIMATE_SERVICES = "/climateService/getAllClimateServices/json";
+	public static final String GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByCreateTime/json";
+	public static final String GET_MOST_POPULAR_CLIMATE_SERVICES_CALL = "/climateService/getAllMostUsedClimateServices/json";
+	
+	public static final String GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByLatestAccessTime/json";
+	public static final String GET_CLIMATE_SERVICES_CALL = "/climateService/getAllClimateServices/json";
 	
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";

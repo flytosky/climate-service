@@ -1,0 +1,73 @@
+@(bugReports: LinkedList[BugReport])
+
+@import helper._
+
+@main("Bug Reports") {
+    
+    <h1> Bug Reports(s)</h1>
+		<table class="table table-striped table-bordered ">
+			<thead ">
+			<tr>
+	    	  <td>Solved</td>
+	    	  <td>Report Title</td>
+	    	  <td>Reporter Name</td>
+	    	  <td>Reporter's email</td>
+	    	  <td>Reporter's organization</td>
+	    	  <td>Bug content</td>
+	    	  <td>Operation</td>
+	        </tr>
+			</thead>
+			
+			<tbody>
+            <tr>
+               @for(bugReport <- bugReports) {
+                    <tr>
+                    	<td>
+                    		@{if(bugReport.getSolved()==1){"Yes"}
+                    			else{"No"}
+                    		}
+                    			
+                    	</td>
+                        <td>
+                            @bugReport.getTitle()
+                        </td>
+                        <td> 
+                            @bugReport.getName()
+                        </td>
+                        <td> 
+                            @bugReport.getEmail()
+                        </td>
+                        <td> 
+                            @bugReport.getOrganization()
+                        </td>
+                        <td> 
+                            @bugReport.getDescription()
+                        </td>
+                        
+                        
+                        <td>
+                        <div class="input-group input-group-sm">
+                        <span>
+						@form(routes.BugReportController.solveReport()){
+               		 		<input name="idHolder" type="hidden" value="@bugReport.getId()">
+        					<input type="submit"  class="btn btn-success" value="Solve" onclick="return confirm('Are you sure you want to solve this issue?')">
+        				}	
+        				</span>
+                        <span>
+						@form(routes.BugReportController.deleteReport()){
+               		 		<input name="idHolder" type="hidden" value="@bugReport.getId()">
+        					<input type="submit"  class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure you want to delete this issue?')">
+        				}	
+        				</span>
+        				</div>
+           				
+						
+						</td>
+                    </tr>
+                }
+            </tr>
+            </tbody>
+
+    </table>
+    
+}

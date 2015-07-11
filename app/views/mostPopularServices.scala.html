@@ -1,0 +1,59 @@
+@(climateServices: List[ClimateService], climateServiceForm: play.data.Form[ClimateService])
+
+@import helper._
+
+@scripts = {
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		//alert($("#url").text());
+	});
+	</script>
+}
+
+@main("Climate Services", scripts) {
+	
+  
+	 
+    <h1>@climateServices.size() Most Popular Used Climate Services</h1>
+		<table class="table table-striped table-bordered table-condensed ex2">
+	<tr>
+		<td class="col-md-2">Climate Service Name</td>
+		<td class="col-md-4">Purpose</td>
+		<td class="col-md-4">Url</td>
+		<td class="col-md-2">Scenario</td>
+		<td class="col-md-2">Version</td>
+		<td class="col-md-2">Root Service</td>
+		 @if(true){
+			<td class="col-md-3">Operation</td> 
+	     } 
+	</tr>
+	
+	@for(climateService <- climateServices){
+	<tr>
+		<td><a href = "@climateService.getUrl()">@climateService.getName()</a></td>
+
+		<td><span class="@climateService.getName() editable" data-name='purpose'>
+				@climateService.getPurpose() </span></td>
+		
+		<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
+				<a href = "@climateService.getUrl()">
+				@climateService.getUrl()</a> </span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='scenario'>
+				@climateService.getScenario() </span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='versionNo'>
+				@climateService.getVersionNo() </span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='rootServiceId'>
+				@climateService.getRootServiceId() </span></td>
+				
+		
+	</tr>
+	}
+    </table>
+ 
+    
+     
+}
