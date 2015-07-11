@@ -12,7 +12,7 @@
     }
     @helper.form(routes.ClimateServiceController.home()) {
     	<div class = "col-sm-offset-3 col-sm-2">
-    		@inputText(serviceLogForm("User Id"), 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "123", 'size->20)
+    		@inputText(serviceLogForm("User Id"), 'id -> "userName", '_label -> Messages("User Id"), 'placeholder -> "123", 'size->20)
     	</div>
     	<div class = "col-sm-2">
     		@inputText(serviceLogForm("Start Time"), 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->20)
@@ -35,7 +35,7 @@
 	@for(serviceLog <- serviceLogs) {
 	<tr>
 	<td>@serviceLog.getServiceId</td>
-	<td>@serviceLog.getUserId</td>
+	<td>@serviceLog.getUserName</td>
 	<td>@serviceLog.getPurpose</td>
 	<td>@serviceLog.getExecutionStartTime</td>
 	<td>@serviceLog.getExecutionEndTime</td>
@@ -43,7 +43,7 @@
 	@form(routes.ClimateServiceController.home()){
 		<input
 			name="logId" class="hidden" type="hidden"
-			value="@serviceLog.getServiceExecutionLogId">
+			value="@serviceLog.getId">
 		<input
 			type="submit" class="btn btn-link" value="see detail">
 	}
@@ -52,7 +52,7 @@
 	@form(routes.ClimateServiceController.home()){ 
 		<input
 			name="idHolder" class="hidden" type="hidden"
-			value="@serviceLog.getServiceExecutionLogId">
+			value="@serviceLog.getId">
 		<input
 			type="submit" class="btn btn-primary delete-btn span2" value="Delete"
 			onclick="return confirm('Are you sure you want to delete this log?')">
