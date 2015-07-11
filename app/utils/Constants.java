@@ -20,6 +20,8 @@ public class Constants {
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";
 	
+	// dataset
+	public static final String GET_ALL_DATASETS = "/dataset/getAllDatasets/json";
 	
 	// http://www.freeformatter.com/java-dotnet-escape.html
 	// html head

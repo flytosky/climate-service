@@ -128,7 +128,8 @@ public class ClimateServiceController extends Controller {
 		System.out.println("JSON data: " + jsonData);
 		String url = jsonData.get("climateServiceCallUrl").toString();
 		System.out.println("JPL climate service model call url: " + url);
-
+		
+		// transfer JsonNode to Object
 		ObjectNode object = (ObjectNode) jsonData;
 		object.remove("climateServiceCallUrl");
 

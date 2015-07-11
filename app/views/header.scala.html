@@ -40,7 +40,10 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a>Most Popular</a></li>
-							<li><a href="#">Dataset List</a></li>
+							<li><a href="@routes.DatasetController.showAllDatasets()">Dataset List</a></li>
+							@if(true) {
+								<li><a href="#">Register A Dataset</a></li>
+							}
 							<li><a href="#">Search Dataset</a></li>
 						</ul>
 					</li>
