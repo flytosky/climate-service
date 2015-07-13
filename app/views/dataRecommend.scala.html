@@ -1,0 +1,100 @@
+@(jsonData: String)
+@import helper._
+
+<link rel="stylesheet"
+    href='@routes.Assets.at("stylesheets/custom_recommend.css")'>
+
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/vis/3.11.0/vis.min.css"
+>
+
+<link rel="stylesheet"
+    href='@routes.Assets.at("stylesheets/livefitler.css")'>
+    
+@scripts = {
+    <script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+    <script src='@routes.Assets.at("javascripts/livefilter.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
+}
+
+@main("Service Logs", scripts){
+  
+
+  <div id="jsonData" style="display: none;">@jsonData</div>
+  <div id="graphText">
+    <div class="row">
+      <div class="col-lg-9" id="testGraph">
+      </div>
+      <div class="col-lg-3" id="testText">
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/3.11.0/vis.min.js"></script>
+  <script type="text/javascript">
+      
+      var jsonString = $('#jsonData').text();
+      var data = JSON.parse(jsonString);
+      var container = document.getElementById('testGraph');
+
+      var options = {
+        stabilize:false,
+        edges: {
+          color: {
+            color: "gray",
+            highlight: "gray",
+          },
+        },
+        nodes: {
+          shape: 'dot',
+          radiusMin: 10,
+          radiusMax: 30,
+        },
+        groups: {
+          user: {
+            color:"#F2545A",
+            shape:"star",
+          },
+          feature: {
+            shape:"triangle",
+            color:"#EC8F93",
+          },
+          service: {
+            color:"#EF777C",
+            shape:"dot",
+          },
+          data: {
+            color:"#F46369",
+            shape:"square",
+          }
+        },
+        tooltip: {
+          delay: 300,
+          fontColor: "black",
+          fontSize: 14,
+          fontFace: "verdana",
+          color: {
+            border: "#666",
+            background: "#FFFFC6"
+          }
+        },
+      };
+
+      var network = new vis.Network(container, data, options);
+      
+      network.on('select', function(properties) {
+        var select_node = $.grep(data.nodes, function(e){
+          return e["id"] == properties.nodes[0];
+        })[0];
+        $("#testText").html(select_node["title"]);
+      });
+
+      //focus on serviceid 19
+      //network.focusOnNode(19);
+    
+  </script>
+  
+  
+    
+}
