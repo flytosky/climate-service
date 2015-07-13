@@ -35,6 +35,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 # About
 GET     /aboutUs					controllers.AboutController.aboutUs()
 GET     /aboutProject				controllers.AboutController.aboutProject()
+GET		/tutorial					controllers.AboutController.tutorial()
 
 # BugReporting
 GET         /bugs                                                controllers.BugReportController.reports()
