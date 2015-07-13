@@ -2,7 +2,6 @@
 
 @import helper._
 
-
 @scripts = {
 	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
@@ -146,7 +145,6 @@
 	 
 	 
     <h1 align="center">Search DataSet</h1>
-    {
     	<div class="ui-widget">
     	<div class = "col-sm-offset-3 col-sm-10">
     		@inputText(dataSetForm("Data Set Name"), 'id -> "dataSetName", '_label -> Messages("Data Set Name"), 'placeholder -> "ARGO Ocean Temperature", 'size->70) 
@@ -171,6 +169,5 @@
 	    	<input class="btn" type="submit" value="Search">
 	    </div>
 	    </div>
-	    
-	    }
+	   
 	 }
