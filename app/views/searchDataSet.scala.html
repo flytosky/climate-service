@@ -1,0 +1,176 @@
+@(dataSetForm: play.data.Form[Dataset])
+
+@import helper._
+
+
+@scripts = {
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+	<script type="text/javascript">
+	$(function() {
+	    var availableDataSetNames = [
+	      "ARGO Ocean Temperature",
+	      "ARGO Ocean Salinity",
+	      "GRACE equivalent water height over land",
+	      "GRACE equivalent water height over ocean",
+	      "NOAA Global Ocean Heat Content",
+	      "AIRS Water Vapor",
+	      "AIRS Air Temperature",
+	      "MLS Water Vapor",
+	      "MLS Air Temperature	NASA",
+	      "MODIS Total Area Cloud Fraction",
+	      "TRMM precipitation",
+	      "GPCP precipitation",
+	      "AMSRE sea surface temperature",
+	      "QuikSCAT Eastward Near-Surfaces Wind",
+	      "QuikSCAT Northward Near-Surface Wind",
+	      "QuikSCAT Near-Surface Wind Speed",
+	      "AVISO sea surface height",
+	      "MODIS leaf area index",
+	      "CERES Radiation"
+	    ];
+	    var availableAgency = [
+	       "NOAA",
+	       "NASA"
+	    ];
+	    
+	    var availableInstruments = [
+	        "ARGO",
+	        "GRACE",
+	        "NODC",
+	        "AIRS",
+	        "MLS",
+	        "MODIS",
+	        "TRMM",
+	        "GPCP",
+	        "AMSRE",
+	        "QuikSCAT",
+	        "AVISO",
+	        "CERES"
+	    ];
+	    var availablePhysicalVariable = [
+	        "Ocean temperature",
+	        "Ocean Salinity",
+	         "Equivalent Water Height Over Land",
+	         "Equivalent water height over ocean",
+	         "Ocean Heat Content Anomaly within 700 m Depth",
+	        "Ocean Heat Content Anomaly within 2000 m Depth",
+	        "Specific Humidity",
+	        "Air Temperature",
+	        "Specific Humidity",
+	        "Air Temperature",
+	        "Total Cloud Fraction",
+	        "Precipitation Flux",
+	        "Sea Surface Temperature",
+	        "Eastward Near-Surface Wind",
+	        "Northward Near-Surface Wind",
+	        "Near-Surface Wind Speed",
+	        "Sea Surface Height",
+	        "Leaf Area Index",
+	        "Surface Downwelling Longwave Radiation",
+	        "Surface Upwelling Shortwave Radiation",
+	        "Surface Downwelling Clear-Sky Longwave Radiation",
+	        "Surface Downwelling Shortwave Radiation",
+	        "Surface Upwelling Clear-Sky Shortwave Radiation",
+	        "Surface Upwelling Longwave Radiation",
+	        "Surface Downwelling Clear-Sky Shortwave Radiation",
+	        "TOA Outgoing Clear-Sky Longwave Radiation",
+	        "TOA Outgoing Shortwave Radiation",
+	        "TOA Incident Shortwave Radiation",
+	        "TOA Outgoing Clear-Sky Shortwave Radiation",
+	        "TOA Outgoing Longwave Radiation"
+	    ];
+	    var availableGridDimension = [
+	       "3D",
+	       "2D"
+	    ];
+	    $( "#dataSetName" ).autocomplete({
+	      source: availableDataSetNames
+	    });
+	    $( "#agency" ).autocomplete({
+		  source: availableAgency
+		});
+	    $( "#instrument" ).autocomplete({
+		  source: availableInstruments
+		});
+	    $( "#physicalVariable" ).autocomplete({
+		  source: availablePhysicalVariable
+		});
+	    $( "#gridDimension" ).autocomplete({
+		  source: availableGridDimension
+		});
+	  });
+	
+	$(document).ready(function(){
+		$( "#preview" ).click(function() {
+			var target = document.getElementById("show");
+			if(target.style.display=="none"){
+				target.style.display="block";
+				$( "#preview" ).text("Hide");
+				var dataS = $("#dataSetName").val();
+				var varName = $("#agency").val();
+				var exectionPurpose = $("#instrument").val();
+				var userId = $("#physicalVariable").val();
+				var startTime = $("#gridDimension").val();
+
+				if(dataS!=""){
+					$("#content").append(" Data Set Name = "+dataS);	
+				}
+				if(varName!="" && varName!=null){
+					$("#content").append(" Agency = "+varName);	
+				}
+				if(exectionPurpose!="" && exectionPurpose!=null){
+					$("#content").append(" Instrument = "+exectionPurpose);	
+				}
+				if(userId!="" && userId!=null){
+					$("#content").append(" Physical Variable = "+userId);	
+				}
+				if(startTime!="" && startTime!=null){
+					$("#content").append(" Grid Dimension = "+startTime);	
+				}
+				
+			}else {
+				$("#content").val('');	
+                target.style.display="none";
+                $( "#preview" ).text("Preview");
+            }
+		});
+	});
+		
+	</script>
+}
+
+@main("Service Logs", scripts){
+	 
+	 
+    <h1 align="center">Search DataSet</h1>
+    {
+    	<div class="ui-widget">
+    	<div class = "col-sm-offset-3 col-sm-10">
+    		@inputText(dataSetForm("Data Set Name"), 'id -> "dataSetName", '_label -> Messages("Data Set Name"), 'placeholder -> "ARGO Ocean Temperature", 'size->70) 
+    	</div>
+    	<div class = "col-sm-offset-3 col-sm-10">
+    		@inputText(dataSetForm("Agency"), 'id -> "agency", '_label -> Messages("Agency"), 'placeholder -> "NOAA", 'size->70) 
+    	</div>
+    	<div class = "col-sm-offset-3 col-sm-10">
+    		@inputText(dataSetForm("Instrument"), 'id -> "instrument", '_label -> Messages("Instrument"), 'placeholder -> "ARGO", 'size->70) 
+       	</div>
+       	<div class = "col-sm-offset-3 col-sm-10">
+       		@inputText(dataSetForm("Physical Variable"), 'id -> "physicalVariable", '_label -> Messages("Physical Variable"), 'placeholder -> "Ocean temperature", 'size->70)
+	    </div>
+	    <div class = "col-sm-offset-3 col-sm-10">
+	    	@inputText(dataSetForm("Grid Dimension"), 'id -> "gridDimension", '_label -> Messages("Grid Dimension"), 'placeholder -> "3D", 'size->70)
+	    	<div id="show" style="display: none;">
+	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
+	    	</div>
+	    </div>
+	    <div align="center">
+	    	<button id="preview" type="button" class="btn btn-info"> Preview</button>
+	    	<input class="btn" type="submit" value="Search">
+	    </div>
+	    </div>
+	    
+	    }
+	 }

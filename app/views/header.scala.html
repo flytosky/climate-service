@@ -44,7 +44,7 @@
 							@if(true) {
 								<li><a href="#">Register A Dataset</a></li>
 							}
-							<li><a href="#">Search Dataset</a></li>
+							<li><a href="@routes.DatasetController.searchDataset()">Search Dataset</a></li>
 						</ul>
 					</li>
 					
@@ -54,7 +54,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="@routes.ServiceExecutionLogController.getServiceLog">Service Execution Log</a></li>
-							<li><a href="#">Search Service Log</a></li>
+							<li><a href="@routes.ServiceExecutionLogController.searchServiceLog">Search Service Log</a></li>
 							<li><a href="#">Semantic Service Analytics</a></li>
 							<li><a href="#">Semantic Dataset Analytics</a></li>
 							<li><a href="#">User Analytics</a></li>
@@ -112,3 +112,4 @@
 			</div>
 		</div>
 	</div>
+	

@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +32,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class DatasetController extends Controller {
 	final static Form<Dataset> dataSetForm = Form
 			.form(Dataset.class);
+	
+	public static Result searchDataset(){
+		return ok(searchDataSet.render(dataSetForm));
+	}
 	
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();

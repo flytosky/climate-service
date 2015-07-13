@@ -1,31 +1,10 @@
-New log file opened at Fri Jul 10 17:54:18 PDT 2015 by 10639@mings-mbp.sv.cmu.local
-Taking next connection to: 65234
-New client attempting to connect on port: 65235-65234
-  Address = /10.0.23.184:65234
-This client on port 65235 has uuid dfbb306d-f869-4336-adb9-17ad623a392a configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-dfbb306d-f869-4336-adb9-17ad623a392a
-Taking next connection to: 65234
-New client attempting to connect on port: 65255-65234
-  Address = /10.0.23.184:65234
-Handshake exception on socket: 65255
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.io.EOFException
-	at java.io.DataInputStream.readInt(DataInputStream.java:392)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 65234
-New client attempting to connect on port: 65256-65234
-  Address = /10.0.23.184:65234
-This client on port 65256 has uuid 4235908a-1244-4326-9dc0-d1291ebb009e configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-4235908a-1244-4326-9dc0-d1291ebb009e
-Taking next connection to: 65234
+New log file opened at Mon Jul 13 15:35:34 PDT 2015 by 3215@longmas-MBP.sv.cmu.local
+Taking next connection to: 53662
+New client attempting to connect on port: 53663-53662
+  Address = /10.0.22.125:53662
+This client on port 53663 has uuid c68ce315-f5c6-4ae7-b6bb-5be18361bdae configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-c68ce315-f5c6-4ae7-b6bb-5be18361bdae
+Taking next connection to: 53662
 Checking to see if clients are empty...
-No non-daemon clients connected after 3 min. Shutting down.
-Server socket thread exiting.
-0 clients open, will close them...
-All client sockets have been closed.
-Closing the 10639@mings-mbp.sv.cmu.local logs at Fri Jul 10 18:00:13 PDT 2015, goodbye.
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53662

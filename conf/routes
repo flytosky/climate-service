@@ -19,9 +19,12 @@ GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServic
 
 # Service Execution Log
 GET     /serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
+GET     /searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
+
 
 # Dataset
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
+GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
