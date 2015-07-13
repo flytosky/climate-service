@@ -1,7 +1,10 @@
-New log file opened at Mon Jul 13 15:32:26 PDT 2015 by 3196@longmas-MBP.sv.cmu.local
-Taking next connection to: 53639
-New client attempting to connect on port: 53640-53639
-  Address = /10.0.22.125:53639
-This client on port 53640 has uuid a17c559f-af10-472c-943d-8d5868533fdc configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-a17c559f-af10-472c-943d-8d5868533fdc
-Taking next connection to: 53639
+New log file opened at Mon Jul 13 15:35:34 PDT 2015 by 3215@longmas-MBP.sv.cmu.local
+Taking next connection to: 53662
+New client attempting to connect on port: 53663-53662
+  Address = /10.0.22.125:53662
+This client on port 53663 has uuid c68ce315-f5c6-4ae7-b6bb-5be18361bdae configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-c68ce315-f5c6-4ae7-b6bb-5be18361bdae
+Taking next connection to: 53662
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53662
