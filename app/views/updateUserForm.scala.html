@@ -1,0 +1,26 @@
+@(userForm: Form[User])
+@import helper._
+@main("Update Users Form"){
+
+    <div class="clearfix  " id="name_field">
+                    
+    <legend>User Update Form</legend>
+    @helper.form(action = routes.UsersController.getAllUsers()){
+    <fieldset>
+    @helper.inputText(userForm("userName"),'_label -> "User Name*")
+    @helper.inputText(userForm("firstName"), '_label -> "First Name*")
+    @helper.inputText(userForm("middleInitial"), '_label -> "Middle Name")
+    @helper.inputText(userForm("lastName"), '_label -> "Last Name")
+
+    @textarea(
+                userForm("affiliation"), 
+                '_label -> "Affliation", 'cols -> 50, 'rows -> 5
+            )
+    @helper.inputText(userForm("email"), '_label -> "Email")
+    @helper.inputText(userForm("researchFields"),  '_label -> "Research Area")
+    <input type="submit" class="btn btn-primary" value="Update">
+    <fieldset>
+    </div>
+}
+}
+

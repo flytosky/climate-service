@@ -108,6 +108,10 @@ public class User {
 	public String getHighestDegree() {
 		return highestDegree;
 	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
