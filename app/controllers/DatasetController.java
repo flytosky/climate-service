@@ -32,6 +32,10 @@ public class DatasetController extends Controller {
 	final static Form<Dataset> dataSetForm = Form
 			.form(Dataset.class);
 	
+	public static Result searchDataset(){
+		return ok(searchDataSet.render(dataSetForm));
+	}
+	
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
 		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_SERVER

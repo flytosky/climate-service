@@ -27,5 +27,9 @@ public class ServiceExecutionLogController extends Controller {
 	public static Result getServiceLog() {
 		return ok(serviceLog.render(ServiceExecutionLog.all(), serviceLogForm));
 	}
+	
+	public static Result searchServiceLog() {
+		return ok(searchServiceLog.render(serviceLogForm));
+	}
 
 }
