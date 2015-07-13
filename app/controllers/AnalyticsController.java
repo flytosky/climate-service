@@ -39,6 +39,7 @@ public class AnalyticsController extends Controller{
 	final static Form<ServiceExecutionLog> serviceLogForm = Form
 			.form(ServiceExecutionLog.class);
 	
+	
 	public static Result getRecommend() {
 		JsonNode response = RESTfulCalls.getAPI("http://einstein.sv.cmu.edu:9026/api/sgraph");
 		String resStr = response.toString();
