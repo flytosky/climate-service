@@ -33,5 +33,9 @@ public class AboutController extends Controller {
     public static Result aboutProject(){
     	return ok(aboutProject.render());
     }
+    
+    public static Result tutorial() {
+		return ok(tutorial.render());
+	}
 
 }
