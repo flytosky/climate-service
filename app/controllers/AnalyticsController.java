@@ -58,4 +58,10 @@ public class AnalyticsController extends Controller{
 		return ok(dataRecommend.render(resStr));
 	}
 	
+	public static Result getLogGraph() {
+		JsonNode response = RESTfulCalls.getAPI("http://einstein.sv.cmu.edu:9026/api/ugraph");
+		String resStr = response.toString();
+		return ok(recommend.render(resStr));
+	}
+	
 }

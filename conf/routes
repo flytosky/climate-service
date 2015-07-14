@@ -30,8 +30,7 @@ GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET     /serviceLogRecommend                        controllers.AnalyticsController.getRecommend()
 GET     /datasetRecommend                           controllers.AnalyticsController.getDatasetRecommend()
 GET     /profileRecommend                           controllers.AnalyticsController.getScientistRecommend()
-
-
+GET     /serviceLogGraph                            controllers.AnalyticsController.getLogGraph()
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
