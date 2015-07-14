@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,4 +65,7 @@ public class AnalyticsController extends Controller{
 		return ok(recommend.render(resStr));
 	}
 	
+	public static Result getSearchAndGenerateWorkflow() {
+		return ok(searchGenerateWorkflow.render(serviceLogForm));
+	}
 }

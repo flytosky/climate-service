@@ -1,0 +1,85 @@
+@(serviceLogForm: play.data.Form[ServiceExecutionLog])
+
+@import helper._
+
+@scripts = {
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+  	<script type="text/javascript">
+	$(document).ready(function(){
+		$( "#preview" ).click(function() {
+			var target = document.getElementById("show");
+			if(target.style.display=="none"){
+				target.style.display="block";
+				$( "#preview" ).text("Hide");
+				var userId = $("#userId").val();
+				var startTime = $("#startTime").val();
+				var endTime = $("#endTime").val();
+				
+				if(userId!="" && userId!=null){
+					$("#content").append(" UserId = "+userId);	
+				}
+				if(startTime!="" && startTime!=null){
+					$("#content").append(" Start Time = "+startTime);	
+				}
+				if(endTime!="" && endTime!=null){
+					$("#content").append(" End Time = "+endTime);	
+				}
+				
+			}else {
+				$("#content").val('');	
+                target.style.display="none";
+                $( "#preview" ).text("Preview");
+            }
+		});
+		if(jsonData!=null){
+			var jsonString = $('#jsonData').text();
+	  	 	var obj = JSON.parse(jsonString);
+	  	 	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+			
+	  	 	$('<a href="data:' + data + '" download="data.json">download JSON</a>').appendTo('#download');
+		}
+		/* 
+		$("#workflow-gen").click(){
+			alert("0");
+			var user = $("#userId").val();
+			$("#user2").val(user);
+			alert(user);
+			var start = $("#startTime").val();
+			$("#startTime2").val(start);
+			var end = $("#endTime").val();
+			$("#endTime2").val(end);
+		}; */
+		
+		
+		
+	});
+		
+	</script>
+}
+
+@main("Search and Generate Workflow", scripts) {
+	
+	   
+    <h1 align="center">Search</h1>
+    
+
+    	<div class="ui-widget">
+       	<div class = "col-sm-offset-3 col-sm-10">
+       		@inputText(serviceLogForm("User Id"), 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "CCS student 1", 'size->70)
+	    </div>
+	    <div class = "col-sm-offset-3 col-sm-10">
+	    	@inputText(serviceLogForm("Start Time"), 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+	    	@inputText(serviceLogForm("End Time"), 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+	    	<div id="show" style="display: none;">
+	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
+	    	</div>
+	    </div>
+	    <div align="center">
+	    <button id="preview" type="button" class="btn btn-info"> Preview</button>	
+	    <input class="btn" type="submit" value="Search" >
+	    </div>
+	    </div>
+}
