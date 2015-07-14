@@ -56,6 +56,10 @@ public class UsersController extends Controller {
 //	public static Result adminPage(){
 //		return ok(adminPage.render(User.all()));
 //	}
+	
+	public static Result searchUser(){
+		return ok(searchUser.render(userForm));
+	}
 
 	public static Result getAllUsers(){
 		List<User> usersList = new ArrayList<User>();
