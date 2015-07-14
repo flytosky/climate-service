@@ -29,6 +29,7 @@ GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 # Analytics
 GET     /serviceLogRecommend                        controllers.AnalyticsController.getRecommend()
 GET     /datasetRecommend                           controllers.AnalyticsController.getDatasetRecommend()
+GET     /profileRecommend                           controllers.AnalyticsController.getScientistRecommend()
 
 
 

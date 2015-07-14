@@ -52,4 +52,10 @@ public class AnalyticsController extends Controller{
 		return ok(dataRecommend.render(resStr));
 	}
 	
+	public static Result getScientistRecommend() {
+		JsonNode response = RESTfulCalls.getAPI("http://einstein.sv.cmu.edu:9026/api/scgraph");
+		String resStr = response.toString();
+		return ok(dataRecommend.render(resStr));
+	}
+	
 }
