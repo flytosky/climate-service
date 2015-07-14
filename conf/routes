@@ -26,6 +26,12 @@ GET     /searchServiceLog                                       controllers.Serv
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 
+# Analytics
+GET     /serviceLogRecommend                        controllers.AnalyticsController.getRecommend()
+GET     /datasetRecommend                           controllers.AnalyticsController.getDatasetRecommend()
+
+
+
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
 GET		/scientist/searchUser 					 	controllers.UsersController.searchUser()
