@@ -393,3 +393,27 @@ function load() {
     console.log("Page load finished");
 
 }
+
+
+
+function replaceFile(id) {
+	console.log(id);
+	var x = document.getElementById(id).files[0];
+	
+	var fileName = "testtttt";
+	console.log("!!!!!!!!!!!!!!!!!!");
+	console.log(x);
+	
+	
+	$.ajax({
+	    url: "replaceFile",
+	    type: "POST",
+	    data: x,	    
+	    processData: false,
+	    contentType: false,
+	    success: function (res) {
+	    	 console.log("Page load finished");
+	    }
+    });
+	
+}

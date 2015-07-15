@@ -1,11 +1,16 @@
 package controllers;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +18,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -369,5 +375,93 @@ public class ClimateServiceController extends Controller {
 		return ok(mostRecentlyUsedServices.render(getMostRecentlyUsed(),
 				climateServiceForm));
 	}
+	
+	public static Result replaceFile() {
+	  	File result =  request().body().asRaw().asFile();
+	  	System.out.println("result: " + request().body().asRaw().asFile());
+	  	
+//	  	String content = readFile(result.getName(), StandardCharsets.UTF_8);
+	  	System.out.println("result body: "+result.toString());
+	  	
+	  	String line = "";
+	    try {
+	    	BufferedReader br = new BufferedReader(new FileReader(result.getAbsolutePath()));
+	        StringBuilder sb = new StringBuilder();
+	        line = br.readLine();
+	        int count = 0;
+	        while (line != null && count < 22) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	            //System.out.println("line:  "+line.toString());
+	            count++;
+	        }
+	        br.close();
+	    } catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	    
+	    //TEMPOARY SOLUTION : get the fileName from the html page
+	    String tempName = line.substring(24, line.length()-5);		  
+	    String fileName = "public/html/service" + tempName.substring(0, 1).toUpperCase() + tempName.substring(1)+ ".html";
+	    System.out.println("fileName: " + fileName);
+	  	
+	  	//replace the page in the frontend Server
+	  	try {		  		
+		  	Path newPath = Paths.get(fileName);
+		  	Files.move(result.toPath(), newPath, REPLACE_EXISTING);
+	  	} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	  	//executeReplace(result);		
+		
+	  	
+	  	return ok("File uploaded");
+	}
+
+public static void executeReplace(String result) {
+	
+	try {
+		String path = "public/html/se.html";			
+		File theDir = new File("public/html");		
+		
+		// if the directory does not exist, create it
+		if (!theDir.exists()) {
+			System.out.println("creating directory: public/html");
+			boolean create = false;
+
+			try {
+				theDir.mkdir();
+				create = true;
+			} catch (SecurityException se) {
+				// handle it
+			}
+			if (create) {
+				System.out.println("DIR created");
+			}
+		}
+		
+		
+		File file = new File(path);
+		BufferedWriter output = new BufferedWriter(new FileWriter(file));			
+		output.write(result);			
+		output.close();
+		System.out.println("Beeping!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+}
 	
 }
