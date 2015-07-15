@@ -63,16 +63,15 @@
 @main("Search and Generate Workflow", scripts) {
 	
 	   
-    <h1 align="center">Search</h1>
-    
+    <h1 style="margin-left:540px">Search</h1>
 
-    	<div class="ui-widget">
-       	<div class = "col-sm-offset-3 col-sm-10">
-       		@inputText(serviceLogForm("User Id"), 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "CCS student 1", 'size->70)
+    	<div class="ui-widget col-sm-offset-3 col-sm-7">
+       	<div class = "form-group">
+       		@inputText(serviceLogForm("User Id"), 'class -> "form-control", 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "CCS student 1", 'size->70)
 	    </div>
-	    <div class = "col-sm-offset-3 col-sm-10">
-	    	@inputText(serviceLogForm("Start Time"), 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
-	    	@inputText(serviceLogForm("End Time"), 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+	    <div class = "form-group">
+	    	@inputText(serviceLogForm("Start Time"), 'class -> "form-control", 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+	    	@inputText(serviceLogForm("End Time"), 'class -> "form-control", 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
 	    	<div id="show" style="display: none;">
 	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
 	    	</div>

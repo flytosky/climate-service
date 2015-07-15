@@ -141,22 +141,22 @@
 @main("Service Logs", scripts){
 	 
 	 
-    <h1 align="center">Search DataSet</h1>
-    	<div class="ui-widget">
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(dataSetForm("Data Set Name"), 'id -> "dataSetName", '_label -> Messages("Data Set Name"), 'placeholder -> "ARGO Ocean Temperature", 'size->70) 
+    <h1 style="margin-left:500px">Search DataSet</h1>
+    	<div class="ui-widget col-sm-offset-3 col-sm-7">
+    	<div class = "form-group">
+    		@inputText(dataSetForm("Data Set Name"), 'id -> "dataSetName", '_label -> Messages("Data Set Name"), 'placeholder -> "ARGO Ocean Temperature", 'class -> "form-control", 'size->70) 
     	</div>
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(dataSetForm("Agency"), 'id -> "agency", '_label -> Messages("Agency"), 'placeholder -> "NOAA", 'size->70) 
+    	<div class = "form-group">
+    		@inputText(dataSetForm("Agency"), 'id -> "agency", '_label -> Messages("Agency"), 'placeholder -> "NOAA", 'class -> "form-control", 'size->70) 
     	</div>
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(dataSetForm("Instrument"), 'id -> "instrument", '_label -> Messages("Instrument"), 'placeholder -> "ARGO", 'size->70) 
+    	<div class = "form-group">
+    		@inputText(dataSetForm("Instrument"), 'id -> "instrument", '_label -> Messages("Instrument"), 'placeholder -> "ARGO", 'class -> "form-control", 'size->70) 
        	</div>
-       	<div class = "col-sm-offset-3 col-sm-10">
-       		@inputText(dataSetForm("Physical Variable"), 'id -> "physicalVariable", '_label -> Messages("Physical Variable"), 'placeholder -> "Ocean temperature", 'size->70)
+       	<div class = "form-group">
+       		@inputText(dataSetForm("Physical Variable"), 'id -> "physicalVariable", '_label -> Messages("Physical Variable"), 'placeholder -> "Ocean temperature", 'class -> "form-control", 'size->70)
 	    </div>
-	    <div class = "col-sm-offset-3 col-sm-10">
-	    	@inputText(dataSetForm("Grid Dimension"), 'id -> "gridDimension", '_label -> Messages("Grid Dimension"), 'placeholder -> "3D", 'size->70)
+	    <div class = "form-group">
+	    	@inputText(dataSetForm("Grid Dimension"), 'id -> "gridDimension", '_label -> Messages("Grid Dimension"), 'placeholder -> "3D", 'class -> "form-control", 'size->70)
 	    	<div id="show" style="display: none;">
 	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
 	    	</div>

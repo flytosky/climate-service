@@ -130,25 +130,25 @@
     <div align="right">
 		<button id="workflow-gen" type="button" class="btn btn-info text-right" >Generate Workflow</button>
     </div>
-    <h1 align="center">Search Log</h1>
+    <h1 style="margin-left:520px">Search Log</h1>
 
     	<!-- @select(serviceLogForm("Data Source"), options(Seq("NASA/MODIS","NASA/AMSRE","NASA/TRMM","NASA/GPCP","NASA/QuikSCAT","NASA/AVISO","NASA/GRACE","")), '_label -> "Data Source", '_default -> "", 'style->"width: 290px")  --> 
-    	<div class="ui-widget">
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(serviceLogForm("Data Source"), 'id -> "dataSource", '_label -> Messages("Data Source"), 'placeholder -> "NASA/MODIS", 'size->70) 
+    	<div class="ui-widget col-sm-offset-3 col-sm-7">
+    	<div class = "form-group">
+    		@inputText(serviceLogForm("Data Source"), 'class -> "form-control", 'id -> "dataSource", '_label -> Messages("Data Source"), 'placeholder -> "NASA/MODIS", 'size->70) 
     	</div>
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(serviceLogForm("Variable Name"), 'id -> "variableName", '_label -> Messages("Variable Name"), 'placeholder -> "Total Cloud Fraction", 'size->70) 
+    	<div class = "form-group">
+    		@inputText(serviceLogForm("Variable Name"), 'class -> "form-control", 'id -> "variableName", '_label -> Messages("Variable Name"), 'placeholder -> "Total Cloud Fraction", 'size->70) 
     	</div>
-    	<div class = "col-sm-offset-3 col-sm-10">
-    		@inputText(serviceLogForm("Execution Purpose"), 'id -> "exectionPurpose", '_label -> Messages("Execution Purpose"), 'placeholder -> " test", 'size->70) 
+    	<div class = "form-group">
+    		@inputText(serviceLogForm("Execution Purpose"), 'class -> "form-control", 'id -> "exectionPurpose", '_label -> Messages("Execution Purpose"), 'placeholder -> " test", 'size->70) 
        	</div>
-       	<div class = "col-sm-offset-3 col-sm-10">
-       		@inputText(serviceLogForm("User Id"), 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "123", 'size->70)
+       	<div class = "form-group">
+       		@inputText(serviceLogForm("User Id"), 'class -> "form-control", 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "123", 'size->70)
 	    </div>
-	    <div class = "col-sm-offset-3 col-sm-10">
-	    	@inputText(serviceLogForm("Start Time"), 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "200401", 'size->70)
-	    	@inputText(serviceLogForm("End Time"), 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "200412", 'size->70)
+	    <div class = "form-group">
+	    	@inputText(serviceLogForm("Start Time"), 'class -> "form-control", 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "200401", 'size->70)
+	    	@inputText(serviceLogForm("End Time"), 'class -> "form-control", 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "200412", 'size->70)
 	    	<!-- @inputText(serviceLogForm("Start Latitude"),'id -> "startLa", '_label -> Messages("Start Latitude"), 'placeholder -> "-90", 'size->70)
 	    	@inputText(serviceLogForm("End Latitude"),'id -> "endLa", '_label -> Messages("End Latitude"), 'placeholder -> "90", 'size->70) -->
 	    	<div id="show" style="display: none;">

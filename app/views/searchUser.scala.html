@@ -1,27 +1,72 @@
-@(userForm: play.data.Form[User])
+@(userForm: play.data.Form[User]) 
+@import helper._ 
 
-@import helper._
+@scripts = {
 
-@main("Search User"){
-	 
-    <h1 align="center">Search User</h1>
-    <div class="ui-widget">
-    	<div class = "form-group col-sm-offset-3 col-sm-10">
-    		@inputText(userForm("User Name"), 'id -> "userName", '_label -> Messages("User Name"), 'placeholder -> "User Name", 'size->70) 
-    	</div>
-    	<div class = "form-group col-sm-offset-3 col-sm-10">
-    		@inputText(userForm("Afflication"), 'id -> "affiliation", '_label -> Messages("Afflication"), 'placeholder -> "Afflication", 'size->70) 
-    	</div>
-    	<div class = "form-group col-sm-offset-3 col-sm-10">
-    		@inputText(userForm("Email"), 'id -> "email", '_label -> Messages("Email"), 'placeholder -> "xxx@gmail.com", 'size->70) 
-       	</div>
-       	<div class = "form-group col-sm-offset-3 col-sm-10">
-       		@inputText(userForm("Research Area"), 'id -> "researchFields", '_label -> Messages("Research Area"), 'placeholder -> "Research Area", 'size->70)
-	    </div>
-	    <div align="center">
-	    	<button id="preview" type="button" class="btn btn-info"> Preview</button>
-	    	<input class="btn" type="submit" value="Search">
-	    </div>
-	</div>	
-	   
+<script type="text/javascript">	
+	$(document).ready(function(){
+		$( "#preview" ).click(function() {
+			var target = document.getElementById("show");
+			if(target.style.display=="none"){
+				target.style.display="block";
+				$( "#preview" ).text("Hide");
+				var userName = $("#userName").val();
+				var affiliation = $("#affiliation").val();
+				var email = $("#email").val();
+				var researchFields = $("#researchFields").val();
+
+				if(userName!=""){
+					$("#content").append(" User Name = "+userName);	
+				}
+				if(affiliation!="" && affiliation!=null){
+					$("#content").append(" Affiliation = "+affiliation);	
+				}
+				if(email!="" && email!=null){
+					$("#content").append(" Email = "+email);	
+				}
+				if(researchFields!="" && researchFields!=null){
+					$("#content").append(" Research Area = "+researchFields);	
+				}
+				
+			}else {
+				$("#content").val('');	
+                target.style.display="none";
+                $("#preview" ).text("Preview");
+            }
+		});
+	});
+		
+	</script>
+} 
+
+@main("Search User", scripts){
+
+	<h1 style="margin-left:520px">Search User</h1>
+	
+	<div class="ui-widget col-sm-offset-3 col-sm-7" id="search-form" >
+		<div class="form-group" >
+			@inputText(userForm("User Name"), 'class -> "form-control", 'id -> "userName", '_label ->
+			Messages("User Name"), 'placeholder -> "User Name", 'size->70)
+		</div>
+		<div class="form-group">
+			@inputText(userForm("Afflication"), 'class -> "form-control", 'id -> "affiliation", '_label ->
+			Messages("Afflication"), 'placeholder -> "Afflication", 'size->70)
+		</div>
+		<div class="form-group">
+			@inputText(userForm("Email"), 'class -> "form-control", 'id -> "email", '_label ->
+			Messages("Email"), 'placeholder -> "xxx@gmail.com", 'size->70)
+		</div>
+		<div class="form-group">
+			@inputText(userForm("Research Area"), 'class -> "form-control", 'id -> "researchFields", '_label
+			-> Messages("Research Area"), 'placeholder -> "Research Area", 'size->70)
+			<div id="show" style="display: none;">
+				<textarea style="width: 640px" rows="4" id="content"></textarea>
+			</div>
+		</div>
+		<div style="text-align:center">
+			<button id="preview" type="button" class="btn btn-info">Preview</button>
+			<input class="btn" type="submit" value="Search">
+		</div>
+	</div>
+
 }
