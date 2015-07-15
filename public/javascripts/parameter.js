@@ -38,9 +38,11 @@ function addButton() {
 	
 }
 
+
 function addRow() {
 
-    var name = document.getElementById("parameterName");
+    var name = document.getElementById("parameterNameDescriptive");
+    var nameFunc = document.getElementById("parameterNameFunctional");
     var type = document.getElementById("parameterType");
     var values = document.getElementById("parameterValues");
     var defaultValues = document.getElementById("defaultValues");
@@ -51,27 +53,27 @@ function addRow() {
 
     switch(type.value) {
         case "Input text":
-            appendInput(name, defaultValues);
+            appendInput(name, nameFunc, defaultValues);
             break;
         case "Input area":
-            appendArea(name);
+            appendArea(name, nameFunc);
             break;
         case "Multiple selects":
-            appendSelects(name, values, defaultValues);
+            appendSelects(name, nameFunc, values, defaultValues);
             break;
         case "Radio button":
-            appendRadioButton(name, values, defaultValues);
+            appendRadioButton(name, nameFunc, values, defaultValues);
             break;
         case "Dropdown list":
-            appendDropdownList(name, values, defaultValues);
+            appendDropdownList(name, nameFunc, values, defaultValues);
             break;
         default:
-            appendInput(name, defaultValues);
+            appendInput(name, nameFunc, defaultValues);
     }
 
 }
 
-function appendInput(name, defaultValues) {
+function appendInput(name, nameFunc, defaultValues) {
     var res = name.value.split(" ");
     var text = res[0];
     for (i = 1; i < res.length; i++) {
@@ -81,7 +83,7 @@ function appendInput(name, defaultValues) {
     }
 
     var str = "";
-    str += '<tr><td>' + name.value + '</td>';
+    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
     str += '<td>';
 
     str += '<input type="text" class="form-control" id="' + text + '" placeholder="' + defaultValues.value + '">';
@@ -93,7 +95,7 @@ function appendInput(name, defaultValues) {
     $("#tbody").append(str);
 }
 
-function appendArea(name) {
+function appendArea(name, nameFunc) {
     var res = name.value.split(" ");
     var text = res[0];
     for (i = 1; i < res.length; i++) {
@@ -103,7 +105,7 @@ function appendArea(name) {
     }
 
     var str = "";
-    str += '<tr><td>' + name.value + '</td>';
+    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
     str += '<td>';
 
     str += '<textarea class="form-control" rows="5" id="' + text + '">';
@@ -116,7 +118,7 @@ function appendArea(name) {
     $("#tbody").append(str);
 }
 
-function appendSelects(name, values, defaultValues) {
+function appendSelects(name, nameFunc, values, defaultValues) {
     var res = name.value.split(" ");
     // generate id
     var text = res[0];
@@ -137,7 +139,7 @@ function appendSelects(name, values, defaultValues) {
     }
 
     var str = "";
-    str += '<tr><td>' + name.value + '</td>';
+    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td>';
     for (i = 0; i < array.length; i++) {
@@ -156,7 +158,7 @@ function appendSelects(name, values, defaultValues) {
     $("#tbody").append(str);
 }
 
-function appendRadioButton(name, values, defaultValues) {
+function appendRadioButton(name, nameFunc, values, defaultValues) {
     var res = name.value.split(" ");
     // generate id
     var text = res[0];
@@ -170,7 +172,7 @@ function appendRadioButton(name, values, defaultValues) {
     var array = values.value.split(",");
 
     var str = "";
-    str += '<tr><td>' + name.value + '</td>';
+    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td>';
     for (i = 0; i < array.length; i++) {
@@ -190,13 +192,13 @@ function appendRadioButton(name, values, defaultValues) {
     $("#tbody").append(str);
 }
 
-function appendDropdownList(name, values, defaultValues) {
+function appendDropdownList(name, nameFunc, values, defaultValues) {
 
     // generate value array
     var array = values.value.split(",");
 
     var str = "";
-    str += '<tr><td>' + name.value + '</td>';
+    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td><select class="form-control">';
     for (i = 0; i < array.length; i++) {
@@ -248,6 +250,7 @@ function addTable() {
     myTableDiv.appendChild(table);
 
 }
+
 
 function disableItem() {
     var type = document.getElementById("parameterType");
