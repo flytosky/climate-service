@@ -165,6 +165,7 @@ public class ClimateServiceController extends Controller {
 		String name = request().body().asJson().get("name").toString();
 		String purpose = request().body().asJson().get("purpose").toString();
 		String url = request().body().asJson().get("url").toString();
+		String outputButton = request().body().asJson().get("pageOutput").toString();
 
 		System.out.println("page string: " + str);
 		System.out.println("climate service name: " + name);
@@ -181,7 +182,7 @@ public class ClimateServiceController extends Controller {
 		
 		System.out.println("WARNING!!!!!!");
 		// save page in front-end
-		savePage(str, name, purpose, url);
+		savePage(str, name, purpose, url, outputButton);
 
 		// flash the response message
 		Application.flashMsg(response);
@@ -189,8 +190,8 @@ public class ClimateServiceController extends Controller {
 	}
 
 	public static void savePage(String str, String name, String purpose,
-			String url) {
-
+			String url, String outputButton) {
+		System.out.println("output button test: " + outputButton);
 		// Remove delete button from preview page
 		String result = str
 				.replaceAll(
@@ -198,10 +199,14 @@ public class ClimateServiceController extends Controller {
 						"");
 
 		result = StringEscapeUtils.unescapeJava(result);
-
+		outputButton = StringEscapeUtils.unescapeJava(outputButton);
+		System.out.println("output button test: " + outputButton);
+		
 		// remove the first char " and the last char " of result, name and
 		// purpose
 		result = result.substring(1, result.length() - 1);
+		outputButton = outputButton.substring(1, outputButton.length() - 1);
+		
 		name = name.substring(1, name.length() - 1);
 		purpose = purpose.substring(1, purpose.length() - 1);
 
@@ -214,9 +219,10 @@ public class ClimateServiceController extends Controller {
 
 		String str21 = Constants.htmlTail1;
 		String str22 = Constants.htmlTail2;
+		String str23 = Constants.htmlTail3;
 
 		result = str11 + name + str12 + purpose + str13 + result + str21
-				+ url.substring(1, url.length() - 1) + str22;
+				+ url.substring(1, url.length() - 1) + str22 + outputButton + str23;
 
 		name = name.replace(" ", "");
 
@@ -256,7 +262,6 @@ public class ClimateServiceController extends Controller {
 			e.printStackTrace();
 		}
 	}
-
 	public static void flashMsg(JsonNode jsonNode) {
 		Iterator<Entry<String, JsonNode>> it = jsonNode.fields();
 		while (it.hasNext()) {

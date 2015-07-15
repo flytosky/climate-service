@@ -6,9 +6,11 @@ $(document).ready(function() {
 		purpose = document.getElementById("purpose").value;
 		serviceUrl = document.getElementById("url").value;
 		var pageStr = myElement.innerHTML;
+		var pageOutput = document.getElementById("output").innerHTML;
 		console.log(pageStr);
-		
+		//add the output here!!!!!!!
 		var obj = {
+			pageOutput: pageOutput,
 			pageString: pageStr,
 			name: name,
 			purpose: purpose,
@@ -25,6 +27,16 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function addButton() {
+	var outputName = document.getElementById("outputName");
+	var outputUrl = document.getElementById("outputUrl");
+	//var str = '<button type=\"button\" class=\"btn btn-success btn-lg\" a=\"'+ outputUrl.value+ '\">'+ outputName.value+'</button>';
+	//<input type="button" onclick="window.location.href='http://www.google.com';" value="Go to Google" />
+	var str = '<button type="button" class="btn btn-success btn-lg" onclick="window.location.href=\''+ outputUrl.value +'\';">'+ outputName.value+'</button>';
+	$("#output").append(str);
+	
+}
 
 function addRow() {
 

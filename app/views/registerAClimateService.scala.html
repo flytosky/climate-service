@@ -73,6 +73,23 @@
                 </div>
             </form>
         </div>
+        <div class="well">
+        	<form>
+                <div class="form-group">
+                    <label>Button Name</label>
+                    <input type="text" class="form-control" id="outputName" placeholder="-Enter Output Name-">
+                </div>
+                <div class="form-group">
+                    <label>Output Button Url</label>
+                    <input type="text" class="form-control" id="outputUrl" placeholder="-Enter Output Button Url-">
+                </div>
+                
+                <div class="text-center">
+                    <button type="button" class="btn btn-info" onclick="Javascript:addButton()">Add a output button</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
         
     <!--</form>  --> }
 </div>
@@ -100,7 +117,7 @@
 </div>
 
 <div class="container col-md-6">
-    <h2>Preview</h2>
+    <h2>Input Part Preview</h2>
 
     <form>
         <table id="parameterPreview" class="table table-bordered table-striped">
@@ -114,6 +131,46 @@
             <tbody id="tbody"></tbody>
         </table>
     </form>
+    
+    <h2> Output Part Preview</h2>
+    <form>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Output</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a id="serviceImgLink" href="" class="text-center">
+                        <img src="" id="serviceImg" class="img-responsive">
+                        <h1>Placeholder for the image</h1>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a id="commentLink" href="">
+                        <textarea class="form-control" rows="3" id="comment" placeholder ="Placeholder for the link"></textarea>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea class="form-control" rows="10" id="message" placeholder ="Placeholder for the message"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">Download Data</button>
+        </div>
+        <br>
+        <div class="text-center" id="output">
+            
+        </div>
+    </form>
+    
 </div>
-
 }
