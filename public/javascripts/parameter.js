@@ -295,7 +295,7 @@ function sendValues(url) {
     var i = 0;
     for (i = 0; i < len; i++) {
     	// key is used for backend climate service model
-        var key = temp[i].getElementsByTagName("td")[0].innerHTML;
+    	var key = temp[i].getElementsByTagName("td")[0].getAttribute("id");
 
         var res = key.split(" ");
         // text is used for retrieving dynamic page element by name
