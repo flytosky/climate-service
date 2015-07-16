@@ -33,7 +33,6 @@ import utils.Constants;
 import utils.RESTfulCalls;
 import utils.RESTfulCalls.ResponseType;
 import views.html.*;
-import models.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -270,93 +269,19 @@ public class ClimateServiceController extends Controller {
 		}
 	}
 	
-	public static List<ClimateService> getMostRecentlyAdded() {
-
+	public static Result mostRecentlyAddedClimateServices() {
+		
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
 
 		JsonNode climateServicesNode = RESTfulCalls
 				.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT
 						+ Constants.GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL);
-		//System.out.print(GET_MOST_RECENTLY_ADDED_CLIMATE_SERVICES_CALL);
-		// if no value is returned or error or is not json array
-		if (climateServicesNode == null || climateServicesNode.has("error")
-				|| !climateServicesNode.isArray()) {
-			return climateServices;
-		}
-
-		// parse the json string into object
-		for (int i = 0; i < climateServicesNode.size(); i++) {
-			JsonNode json = climateServicesNode.path(i);
-			ClimateService newService = new ClimateService();
-			//long newServiceId = json.get("id").asLong();
-			//newService.setId(newServiceId);
-			newService.setName(json.get(
-					"name").asText());
-			newService.setPurpose(json.findPath("purpose").asText());
-			newService.setUrl(json.findPath("url").asText());
-			//newService.setCreateTime(json.findPath("createTime").asText());
-			newService.setScenario(json.findPath("scenario").asText());
-			newService.setVersionNo(json.findPath("versionNo").asText());
-			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
-			climateServices.add(newService);
-		}
-		return climateServices;
-	}
-	
-	
-	public static List<ClimateService> getMostPopular() {
-
-		List<ClimateService> climateServices = new ArrayList<ClimateService>();
-
-		JsonNode climateServicesNode = RESTfulCalls
-				.getAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
 
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
 				|| !climateServicesNode.isArray()) {
-			return climateServices;
-		}
-
-		// parse the json string into object
-		for (int i = 0; i < climateServicesNode.size(); i++) {
-			JsonNode json = climateServicesNode.path(i);
-			ClimateService newService = new ClimateService();
-			//newService.setId(json.get("id").asText());
-			newService.setName(json.get(
-					"name").asText());
-			newService.setPurpose(json.findPath("purpose").asText());
-			newService.setUrl(json.findPath("url").asText());
-			//newService.setCreateTime(json.findPath("createTime").asText());
-			newService.setScenario(json.findPath("scenario").asText());
-			newService.setVersionNo(json.findPath("versionNo").asText());
-			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
-			climateServices.add(newService);
-		}
-		return climateServices;
-	}
-	
-	public static Result mostRecentlyAddedClimateServices() {
-		return ok(mostRecentlyAddedServices.render(getMostRecentlyAdded(),
-				climateServiceForm));
-	}
-	
-	public static Result mostPopularServices() {
-		return ok(mostPopularServices.render(getMostPopular(),
-				climateServiceForm));
-	}
-	
-	public static List<ClimateService> getMostRecentlyUsed() {
-
-		List<ClimateService> climateServices = new ArrayList<ClimateService>();
-
-		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
-				+ Constants.CMU_BACKEND_PORT
-				+ Constants.GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL);
-		
-		if (climateServicesNode == null || climateServicesNode.has("error")
-				|| !climateServicesNode.isArray()) {
-			return climateServices;
+			return ok(mostRecentlyUsedServices.render(climateServices));
 		}
 
 		// parse the json string into object
@@ -366,19 +291,89 @@ public class ClimateServiceController extends Controller {
 			newService.setId(json.get("id").asLong());
 			newService.setName(json.get("name").asText());
 			newService.setPurpose(json.findPath("purpose").asText());
-			newService.setUrl(json.findPath("url").asText());
+			//newService.setUrl(json.findPath("url").asText());
+			String name = json.path("name").asText();
+			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
+					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
+			newService.setUrl(pageUrl);
 			//newService.setCreateTime(json.findPath("createTime").asText());
 			newService.setScenario(json.findPath("scenario").asText());
 			newService.setVersionNo(json.findPath("versionNo").asText());
 			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
 			climateServices.add(newService);
 		}
-		return climateServices;
+		
+		return ok(mostRecentlyAddedServices.render(climateServices));
+	}
+	
+	public static Result mostPopularServices() {
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+
+		JsonNode climateServicesNode = RESTfulCalls
+				.getAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
+
+		// if no value is returned or error or is not json array
+		if (climateServicesNode == null || climateServicesNode.has("error")
+				|| !climateServicesNode.isArray()) {
+			return ok(mostPopularServices.render(climateServices));
+		}
+
+		// parse the json string into object
+		for (int i = 0; i < climateServicesNode.size(); i++) {
+			JsonNode json = climateServicesNode.path(i);
+			ClimateService newService = new ClimateService();
+			newService.setId(json.get("id").asLong());
+			newService.setName(json.get("name").asText());
+			newService.setPurpose(json.findPath("purpose").asText());
+			//newService.setUrl(json.findPath("url").asText());
+			String name = json.path("name").asText();
+			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
+					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
+			newService.setUrl(pageUrl);
+			//newService.setCreateTime(json.findPath("createTime").asText());
+			newService.setScenario(json.findPath("scenario").asText());
+			newService.setVersionNo(json.findPath("versionNo").asText());
+			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
+			climateServices.add(newService);
+		}
+		
+		return ok(mostPopularServices.render(climateServices));
 	}
 	
 	public static Result mostRecentlyUsedClimateServices() {
-		return ok(mostRecentlyUsedServices.render(getMostRecentlyUsed(),
-				climateServiceForm));
+		
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+
+		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL);
+		
+		// if no value is returned or error or is not json array
+		if (climateServicesNode == null || climateServicesNode.has("error")
+				|| !climateServicesNode.isArray()) {
+			return ok(mostRecentlyUsedServices.render(climateServices));
+		}
+
+		// parse the json string into object
+		for (int i = 0; i < climateServicesNode.size(); i++) {
+			JsonNode json = climateServicesNode.path(i);
+			ClimateService newService = new ClimateService();
+			newService.setId(json.get("id").asLong());
+			newService.setName(json.get("name").asText());
+			newService.setPurpose(json.findPath("purpose").asText());
+			//newService.setUrl(json.findPath("url").asText());
+			String name = json.path("name").asText();
+			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
+					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
+			newService.setUrl(pageUrl);
+			//newService.setCreateTime(json.findPath("createTime").asText());
+			newService.setScenario(json.findPath("scenario").asText());
+			newService.setVersionNo(json.findPath("versionNo").asText());
+			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
+			climateServices.add(newService);
+		}
+		
+		return ok(mostRecentlyUsedServices.render(climateServices));
 	}
 	
 	public static Result replaceFile() {
