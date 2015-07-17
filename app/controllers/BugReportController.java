@@ -1,89 +1,110 @@
 package controllers;
 
 import models.BugReport;
+import models.ClimateService;
 import play.data.DynamicForm;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.*;
+import utils.Constants;
 import utils.RESTfulCalls;
 import utils.RESTfulCalls.ResponseType;
 import views.html.*;
 
+import java.net.URLEncoder;
 import java.util.*;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 public class BugReportController extends Controller {
 	final static Form<BugReport> bugReportForm = Form.form(BugReport.class);
 
-	@play.db.jpa.Transactional
 	public static Result reports() {
 		return ok(bugReporting.render(bugReportForm));
 	}
 
-	@play.db.jpa.Transactional
 	public static Result newReport() {
 		Form<BugReport> filledForm = bugReportForm.bindFromRequest();
-
-		BugReport report = new BugReport();
+		
+		ObjectNode jsonData = Json.newObject();
 		try {
-			// Validations
-			report.setTitle(filledForm.get().getTitle());
-			report.setName(filledForm.get().getName());
-			report.setEmail(filledForm.get().getEmail());
-			report.setOrganization(filledForm.get().getOrganization());
-			report.setDescription(filledForm.get().getDescription());
-			report.setSolved(0);
-
-			report.save();
+			jsonData.put("title", filledForm.get().getTitle());
+			jsonData.put("name", filledForm.get().getName());
+			jsonData.put("email", filledForm.get().getEmail());
+			jsonData.put("organization", filledForm.get().getOrganization());
+			jsonData.put("description", filledForm.get().getDescription());
+			jsonData.put("solved", 0);
+			
+			// POST Climate Service JSON data
+			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
+					+ Constants.ADD_BUG_REPORT, jsonData);
+			
+			// flash the response message
+			Application.flashMsg(response);
+			
 			return redirect(routes.BugReportController.list());
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
-		}	
-		return ok(bugReporting.render(filledForm));
-	}
-
-	@play.db.jpa.Transactional
-	public static Result list() {
-		BugReport bugReport = new BugReport();
-		List<Object[]> list = BugReport.getAll();
-		LinkedList<BugReport> bugList = new LinkedList<BugReport>();
-		// title VARCHAR(255), organization_name VARCHAR(255), email
-		// VARCHAR(255), description
-		for (Object[] e : list) {
-			BugReport bug = new BugReport();
-			bug.setId((Integer)e[0]);
-			bug.setTitle(e[1].toString());
-			bug.setName(e[2].toString());
-			bug.setEmail(e[3].toString());
-			bug.setOrganization(e[4].toString());
-			bug.setDescription(e[5].toString());
-			bug.setSolved((Byte)e[6]);
-			bugList.add(bug);
 		}
-		return ok(bugs.render(bugList));
+		catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		
+		return ok(bugReporting.render(filledForm));
+		
 	}
 
-	/*
-	 * public static Result authenticate() { Form<Login> loginForm =
-	 * form(Login.class).bindFromRequest(); if(loginForm.hasErrors()) return
-	 * badRequest(login.render(loginForm)); else { session("email",
-	 * loginForm.get().email); return redirect(
-	 * routes.DeviceTypeController.deviceTypes() ); } }
-	 */
+	public static Result list() {
+		List<BugReport> bugReportList = new ArrayList<BugReport>();
+		
+		JsonNode bugReportsNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_ALL_BUG_REPORTS);
+		
+		// if no value is returned or error or is not json array
+		if (bugReportsNode == null || bugReportsNode.has("error")
+				|| !bugReportsNode.isArray()) {
+			return ok(bugs.render(bugReportList));
+		}
+		
+		for (int i = 0; i < bugReportsNode.size(); i++) {
+			JsonNode json = bugReportsNode.path(i);
+			BugReport oneBugReport = new BugReport();
+			oneBugReport.setId(json.get("id").asLong());
+			oneBugReport.setTitle(json.get("title").asText());			
+			oneBugReport.setName(json.get("name").asText());
+			oneBugReport.setEmail(json.get("email").asText());
+			oneBugReport.setOrganization(json.get("organization").asText());
+			oneBugReport.setDescription(json.get("description").asText());
+			oneBugReport.setSolved(json.get("solved").asInt());
+			bugReportList.add(oneBugReport);
+		}
+		
+		return ok(bugs.render(bugReportList));
+	}
 	
-	@play.db.jpa.Transactional
 	public static Result deleteReport() {
 		DynamicForm df = DynamicForm.form().bindFromRequest();
 		
 		try {
 			int id = Integer.valueOf(df.field("idHolder").value());
-		
-			// Call the delete() method
-			if(BugReport.delete(id)){
-				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.SUCCESS));
-			}else {
-				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.DELETEERROR));
-			}
+			
+			JsonNode response = RESTfulCalls.deleteAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT
+					+ Constants.DELETE_ONE_BUG_REPORT 
+					+ id);
+			
+			// flash the response message
+			Application.flashMsg(response);
+			
+			return redirect(routes.BugReportController.list());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
@@ -91,19 +112,31 @@ public class BugReportController extends Controller {
 		return redirect(routes.BugReportController.list());
 	}
 	
-	@play.db.jpa.Transactional
 	public static Result solveReport() {
 		DynamicForm df = DynamicForm.form().bindFromRequest();
 		
+		ObjectNode jsonData = Json.newObject();
 		try {
-			int id = Integer.valueOf(df.field("idHolder").value());
-		
-			// Call the delete() method
-			if(BugReport.solve(id)){
-				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.SUCCESS));
-			}else {
-				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.RESOLVEERROR));
-			}
+			long id = Long.valueOf(df.field("idHolder").value());
+			JsonNode bugReportsNode = RESTfulCalls.getAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT
+					+ Constants.GET_BUG_REPORT_BY_ID + id);
+			
+			jsonData.put("title", bugReportsNode.get("title").asText());
+			jsonData.put("name", bugReportsNode.get("name").asText());
+			jsonData.put("email", bugReportsNode.get("email").asText());
+			jsonData.put("organization", bugReportsNode.get("organization").asText());
+			jsonData.put("description", bugReportsNode.get("description").asText());
+			jsonData.put("solved", 1);
+			
+			JsonNode response = RESTfulCalls.putAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
+					+ Constants.UPDATE_BUG_REPORT + id, jsonData);
+			
+			// flash the response message
+			Application.flashMsg(response);
+			
+			return redirect(routes.BugReportController.list());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
