@@ -3,22 +3,24 @@
 # ~~~~
 
 # Home page
-GET		/							controllers.ClimateServiceController.home()						
-GET		/testPage					controllers.Application.showClimateService()
+GET		/							controllers.Application.home()
+GET		/login						controllers.Application.login()
+GET		/logout						controllers.Application.logout()
+GET		/authenticate				controllers.Application.authenticate()
 
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
 GET		/climateService/add											controllers.ClimateServiceController.addClimateService()
-GET     /climateService/addAClimateService          			controllers.ClimateServiceController.addAClimateService()	
+GET     /climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()	
 POST	/climateService/savePage									controllers.ClimateServiceController.passPageStr()
-POST	/assets/html/climateService/serviceModels		controllers.ClimateServiceController.serviceModels()
+POST	/assets/html/climateService/serviceModels					controllers.ClimateServiceController.serviceModels()
 
 GET     /climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
 GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
 GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
 
 #replace page
-POST 	/climateService/replaceFile							controllers.ClimateServiceController.replaceFile()
+POST 	/climateService/replaceFile								controllers.ClimateServiceController.replaceFile()
 
 
 # Service Execution Log

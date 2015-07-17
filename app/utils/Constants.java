@@ -24,6 +24,9 @@ public class Constants {
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";
 	
+	// user
+	public static final String IS_USER_VALID = "/users/isUserValid";
+	
 	//climate service log for Old Backend to Test
 	public static final String GET_ALL_SERVICE_LOG = "/serviceExecutionLog/getAllServiceExecutionLog";	
 	public static final String SERVICE_EXECUTION_LOG = "/serviceExecutionLog/";

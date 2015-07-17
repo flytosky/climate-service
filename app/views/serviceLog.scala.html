@@ -5,12 +5,12 @@
 @main("Service Logs"){ 
 	 
     <h1>@serviceLogs.size() Service Logs</h1>
-    @helper.form(routes.ClimateServiceController.home()) {
+    @helper.form(routes.Application.home()) {
     	<div class = "col-sm-2">
     		<input class="btn btn-primary" type="submit" value="Sync data" style="margin-top:18px">
     	</div>
     }
-    @helper.form(routes.ClimateServiceController.home()) {
+    @helper.form(routes.Application.home()) {
     	<div class = "col-sm-offset-3 col-sm-2">
     		@inputText(serviceLogForm("User Id"), 'id -> "userName", '_label -> Messages("User Id"), 'placeholder -> "123", 'size->20)
     	</div>
@@ -40,7 +40,7 @@
 	<td>@serviceLog.getExecutionStartTime</td>
 	<td>@serviceLog.getExecutionEndTime</td>
 	<td>
-	@form(routes.ClimateServiceController.home()){
+	@form(routes.Application.home()){
 		<input
 			name="logId" class="hidden" type="hidden"
 			value="@serviceLog.getId">
@@ -49,7 +49,7 @@
 	}
 	</td>
 	<td>
-	@form(routes.ClimateServiceController.home()){ 
+	@form(routes.Application.home()){ 
 		<input
 			name="idHolder" class="hidden" type="hidden"
 			value="@serviceLog.getId">

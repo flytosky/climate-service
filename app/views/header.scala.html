@@ -19,9 +19,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Web Service<b class="caret"></b>
-						</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Web Service<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="@routes.ClimateServiceController.mostRecentlyAddedClimateServices()">Most Recently Added</a></li>
 							<li><a href="@routes.ClimateServiceController.mostRecentlyUsedClimateServices">Most Recently Used</a></li>
@@ -35,9 +33,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Dataset<b class="caret"></b>
-						</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dataset<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a>Most Popular</a></li>
 							<li><a href="@routes.DatasetController.showAllDatasets()">Dataset List</a></li>
@@ -49,9 +45,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Analytics<b class="caret"></b>
-						</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Analytics<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="@routes.ServiceExecutionLogController.getServiceLog">Service Execution Log</a></li>
 							<li><a href="@routes.ServiceExecutionLogController.searchServiceLog">Search Service Log</a></li>
@@ -64,9 +58,7 @@
 					</li>
 					
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Scientist<b class="caret"></b>
-						</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Scientist<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="@routes.UsersController.getAllUsers()">All Users</a></li>
 							<li><a href="@routes.UsersController.searchUser()">Search User</a></li>
@@ -79,26 +71,34 @@
 					</li>
 					
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							About<b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="@routes.ClimateServiceController.home()">Home</a></li>
+							<li><a href="@routes.Application.home()">Home</a></li>
 							<li><a href="@routes.AboutController.aboutUs()">About Us</a></li>
 							<li><a href="@routes.AboutController.aboutProject()">About project</a></li>
 							<li><a href="@routes.AboutController.tutorial()">Tutorial</a></li>
 						</ul>
 					</li>
 					
-					@if(!session.get("username")) {
-					
-						<form class="navbar-form navbar-right" action="#">
+					@if(!session.get("email")) {
+						<form class="navbar-form navbar-right" action="@routes.Application.login()">
 							<button type="submit" class="btn btn-success">Log in</button>
 						</form>
 					} else {
-						<li><a href="/estimator/tutorial">Estimator</a></li>
-						<form class="navbar-form navbar-right" action="#">
-							<button type="submit" class="btn btn-success">Log out</button>
-						</form>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Services<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">My climate services</a></li>
+								<li><a href="#">My datasets</a></li>
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">@session.get("email")<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="@routes.Application.logout()">Log out</a></li>
+							</ul>
+						</li>
 					}	
 										
 					@if(false) {

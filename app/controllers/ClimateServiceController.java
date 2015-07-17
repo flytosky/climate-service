@@ -40,11 +40,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ClimateServiceController extends Controller {
 
 	final static Form<ClimateService> climateServiceForm = Form
-			.form(ClimateService.class);
-	
-	public static Result home() {
-		return ok(home.render());
-	} 
+			.form(ClimateService.class); 
 	
 	public static Result addAClimateService() {
 		return ok(registerAClimateService.render(climateServiceForm));
