@@ -395,6 +395,7 @@ function sendValues(url) {
     	$('#comment').html(responseJson.dataUrl);
     	$('#commentLink').attr("href", responseJson.dataUrl);
     	$('#message').html(responseJson.message);
+    	$('#downloadButton').attr("onclick","location.href ='" + responseJson.dataUrl + "';");
     }).fail(function(xhr, textStatus, errorThrown) {
     	console.log("error!");
     	console.log(xhr);
