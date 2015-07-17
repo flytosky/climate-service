@@ -7,18 +7,8 @@
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/vis/3.11.0/vis.min.css"
 >
-
-<link rel="stylesheet"
-	href='@routes.Assets.at("stylesheets/livefitler.css")'>
 	
-@scripts = {
-	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
-	<script src='@routes.Assets.at("javascripts/livefilter.js")'></script>
-	<script type="text/javascript" src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
-}
-
-@main("Service Logs", scripts){
-	
+@main("Service Logs"){
 	  
 
   <div id="jsonData" style="display: none;">@jsonData</div>
