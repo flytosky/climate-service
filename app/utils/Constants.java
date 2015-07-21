@@ -26,6 +26,7 @@ public class Constants {
 	
 	// user
 	public static final String IS_USER_VALID = "/users/isUserValid";
+	public static final String ADD_USER = "/users/add";
 	
 	//climate service log for Old Backend to Test
 	public static final String GET_ALL_SERVICE_LOG = "/serviceExecutionLog/getAllServiceExecutionLog";	
