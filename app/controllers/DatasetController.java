@@ -39,10 +39,10 @@ public class DatasetController extends Controller {
 	
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
-		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_SERVER
+		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_DATASETS);
-		System.out.println("GET API: " + Constants.URL_SERVER
+		System.out.println("GET API: " + Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_DATASETS);
 		// if no value is returned or error or is not json array

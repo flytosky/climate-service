@@ -7,7 +7,7 @@
 <br>
 
 <div class="container col-md-6">
-    <h2>Add</h2>
+    <h3>Climate Service Metadata</h3>
 
     <!-- <form> -->
     @form(routes.ClimateServiceController.addClimateService()) {
@@ -40,17 +40,22 @@
             <input type="text" class="form-control" id="homepage" placeholder="http://www.google.com">
         </div>
         <div class="form-group">
-            <!-- <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#confirm">Add a Climate Service</button> -->
+            <label>Developers</label>
+            <input type="text" class="form-control" id="delevopers" placeholder="Tom Smith, Mary Brown">
+        </div>
+        <div class="form-group">
+            <!-- <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#confirm">Create Climate Service</button> -->
             <button type="submit" class="btn btn-success btn-lg" id="addAClimateService">Add a Climate Service</button>
         </div>
         <div class="well">
+            <h4>Configure Input Parameters</h4>
             <form>
                 <div class="form-group">
                     <label>Descriptive Parameter Name</label>
                     <input type="text" class="form-control" id="parameterNameDescriptive" placeholder="-descriptive-">
                 </div>
                 <div class="form-group">
-                    <label>Functional Parameter Name</label>
+                    <label>API Parameter Name</label>
                     <input type="text" class="form-control" id="parameterNameFunctional" placeholder="-functional-">
                 </div>
                 <div class="form-group">
@@ -72,24 +77,25 @@
                     <input type="text" class="form-control" id="defaultValues" placeholder="2">
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-info" onclick="Javascript:addRow()">Add a Parameter</button>
+                    <button type="button" class="btn btn-info" onclick="Javascript:addRow()">Add Input Parameter</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
             </form>
         </div>
         <div class="well">
+        	<h4>Configure Output Parameters</h4>
         	<form>
                 <div class="form-group">
                     <label>Button Name</label>
                     <input type="text" class="form-control" id="outputName" placeholder="-Enter Output Name-">
                 </div>
                 <div class="form-group">
-                    <label>Output Button Url</label>
+                    <label>Output Button Key</label>
                     <input type="text" class="form-control" id="outputUrl" placeholder="-Enter Output Button Url-">
                 </div>
                 
                 <div class="text-center">
-                    <button type="button" class="btn btn-info" onclick="Javascript:addButton()">Add a output button</button>
+                    <button type="button" class="btn btn-info" onclick="Javascript:addButton()">Add Output Button</button>
                     <button type="reset" class="btn btn-danger">Reset</button>
                 </div>
             </form>
@@ -121,7 +127,7 @@
 </div>
 
 <div class="container col-md-6">
-    <h2>Input Part Preview</h2>
+    <h3>Input Part Preview</h3>
 
     <form>
         <table id="parameterPreview" class="table table-bordered table-striped">
@@ -136,7 +142,7 @@
         </table>
     </form>
     
-    <h2> Output Part Preview</h2>
+    <h3> Output Part Preview</h3>
     <form>
         <table class="table table-bordered table-striped">
             <thead>
@@ -147,9 +153,9 @@
             <tbody>
             <tr>
                 <td>
-                    <a id="serviceImgLink" href="" class="text-center">
+                    <a id="serviceImgLink" href="">
                         <img src="" id="serviceImg" class="img-responsive">
-                        <h1>Placeholder for the image</h1>
+                        <h5>  Placeholder for the image</h5>
                     </a>
                 </td>
             </tr>

@@ -33,7 +33,7 @@ function addButton() {
 	var outputUrl = document.getElementById("outputUrl");
 	//var str = '<button type=\"button\" class=\"btn btn-success btn-lg\" a=\"'+ outputUrl.value+ '\">'+ outputName.value+'</button>';
 	//<input type="button" onclick="window.location.href='http://www.google.com';" value="Go to Google" />
-	var str = '<button type="button" class="btn btn-success btn-lg" onclick="window.location.href=\''+ outputUrl.value +'\';">'+ outputName.value+'</button>';
+	var str = '<button type="button" class="btn btn-success btn-lg" name="' +outputUrl.value + '"  id="' +outputName.value + '" onclick="window.location.href=\''+ outputUrl.value +'\';">'+ outputName.value+'</button>';
 	$("#output").append(str);
 	
 }
@@ -395,6 +395,18 @@ function sendValues(url) {
     	$('#comment').html(responseJson.dataUrl);
     	$('#commentLink').attr("href", responseJson.dataUrl);
     	$('#message').html(responseJson.message);
+    	$('#downloadButton').attr("onclick","location.href ='" + responseJson.dataUrl + "';");
+    	console.log("done!!!!!")
+    	var x=document.getElementById("output").getElementsByTagName("button");
+    	
+    	for (var i = 0; i < x.length; i ++) {
+    		var key = responseJson[x[i].getAttribute("name")];
+    		var id = x[i].innerHTML;
+    		console.log("key    " + key + "    id    " +id);
+    		$('#'+id).attr("onclick","location.href ='" + key + "';");
+		}   	1
+    	
+    	
     }).fail(function(xhr, textStatus, errorThrown) {
     	console.log("error!");
     	console.log(xhr);
