@@ -2,11 +2,17 @@ package models;
 
 import java.util.Date;
 
+import play.data.validation.Constraints;
+
 public class BugReport {
 	
 	private long id;
+	
+	@Constraints.Required
 	private String title;
+	@Constraints.Required
 	private String email;
+	@Constraints.Required
 	private String name;
 	private String organization;
 	private String description;
