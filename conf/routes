@@ -9,6 +9,7 @@ GET		/logout						controllers.Application.logout()
 GET		/authenticate				controllers.Application.authenticate()
 GET		/signup						controllers.Application.signup()
 GET		/createNewUser				controllers.Application.createNewUser()
+GET		/createSuccess				controllers.Application.createSuccess()
 
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()

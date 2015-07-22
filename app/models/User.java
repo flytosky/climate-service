@@ -5,19 +5,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import play.data.validation.Constraints;
+
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	private String userName;
+	@Constraints.Required
 	private String password;
+	@Constraints.Required
 	private String firstName;
+	@Constraints.Required
 	private String lastName;
 	private String middleInitial;
 	private String affiliation;
 	private String title;
+	@Constraints.Required
 	private String email;
 	private String mailingAddress;
 	private String phoneNumber;

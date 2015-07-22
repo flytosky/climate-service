@@ -1,66 +1,103 @@
 @(userForm: play.data.Form[models.User])
+@import helper._
+
+
+<script type="text/javascript">
+		function checkpwd(){
+				var p1=document.getElementById("password").value;
+				var p2=document.getElementById("repassword").value;
+				if(p1!=p2){
+					document.getElementById("msg").innerHTML="Please check that your passwords match";
+					document.getElementById("create").disabled = true;
+					
+				}else{
+					document.getElementById("msg").innerHTML = "";
+					document.getElementById("create").disabled = false;
+					return true;
+				}
+		}
+</script>
 
 @main("Signup") {  
-
-	<h1 class="text-center">Sign up</h1>
-<br>
 	
-	@helper.form(routes.Application.createNewUser) {
-	<div style="width:540px; margin-left:300px">
-		<div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName">
-        </div>
-        <div class="form-group">
-            <label>Middle Initial</label>
-            <input type="text" class="form-control" id="middleInitial" name="middleInitial">
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="text" class="form-control" id="password" name="password">
-        </div>
-        <div class="form-group">
-            <label>Affiliation</label>
-            <input type="text" class="form-control" id="affiliation" name="affiliation">
-        </div>
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" id="title" name="title">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" id="email" name="email">
-        </div>
-        <div class="form-group">
-            <label>Mailing Address</label>
-            <input type="text" class="form-control" id="mailingAddress" name="mailingAddress">
-        </div>
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
-        </div>
-        <div class="form-group">
-            <label>Fax Number</label>
-            <input type="text" class="form-control" id="faxNumber" name="faxNumber">
-        </div>
-        <div class="form-group">
-            <label>Research Fields</label>
-            <input type="text" class="form-control" id="researchFields" name="researchFields">
-        </div>
-        <div class="form-group">
-            <label>Highest Degree</label>
-            <input type="text" class="form-control" id="highestDegree" name="highestDegree">
-        </div> 
-        </div>   
-        <p align="center">
-            <button type="submit" class="btn btn-primary">create</button>
-        </p>
-        
-     }
-}
-    
+	@helper.form(action = routes.Application.createNewUser) {
+	
+	<fieldset>
+            <legend><font size="6">Registration</font></legend>
+            
+            @inputText(
+                userForm("firstName"), 
+                '_label -> "First name",                 
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("middleInitial"), 
+                '_label -> "Middle Initial",                 
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("lastName"), 
+                '_label -> "Last Name",               
+                '_error -> userForm.globalError                                
+            )
 
+            <div class="form-group">
+            <label>Password</label><br>
+            <input type="text" id="password" name="password"/>
+        	</div>
+        	<div class="form-group">
+            <label>Re-enter Password</label><br>
+            <input type="text" id="repassword" name="repassword" oninput="checkpwd()"/>
+        	</div>
+        	<div id="msg" style="color:red;"></div>
+        	
+            @inputText(
+                userForm("affiliation"), 
+                '_label -> "Affiliation",                 
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("title"), 
+                '_label -> "Title",                 
+                '_error -> userForm.globalError                              
+            )
+            @inputText(
+                userForm("email"), 
+                '_label -> "Email",             
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("mailingAddress"), 
+                '_label -> "Mailing Address",                 
+                '_error -> userForm.globalError                                
+            )
+           
+           @inputText(
+                userForm("phoneNumber"), 
+                '_label -> "Phone Number",                 
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("faxNumber"), 
+                '_label -> "Fax Number",                 
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("researchFields"), 
+                '_label -> "Research Fields",                
+                '_error -> userForm.globalError                                
+            )
+            @inputText(
+                userForm("highestDegree"), 
+                '_label -> "Highest Degree",                 
+                '_error -> userForm.globalError                                
+            )
+        </fieldset>
+        
+      
+        <div class="actions">
+            <input type="submit" class="btn btn-primary" value="Create" id="create">
+            <a href="@routes.Application.home()" class="btn">Cancel</a>
+        </div>
+}
+}

@@ -1,0 +1,32 @@
+@main("Create Successfully") {
+<html>
+	<head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<title>Create Successfully</title> 
+		<style>
+		body{
+			text-align:center;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		</style>
+	</head> 
+	<body> 
+		<h1>Congratulations!</h1>
+		<h3>Registration has been successful.</h3>
+		<script type="text/javascript"> 
+		var t=5; // set the time of re-directing
+		setInterval("refer()",1000); // 1s start up
+		function refer(){  
+		    if(t==0){ 
+		        location='@routes.Application.login()'; 
+		    } 
+		    document.getElementById('show').innerHTML="The page will be redirected to the home page in "
+		    +""+t+" seconds";
+		    t--; 
+		} 
+		</script> 
+		<span id="show"></span> 
+	</body>
+</html>
+}

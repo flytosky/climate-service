@@ -62,6 +62,10 @@ public class Application extends Controller {
         return redirect(routes.Application.home());
     }
 	
+	public static Result createSuccess(){
+		return ok(createSuccess.render());
+	}
+	
 	public static Result authenticate() {
 	    loginForm = loginForm.bindFromRequest();
 	    if (loginForm.hasErrors()) {
@@ -82,6 +86,7 @@ public class Application extends Controller {
     }
     
     public static Result signup() {
+    	
 		return ok(signup.render(userForm));
 	}
   
@@ -91,28 +96,30 @@ public class Application extends Controller {
     	
     	ObjectNode jsonData = Json.newObject();
     	String userName = null;
+    	
     	try{
     		userName = nu.field("firstName").value()+" "+(nu.field("middleInitial")).value()
     				+" "+(nu.field("lastName")).value();
     		jsonData.put("userName", userName);
-			jsonData.put("firstName", nu.field("firstName").value());
-			jsonData.put("middleInitial", nu.field("middleInitial").value());
-			jsonData.put("lastName", nu.field("lastName").value());
-			jsonData.put("password", nu.field("password").value());
-			jsonData.put("affiliation", nu.field("affiliation").value());
-			jsonData.put("title", nu.field("title").value());
-			jsonData.put("email", nu.field("email").value());
-			jsonData.put("mailingAddress", nu.field("mailingAddress").value());
-			jsonData.put("phoneNumber", nu.field("phoneNumber").value());
-			jsonData.put("faxNumber", nu.field("faxNumber").value());
-			jsonData.put("researchFields", nu.field("researchFields").value());
-			jsonData.put("highestDegree", nu.field("highestDegree").value());
+			jsonData.put("firstName", nu.get().getFirstName());
+			jsonData.put("middleInitial", nu.get().getMiddleInitial());
+			jsonData.put("lastName", nu.get().getLastName());
+			jsonData.put("password", nu.get().getPassword());
+			jsonData.put("affiliation", nu.get().getAffiliation());
+			jsonData.put("title", nu.get().getTitle());
+			jsonData.put("email", nu.get().getEmail());
+			jsonData.put("mailingAddress", nu.get().getMailingAddress());
+			jsonData.put("phoneNumber", nu.get().getPhoneNumber());
+			jsonData.put("faxNumber", nu.get().getFaxNumber());
+			jsonData.put("researchFields", nu.get().getResearchFields());
+			jsonData.put("highestDegree", nu.get().getHighestDegree());
 			
 			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
 					+ Constants.ADD_USER, jsonData);
 
 			// flash the response message
 			Application.flashMsg(response);
+			return redirect(routes.Application.createSuccess());
     		
     	}catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -123,6 +130,7 @@ public class Application extends Controller {
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
-		return redirect(routes.Application.home());
+		return ok(signup.render(nu));
+	    
     }
 }
