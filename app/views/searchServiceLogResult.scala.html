@@ -1,0 +1,36 @@
+@(serviceLogs: List[ServiceExecutionLog])
+
+@import helper._
+
+@main("Result Service Logs"){  
+	 
+<h1>@serviceLogs.size() Service Logs</h1>
+
+<table class="table table-striped table-bordered table-condensed">
+	<tr>
+		<td>ServiceId</td>
+		<td>User</td>
+		<td>Purpose</td>
+		<td>StartTime</td>
+		<td>EndTime</td>
+		<td>ServiceConfigurationId</td>
+	</tr>
+	@for(serviceLog <- serviceLogs) {
+	<tr>
+		<td>@serviceLog.getServiceId</td>
+		<td>@serviceLog.getUserName</td>
+		<td>@serviceLog.getPurpose</td>
+		<td>@serviceLog.getExecutionStartTime</td>
+		<td>@serviceLog.getExecutionEndTime</td>
+		<td>
+			@form(routes.Application.home()){ <input
+			name="serviceId" class="hidden" type="hidden"
+			value="@serviceLog.getServiceId"> <input name="logId"
+			class="hidden" type="hidden"
+			value="@serviceLog.getServiceConfigurationId"> <input
+			type="submit" class="btn btn-link" value="see detail"> }
+		</td>
+	</tr>
+	}
+</table>
+}

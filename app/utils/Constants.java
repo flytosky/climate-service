@@ -29,12 +29,9 @@ public class Constants {
 	public static final String IS_USER_VALID = "/users/isUserValid";
 	public static final String ADD_USER = "/users/add";
 	
-	//climate service log for Old Backend to Test
+	//climate service execution log 
 	public static final String GET_ALL_SERVICE_LOG = "/serviceExecutionLog/getAllServiceExecutionLog";	
-	public static final String SERVICE_EXECUTION_LOG = "/serviceExecutionLog/";
-	public static final String NEW_GET_A_SERVICE_LOG = "/getServiceExecutionLogs/";
-	public static final String SERVICE_EXECUTION_LOG_QUERY = "queryServiceExecutionLogs";
-	public static final String SERVICE_EXECUTION_LOG_GET= "getServiceExecutionLog/";
+	public static final String QUERY_SERVICE_LOG = "/serviceExecutionLog/queryServiceExecutionLogs";
 
 	// dataset
 	public static final String GET_ALL_DATASETS = "/dataset/getAllDatasets/json";

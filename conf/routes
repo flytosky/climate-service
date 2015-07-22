@@ -28,7 +28,7 @@ POST 	/climateService/replaceFile								controllers.ClimateServiceController.re
 # Service Execution Log
 GET     /serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
 GET     /searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
-
+GET		/searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
 
 # Dataset
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
