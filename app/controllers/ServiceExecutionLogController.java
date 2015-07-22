@@ -1,22 +1,27 @@
 package controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import models.ServiceExecutionLog;
+import models.*;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import utils.Constants;
-import utils.RESTfulCalls;
+import utils.*;
+import utils.RESTfulCalls.ResponseType;
 import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ServiceExecutionLogController extends Controller {
-	
-	private static final String GET_ALL_SERVICE_LOG = Constants.URL_HOST
-			+ Constants.CMU_BACKEND_PORT + Constants.GET_ALL_SERVICE_LOG;
 	
 	final static Form<ServiceExecutionLog> serviceLogForm = Form
 			.form(ServiceExecutionLog.class);
@@ -24,7 +29,8 @@ public class ServiceExecutionLogController extends Controller {
 	public static Result getServiceLog() {
 		
 		List<ServiceExecutionLog> serviceLogList = new ArrayList<ServiceExecutionLog>();		
-		JsonNode serviceLogNode = RESTfulCalls.getAPI(GET_ALL_SERVICE_LOG);
+		JsonNode serviceLogNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT + Constants.GET_ALL_SERVICE_LOG);
 		
 		// if no value is returned or error or is not json array
 		if (serviceLogNode == null || serviceLogNode.has("error")
@@ -53,6 +59,171 @@ public class ServiceExecutionLogController extends Controller {
 	
 	public static Result searchServiceLog() {
 		return ok(searchServiceLog.render(serviceLogForm));
+	}
+	
+	public static Result getSearchServiceLog() {
+		Form<ServiceExecutionLog> dc = serviceLogForm.bindFromRequest();
+		ObjectNode jsonData = Json.newObject();
+		String dataSource = "";
+		String variableName = "";
+		String executionPurpose = "";
+		String userId = "";
+		String startTime = "";
+		String endTime = "";
+		Date start = null, end= null;
+		
+		try {
+			dataSource = dc.field("Data Source").value().replace("/", "_");
+			variableName = dc.field("Variable Name").value();
+			executionPurpose = dc.field("Execution Purpose").value();
+			userId = dc.field("User Id").value().replace(" ", "%20");
+			startTime = dc.field("Start Time").value();
+			endTime = dc.field("End Time").value();
+
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
+
+			if (!startTime.isEmpty()) {
+				try {
+					start = simpleDateFormat.parse(startTime);
+				} catch (ParseException e) {
+					System.out.println("Wrong Date Format :" + startTime);
+					return badRequest("Wrong Date Format :" + startTime);
+				}
+			}
+			if (!endTime.isEmpty()) {
+				try {
+					end = simpleDateFormat.parse(endTime);
+				} catch (ParseException e) {
+					System.out.println("Wrong Date Format :" + endTime);
+					return badRequest("Wrong Date Format :" + endTime);
+				}
+			}
+
+			if (variableName.equals("Total Cloud Fraction")) {
+				variableName = "clt";
+			} else if (variableName.equals("Leaf Area Index")) {
+				variableName = "lai";
+			} else if (variableName.equals("Surface Temperature")) {
+				variableName = "ts";
+			} else if (variableName.equals("Sea Surface Temperature")) {
+				variableName = "tos";
+			} else if (variableName.equals("Precipitation Flux")) {
+				variableName = "pr";
+			} else if (variableName.equals("Eastward Near-Surface Wind")) {
+				variableName = "uas";
+			} else if (variableName.equals("Northward Near-Surface Wind")) {
+				variableName = "vas";
+			} else if (variableName.equals("Near-Surface Wind Speed")) {
+				variableName = "sfcWind";
+			} else if (variableName.equals("Sea Surface Height")) {
+				variableName = "zos";
+			} else if (variableName.equals("Equivalent Water Height Over Land")) {
+				variableName = "zl";
+			} else if (variableName.equals("Equivalent Water Height Over Ocean")) {
+				variableName = "zo";
+			} else if (variableName.equals("Ocean Heat Content Anomaly within 700 m Depth")) {
+				variableName = "ohc700";
+			} else if (variableName.equals("Ocean Heat Content Anomaly within 2000 m Depth")) {
+				variableName = "ohc2000";
+			} else if (variableName.equals("Surface Downwelling Longwave Radiation")) {
+				variableName = "rlds";
+			} else if (variableName.equals("Surface Downwelling Shortwave Radiation")) {
+				variableName = "rsds";
+			} else if (variableName.equals("Surface Upwelling Longwave Radiation")) {
+				variableName = "rlus";
+			} else if (variableName.equals("Surface Upwelling Shortwave Radiation")) {
+				variableName = "rsus";
+			} else if (variableName.equals("Surface Downwelling Clear-Sky Longwave Radiation")) {
+				variableName = "rldscs";
+			} else if (variableName.equals("Surface Downwelling Clear-Sky Shortwave Radiation")) {
+				variableName = "rsdscs";
+			} else if (variableName.equals("Surface Upwelling Clear-Sky Shortwave Radiation")) {
+				variableName = "rsuscs";
+			} else if (variableName.equals("TOA Incident Shortwave Radiation")) {
+				variableName = "rsdt";
+			} else if (variableName.equals("TOA Outgoing Clear-Sky Longwave Radiation")) {
+				variableName = "rlutcs";
+			} else if (variableName.equals("TOA Outgoing Longwave Radiation")) {
+				variableName = "rlut";
+			} else if (variableName.equals("TOA Outgoing Clear-Sky Shortwave Radiation")) {
+				variableName = "rsutcs";
+			} else if (variableName.equals("TOA Outgoing Shortwave Radiation")) {
+				variableName = "rsut";
+			}
+
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		}
+
+		//Data source and variable names are parameters
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("model", dataSource);
+		parameters.put("var", variableName);
+
+		List<ServiceExecutionLog> response = queryServiceExecutionLogs(userId, start, end, executionPurpose, parameters);
+		return ok(searchServiceLogResult.render(response));
+	}
+
+	private static List<ServiceExecutionLog> queryServiceExecutionLogs(
+			String userId, Date startTime, Date endTime,
+			String executionPurpose, Map<String, String> parameters) {
+	List<ServiceExecutionLog> serviceLogList = new ArrayList<ServiceExecutionLog>();
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode queryJson = mapper.createObjectNode();
+		if (userId != null && !userId.isEmpty()) {
+			queryJson.put("userId", userId);
+		}
+		if (startTime != null ) {
+			queryJson.put("executionStartTime", startTime.getTime());
+		}
+		if (endTime != null) {
+			queryJson.put("executionEndTime", endTime.getTime());
+		}
+		if (executionPurpose != null && !executionPurpose.isEmpty()) {
+			queryJson.put("purpose", executionPurpose);
+		}
+
+		if (parameters != null) {
+			ObjectNode paramsNode = mapper.createObjectNode();
+			for (String paramName : parameters.keySet()) {
+				String paramValue = parameters.get(paramName);
+				if (paramValue != null && !paramValue.isEmpty())
+					paramsNode.put(paramName, paramValue);
+			}
+			if (paramsNode.size() > 0) {
+				queryJson.set("parameters", paramsNode);
+			}
+		}
+
+		JsonNode serviceLogNode = RESTfulCalls.postAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT + Constants.QUERY_SERVICE_LOG, queryJson);
+		if (serviceLogNode == null || serviceLogNode.has("error")
+				|| !serviceLogNode.isArray()) {
+			return serviceLogList;
+		}
+
+		// parse the json string into object
+		for (int i = 0; i < serviceLogNode.size(); i++) {
+			JsonNode json = serviceLogNode.path(i);
+			ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
+			newServiceLog.setId(json.get("id").asLong());
+			newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
+			newServiceLog.setPurpose(json.get("purpose").asText());
+			newServiceLog.setUserName(json.get("user").get("firstName").asText()
+					+ " " + json.get("user").get("lastName").asText());
+			newServiceLog.setServiceConfigurationId(json
+					.get("serviceConfiguration").get("id").asText());
+			newServiceLog.setExecutionStartTime(json.findPath(
+					"executionStartTime").asText());
+			newServiceLog.setExecutionEndTime(json.findPath("executionEndTime").asText());
+			serviceLogList.add(newServiceLog);
+		}
+		return serviceLogList;
 	}
 
 }

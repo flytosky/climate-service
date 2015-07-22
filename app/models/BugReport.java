@@ -7,6 +7,7 @@ import play.data.validation.Constraints;
 public class BugReport {
 	
 	private long id;
+
 	@Constraints.Required
 	private String title;
 	@Constraints.Required
