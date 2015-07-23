@@ -40,11 +40,12 @@
                 '_label -> "Last Name",               
                 '_error -> userForm.globalError                                
             )
+			@inputText(
+                userForm("password"), 
+                '_label -> "Password",               
+                '_error -> userForm.globalError                                
+            )
 
-            <div class="form-group">
-            <label>Password</label><br>
-            <input type="text" id="password" name="password"/>
-        	</div>
         	<div class="form-group">
             <label>Re-enter Password</label><br>
             <input type="text" id="repassword" name="repassword" oninput="checkpwd()"/>
@@ -63,9 +64,10 @@
             )
             @inputText(
                 userForm("email"), 
-                '_label -> "Email",             
-                '_error -> userForm.globalError                                
+                '_label -> "Email  (Format: ***@***)",            
+                '_error -> userForm.globalError                   
             )
+            
             @inputText(
                 userForm("mailingAddress"), 
                 '_label -> "Mailing Address",                 
