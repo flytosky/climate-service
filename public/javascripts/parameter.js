@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $("#ruleAlert").hide();
+
 	$('#addAClimateService').click(function() {
 		console.log("beeping");
 		myElement = document.getElementById("tbody");
@@ -27,6 +29,91 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function createAutoClosingAlert(delay) {
+    $("#ruleAlert").show();
+    window.setTimeout(function() { $("#ruleAlert").hide(); }, delay);
+}
+
+var dataSourceList = [];//initialization ??
+var modelList = [];
+var varList = [];
+var modelAndVar = [];
+var map = {};
+var jsonfiedData ="";
+
+function addDataSource() {
+source = document.getElementById("dataSource").value;
+dataSourceList.push(source);
+document.getElementById("demo1").value= source ;
+createAutoClosingAlert(500);
+    
+}
+
+function addGroup() {
+group = document.getElementById("dataGroup").value;
+modelList.push(group);   
+document.getElementById("demo1").value= group  ; 
+createAutoClosingAlert(500);
+}
+
+function resetDataSource() {
+dataSourceList = [];
+}
+
+function addVariable() {
+variable= document.getElementById("variable").value;
+varList.push(variable); 
+document.getElementById("demo1").value= variable  ; 
+createAutoClosingAlert(500);
+}
+
+function continue1() {
+modelAndVar.push(modelList);
+modelAndVar.push(varList);
+map[dataSourceList] = modelAndVar;
+
+jsonfiedData = JSON.stringify(map);
+document.getElementById("preview").value= jsonfiedData;
+dataSourceList = [];
+modelList = [];
+varList = [];
+modelAndVar = [];
+createAutoClosingAlert(500);
+}
+
+
+function resetVariable() {
+modelAndVar = [];
+}
+
+function deleteAllData() {
+map = {};
+}
+
+function isValidJson(json) {
+    try {
+        JSON.parse(json);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function validate() {
+    var toBeValidated = document.getElementById("preview").value;
+    document.getElementById("valid").value = isValidJson(toBeValidated);
+    if (isValidJson(toBeValidated)){
+        jsonfiedData = toBeValidated;
+    } else {
+        document.getElementById("preview").value= jsonfiedData;
+    }
+}
+
+
+
+
+
 
 function addButton() {
 	var outputName = document.getElementById("outputName");
