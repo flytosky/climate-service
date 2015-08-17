@@ -100,6 +100,71 @@
                 </div>
             </form>
         </div>
+        <div class="well">
+
+            <h4>Rule Generator</h4>
+            
+            <div id= "ruleAlert" class="alert alert-success">
+                <strong>Successfully added!</strong>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label>Data source</label>
+                    <input type="text" class="form-control" id="dataSource" placeholder="-Enter Data Source-" value="GFDL/ESM2G">
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success" onclick="Javascript:addDataSource()">Add data source</button>
+                    <button type="button" class="btn btn-danger" onclick="Javascript:resetDataSource()">Reset data source</button>
+                </div>
+                <div class="form-group">
+                    <label>Data group</label>
+                    <input type="text" class="form-control" id="dataGroup" placeholder="-Enter Data Group-" value="Model: Historical">
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success" onclick="Javascript:addGroup()">Add group</button>
+                </div>
+                <div class="form-group">
+                    <label>Enabled variable</label>
+                    <input type="text" class="form-control" id="variable" placeholder="-Enter Variable-" value="clt">
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success" onclick="Javascript:addVariable()">Add variable</button>
+                    <button type="button" class="btn btn-danger" onclick="Javascript:resetVariable()">Reset variable</button>
+                </div>       
+            </form>
+            <br>
+
+            <div class="well">
+                <div class="text-center">
+                    <button type="button" class="btn btn-lg btn-info" onclick="Javascript:continue1()">Add rule</button>
+                    <button type="button" class="btn btn-lg btn-warning" onclick="Javascript:deleteAllData()">Reset rule</button>
+                </div>
+            </div>
+            
+            <div class="well">
+                <label>Rule Preview</label>
+                <textarea class="form-control" rows="10" id="preview" placeholder ="Placeholder for the json data"></textarea>
+            
+                <div class="input-group">
+                    <input type="text" id="valid" class="form-control" placeholder="-Valiadtion Result-">
+                    <span class="input-group-btn">
+                    <button class="btn btn-warning" onclick="Javascript:validate()" type="button">Validate Json Format and Save</button>
+                    </span>
+                </div><!-- /input-group -->
+
+            </div>
+
+            <div class="well">
+                <div class="form-group">
+                    <label>Show Cache</label>
+                    <input type="text" class="form-control" id="demo1" placeholder="-Show Cache-" >
+                </div>
+            </div>
+
+            
+           
+        </div>
         
     <!--</form>  --> }
 </div>
