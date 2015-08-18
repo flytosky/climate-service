@@ -86,12 +86,20 @@ public class ClimateServiceController extends Controller {
 	}
 
 	public static Result addClimateService() {
-		Form<ClimateService> cs = climateServiceForm.bindFromRequest();
-
+//		Form<ClimateService> cs = climateServiceForm.bindFromRequest();
+		JsonNode json = request().body().asJson();
+		String name = json.path("name").asText();
+		String purpose = json.path("purpose").asText();
+		String url = json.path("url").asText();
+		String scenario = json.path("scenario").asText();
+		String versionNo = json.path("versionNo").asText();
+		String rootServiceId = json.path("rootServiceId").asText();
+		
+		
 		ObjectNode jsonData = Json.newObject();
 		try {
 
-			String originalClimateServiceName = cs.field("name").value();
+			String originalClimateServiceName = name;
 			String newClimateServiceName = originalClimateServiceName.replace(
 					' ', '-');
 
@@ -103,15 +111,15 @@ public class ClimateServiceController extends Controller {
 			jsonData.put("creatorId", 1); // TODO, since we don't have
 											// login/account id yet use a
 											// default val
-			jsonData.put("purpose", cs.field("purpose").value());
-			jsonData.put("url", cs.field("url").value());
+			jsonData.put("purpose", purpose);
+			jsonData.put("url", url);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			// get current date time with Date()
 			Date date = new Date();
 			jsonData.put("createTime", dateFormat.format(date));
-			jsonData.put("scenario", cs.field("scenario").value());
-			jsonData.put("versionNo", cs.field("version").value());
-			jsonData.put("rootServiceId", cs.field("rootServiceId").value());
+			jsonData.put("scenario", scenario);
+			jsonData.put("versionNo", versionNo);
+			jsonData.put("rootServiceId", rootServiceId);
 
 			// POST Climate Service JSON data
 			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
@@ -128,7 +136,7 @@ public class ClimateServiceController extends Controller {
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
-		return redirect(routes.ClimateServiceController.addAClimateService());
+		return ok("Service data sent.");
 	}
 
 	public static Result serviceModels() {

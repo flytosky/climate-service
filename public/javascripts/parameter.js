@@ -4,9 +4,22 @@ $(document).ready(function() {
 	$('#addAClimateService').click(function() {
 		console.log("beeping");
 		myElement = document.getElementById("tbody");
+		
 		name = document.getElementById("name").value;
 		purpose = document.getElementById("purpose").value;
 		serviceUrl = document.getElementById("url").value;
+		scenario = document.getElementById("scenario").value;
+		version = document.getElementById("version").value;
+		rootServiceId = document.getElementById("rootServiceId").value;
+		var serviceData = {
+			name: name,
+			purpose: purpose,
+			url: serviceUrl,
+			scenario: scenario,
+			version: version,
+			rootServiceId: rootServiceId
+		};
+		
 		var pageStr = myElement.innerHTML;
 		var pageOutput = document.getElementById("output").innerHTML;
 		console.log(pageStr);
@@ -22,6 +35,15 @@ $(document).ready(function() {
 		$.ajax({
 			url: "savePage",
 			data: JSON.stringify(obj),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			type: "POST"
+		});
+		
+		$.ajax({
+			url: "add",
+			data: JSON.stringify(serviceData),
 			headers: {
 				'Content-Type': 'application/json'
 			},
