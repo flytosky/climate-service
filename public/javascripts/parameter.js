@@ -26,7 +26,7 @@ $(document).ready(function() {
 				'Content-Type': 'application/json'
 			},
 			type: "POST"
-		});
+		}).done(location.reload());
 	});
 });
 
@@ -80,6 +80,17 @@ modelList = [];
 varList = [];
 modelAndVar = [];
 createAutoClosingAlert(500);
+}
+
+function postAllData() {
+	$.ajax({
+		url: "ruleEngineData",
+		data: jsonfiedData,
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		type: "POST"
+	});
 }
 
 

@@ -85,7 +85,7 @@ public class ClimateServiceController extends Controller {
 				climateServiceForm));
 	}
 
-	public static Result addClimateService() {
+	public static void addClimateService() {
 		Form<ClimateService> cs = climateServiceForm.bindFromRequest();
 
 		ObjectNode jsonData = Json.newObject();
@@ -118,7 +118,7 @@ public class ClimateServiceController extends Controller {
 					+ Constants.ADD_CLIMATE_SERVICE, jsonData);
 
 			// flash the response message
-			Application.flashMsg(response);
+//			Application.flashMsg(response);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls
@@ -128,7 +128,7 @@ public class ClimateServiceController extends Controller {
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
-		return redirect(routes.ClimateServiceController.addAClimateService());
+		//return null;
 	}
 
 	public static Result serviceModels() {

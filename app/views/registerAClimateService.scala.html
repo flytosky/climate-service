@@ -7,10 +7,13 @@
 <br>
 
 <div class="container col-md-6">
-    <h3>Climate Service Metadata</h3>
+    
 
-    <!-- <form> -->
+    
     @form(routes.ClimateServiceController.addClimateService()) {
+    <div class="well">
+    	<h4>Step 1 : Add Climate Service Metadata</h3>
+    	<br>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="2-D-Variable-Map">
@@ -42,21 +45,25 @@
         <div class="form-group">
             <label>Developers</label>
             <input type="text" class="form-control" id="delevopers" placeholder="Tom Smith, Mary Brown">
+        </div>        
+        <div class="text-center">
+        	<div class="form-group">            
+            	<button type="submit" class="btn btn-primary" >Add Metadata</button>
+            	<button type="reset" class="btn btn-success">Reset</button>
+        	</div>
         </div>
-        <div class="form-group">
-            <!-- <button type="submit" class="btn btn-success btn-lg" data-toggle="modal" data-target="#confirm">Create Climate Service</button> -->
-            <button type="submit" class="btn btn-success btn-lg" id="addAClimateService">Add a Climate Service</button>
-        </div>
+     </div>   
         <div class="well">
-            <h4>Configure Input Parameters</h4>
+            <h4>Step 2 : Configure Input Parameters</h4>
+            <br>
             <form>
                 <div class="form-group">
                     <label>Descriptive Parameter Name</label>
-                    <input type="text" class="form-control" id="parameterNameDescriptive" placeholder="-descriptive-">
+                    <input type="text" class="form-control" id="parameterNameDescriptive" placeholder="descriptive">
                 </div>
                 <div class="form-group">
                     <label>API Parameter Name</label>
-                    <input type="text" class="form-control" id="parameterNameFunctional" placeholder="-functional-">
+                    <input type="text" class="form-control" id="parameterNameFunctional" placeholder="functional">
                 </div>
                 <div class="form-group">
                     <label>Parameter Type</label>
@@ -77,79 +84,63 @@
                     <input type="text" class="form-control" id="defaultValues" placeholder="2">
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-info" onclick="Javascript:addRow()">Add Input Parameter</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
+                    <button type="button" class="btn btn-primary" onclick="Javascript:addRow()">Add Input Parameter</button>
+                    <button type="reset" class="btn btn-success">Reset</button>
                 </div>
             </form>
-        </div>
-        <div class="well">
-        	<h4>Configure Output Parameters</h4>
-        	<form>
-                <div class="form-group">
-                    <label>Button Name</label>
-                    <input type="text" class="form-control" id="outputName" placeholder="-Enter Output Name-">
-                </div>
-                <div class="form-group">
-                    <label>Output Button Key</label>
-                    <input type="text" class="form-control" id="outputUrl" placeholder="-Enter Output Button Url-">
-                </div>
-                
-                <div class="text-center">
-                    <button type="button" class="btn btn-info" onclick="Javascript:addButton()">Add Output Button</button>
-                    <button type="reset" class="btn btn-danger">Reset</button>
-                </div>
-            </form>
-        </div>
+        </div>        
         <div class="well">
 
-            <h4>Rule Generator</h4>
+            <h4>Step 3 : Rule Generator</h4>
+            <br>
             
             <div id= "ruleAlert" class="alert alert-success">
                 <strong>Successfully added!</strong>
             </div>
-
-            <form>
-                <div class="form-group">
-                    <label>Data source</label>
-                    <input type="text" class="form-control" id="dataSource" placeholder="-Enter Data Source-" value="GFDL/ESM2G">
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success" onclick="Javascript:addDataSource()">Add data source</button>
-                    <button type="button" class="btn btn-danger" onclick="Javascript:resetDataSource()">Reset data source</button>
-                </div>
-                <div class="form-group">
-                    <label>Data group</label>
-                    <input type="text" class="form-control" id="dataGroup" placeholder="-Enter Data Group-" value="Model: Historical">
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success" onclick="Javascript:addGroup()">Add group</button>
-                </div>
-                <div class="form-group">
-                    <label>Enabled variable</label>
-                    <input type="text" class="form-control" id="variable" placeholder="-Enter Variable-" value="clt">
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success" onclick="Javascript:addVariable()">Add variable</button>
-                    <button type="button" class="btn btn-danger" onclick="Javascript:resetVariable()">Reset variable</button>
-                </div>       
-            </form>
-            <br>
-
-            <div class="well">
-                <div class="text-center">
-                    <button type="button" class="btn btn-lg btn-info" onclick="Javascript:continue1()">Add rule</button>
-                    <button type="button" class="btn btn-lg btn-warning" onclick="Javascript:deleteAllData()">Reset rule</button>
-                </div>
+			<div class="well">
+	            <form>
+	                <div class="form-group">
+	                    <label>Data source</label>
+	                    <input type="text" class="form-control" id="dataSource" placeholder="Enter Data Source" value="GFDL/ESM2G">
+	                </div>
+	                <div class="text-center">
+	                    <button type="button" class="btn btn-primary" onclick="Javascript:addDataSource()">Add data source</button>
+	                    <button type="button" class="btn btn-success" onclick="Javascript:resetDataSource()">Reset data source</button>
+	                </div>
+	                <div class="form-group">
+	                    <label>Data group</label>
+	                    <input type="text" class="form-control" id="dataGroup" placeholder="Enter Data Group" value="Model: Historical">
+	                </div>
+	                <div class="text-center">
+	                    <button type="button" class="btn btn-primary" onclick="Javascript:addGroup()">Add group</button>
+	                </div>
+	                <div class="form-group">
+	                    <label>Enabled variable</label>
+	                    <input type="text" class="form-control" id="variable" placeholder="Enter Variable" value="clt">
+	                </div>
+	                <div class="text-center">
+	                    <button type="button" class="btn btn-primary" onclick="Javascript:addVariable()">Add variable</button>
+	                    <button type="button" class="btn btn-success" onclick="Javascript:resetVariable()">Reset variable</button>
+	                </div>       
+	            </form>
+	            <br>
+	
+	            <div class="well">
+	                <div class="text-center">
+	                    <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add rule</button>
+	                    <button type="button" class="btn  btn-primary" onclick="Javascript:postAllData()">Post data to controller</button>
+						<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
+	                </div>
+	            </div>
             </div>
-            
             <div class="well">
                 <label>Rule Preview</label>
                 <textarea class="form-control" rows="10" id="preview" placeholder ="Placeholder for the json data"></textarea>
             
                 <div class="input-group">
-                    <input type="text" id="valid" class="form-control" placeholder="-Valiadtion Result-">
+                    <input type="text" id="valid" class="form-control" placeholder="Valiadtion Result">
                     <span class="input-group-btn">
-                    <button class="btn btn-warning" onclick="Javascript:validate()" type="button">Validate Json Format and Save</button>
+                    <button class="btn btn-primary" onclick="Javascript:validate()" type="button">Validate Json Format and Save</button>
                     </span>
                 </div><!-- /input-group -->
 
@@ -158,15 +149,35 @@
             <div class="well">
                 <div class="form-group">
                     <label>Show Cache</label>
-                    <input type="text" class="form-control" id="demo1" placeholder="-Show Cache-" >
+                    <input type="text" class="form-control" id="demo1" placeholder="Show Cache" >
                 </div>
             </div>
-
-            
-           
         </div>
         
-    <!--</form>  --> }
+        <div class="well">
+        	<h4>Step 4 : Configure Output Parameters</h4>
+        	<br>
+        	<form>
+                <div class="form-group">
+                    <label>Button Name</label>
+                    <input type="text" class="form-control" id="outputName" placeholder="Enter Output Name">
+                </div>
+                <div class="form-group">
+                    <label>Output Button Key</label>
+                    <input type="text" class="form-control" id="outputUrl" placeholder="Enter Output Button Url">
+                </div>
+                
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="Javascript:addButton()">Add Output Button</button>
+                    <button type="reset" class="btn btn-success">Reset</button>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+        
+    }
 </div>
 
 <!-- Modal -->
@@ -183,8 +194,8 @@
                 <p>Are you sure you want to add this climate service?</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="Javascript:window.location.href='/climateService/add'">Submit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="Javascript:window.location.href='/climateService/add'">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
 
@@ -239,13 +250,18 @@
             </tbody>
         </table>
         <div class="text-center">
-            <button type="submit" class="btn btn-success btn-lg">Download Data</button>
+            <button type="submit" class="btn btn-primary">Download Data</button>
         </div>
         <br>
         <div class="text-center" id="output">
             
         </div>
     </form>
+    
+    <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg" id="addAClimateService">Add a Climate Service</button>
+    </div>
+    
     
 </div>
 }
