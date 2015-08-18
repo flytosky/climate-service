@@ -150,8 +150,7 @@ public class ClimateServiceController extends Controller {
 
 		// flash the response message
 		Application.flashMsg(response);
-		System.out
-				.println(ok("Climate Service model has been called successfully!"));
+		System.out	.println(ok("Climate Service model has been called successfully!"));
 		// return jsonData
 		return ok(response);
 	}
@@ -186,6 +185,13 @@ public class ClimateServiceController extends Controller {
 		return ok("Climate Service Page has been saved succussfully!");
 	}
 
+	public static Result ruleEngineData() {
+		JsonNode result = request().body().asJson();
+		//System.out.println("ticking!");
+		System.out.println(result);		
+		return ok("good");	
+	}
+	
 	public static void savePage(String str, String name, String purpose,
 			String url, String outputButton) {
 		System.out.println("output button test: " + outputButton);

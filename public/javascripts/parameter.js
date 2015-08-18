@@ -90,7 +90,7 @@ function postAllData() {
 			'Content-Type': 'application/json'
 		},
 		type: "POST"
-	});
+	}).done(console.log("frontDone"));
 }
 
 
