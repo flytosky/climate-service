@@ -240,7 +240,7 @@ public class ClimateServiceController extends Controller {
 		// Remove delete button from preview page
 		String result = str
 				.replaceAll(
-						"<td><button type=\\\\\"button\\\\\" class=\\\\\"btn btn-danger\\\\\" onclick=\\\\\"Javascript:deleteRow\\(this\\)\\\\\">delete</button></td>",
+						"<td><button type=\\\\\"button\\\\\" class=\\\\\"btn btn-danger\\\\\" onclick=\\\\\"Javascript:deleteRow\\(this,\\d+\\)\\\\\">delete</button></td>",
 						"");
 
 		result = StringEscapeUtils.unescapeJava(result);
