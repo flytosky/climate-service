@@ -48,7 +48,34 @@ $(document).ready(function() {
 				'Content-Type': 'application/json'
 			},
 			type: "POST"
-		}).done(location.reload());
+		}).done(function(data) {
+			console.log("invoked"); 
+			var serviceId = JSON.parse(data);
+			console.log("Get the serviceID: " + serviceId);
+			
+//			var paraData = JSON.stringify(parameterPackage);
+			var x;
+			for (x in parameterPackage) {
+				parameterPackage[x].serviceId = serviceId;
+			}
+			
+			
+		    console.log(JSON.stringify(parameterPackage));
+			
+			$.ajax({
+				url: "addAllParameters",
+				data: JSON.stringify(parameterPackage),
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				type: "POST"
+			}).done(location.reload());
+			
+		});
+		
+		
+		
+		
 	});
 });
 
@@ -57,6 +84,14 @@ function createAutoClosingAlert(delay) {
     window.setTimeout(function() { $("#ruleAlert").hide(); }, delay);
 }
 
+//parameter package
+var parameterPackage = [];
+var indexInService = 0;
+var countDelete = 0;
+
+
+
+//rule engine data
 var dataSourceList = [];//initialization ??
 var modelList = [];
 var varList = [];
@@ -166,6 +201,12 @@ function addRow() {
     var type = document.getElementById("parameterType");
     var values = document.getElementById("parameterValues");
     var defaultValues = document.getElementById("defaultValues");
+    
+    var parameterBag = {};
+    
+    var rule = {"Type" : type.value, "Value" : values.value, "DefaultValue" : defaultValues.value};
+    parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
+    parameterPackage.push(parameterBag);
 
     var table = document.getElementById("parameterPreview");
 
@@ -173,27 +214,29 @@ function addRow() {
 
     switch(type.value) {
         case "Input text":
-            appendInput(name, nameFunc, defaultValues);
+            appendInput(name, nameFunc, defaultValues, indexInService);
             break;
         case "Input area":
-            appendArea(name, nameFunc);
+            appendArea(name, nameFunc, indexInService);
             break;
         case "Multiple selects":
-            appendSelects(name, nameFunc, values, defaultValues);
+            appendSelects(name, nameFunc, values, defaultValues, indexInService);
             break;
         case "Radio button":
-            appendRadioButton(name, nameFunc, values, defaultValues);
+            appendRadioButton(name, nameFunc, values, defaultValues, indexInService);
             break;
         case "Dropdown list":
-            appendDropdownList(name, nameFunc, values, defaultValues);
+            appendDropdownList(name, nameFunc, values, defaultValues, indexInService);
             break;
         default:
             appendInput(name, nameFunc, defaultValues);
     }
-
+    var paraData = JSON.stringify(parameterPackage);
+    document.getElementById("previewPara").value= paraData;
+    indexInService++;
 }
 
-function appendInput(name, nameFunc, defaultValues) {
+function appendInput(name, nameFunc, defaultValues, indexInService) {
     var res = name.value.split(" ");
     var text = res[0];
     for (i = 1; i < res.length; i++) {
@@ -210,12 +253,12 @@ function appendInput(name, nameFunc, defaultValues) {
 
     str += '</td>';
     str += '<td><button type="button" class="btn btn-danger"' +
-                   'onclick="Javascript:deleteRow(this)">delete</button></td></tr>';
+                   'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
 
     $("#tbody").append(str);
 }
 
-function appendArea(name, nameFunc) {
+function appendArea(name, nameFunc, indexInService) {
     var res = name.value.split(" ");
     var text = res[0];
     for (i = 1; i < res.length; i++) {
@@ -233,12 +276,12 @@ function appendArea(name, nameFunc) {
 
     str += '</td>';
     str += '<td><button type="button" class="btn btn-danger"' +
-                   'onclick="Javascript:deleteRow(this)">delete</button></td></tr>';
+                   'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
 
     $("#tbody").append(str);
 }
 
-function appendSelects(name, nameFunc, values, defaultValues) {
+function appendSelects(name, nameFunc, values, defaultValues, indexInService) {
     var res = name.value.split(" ");
     // generate id
     var text = res[0];
@@ -273,12 +316,12 @@ function appendSelects(name, nameFunc, values, defaultValues) {
     str += '</td>';
 
     str += '<td><button type="button" class="btn btn-danger"' +
-               'onclick="Javascript:deleteRow(this)">delete</button></td></tr>';
+               'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
 
     $("#tbody").append(str);
 }
 
-function appendRadioButton(name, nameFunc, values, defaultValues) {
+function appendRadioButton(name, nameFunc, values, defaultValues, indexInService) {
     var res = name.value.split(" ");
     // generate id
     var text = res[0];
@@ -307,12 +350,12 @@ function appendRadioButton(name, nameFunc, values, defaultValues) {
     str += '</td>';
 
     str += '<td><button type="button" class="btn btn-danger"' +
-               'onclick="Javascript:deleteRow(this)">delete</button></td></tr>';
+               'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
 
     $("#tbody").append(str);
 }
 
-function appendDropdownList(name, nameFunc, values, defaultValues) {
+function appendDropdownList(name, nameFunc, values, defaultValues, indexInService) {
 
     // generate value array
     var array = values.value.split(",");
@@ -333,17 +376,20 @@ function appendDropdownList(name, nameFunc, values, defaultValues) {
     str += '</select></td>';
 
     str += '<td><button type="button" class="btn btn-danger"' +
-                   'onclick="Javascript:deleteRow(this)">delete</button></td></tr>';
+                   'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
 
     $("#tbody").append(str);
 }
 
-function deleteRow(obj) {
+function deleteRow(obj, indexInService) {
 
     var index = obj.parentNode.parentNode.rowIndex;
     var table = document.getElementById("parameterPreview");
     table.deleteRow(index);
-
+    parameterPackage.splice(indexInService-countDelete, 1);
+    countDelete++;
+    var paraData = JSON.stringify(parameterPackage);
+    document.getElementById("previewPara").value= paraData;
 }
 
 function addTable() {

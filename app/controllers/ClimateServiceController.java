@@ -95,7 +95,7 @@ public class ClimateServiceController extends Controller {
 		String versionNo = json.path("versionNo").asText();
 		String rootServiceId = json.path("rootServiceId").asText();
 		
-		
+		JsonNode response = null;
 		ObjectNode jsonData = Json.newObject();
 		try {
 
@@ -122,10 +122,11 @@ public class ClimateServiceController extends Controller {
 			jsonData.put("rootServiceId", rootServiceId);
 
 			// POST Climate Service JSON data
-			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
+			response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
 					+ Constants.ADD_CLIMATE_SERVICE, jsonData);
 
 			// flash the response message
+			System.out.println("***************"+response);
 			Application.flashMsg(response);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -136,7 +137,7 @@ public class ClimateServiceController extends Controller {
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
-		return ok("Service data sent.");
+		return ok(response);
 	}
 
 	public static Result serviceModels() {
@@ -195,8 +196,41 @@ public class ClimateServiceController extends Controller {
 
 	public static Result ruleEngineData() {
 		JsonNode result = request().body().asJson();
-		//System.out.println("ticking!");
-		System.out.println(result);		
+		//System.out.println("ticking!");  
+//		System.out.println(result.);		
+		System.out.println(result);
+		System.out.println("--------------------------");
+		Iterator<JsonNode> ite = result.iterator();
+		
+		while(ite.hasNext()) {
+			JsonNode tmp = ite.next();
+			System.out.println(tmp);
+			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT
+					+ Constants.ADD_ALL_PARAMETERS, tmp);
+			System.out.println("=========" + response);
+		}
+		
+		return ok("good");	
+	}
+	
+	
+	public static Result addAllParameters() {
+		JsonNode result = request().body().asJson();
+		System.out.println(result);
+		System.out.println("--------------------------");
+		Iterator<JsonNode> ite = result.iterator();
+		
+		while(ite.hasNext()) {
+			
+			JsonNode tmp = ite.next();
+			System.out.println(tmp);
+			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT
+					+ Constants.ADD_ALL_PARAMETERS, tmp);
+			System.out.println("=========" + response);
+		}
+		
 		return ok("good");	
 	}
 	

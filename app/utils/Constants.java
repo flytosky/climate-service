@@ -3,7 +3,7 @@ public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
 	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
-	
+	//public static final String URL_SERVER = "http://localhost";
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
@@ -12,6 +12,9 @@ public class Constants {
 
 	// API Call format
 	public static final String FORMAT = "json";
+	
+	// add all parameter
+	public static final String ADD_ALL_PARAMETERS = "/parameter/addParameter";
 	
 	// climate service
 	public static final String ADD_CLIMATE_SERVICE = "/climateService/addClimateService";
