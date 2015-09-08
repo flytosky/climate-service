@@ -352,6 +352,49 @@ public class ClimateServiceController extends Controller {
 		return ok(mostRecentlyAddedServices.render(climateServices));
 	}
 	
+	
+	
+	public static Result getConfigurationByConfId() {
+		
+	
+		try {
+			DynamicForm df = DynamicForm.form().bindFromRequest();
+			String logId = df.field("logId").value();
+
+			if (logId == null || logId.isEmpty()) {
+				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+				return notFound("confId is null or empty");
+			}
+
+			// Call API
+			JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.SERVICE_EXECUTION_LOG + Constants.SERVICE_EXECUTION_LOG_GET + "/" + logId);
+
+			int configurationId = response.path("serviceConfiguration").path("id").asInt();
+
+			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
+
+			String serviceName = response.path("climateService").path("name").asText();
+			
+			
+			System.out.println("Print service Name: "+serviceName);
+			
+			
+		}catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		}
+		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		
+		
+		return ok();
+	}
+	
+	
+	
 	public static Result mostPopularServices() {
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
 

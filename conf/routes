@@ -31,6 +31,7 @@ POST 	/climateService/replaceFile								controllers.ClimateServiceController.re
 GET     /serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
 GET     /searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
 GET		/searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
+GET 		/getConfigurationByConfId                               controllers.ClimateServiceController.getConfigurationByConfId()
 
 # Dataset
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
@@ -61,3 +62,6 @@ GET         /newReport                                           controllers.Bug
 GET         /bug/list                                            controllers.BugReportController.list()
 POST        /delete/report                                       controllers.BugReportController.deleteReport()
 POST        /solve/report                                        controllers.BugReportController.solveReport()
+
+# AddParameters
+POST	/climateService/addAllParameters							controllers.ClimateServiceController.addAllParameters()
