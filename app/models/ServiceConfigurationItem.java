@@ -6,6 +6,19 @@ public class ServiceConfigurationItem {
 	private long serviceConfigurationId;
 	private Parameter parameter;
 	private String value;
+	private String parameterName;
+
+	public String getParameterName() {
+		return parameterName;
+	}
+
+	public void setParameterName(String parameterName) {
+		this.parameterName = parameterName;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public ServiceConfigurationItem() {
 	}

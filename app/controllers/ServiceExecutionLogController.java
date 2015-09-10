@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,8 +9,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import models.*;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -25,6 +29,94 @@ public class ServiceExecutionLogController extends Controller {
 	
 	final static Form<ServiceExecutionLog> serviceLogForm = Form
 			.form(ServiceExecutionLog.class);
+	
+	
+
+	public static Result getConfigurationByConfId() {
+		String dynamicUrl = "T2";
+		
+		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
+		
+		
+		try {
+			DynamicForm df = DynamicForm.form().bindFromRequest();
+			String logId = df.field("logId").value();
+
+			if (logId == null || logId.isEmpty()) {
+				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+				return notFound("confId is null or empty");
+			}
+
+			// Call API
+			JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.SERVICE_EXECUTION_LOG + Constants.SERVICE_EXECUTION_LOG_GET + "/" + logId);
+			System.out.println("Print service response: " + response);
+			int configurationId = response.path("serviceConfiguration").path("id").asInt();
+			
+			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
+			
+			String serviceName = response.path("climateService").path("name").asText();
+			
+			for (int i = 0; i < responseConfigItems.size(); i++) {
+				JsonNode json = responseConfigItems.path(i);
+				ServiceConfigurationItem serviceConfigItem = new ServiceConfigurationItem();
+				
+				serviceConfigItem.setParameterName(json.get("parameter").get("name").asText());
+				serviceConfigItem.setValue(json.findPath("value").asText());
+				System.out.println("Print Parameter Name: " + json.get("parameter").get("name").asText());
+				System.out.println("Print Parameter Value: " + json.findPath("value").asText());
+				serviceConfigItemList.add(serviceConfigItem);
+			}	
+			
+			System.out.println("Print service Name: "+serviceName);
+			//System.out.println("Print service configs: " + responseConfigItems);
+			
+		}catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		}
+		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		
+		
+		return redirect(Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + dynamicUrl + ".html");
+	}
+	
+	public static String parseServicePageBody(String serviceName) {
+    	
+    	String location = "public/html/service" + serviceName + ".html";
+    	File htmlFile = new File(location);
+    	String entireHtml = null;
+		try {
+			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	String body = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
+
+		return body;
+    }
+	
+	public static String handleServiceName(String temp){
+		StringBuffer buffer = new StringBuffer();  
+		buffer.append(temp);
+		int count = buffer.indexOf("-");
+		while(count != 0){
+			int number = buffer.indexOf("-", count);
+			count = number + 1;
+			if(number != -1){
+				char a = buffer.charAt(count);
+				char b = (char) (a - 32);
+				buffer.replace(count, count+1, b+"");
+			}
+		}
+		temp = buffer.toString().replaceAll("-", "");
+		temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+		return temp;
+	}
 	
 	public static Result getServiceLog() {
 		

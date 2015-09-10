@@ -40,7 +40,7 @@
 	<td>@serviceLog.getExecutionStartTime</td>
 	<td>@serviceLog.getExecutionEndTime</td>
 	<td>
-	@form(routes.Application.home()){
+	@form(routes.ServiceExecutionLogController.getConfigurationByConfId()){
 		<input
 			name="logId" class="hidden" type="hidden"
 			value="@serviceLog.getId">
