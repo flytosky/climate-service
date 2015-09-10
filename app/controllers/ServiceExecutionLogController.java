@@ -67,6 +67,8 @@ public class ServiceExecutionLogController extends Controller {
 				serviceConfigItemList.add(serviceConfigItem);
 			}	
 			
+			
+			
 			System.out.println("Print service Name: "+serviceName);
 			//System.out.println("Print service configs: " + responseConfigItems);
 			
@@ -80,7 +82,7 @@ public class ServiceExecutionLogController extends Controller {
 		}
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
-		
+		parseServicePageBody(dynamicUrl);
 		return redirect(Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + dynamicUrl + ".html");
 	}
 	
