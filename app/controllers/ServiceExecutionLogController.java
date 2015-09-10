@@ -33,7 +33,7 @@ public class ServiceExecutionLogController extends Controller {
 	
 
 	public static Result getConfigurationByConfId() {
-		String dynamicUrl = "T2";
+		String dynamicUrl = "T3";
 		
 		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
 		
@@ -82,8 +82,8 @@ public class ServiceExecutionLogController extends Controller {
 		}
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
-		parseServicePageBody(dynamicUrl);
-		return redirect(Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + dynamicUrl + ".html");
+		String body = parseServicePageBody(dynamicUrl);
+		return ok(serviceDetail.render(body, serviceConfigItemList));
 	}
 	
 	public static String parseServicePageBody(String serviceName) {
