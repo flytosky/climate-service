@@ -1,0 +1,14 @@
+@(servicePage: String, confItems: List[ServiceConfigurationItem])
+
+@import helper._
+
+@scripts = {
+	<script type="text/javascript"></script>
+	window.onload = function() {
+		
+	}
+}
+
+@main("Service Details", scripts) {
+	@Html(servicePage)
+}
