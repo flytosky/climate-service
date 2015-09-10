@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import models.*;
 import play.data.DynamicForm;
@@ -80,6 +83,22 @@ public class ServiceExecutionLogController extends Controller {
 		
 		return redirect(Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + dynamicUrl + ".html");
 	}
+	
+	public static String parseServicePageBody(String serviceName) {
+    	
+    	String location = "public/html/service" + serviceName + ".html";
+    	File htmlFile = new File(location);
+    	String entireHtml = null;
+		try {
+			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	String body = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
+
+		return body;
+    }
 	
 	public static String handleServiceName(String temp){
 		StringBuffer buffer = new StringBuffer();  
