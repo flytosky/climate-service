@@ -3,10 +3,15 @@
 @import helper._
 
 @scripts = {
-	<script type="text/javascript"></script>
+	<script type="text/javascript">
 	window.onload = function() {
-		
+		var temp = "";
+		@for(confItem <- confItems) {
+			temp = @confItem.getParameterName();
+		}
+		document.getElementById('t3').value = temp;
 	}
+	</script>
 }
 
 @main("Service Details", scripts) {
