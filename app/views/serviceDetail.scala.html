@@ -7,8 +7,9 @@
 	window.onload = function() {
 		var temp = "";
 		@for(confItem <- confItems) {
-			temp = @confItem.getParameterName();
+			temp = "@confItem.getParameterName()";
 		}
+		//only for testing
 		document.getElementById('t3').value = temp;
 	}
 	</script>
