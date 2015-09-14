@@ -204,7 +204,7 @@ function addRow() {
     
     var parameterBag = {};
     
-    var rule = {"Type" : type.value, "Value" : values.value, "DefaultValue" : defaultValues.value};
+    var rule = "*|Type|*" + type.value+ "*|Value|*" + values.value + "*|DefaultValue|*" + defaultValues.value;
     parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
     parameterPackage.push(parameterBag);
 
