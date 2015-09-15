@@ -8,6 +8,26 @@ public class ServiceConfigurationItem {
 	private String value;
 	private String parameterName;
 	private String parameterRule;
+	private String parameterPurpose;
+	
+	public ServiceConfigurationItem(long serviceConfigurationId, Parameter parameter
+			, String value, String parameterName, String parameterRule, String parameterPurpose) {
+		super();
+		this.serviceConfigurationId = serviceConfigurationId;
+		this.parameter = parameter;
+		this.value = value;
+		this.parameterName = parameterName;
+		this.parameterRule = parameterRule;
+		this.parameterPurpose = parameterPurpose;
+	}
+
+	public String getParameterPurpose() {
+		return parameterPurpose;
+	}
+
+	public void setParameterPurpose(String parameterPurpose) {
+		this.parameterPurpose = parameterPurpose;
+	}
 
 	public String getParameterRule() {
 		return parameterRule;
@@ -30,14 +50,6 @@ public class ServiceConfigurationItem {
 	}
 
 	public ServiceConfigurationItem() {
-	}
-	
-	public ServiceConfigurationItem(long serviceConfigurationId, Parameter parameter
-			, String value) {
-		super();
-		this.serviceConfigurationId = serviceConfigurationId;
-		this.parameter = parameter;
-		this.value = value;
 	}
 
 	public long getId() {

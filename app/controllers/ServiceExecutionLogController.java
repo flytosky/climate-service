@@ -62,9 +62,11 @@ public class ServiceExecutionLogController extends Controller {
 				
 				serviceConfigItem.setParameterName(json.get("parameter").get("name").asText());
 				serviceConfigItem.setParameterRule(json.get("parameter").get("rule").asText());
+				serviceConfigItem.setParameterPurpose(json.get("parameter").get("purpose").asText());
 				serviceConfigItem.setValue(json.findPath("value").asText());
 				System.out.println("Print Parameter Name: " + json.get("parameter").get("name").asText());
 				System.out.println("Print Parameter Rule: " + json.get("parameter").get("rule").asText());
+				System.out.println("Print Parameter Purpose: " + json.get("parameter").get("purpose").asText());
 				System.out.println("Print Parameter Value: " + json.findPath("value").asText());
 				serviceConfigItemList.add(serviceConfigItem);
 			}	
