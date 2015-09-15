@@ -6,22 +6,35 @@
 	<script type="text/javascript">
 	window.onload = function() {
 		var value = "";
-		var parameterName = "";
+		var parameterPurpose = "";
 		var parameterRule = "";
 		
 		@for(confItem <- confItems) {
 			var parameterType = "";
 			var parameterValue = "";
 			var parameterDefaultValue = "";
-			parameterName = "@confItem.getParameterName()";
+			parameterPurpose = "@confItem.getParameterPurpose()";
 			parameterRule = "@confItem.getParameterRule()";
 			value = "@confItem.getValue()";
 			parameterType = parameterRule.split("*|")[1].split("|*")[1];
 			parameterValue = parameterRule.split("*|")[2].split("|*")[1];
 			parameterDefaultValue = parameterRule.split("*|")[3].split("|*")[1];
+			
+			var res = parameterPurpose.split(" ");
+			var name = res[0];
+			for (i = 1; i < res.length; i++) {
+				var temp = res[i].charAt(0).toUpperCase();
+				temp += res[i].substring(1);
+				name += temp;
+			}
+			console.log(name + value + parameterType + parameterValue + parameterDefaultValue);
+			
+			if (parameterType == "Input text" ) {
+				document.getElementById(name).value = value;
+			}
 		}
-		//only for testing
-		document.getElementById('startTime').value = temp;
+		
+		
 	}
 	</script>
 }
