@@ -7,6 +7,15 @@ public class ServiceConfigurationItem {
 	private Parameter parameter;
 	private String value;
 	private String parameterName;
+	private String parameterRule;
+
+	public String getParameterRule() {
+		return parameterRule;
+	}
+
+	public void setParameterRule(String parameterRule) {
+		this.parameterRule = parameterRule;
+	}
 
 	public String getParameterName() {
 		return parameterName;

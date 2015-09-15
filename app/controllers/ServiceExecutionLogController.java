@@ -33,10 +33,9 @@ public class ServiceExecutionLogController extends Controller {
 	
 
 	public static Result getConfigurationByConfId() {
-		String dynamicUrl = "T3";
 		
 		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
-		
+		String serviceName = null;
 		
 		try {
 			DynamicForm df = DynamicForm.form().bindFromRequest();
@@ -54,22 +53,24 @@ public class ServiceExecutionLogController extends Controller {
 			
 			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
 			
-			String serviceName = response.path("climateService").path("name").asText();
+			serviceName = response.path("climateService").path("name").asText();
 			
 			for (int i = 0; i < responseConfigItems.size(); i++) {
 				JsonNode json = responseConfigItems.path(i);
 				ServiceConfigurationItem serviceConfigItem = new ServiceConfigurationItem();
 				
 				serviceConfigItem.setParameterName(json.get("parameter").get("name").asText());
+				serviceConfigItem.setParameterRule(json.get("parameter").get("rule").asText());
 				serviceConfigItem.setValue(json.findPath("value").asText());
 				System.out.println("Print Parameter Name: " + json.get("parameter").get("name").asText());
+				System.out.println("Print Parameter Rule: " + json.get("parameter").get("rule").asText());
 				System.out.println("Print Parameter Value: " + json.findPath("value").asText());
 				serviceConfigItemList.add(serviceConfigItem);
 			}	
 			
 			
 			
-			System.out.println("Print service Name: "+serviceName);
+			System.out.println("Print service Name: " + serviceName);
 			//System.out.println("Print service configs: " + responseConfigItems);
 			
 		}catch (IllegalStateException e) {
@@ -82,7 +83,7 @@ public class ServiceExecutionLogController extends Controller {
 		}
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
-		String body = parseServicePageBody(dynamicUrl);
+		String body = parseServicePageBody(serviceName);
 		return ok(serviceDetail.render(body, serviceConfigItemList));
 	}
 	
