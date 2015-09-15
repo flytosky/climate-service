@@ -2,8 +2,8 @@ package utils;
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
-	//public static final String URL_SERVER = "http://localhost";
+	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	public static final String URL_SERVER = "http://localhost";
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";

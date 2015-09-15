@@ -33,7 +33,7 @@ public class ServiceExecutionLogController extends Controller {
 	
 
 	public static Result getConfigurationByConfId() {
-		String dynamicUrl = "T3";
+		String dynamicUrl = "TwoDimSlice3D";
 		
 		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
 		
@@ -83,6 +83,7 @@ public class ServiceExecutionLogController extends Controller {
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
 		String body = parseServicePageBody(dynamicUrl);
+		
 		return ok(serviceDetail.render(body, serviceConfigItemList));
 	}
 	

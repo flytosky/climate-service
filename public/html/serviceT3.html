@@ -20,9 +20,9 @@
 </head>
 <body>
 
-<h2 class="text-center">t3</h2>
+<h2 class="text-center">t2</h2>
 
-<p class="text-center col-md-8 col-md-offset-2">t3111111111111111111111111111111111111</p>
+<p class="text-center col-md-8 col-md-offset-2">t2</p>
 
 <div class="container col-md-6">
     <form>
@@ -33,11 +33,11 @@
                 <th class="col-md-4">Value</th>
             </tr>
             </thead>
-            <tbody id="dynamicTBody"><tr><td>t3</td><td><input type="text" class="form-control" id="t3" placeholder="3"></td></tr></tbody>
+            <tbody id="dynamicTBody"><tr><td id="g2">g2</td><td><input type="text" class="form-control" id="g2" placeholder="2"></td></tr></tbody>
         </table>
     </form>
     <div class="text-center">
-    	<button type="submit" class="btn btn-success btn-lg" onclick="Javascript:sendValues('www')">Get Plot</button>
+    	<button type="submit" class="btn btn-success btn-lg" onclick="Javascript:sendValues('www')">Request Service</button>
     </div>
 </div>
 
@@ -72,14 +72,12 @@
             </tbody>
         </table>
         <div class="text-center">
-            <button type="submit" class="btn btn-success btn-lg">Download Data</button>
-        </div>
-    </form>
+            <button id = "downloadButton" type="button" class="btn btn-success btn-lg">Download Data</button>
+ </div> <br> <div class="text-center" id="output">
+            
+        </div></form>
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/assets/javascripts/bootstrap.min.js"></script>
+
 </body>
 </html>

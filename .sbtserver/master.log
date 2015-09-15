@@ -1,22 +1,22 @@
-New log file opened at Mon Jul 13 15:35:34 PDT 2015 by 3215@longmas-MBP.sv.cmu.local
-jvm 3215@longmas-MBP.sv.cmu.local
-jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=24.65-b04
-jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.7
-jvm arguments: [-Xms256m, -Xmx1024m, -XX:PermSize=64m, -XX:MaxPermSize=256m]
+New log file opened at Mon Aug 17 14:59:57 PDT 2015 by 4320@Longinus
+jvm 4320@Longinus
+jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
+jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
+jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
 Starting event engine
 Starting sbt command engine
 Waiting for sbt command engine
 Command engine arguments=List()
-Command engine baseDirectory=/Users/longma/Desktop/climate-service
+Command engine baseDirectory=D:\Safe\climate-service
 Command engine initial remaining commands List(--initialize, onFailure load-failed, boot, server-send-ready-for-request, server-handle-next-server-request)
 > --initialize
 > initialize
 > onFailure load-failed
 > boot
 > reload
-[Loading] Scanning directory /Users/longma/Desktop/climate-service/project
+[Loading] Scanning directory D:\Safe\climate-service\project
 [Loading] Found non-root projects 
-[Loading] Done in /Users/longma/Desktop/climate-service/project, returning: ()
+[Loading] Done in D:\Safe\climate-service\project, returning: ()
 deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))))
   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.JUnitXmlReportPlugin)
 sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
@@ -25,9 +25,9 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorting:: found: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin) not found List(sbt.plugins.JUnitXmlReportPlugin)
   :: sorting:: found: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin) not found List()
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
-[Loading] Done in /Users/longma/Desktop/climate-service/project, returning: (climate-service-build)
-Loading project definition from /Users/longma/Desktop/climate-service/project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@586f53c1, check cycles: false
+[Loading] Done in D:\Safe\climate-service\project, returning: (climate-service-build)
+Loading project definition from D:\Safe\climate-service\project
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5cce919e, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -46,7 +46,7 @@ All initially invalidated sources: Set()
 
 Copy resource mappings: 
 	
-[Loading] Scanning directory /Users/longma/Desktop/climate-service
+[Loading] Scanning directory D:\Safe\climate-service
 [Loading] Found root project root w/ remaining 
 deducing auto plugins based on known facts Set(Atom(play.PlayJava), Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(sbt.plugins.BackgroundRunPlugin))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(play.Play))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(sbt.plugins.SerializersPlugin))), Clause(Atom(play.Play),Set(Atom(com.typesafe.sbt.webdriver.SbtWebDriver))), Clause(Atom(play.Play),Set(Atom(play.twirl.sbt.SbtTwirl))), Clause(Atom(play.Play),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(play.PlayJava),Set(Atom(play.Play))), Clause(Atom(play.PlayScala),Set(Atom(play.Play))), Clause(Atom(play.twirl.sbt.SbtTwirl),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(com.typesafe.sbt.jse.SbtJsEngine),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.jse.SbtJsEngine))), Clause(Atom(com.typesafe.sbt.webdriver.SbtWebDriver),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(sbt.plugins.BackgroundRunPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(com.typesafe.sbt.coffeescript.SbtCoffeeScript),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.less.SbtLess),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.jshint.SbtJSHint),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.rjs.SbtRjs),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.digest.SbtDigest),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(com.typesafe.sbt.mocha.SbtMocha),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(And(Set(Atom(sbt.plugins.BackgroundRunPlugin), Atom(play.Play), Atom(sbt.plugins.SerializersPlugin))),Set(Atom(play.sbt.forkrun.PlayForkRun))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.jse.SbtJsEngine))), Clause(Atom(com.typesafe.sbt.jse.SbtJsEngine),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.webdriver.SbtWebDriver))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.BackgroundRunPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.InteractionServicePlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.SendEventServicePlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.SerializersPlugin))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.coffeescript.SbtCoffeeScript))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.less.SbtLess))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.jshint.SbtJSHint))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.rjs.SbtRjs))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.digest.SbtDigest))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.mocha.SbtMocha)))))
   :: deduced result: Matched(sbt.plugins.CorePlugin,play.PlayJava,sbt.plugins.InteractionServicePlugin,sbt.plugins.SendEventServicePlugin,play.Play,sbt.plugins.SerializersPlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,com.typesafe.sbt.jse.SbtJsTask,play.twirl.sbt.SbtTwirl,com.typesafe.sbt.webdriver.SbtWebDriver,com.typesafe.sbt.jshint.SbtJSHint,sbt.plugins.JUnitXmlReportPlugin,com.typesafe.sbt.mocha.SbtMocha,com.typesafe.sbt.less.SbtLess,com.typesafe.sbt.web.SbtWeb,com.typesafe.sbt.rjs.SbtRjs,com.typesafe.sbt.jse.SbtJsEngine,com.typesafe.sbt.coffeescript.SbtCoffeeScript,sbt.plugins.BackgroundRunPlugin,com.typesafe.sbt.digest.SbtDigest,play.sbt.forkrun.PlayForkRun)
@@ -58,10 +58,108 @@ sorting: ns: List(sbt.plugins.CorePlugin, play.PlayJava, sbt.plugins.Interaction
   :: sorting:: found: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play) not found List(play.PlayJava, play.sbt.forkrun.PlayForkRun)
   :: sorting:: found: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play, play.PlayJava, play.sbt.forkrun.PlayForkRun) not found List()
   :: sorted deduced result: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play, play.PlayJava, play.sbt.forkrun.PlayForkRun)
-[Loading] Done in /Users/longma/Desktop/climate-service, returning: (root)
-Set current project to climate-service (in build file:/Users/longma/Desktop/climate-service/)
+[Loading] Done in D:\Safe\climate-service, returning: (root)
+Set current project to climate-service (in build file:/D:/Safe/climate-service/)
 Reapplying settings...
-Set current project to climate-service (in build file:/Users/longma/Desktop/climate-service/)
+Set current project to climate-service (in build file:/D:/Safe/climate-service/)
 > iflast shell
 > server-send-ready-for-request
+> server-handle-next-server-request
+> eclipse
+About to create Eclipse project files for your project(s).
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5cce919e, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(D:\Safe\climate-service\conf\application.conf,D:\Safe\climate-service\target\scala-2.11\classes\application.conf)
+	(D:\Safe\climate-service\conf\routes,D:\Safe\climate-service\target\scala-2.11\classes\routes)
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5cce919e, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5cce919e, check cycles: false
+External dependencies for configuration 'test' and withSource 'false' and withJavadoc 'false' and withBundledScalaContainers'true': Success(List(Lib(C:\Users\User\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.4.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.0.2.jar), Lib(C:\Users\User\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.1.jar), Lib(C:\Users\User\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe\config\bundles\config-1.2.1.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.3.jar), Lib(C:\Users\User\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.6.jar), Lib(C:\Users\User\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.3.2.jar), Lib(C:\Users\User\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.3.2.jar), Lib(C:\Users\User\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.3.2.jar), Lib(D:\Dev\activator-1.3.2\repository\org.scala-lang\scala-reflect\2.11.1\jars\scala-reflect.jar), Lib(C:\Users\User\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.1.jar), Lib(C:\Users\User\.ivy2\cache\io.netty\netty\bundles\netty-3.9.8.Final.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.netty\netty-http-pipelining\jars\netty-http-pipelining-1.1.2.jar), Lib(C:\Users\User\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.6.jar), Lib(C:\Users\User\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.1.1.jar), Lib(C:\Users\User\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.1.1.jar), Lib(D:\Dev\activator-1.3.2\repository\com.typesafe.akka\akka-actor_2.11\2.3.4\jars\akka-actor_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\com.typesafe.akka\akka-slf4j_2.11\2.3.4\jars\akka-slf4j_2.11.jar), Lib(C:\Users\User\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.9.jar), Lib(C:\Users\User\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar), Lib(C:\Users\User\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar), Lib(C:\Users\User\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\org.yaml\snakeyaml\1.13\bundles\snakeyaml.jar), Lib(D:\Dev\activator-1.3.2\repository\org.hibernate\hibernate-validator\5.0.3.Final\jars\hibernate-validator.jar), Lib(D:\Dev\activator-1.3.2\repository\javax.validation\validation-api\1.1.0.Final\jars\validation-api.jar), Lib(D:\Dev\activator-1.3.2\repository\com.fasterxml\classmate\1.0.0\bundles\classmate.jar), Lib(D:\Dev\activator-1.3.2\repository\org.jboss.logging\jboss-logging\3.2.0.Final\jars\jboss-logging.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.1.4.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-aop\jars\spring-aop-4.1.4.RELEASE.jar), Lib(D:\Dev\activator-1.3.2\repository\aopalliance\aopalliance\1.0\jars\aopalliance.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.1.4.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.1.4.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.2.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-expression\jars\spring-expression-4.1.4.RELEASE.jar), Lib(D:\Dev\activator-1.3.2\repository\org.javassist\javassist\3.19.0-GA\bundles\javassist.jar), Lib(D:\Dev\activator-1.3.2\repository\org.reflections\reflections\0.9.8\jars\reflections.jar), Lib(C:\Users\User\.ivy2\cache\com.google.guava\guava\bundles\guava-16.0.1.jar), Lib(D:\Dev\activator-1.3.2\repository\dom4j\dom4j\1.6.1\jars\dom4j.jar), Lib(D:\Dev\activator-1.3.2\repository\com.google.code.findbugs\jsr305\2.0.3\jars\jsr305.jar), Lib(D:\Dev\activator-1.3.2\repository\org.apache.tomcat\tomcat-servlet-api\8.0.5\jars\tomcat-servlet-api.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-java-jdbc_2.11\jars\play-java-jdbc_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\com.jolbox\bonecp\0.8.0.RELEASE\bundles\bonecp.jar), Lib(D:\Dev\activator-1.3.2\repository\com.h2database\h2\1.3.175\jars\h2.jar), Lib(D:\Dev\activator-1.3.2\repository\tyrex\tyrex\1.0.1\jars\tyrex.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-java-ebean_2.11\jars\play-java-ebean_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\org.avaje.ebeanorm\avaje-ebeanorm\3.3.4\jars\avaje-ebeanorm.jar), Lib(D:\Dev\activator-1.3.2\repository\org.avaje.ebeanorm\avaje-ebeanorm-agent\3.2.2\jars\avaje-ebeanorm-agent.jar), Lib(D:\Dev\activator-1.3.2\repository\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\1.0.1.Final\jars\hibernate-jpa-2.0-api.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\net.sf.ehcache\ehcache-core\2.6.8\jars\ehcache-core.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-java-ws_2.11\jars\play-java-ws_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.3.9.jar), Lib(C:\Users\User\.ivy2\cache\com.ning\async-http-client\jars\async-http-client-1.8.15.jar), Lib(C:\Users\User\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar), Lib(C:\Users\User\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-java-jpa_2.11\jars\play-java-jpa_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\javax.inject\javax.inject\1\jars\javax.inject.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework.data\spring-data-jpa\jars\spring-data-jpa-1.7.1.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework.data\spring-data-commons\jars\spring-data-commons-1.9.1.RELEASE.jar), Lib(D:\Dev\activator-1.3.2\repository\org.slf4j\slf4j-api\1.7.7\jars\slf4j-api.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-orm\jars\spring-orm-4.0.7.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-jdbc\jars\spring-jdbc-4.0.7.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.springframework\spring-tx\jars\spring-tx-4.0.7.RELEASE.jar), Lib(C:\Users\User\.ivy2\cache\org.aspectj\aspectjrt\jars\aspectjrt-1.8.2.jar), Lib(C:\Users\User\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.7.jar), Lib(C:\Users\User\.ivy2\cache\org.hibernate\hibernate-entitymanager\jars\hibernate-entitymanager-4.3.7.Final.jar), Lib(C:\Users\User\.ivy2\cache\org.jboss.logging\jboss-logging-annotations\jars\jboss-logging-annotations-1.2.0.Beta1.jar), Lib(C:\Users\User\.ivy2\cache\org.hibernate\hibernate-core\jars\hibernate-core-4.3.7.Final.jar), Lib(C:\Users\User\.ivy2\cache\org.jboss.spec.javax.transaction\jboss-transaction-api_1.2_spec\jars\jboss-transaction-api_1.2_spec-1.0.0.Final.jar), Lib(C:\Users\User\.ivy2\cache\org.hibernate.common\hibernate-commons-annotations\jars\hibernate-commons-annotations-4.0.5.Final.jar), Lib(C:\Users\User\.ivy2\cache\org.hibernate.javax.persistence\hibernate-jpa-2.1-api\jars\hibernate-jpa-2.1-api-1.0.0.Final.jar), Lib(C:\Users\User\.ivy2\cache\antlr\antlr\jars\antlr-2.7.7.jar), Lib(C:\Users\User\.ivy2\cache\org.jboss\jandex\jars\jandex-1.1.0.Final.jar), Lib(C:\Users\User\.ivy2\cache\mysql\mysql-connector-java\jars\mysql-connector-java-5.1.34.jar), Lib(C:\Users\User\.ivy2\cache\com.typesafe.play\play-test_2.11\jars\play-test_2.11-2.3.9.jar), Lib(D:\Dev\activator-1.3.2\repository\junit\junit\4.11\jars\junit.jar), Lib(D:\Dev\activator-1.3.2\repository\org.hamcrest\hamcrest-core\1.3\jars\hamcrest-core.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-core_2.11\2.3.12\jars\specs2-core_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-matcher_2.11\2.3.12\jars\specs2-matcher_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-common_2.11\2.3.12\jars\specs2-common_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.scalaz\scalaz-core_2.11\7.0.6\bundles\scalaz-core_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.scalaz\scalaz-concurrent_2.11\7.0.6\bundles\scalaz-concurrent_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.scalaz\scalaz-effect_2.11\7.0.6\bundles\scalaz-effect_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-junit_2.11\2.3.12\jars\specs2-junit_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-mock_2.11\2.3.12\jars\specs2-mock_2.11.jar), Lib(C:\Users\User\.ivy2\cache\org.mockito\mockito-core\jars\mockito-core-1.10.19.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-matcher-extra_2.11\2.3.12\jars\specs2-matcher-extra_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\specs2-analysis_2.11\2.3.12\jars\specs2-analysis_2.11.jar), Lib(D:\Dev\activator-1.3.2\repository\org.scala-lang\scala-compiler\2.11.0\jars\scala-compiler.jar), Lib(D:\Dev\activator-1.3.2\repository\org.specs2\classycle\1.4.3\jars\classycle.jar), Lib(D:\Dev\activator-1.3.2\repository\com.novocode\junit-interface\0.11-RC1\jars\junit-interface.jar), Lib(C:\Users\User\.ivy2\cache\org.scala-sbt\test-interface\jars\test-interface-1.0.jar), Lib(D:\Dev\activator-1.3.2\repository\org.fluentlenium\fluentlenium-festassert\0.9.2\jars\fluentlenium-festassert.jar), Lib(D:\Dev\activator-1.3.2\repository\org.fluentlenium\fluentlenium-core\0.9.2\jars\fluentlenium-core.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-java\2.39.0\jars\selenium-java.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-android-driver\2.39.0\jars\selenium-android-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-remote-driver\2.39.0\jars\selenium-remote-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\cglib\cglib-nodep\2.1_3\jars\cglib-nodep.jar), Lib(D:\Dev\activator-1.3.2\repository\org.json\json\20080701\jars\json.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-api\2.39.0\jars\selenium-api.jar), Lib(D:\Dev\activator-1.3.2\repository\org.apache.httpcomponents\httpclient\4.3.1\jars\httpclient.jar), Lib(D:\Dev\activator-1.3.2\repository\org.apache.httpcomponents\httpcore\4.3\jars\httpcore.jar), Lib(D:\Dev\activator-1.3.2\repository\org.apache.commons\commons-exec\1.1\jars\commons-exec.jar), Lib(D:\Dev\activator-1.3.2\repository\net.java.dev.jna\jna\3.4.0\jars\jna.jar), Lib(D:\Dev\activator-1.3.2\repository\net.java.dev.jna\platform\3.4.0\jars\platform.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-chrome-driver\2.39.0\jars\selenium-chrome-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-htmlunit-driver\2.39.0\jars\selenium-htmlunit-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\net.sourceforge.htmlunit\htmlunit\2.13\jars\htmlunit.jar), Lib(D:\Dev\activator-1.3.2\repository\xalan\xalan\2.7.1\jars\xalan.jar), Lib(D:\Dev\activator-1.3.2\repository\xalan\serializer\2.7.1\jars\serializer.jar), Lib(D:\Dev\activator-1.3.2\repository\commons-collections\commons-collections\3.2.1\jars\commons-collections.jar), Lib(D:\Dev\activator-1.3.2\repository\org.apache.httpcomponents\httpmime\4.3.1\jars\httpmime.jar), Lib(D:\Dev\activator-1.3.2\repository\net.sourceforge.htmlunit\htmlunit-core-js\2.13\jars\htmlunit-core-js.jar), Lib(D:\Dev\activator-1.3.2\repository\net.sourceforge.nekohtml\nekohtml\1.9.19\jars\nekohtml.jar), Lib(D:\Dev\activator-1.3.2\repository\net.sourceforge.cssparser\cssparser\0.9.11\jars\cssparser.jar), Lib(D:\Dev\activator-1.3.2\repository\org.w3c.css\sac\1.3\jars\sac.jar), Lib(D:\Dev\activator-1.3.2\repository\commons-io\commons-io\2.2\jars\commons-io.jar), Lib(D:\Dev\activator-1.3.2\repository\org.eclipse.jetty\jetty-websocket\8.1.12.v20130726\jars\jetty-websocket.jar), Lib(D:\Dev\activator-1.3.2\repository\org.eclipse.jetty\jetty-util\8.1.12.v20130726\jars\jetty-util.jar), Lib(D:\Dev\activator-1.3.2\repository\org.eclipse.jetty\jetty-io\8.1.12.v20130726\jars\jetty-io.jar), Lib(D:\Dev\activator-1.3.2\repository\org.eclipse.jetty\jetty-http\8.1.12.v20130726\jars\jetty-http.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-firefox-driver\2.39.0\jars\selenium-firefox-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-ie-driver\2.39.0\jars\selenium-ie-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-iphone-driver\2.39.0\jars\selenium-iphone-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-safari-driver\2.39.0\jars\selenium-safari-driver.jar), Lib(D:\Dev\activator-1.3.2\repository\org.webbitserver\webbit\0.4.14\jars\webbit.jar), Lib(D:\Dev\activator-1.3.2\repository\org.seleniumhq.selenium\selenium-support\2.39.0\jars\selenium-support.jar), Lib(D:\Dev\activator-1.3.2\repository\org.easytesting\fest-assert\1.4\jars\fest-assert.jar), Lib(D:\Dev\activator-1.3.2\repository\org.easytesting\fest-util\1.1.6\jars\fest-util.jar), Lib(C:\Users\User\.ivy2\cache\org.objenesis\objenesis\jars\objenesis-2.1.jar)))
+Project dependencies for configuration 'compile': Success(List())
+Project dependencies for configuration 'test': Success(List())
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5cce919e, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Successfully created Eclipse project files for project(s):
+climate-service
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Safe/climate-service/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@3b859b35, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed 2015-8-17 15:00:04
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Safe/climate-service/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@b2e85e0, check cycles: false
+Total time: 0 s, completed 2015-8-17 15:00:04
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Safe/climate-service/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@31e2c76f, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed 2015-8-17 15:00:04
+> server-post-command-cleanup
 > server-handle-next-server-request
