@@ -33,6 +33,7 @@ public class ServiceExecutionLogController extends Controller {
 	
 
 	public static Result getConfigurationByConfId() {
+
 		
 		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
 		String serviceName = null;
@@ -83,7 +84,9 @@ public class ServiceExecutionLogController extends Controller {
 		}
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
+
 		String body = parseServicePageBody(serviceName);
+
 		return ok(serviceDetail.render(body, serviceConfigItemList));
 	}
 	
