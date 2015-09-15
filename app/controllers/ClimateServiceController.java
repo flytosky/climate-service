@@ -93,7 +93,7 @@ public class ClimateServiceController extends Controller {
 		String purpose = json.path("purpose").asText();
 		String url = json.path("url").asText();
 		String scenario = json.path("scenario").asText();
-		String versionNo = json.path("versionNo").asText();
+		String versionNo = json.path("version").asText();
 		String rootServiceId = json.path("rootServiceId").asText();
 		
 		JsonNode response = null;
@@ -114,13 +114,14 @@ public class ClimateServiceController extends Controller {
 											// default val
 			jsonData.put("purpose", purpose);
 			jsonData.put("url", url);
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
 			// get current date time with Date()
 			Date date = new Date();
 			jsonData.put("createTime", dateFormat.format(date));
 			jsonData.put("scenario", scenario);
 			jsonData.put("versionNo", versionNo);
 			jsonData.put("rootServiceId", rootServiceId);
+			
 
 			// POST Climate Service JSON data
 			response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
