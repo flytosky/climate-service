@@ -92,13 +92,15 @@ public class ServiceExecutionLogController extends Controller {
     	String location = "public/html/service" + serviceName + ".html";
     	File htmlFile = new File(location);
     	String entireHtml = null;
+    	String body = null;
 		try {
+			
 			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
+			body = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-    	
-    	String body = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
 
 		return body;
     }
