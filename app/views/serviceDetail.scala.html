@@ -5,9 +5,20 @@
 @scripts = {
 	<script type="text/javascript">
 	window.onload = function() {
-		var temp = "";
+		var value = "";
+		var parameterName = "";
+		var parameterRule = "";
+		
 		@for(confItem <- confItems) {
-			temp = "@confItem.getParameterName()";
+			var parameterType = "";
+			var parameterValue = "";
+			var parameterDefaultValue = "";
+			parameterName = "@confItem.getParameterName()";
+			parameterRule = "@confItem.getParameterRule()";
+			value = "@confItem.getValue()";
+			parameterType = parameterRule.split("*|")[1].split("|*")[1];
+			parameterValue = parameterRule.split("*|")[2].split("|*")[1];
+			parameterDefaultValue = parameterRule.split("*|")[3].split("|*")[1];
 		}
 		//only for testing
 		document.getElementById('t3').value = temp;
