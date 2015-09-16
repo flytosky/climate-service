@@ -9,6 +9,7 @@
 		var parameterPurpose = "";
 		var parameterRule = "";
 		
+		var seperator = "  |  ";
 		@for(confItem <- confItems) {
 			var parameterType = "";
 			var parameterValue = "";
@@ -20,13 +21,23 @@
 			parameterValue = parameterRule.split("*|")[2].split("|*")[1];
 			parameterDefaultValue = parameterRule.split("*|")[3].split("|*")[1];
 			
+			var res = parameterPurpose.split(" ");
+			var name = res[0];
+			for (i = 1; i < res.length; i++) {
+				var temp = res[i].charAt(0).toUpperCase();
+				temp += res[i].substring(1);
+				name += temp;
+			}
+			
+			
+			console.log(name + seperator + value + seperator + parameterType + seperator + parameterValue + seperator + parameterDefaultValue);
 
 			switch (parameterType) {
 				case "Input text":
-					document.getElementById('endTime').value = parameterType;		           
+					document.getElementById(name).value = value;		           
 		            break;
 		        case "Input area":
-		        	document.getElementById("Purpose1").innerHTML = "hahahah";
+		        	document.getElementById(name).innerHTML = value;
 		            break;
 		        case "Multiple selects":
 		        	$( 'input' ).filter('[value="6"]').prop( "checked", false );
@@ -35,15 +46,18 @@
 		        	$( "#colorScale1" ).prop( "checked", true );
 		            break;
 		        case "Dropdown list":
-		        	$( 'option:contains("NASA_TRMM")').attr('selected','selected');
+		        	$( 'option:contains("'+value+'")').attr('selected','selected');
 		            break;
 		        default:
 		            
-			}				
-			//document.getElementById("Purpose1").innerHTML = "hahahah";
+			}					
 		}
 		//only for testing
 		//document.getElementById('startTime').value = parameterType;
+		
+		
+		document.getElementById("serviceImg").src = "@serviceLog.getPlotUrl()";
+		document.getElementById("comment").value = "@serviceLog.getDataUrl()";
 /*		
 =======
 			var res = parameterPurpose.split(" ");
@@ -58,7 +72,7 @@
 			if (parameterType == "Input text" ) {
 				document.getElementById(name).value = value;
 			}
-		}
+		
 		
 		document.getElementById("serviceImg").src = "@serviceLog.getPlotUrl()";
 		document.getElementById("comment").value = "@serviceLog.getDataUrl()";
