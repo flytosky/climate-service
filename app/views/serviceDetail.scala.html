@@ -40,10 +40,19 @@
 		        	document.getElementById(name).innerHTML = value;
 		            break;
 		        case "Multiple selects":
-		        	$( 'input' ).filter('[value="6"]').prop( "checked", false );
+		        	var paraArr = parameterDefaultValue.split(",");
+		        	var checkedPara = value.split(",");
+		        	
+		        	for (var i =0; i<paraArr.length;i++) {
+		        		$( 'input' ).filter('[value="'+paraArr[i]+'"]').prop( "checked", false );
+		        	}
+		        	for (var i =0; i<checkedPara.length;i++) {
+		        		$( 'input' ).filter('[value="'+checkedPara[i]+'"]').prop( "checked", true );
+		        	}
+		        	//$( 'input' ).filter('[value="6"]').prop( "checked", false );
 		            break;
 		        case "Radio button":
-		        	$( "#colorScale1" ).prop( "checked", true );
+		        	$( "#colorScale" + value).prop( "checked", true );
 		            break;
 		        case "Dropdown list":
 		        	$( 'option:contains("'+value+'")').attr('selected','selected');
@@ -55,7 +64,7 @@
 		//only for testing
 		//document.getElementById('startTime').value = parameterType;
 		
-		
+		document.getElementById("Purpose1").innerHTML = "@serviceLog.getPurpose()";
 		document.getElementById("serviceImg").src = "@serviceLog.getPlotUrl()";
 		document.getElementById("comment").value = "@serviceLog.getDataUrl()";
 /*		
