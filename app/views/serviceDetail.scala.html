@@ -1,4 +1,4 @@
-@(servicePage: String, confItems: List[ServiceConfigurationItem])
+@(servicePage: String, confItems: List[ServiceConfigurationItem], serviceLog: ServiceExecutionLog)
 
 @import helper._
 
@@ -34,6 +34,8 @@
 			}
 		}
 		
+		document.getElementById("serviceImg").src = "@serviceLog.getPlotUrl()";
+		document.getElementById("comment").value = "@serviceLog.getDataUrl()";
 		
 	}
 	</script>
