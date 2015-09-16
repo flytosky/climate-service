@@ -19,9 +19,30 @@
 			parameterType = parameterRule.split("*|")[1].split("|*")[1];
 			parameterValue = parameterRule.split("*|")[2].split("|*")[1];
 			parameterDefaultValue = parameterRule.split("*|")[3].split("|*")[1];
+			
+			switch (parameterType) {
+				case "Input text":
+					document.getElementById('endTime').value = parameterType;		           
+		            break;
+		        case "Input area":
+		        	document.getElementById("Purpose1").innerHTML = "hahahah";
+		            break;
+		        case "Multiple selects":
+		        	$( 'input' ).filter('[value="6"]').prop( "checked", false );
+		            break;
+		        case "Radio button":
+		        	$( "#colorScale1" ).prop( "checked", true );
+		            break;
+		        case "Dropdown list":
+		        	$( 'option:contains("NASA_TRMM")').attr('selected','selected');
+		            break;
+		        default:
+		            
+			}				
+			//document.getElementById("Purpose1").innerHTML = "hahahah";
 		}
 		//only for testing
-		document.getElementById('startTime').value = temp;
+		//document.getElementById('startTime').value = parameterType;
 	}
 	</script>
 }
