@@ -33,9 +33,9 @@ public class ServiceExecutionLogController extends Controller {
 	
 
 	public static Result getConfigurationByConfId() {
-
 		
 		List<ServiceConfigurationItem> serviceConfigItemList = new ArrayList<ServiceConfigurationItem>();	
+		ServiceExecutionLog serviceLog = new ServiceExecutionLog();
 		String serviceName = null;
 		
 		try {
@@ -50,11 +50,15 @@ public class ServiceExecutionLogController extends Controller {
 			// Call API
 			JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.SERVICE_EXECUTION_LOG + Constants.SERVICE_EXECUTION_LOG_GET + "/" + logId);
 			System.out.println("Print service response: " + response);
-			int configurationId = response.path("serviceConfiguration").path("id").asInt();
+			int configurationId = response.get("serviceConfiguration").get("id").asInt();
 			
 			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
 			
-			serviceName = response.path("climateService").path("name").asText();
+			serviceName = response.get("climateService").get("name").asText();
+			serviceLog.setId(response.get("id").asLong());
+			serviceLog.setDataUrl(response.get("dataUrl").asText());
+			serviceLog.setPlotUrl(response.get("plotUrl").asText());
+			serviceLog.setPurpose(response.get("purpose").asText());
 			
 			for (int i = 0; i < responseConfigItems.size(); i++) {
 				JsonNode json = responseConfigItems.path(i);
@@ -62,9 +66,11 @@ public class ServiceExecutionLogController extends Controller {
 				
 				serviceConfigItem.setParameterName(json.get("parameter").get("name").asText());
 				serviceConfigItem.setParameterRule(json.get("parameter").get("rule").asText());
+				serviceConfigItem.setParameterPurpose(json.get("parameter").get("purpose").asText());
 				serviceConfigItem.setValue(json.findPath("value").asText());
 				System.out.println("Print Parameter Name: " + json.get("parameter").get("name").asText());
 				System.out.println("Print Parameter Rule: " + json.get("parameter").get("rule").asText());
+				System.out.println("Print Parameter Purpose: " + json.get("parameter").get("purpose").asText());
 				System.out.println("Print Parameter Value: " + json.findPath("value").asText());
 				serviceConfigItemList.add(serviceConfigItem);
 			}	
@@ -87,7 +93,7 @@ public class ServiceExecutionLogController extends Controller {
 
 		String body = parseServicePageBody(serviceName);
 
-		return ok(serviceDetail.render(body, serviceConfigItemList));
+		return ok(serviceDetail.render(body, serviceConfigItemList, serviceLog));
 	}
 	
 	public static String parseServicePageBody(String serviceName) {
