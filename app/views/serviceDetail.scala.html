@@ -52,7 +52,8 @@
 		        	//$( 'input' ).filter('[value="6"]').prop( "checked", false );
 		            break;
 		        case "Radio button":
-		        	$( "#colorScale" + value).prop( "checked", true );
+		        	
+		        	$( "#" + name + value ).prop( "checked", true).checkboxradio('refresh');
 		            break;
 		        case "Dropdown list":
 		        	$( 'option:contains("'+value+'")').attr('selected','selected');
