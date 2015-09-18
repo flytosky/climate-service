@@ -84,6 +84,10 @@ function createAutoClosingAlert(delay) {
     window.setTimeout(function() { $("#ruleAlert").hide(); }, delay);
 }
 
+//suffix
+var sufTrID = "_trID";
+var sufDetail = "_detail";
+
 //parameter package
 var parameterPackage = [];
 var indexInService = 0;
@@ -246,10 +250,10 @@ function appendInput(name, nameFunc, defaultValues, indexInService) {
     }
 
     var str = "";
-    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
     str += '<td>';
 
-    str += '<input type="text" class="form-control" id="' + text + '" placeholder="' + defaultValues.value + '">';
+    str += '<input type="text" class="form-control" id="' + text + sufDetail + '" placeholder="' + defaultValues.value + '">';
 
     str += '</td>';
     str += '<td><button type="button" class="btn btn-danger"' +
@@ -268,10 +272,10 @@ function appendArea(name, nameFunc, indexInService) {
     }
 
     var str = "";
-    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
     str += '<td>';
 
-    str += '<textarea class="form-control" rows="5" id="' + text + '">';
+    str += '<textarea class="form-control" rows="5" id="' + text + sufDetail + '">';
     str += '</textarea>';
 
     str += '</td>';
@@ -302,11 +306,11 @@ function appendSelects(name, nameFunc, values, defaultValues, indexInService) {
     }
 
     var str = "";
-    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td>';
     for (i = 0; i < array.length; i++) {
-        str += '<label class="checkbox-inline"><input type="checkbox" id="' + text + i + '"' +
+        str += '<label class="checkbox-inline"><input type="checkbox" id="' + text + sufDetail + i + '"' +
         'value="' + array[i] + '"';
         if (defaultValueSet[array[i].trim()]) {
             str += ' checked';
@@ -335,13 +339,13 @@ function appendRadioButton(name, nameFunc, values, defaultValues, indexInService
     var array = values.value.split(",");
 
     var str = "";
-    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td>';
     for (i = 0; i < array.length; i++) {
     	// name is for grouping
-        str += '<label class="radio-inline"><input type="radio" id="' + text + i + '"' +
-        'value="' + array[i] + '" name=' + text + '"';
+        str += '<label class="radio-inline"><input type="radio" id="' + text + sufDetail + i + '"' +
+        'value="' + array[i] + '" name="' + text + sufDetail + '"';
         if (array[i].trim() == defaultValues.value.trim()) {
             str += ' checked';
         }
@@ -361,7 +365,7 @@ function appendDropdownList(name, nameFunc, values, defaultValues, indexInServic
     var array = values.value.split(",");
 
     var str = "";
-    str += '<tr><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
     str += '<td><select class="form-control">';
     for (i = 0; i < array.length; i++) {

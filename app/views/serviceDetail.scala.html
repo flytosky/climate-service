@@ -3,6 +3,7 @@
 @import helper._
 
 @scripts = {
+	
 	<script type="text/javascript">
 	window.onload = function() {
 		var value = "";
@@ -11,12 +12,14 @@
 		
 		var seperator = "  |  ";
 		@for(confItem <- confItems) {
+			var parameterName = "";
 			var parameterType = "";
 			var parameterValue = "";
 			var parameterDefaultValue = "";
 			parameterPurpose = "@confItem.getParameterPurpose()";
 			parameterRule = "@confItem.getParameterRule()";
 			value = "@confItem.getValue()";
+			parameterName = "@confItem.getParameterName()";
 			parameterType = parameterRule.split("*|")[1].split("|*")[1];
 			parameterValue = parameterRule.split("*|")[2].split("|*")[1];
 			parameterDefaultValue = parameterRule.split("*|")[3].split("|*")[1];
@@ -28,9 +31,10 @@
 				temp += res[i].substring(1);
 				name += temp;
 			}
+			name += "_detail";
 			
 			
-			console.log(name + seperator + value + seperator + parameterType + seperator + parameterValue + seperator + parameterDefaultValue);
+			console.log(parameterName + seperator + name + seperator + value + seperator + parameterType + seperator + parameterValue + seperator + parameterDefaultValue);
 
 			switch (parameterType) {
 				case "Input text":
@@ -40,23 +44,30 @@
 		        	document.getElementById(name).innerHTML = value;
 		            break;
 		        case "Multiple selects":
-		        	var paraArr = parameterDefaultValue.split(",");
+		        	var paraArr = parameterValue.split(",");
 		        	var checkedPara = value.split(",");
 		        	
-		        	for (var i =0; i<paraArr.length;i++) {
-		        		$( 'input' ).filter('[value="'+paraArr[i]+'"]').prop( "checked", false );
-		        	}
-		        	for (var i =0; i<checkedPara.length;i++) {
-		        		$( 'input' ).filter('[value="'+checkedPara[i]+'"]').prop( "checked", true );
+		        	for (var i=0; i<paraArr.length; i++) {
+		        		$("#" + name + i).prop( "checked", false );
+		        		for (var j=0; j<checkedPara.length; j++ ) {
+		        			if ($("#" + name + i).val() == checkedPara[j]) {
+		        				$("#" + name + i).prop( "checked", true );
+		        			}
+		        		} 
 		        	}
 		        	//$( 'input' ).filter('[value="6"]').prop( "checked", false );
 		            break;
 		        case "Radio button":
-		        	
-		        	$( "#" + name + value ).prop( "checked", true).checkboxradio('refresh');
+		        	$( "#" + name + value ).prop("checked", true);
 		            break;
 		        case "Dropdown list":
-		        	$( 'option:contains("'+value+'")').attr('selected','selected');
+		        	//$( 'option:contains("'+value+'")').attr('selected','selected');
+		        	var allOptions = document.getElementById(parameterName + "_trID").getElementsByTagName('option');
+		        	for (var i =0; i<allOptions.length; i++) {
+		        		if(allOptions[i].value == value) {
+		        			allOptions[i].selected = true;
+		        		}
+		        	} 
 		            break;
 		        default:
 		            
@@ -65,7 +76,7 @@
 		//only for testing
 		//document.getElementById('startTime').value = parameterType;
 		
-		document.getElementById("Purpose1").innerHTML = "@serviceLog.getPurpose()";
+		document.getElementById("purpose_detail").innerHTML = "@serviceLog.getPurpose()";
 		document.getElementById("serviceImg").src = "@serviceLog.getPlotUrl()";
 		document.getElementById("comment").value = "@serviceLog.getDataUrl()";
 /*		
