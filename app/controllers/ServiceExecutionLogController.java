@@ -97,8 +97,8 @@ public class ServiceExecutionLogController extends Controller {
 	}
 	
 	public static String parseServicePageBody(String serviceName) {
-    	
-    	String location = "public/html/service" + serviceName + ".html";
+
+    	String location = "public/html/service" + handleServiceName(serviceName) + ".html";
     	File htmlFile = new File(location);
     	String entireHtml = null;
     	String body = null;
