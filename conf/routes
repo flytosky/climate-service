@@ -17,6 +17,7 @@ POST		/climateService/add											controllers.ClimateServiceController.addClim
 GET     /climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()	
 POST	/climateService/savePage									controllers.ClimateServiceController.passPageStr()
 POST	/assets/html/climateService/serviceModels					controllers.ClimateServiceController.serviceModels()
+POST	/climateService/serviceModels								controllers.ClimateServiceController.serviceModels()
 POST	/climateService/ruleEngineData									controllers.ClimateServiceController.ruleEngineData()
 
 GET     /climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
