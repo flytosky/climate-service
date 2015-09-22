@@ -58,7 +58,13 @@
 		        	//$( 'input' ).filter('[value="6"]').prop( "checked", false );
 		            break;
 		        case "Radio button":
-		        	$( "#" + name + value ).prop("checked", true);
+		        	var paraArr = parameterValue.split(",");
+		        	for (var i=0; i<paraArr.length; i++) {
+		        		if ($("#" + name + i).val() == value) {
+		        			$( "#" + name + i ).prop("checked", true);
+		        			break;
+		        		}
+		        	}
 		            break;
 		        case "Dropdown list":
 		        	//$( 'option:contains("'+value+'")').attr('selected','selected');
