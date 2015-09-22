@@ -22,5 +22,4 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.34"
 )
 
-fork in run := true
 
