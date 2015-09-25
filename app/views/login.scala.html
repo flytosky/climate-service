@@ -3,40 +3,47 @@
 @main("Login") {  
     
     @helper.form(routes.Application.authenticate) {
-        
-        <h1>Sign in</h1>
-        
-        @if(form.hasGlobalErrors) { 
-            <p class="error">
-                @form.globalError.message
-            </p>
-        }
-        
-        @if(flash.contains("success")) {
-            <p class="success">
-                @flash.get("success")
-            </p>
-        }
-        
-        <p>
-            <input type="email" name="email" placeholder="Email" value='@form("email").value'>
-        </p>
-        <p>
-            <input type="password" name="password" placeholder="Password">
-        </p>
-        <p>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </p>
-        <p></p>
-        <p></p>
-        
-	}
-	<p class="text-left">
-            New User?
-    </p>
-    <p class="text-left">
-	<button class="btn btn-success" onclick="location.href='@routes.Application.signup()'">Sign up</button>
-	</p>
+
+		<div class="container" style="background-image:url(https://msha.teds.com/EveryOne/images/login-background.jpg); height:80vh; background-size: 100%;">
+			<div class="col-sm-6 col-md-4 col-md-offset-4" style="background: rgba(255,255,255,0.7); border-radius:3px; top:25%;">
+			<form class="form-signin">
+				<h1 class="form-signin-heading" align="center">Sign in</h1>
+				<div class="form-group">
+					<label for="inputEmail" class="sr-only">Email address</label> 
+					<input
+						type="email" name="email" id="email" class="form-control"
+						placeholder="Email address" required="" autofocus="" value='@form("email").value'>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="sr-only">Password</label> 
+					<input
+						type="password" name="password" id="password" class="form-control"
+						placeholder="Password" required="">
+				</div>
+				<div class="form-group">
+				@if(form.hasGlobalErrors) { 
+            	<p class="error">
+                	@form.globalError.message
+            	</p>
+        		}
+        		@if(flash.contains("success")) {
+            	<p class="success">
+                	@flash.get("success")
+            	</p>
+        		}
+				<button class="btn btn-primary btn-block" type="submit">Sign in</button>
+				</div>
+				<div class="form-group" align="center">
+					<span >
+					New User?
+					<a href='@routes.Application.signup()'>Sign up</a>
+					</span>
+				</div>
+			</form>
+			</div>
+		</div>
+}
+	
 }
     
 
