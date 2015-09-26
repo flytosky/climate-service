@@ -16,6 +16,30 @@
 					return true;
 				}
 		}
+		
+		function isEmailExisted() {
+			var email = document.getElementById("email").value;
+			var obj = {
+					email : email;
+			}
+			$.ajax({
+				url: "/isEmailExisted",
+				data: JSON.stringify(obj),
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				type: "POST"
+			}).done(function(data) {
+				var response = JSON.parse(data);
+				if(response == "Email is valid"){
+					document.getElementById("msg").innerHTML = "";
+					document.getElementById("create").disabled = false;
+				}else{
+					document.getElementById("msg1").innerHTML = response;
+					document.getElementById("create").disabled = true;
+				}
+			});
+		}
 </script>
 
 @main("Signup") {  
@@ -53,8 +77,9 @@
 			<div class="form-group">
 				<input type="email" name="email" id="email" class="form-control"
 					placeholder="Email address" required=""
-					value='@userForm("email").value'>
+					value='@userForm("email").value' onchange="isEmailExisted()">
 			</div>
+			<div class="form-group" id="msg1" style="color: red;"></div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-6">
 					<div class="form-group">

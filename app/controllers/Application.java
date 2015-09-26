@@ -94,6 +94,8 @@ public class Application extends Controller {
     public static Result createNewUser(){
     	Form<User> nu = userForm.bindFromRequest();
     	
+    	
+    	
     	ObjectNode jsonData = Json.newObject();
     	String userName = null;
     	
@@ -130,7 +132,29 @@ public class Application extends Controller {
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
-		return ok(signup.render(nu));
-	    
+		return ok(signup.render(nu));  
+    }
+    
+    public static Result isEmailExisted() {
+    	JsonNode json = request().body().asJson();
+    	String email = json.path("email").asText();
+    	
+		ObjectNode jsonData = Json.newObject();
+		JsonNode response = null;
+		try {
+			jsonData.put("email", email);
+			response = RESTfulCalls.postAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT 
+					+ Constants.IS_EMAIL_EXISTED, jsonData);
+			Application.flashMsg(response);
+		}catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
     }
 }
