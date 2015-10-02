@@ -10,6 +10,7 @@ GET		/authenticate				controllers.Application.authenticate()
 GET		/signup						controllers.Application.signup()
 GET		/createNewUser				controllers.Application.createNewUser()
 GET		/createSuccess				controllers.Application.createSuccess()
+POST	/isEmailExisted				controllers.Application.isEmailExisted()
 
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()

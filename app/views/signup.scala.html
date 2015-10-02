@@ -16,90 +16,139 @@
 					return true;
 				}
 		}
+		
+		function isEmailExisted() {
+			var email = document.getElementById("email").value;
+			var obj = {
+					email : email
+			}
+			$.ajax({
+				url: "/isEmailExisted",
+				data: JSON.stringify(obj),
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				type: "POST"
+			}).done(function(data) {
+				console.log(data);
+				var response = data;
+				if("error" in response){
+					document.getElementById("msg1").innerHTML = "Email already used";
+					document.getElementById("create").disabled = true;
+				}else{
+					document.getElementById("msg1").innerHTML = "";
+					document.getElementById("create").disabled = false;
+					return true;
+				}
+			});
+		}
 </script>
 
 @main("Signup") {  
 	
 	@helper.form(action = routes.Application.createNewUser) {
-	
-	<fieldset>
-            <legend><font size="6">Registration</font></legend>
-            
-            @inputText(
-                userForm("firstName"), 
-                '_label -> "First name",                 
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("middleInitial"), 
-                '_label -> "Middle Initial",                 
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("lastName"), 
-                '_label -> "Last Name",               
-                '_error -> userForm.globalError                                
-            )
-			@inputText(
-                userForm("password"), 
-                '_label -> "Password",               
-                '_error -> userForm.globalError                                
-            )
+<div class="container"
+	style="background-image: url(https://msha.teds.com/EveryOne/images/login-background.jpg); height: 90vh; background-size: 100%;">
+	<div
+		class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form class="form-signin">
+			<h1 class="form-signin-heading" align="center">Sign up</h1>
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+						<input type="text" name="firstName" id="firstName"
+							class="form-control" placeholder="First Name" required=""
+							value='@userForm("firstName").value'>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+						<input type="text" name="middleInitial" id="middleInitial"
+							class="form-control" placeholder="Middle Name"
+							value='@userForm("middleInitial").value'>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<div class="form-group">
+						<input type="text" name="lastName" id="lastName"
+							class="form-control" placeholder="Last Name" required=""
+							value='@userForm("lastName").value'>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<input type="email" name="email" id="email" class="form-control"
+					placeholder="Email address" required=""
+					value='@userForm("email").value' onchange="isEmailExisted()">
+			</div>
+			<div class="form-group" id="msg1" style="color: red;"></div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="password" id="password"
+							class="form-control" placeholder="Password" required=""
+							value='@userForm("password").value'>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="repassword" id="repassword"
+							class="form-control" placeholder="Re-enter Password"
+							oninput="checkpwd()" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group" id="msg" style="color: red;"></div>
+			
+			<div class="form-group">
+				<input type="text" name="affiliation" id="affiliation"
+					class="form-control" placeholder="Affiliation"
+					value='@userForm("affiliation").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="title" id="title" class="form-control"
+					placeholder="Title" value='@userForm("title").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="mailingAddress" id="mailingAddress"
+					class="form-control" placeholder="Mailing Address"
+					value='@userForm("mailingAddress").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="phoneNumber" id="phoneNumber"
+					class="form-control" placeholder="Phone Number"
+					value='@userForm("phoneNumber").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="faxNumber" id="faxNumber"
+					class="form-control" placeholder="Fax Number"
+					value='@userForm("faxNumber").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="researchFields" id="researchFields"
+					class="form-control" placeholder="Research Fields"
+					value='@userForm("researchFields").value'>
+			</div>
+			<div class="form-group">
+				<input type="text" name="highestDegree" id="highestDegree"
+					class="form-control" placeholder="Highest Degree"
+					value='@userForm("highestDegree").value'>
+			</div>
 
-        	<div class="form-group">
-            <label>Re-enter Password</label><br>
-            <input type="text" id="repassword" name="repassword" oninput="checkpwd()"/>
-        	</div>
-        	<div id="msg" style="color:red;"></div>
-        	
-            @inputText(
-                userForm("affiliation"), 
-                '_label -> "Affiliation",                 
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("title"), 
-                '_label -> "Title",                 
-                '_error -> userForm.globalError                              
-            )
-            @inputText(
-                userForm("email"), 
-                '_label -> "Email  (Format: ***@***)",            
-                '_error -> userForm.globalError                   
-            )
-            
-            @inputText(
-                userForm("mailingAddress"), 
-                '_label -> "Mailing Address",                 
-                '_error -> userForm.globalError                                
-            )
-           
-           @inputText(
-                userForm("phoneNumber"), 
-                '_label -> "Phone Number",                 
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("faxNumber"), 
-                '_label -> "Fax Number",                 
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("researchFields"), 
-                '_label -> "Research Fields",                
-                '_error -> userForm.globalError                                
-            )
-            @inputText(
-                userForm("highestDegree"), 
-                '_label -> "Highest Degree",                 
-                '_error -> userForm.globalError                                
-            )
-        </fieldset>
-        
-      
-        <div class="actions">
-            <input type="submit" class="btn btn-primary" value="Create" id="create">
-            <a href="@routes.Application.home()" class="btn">Cancel</a>
-        </div>
-}
+			<div class="actions row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<input type="submit" class="btn btn-primary btn-block"
+						value="Create" id="create">
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<a href="@routes.Application.login()" class="btn btn-success btn-block">Sign in</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+} 
 }

@@ -31,6 +31,7 @@ public class Constants {
 	// user
 	public static final String IS_USER_VALID = "/users/isUserValid";
 	public static final String ADD_USER = "/users/add";
+	public static final String IS_EMAIL_EXISTED = "/users/isEmailExisted";
 	
 	//climate service execution log 
 	public static final String GET_ALL_SERVICE_LOG = "/serviceExecutionLog/getAllServiceExecutionLog";	
