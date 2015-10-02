@@ -8,24 +8,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="/assets/javascripts/parameter.js"></script>
-<script>
-function put_var(thisID, thatID, rule) {
-	var thatList=document.getElementById(thatID);
-	
-	for (var i=thatList.length-1; i>=0; i--) {
-	  	thatList.remove(i);
-	} 
 
-	var thisStr =  document.getElementById(thisID).value;
-	var thatListTobe = rule[thisStr][1];  
-	for (var i=0; i<thatListTobe.length; i++) {
-	  	var k = thatListTobe[i];
-	  	thatList.add(new Option(k,k));
-	  	
-	}
-}
-var dataList = {"NASA_AIRS":[["Model: Historical"],["ta","hus"]],"NASA_MLS":[["Model: Historical"],["test1","test2","test3"]],"NASA_MODIS":[["Model: Historical"],["test2","test3","test4"]],"ARGO_ARGO":[["Model: Historical"],["test3","test4","test5"]]}
-</script>
 <!-- Bootstrap -->
 <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
 
@@ -54,20 +37,14 @@ var dataList = {"NASA_AIRS":[["Model: Historical"],["ta","hus"]],"NASA_MLS":[["M
 				<tbody id="dynamicTBody">
 					<tr id="model_trID">
 						<td id="model">data source</td>
-						<td><select id = "test" class="form-control" onchange="put_var('test','test1', dataList)" ><option selected="">NASA_AIRS</option>
+						<td><select class="form-control"><option selected="">NASA_AIRS</option>
 								<option>NASA_MLS</option>
-								<option>NASA_MODIS</option>
 								<option>ARGO_ARGO</option></select></td>
 					</tr>
 					<tr id="var_trID">
 						<td id="var">variable name</td>
-						<td><select class="form-control" id = "test1"><option selected="">ta</option>
-								<option>hus</option>
-								<option>test1</option>
-								<option>test2</option>
-								<option>test3</option>
-								<option>test4</option>
-								<option>test5</option></select></td>
+						<td><select class="form-control"><option selected="">ta</option>
+								<option>hus</option></select></td>
 					</tr>
 					<tr id="start_time_trID">
 						<td id="start_time">start time</td>

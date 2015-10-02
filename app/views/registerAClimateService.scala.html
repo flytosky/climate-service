@@ -96,9 +96,23 @@
             <div id= "ruleAlert" class="alert alert-success">
                 <strong>Successfully added!</strong>
             </div>
-			<div class="well">
-	            <form>
+            <div class="well">
+					<div class="form-group">
+	                    <label>Dependence1</label>
+	                    <input type="text" class="form-control" id="dependence1" placeholder="Enter dependence1 API Name" value="test">
+	                </div>
 	                <div class="form-group">
+	                    <label>Dependence2</label>
+	                    <input type="text" class="form-control" id="dependence2" placeholder="Enter dependence2 API Name" value="test1">
+	                </div>
+	                <div class="text-center">
+	                    <button type="button" class="btn btn-primary" onclick="Javascript:addDependency()">Add dependency</button>
+	                    <button type="button" class="btn btn-success" onclick="">Reset dependency</button>
+	                </div> 
+             </div>
+			<div class="well">					
+	            <form>
+	            	<div class="form-group">
 	                    <label>Data source</label>
 	                    <input type="text" class="form-control" id="dataSource" placeholder="Enter Data Source" value="GFDL/ESM2G">
 	                </div>
@@ -108,7 +122,7 @@
 	                </div>
 	                <div class="form-group">
 	                    <label>Data group</label>
-	                    <input type="text" class="form-control" id="dataGroup" placeholder="Enter Data Group" value="Model: Historical">
+	                    <input type="text" class="form-control" id="dataGroup" placeholder="Enter Data Group" value="Default Group">
 	                </div>
 	                <div class="text-center">
 	                    <button type="button" class="btn btn-primary" onclick="Javascript:addGroup()">Add group</button>
@@ -120,14 +134,15 @@
 	                <div class="text-center">
 	                    <button type="button" class="btn btn-primary" onclick="Javascript:addVariable()">Add variable</button>
 	                    <button type="button" class="btn btn-success" onclick="Javascript:resetVariable()">Reset variable</button>
+	                    <button type="button" class="btn btn-primary" onclick="Javascript:oneClickAdd()">One-click add</button>
 	                </div>       
 	            </form>
 	            <br>
 	
 	            <div class="well">
 	                <div class="text-center">
-	                    <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add rule</button>
-	                    <button type="button" class="btn  btn-primary" onclick="Javascript:postAllData()">Post data to controller</button>
+	                    <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add one rule</button>
+	                    <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list</button>
 						<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
 	                </div>
 	            </div>

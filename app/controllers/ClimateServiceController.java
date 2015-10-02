@@ -173,7 +173,8 @@ public class ClimateServiceController extends Controller {
 		String purpose = request().body().asJson().get("purpose").toString();
 		String url = request().body().asJson().get("url").toString();
 		String outputButton = request().body().asJson().get("pageOutput").toString();
-
+		String dataListContent = request().body().asJson().get("dataListContent").toString();
+		
 		System.out.println("page string: " + str);
 		System.out.println("climate service name: " + name);
 
@@ -189,7 +190,7 @@ public class ClimateServiceController extends Controller {
 		
 		System.out.println("WARNING!!!!!!");
 		// save page in front-end
-		savePage(str, name, purpose, url, outputButton);
+		savePage(str, name, purpose, url, outputButton, dataListContent);
 
 		// flash the response message
 		Application.flashMsg(response);
@@ -199,19 +200,7 @@ public class ClimateServiceController extends Controller {
 	public static Result ruleEngineData() {
 		JsonNode result = request().body().asJson();
 		//System.out.println("ticking!");  
-//		System.out.println(result.);		
-		System.out.println(result);
-		System.out.println("--------------------------");
-		Iterator<JsonNode> ite = result.iterator();
-		
-		while(ite.hasNext()) {
-			JsonNode tmp = ite.next();
-			System.out.println(tmp);
-			JsonNode response = RESTfulCalls.postAPI(Constants.URL_HOST
-					+ Constants.CMU_BACKEND_PORT
-					+ Constants.ADD_ALL_PARAMETERS, tmp);
-			System.out.println("=========" + response);
-		}
+ 		System.out.println(result);		
 		
 		return ok("good");	
 	}
@@ -237,38 +226,44 @@ public class ClimateServiceController extends Controller {
 	}
 	
 	public static void savePage(String str, String name, String purpose,
-			String url, String outputButton) {
+			String url, String outputButton, String dataListContent) {
 		System.out.println("output button test: " + outputButton);
 		// Remove delete button from preview page
 		String result = str
 				.replaceAll(
 						"<td><button type=\\\\\"button\\\\\" class=\\\\\"btn btn-danger\\\\\" onclick=\\\\\"Javascript:deleteRow\\(this,\\d+\\)\\\\\">delete</button></td>",
 						"");
-
+		
+		dataListContent = StringEscapeUtils.unescapeJava(dataListContent);
 		result = StringEscapeUtils.unescapeJava(result);
 		outputButton = StringEscapeUtils.unescapeJava(outputButton);
 		System.out.println("output button test: " + outputButton);
 		
 		// remove the first char " and the last char " of result, name and
 		// purpose
+		dataListContent = dataListContent.substring(1, dataListContent.length() - 1);
 		result = result.substring(1, result.length() - 1);
 		outputButton = outputButton.substring(1, outputButton.length() - 1);
 		
 		name = name.substring(1, name.length() - 1);
 		purpose = purpose.substring(1, purpose.length() - 1);
-
+		
+		String putVarAndDataList = Constants.putVar + dataListContent;
+		System.out.println("putVarAndDataList: " + putVarAndDataList);
+		
 		String str11 = Constants.htmlHead1;
 		// System.out.println("head1: " + str11);
 		String str12 = Constants.htmlHead2;
 		// System.out.println("head2: " + str12);
 		String str13 = Constants.htmlHead3;
 		// System.out.println("head3: " + str13);
+		String str14 = Constants.htmlHead4;
 
 		String str21 = Constants.htmlTail1;
 		String str22 = Constants.htmlTail2;
 		String str23 = Constants.htmlTail3;
 
-		result = str11 + name + str12 + purpose + str13 + result + str21
+		result = str11 +putVarAndDataList+ str12 + name + str13 + purpose + str14 + result + str21
 				+ url.substring(1, url.length() - 1) + str22 + outputButton + str23;
 
 		name = name.replace(" ", "");

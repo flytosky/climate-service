@@ -14,13 +14,13 @@ GET		/createSuccess				controllers.Application.createSuccess()
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
 POST		/climateService/add											controllers.ClimateServiceController.addClimateService()
-GET     /climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()	
-POST	/climateService/savePage									controllers.ClimateServiceController.passPageStr()
-POST	/assets/html/climateService/serviceModels					controllers.ClimateServiceController.serviceModels()
-POST	/climateService/serviceModels								controllers.ClimateServiceController.serviceModels()
-POST	/climateService/ruleEngineData									controllers.ClimateServiceController.ruleEngineData()
+GET     	/climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()	
+POST		/climateService/savePage									controllers.ClimateServiceController.passPageStr()
+POST		/assets/html/climateService/serviceModels					controllers.ClimateServiceController.serviceModels()
+POST		/climateService/serviceModels								controllers.ClimateServiceController.serviceModels()
+POST		/climateService/ruleEngineData									controllers.ClimateServiceController.ruleEngineData()
 
-GET     /climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
+GET     	/climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
 GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
 GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
 
@@ -29,8 +29,8 @@ POST 	/climateService/replaceFile								controllers.ClimateServiceController.re
 
 
 # Service Execution Log
-GET     /serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
-GET     /searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
+GET     	/serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
+GET    	/searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
 GET		/searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
 GET 		/getConfigurationByConfId                               controllers.ServiceExecutionLogController.getConfigurationByConfId()
 

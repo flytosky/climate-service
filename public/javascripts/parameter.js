@@ -25,6 +25,7 @@ $(document).ready(function() {
 		console.log(pageStr);
 		//add the output here!!!!!!!
 		var obj = {
+			dataListContent: dataListContent,
 			pageOutput: pageOutput,
 			pageString: pageStr,
 			name: name,
@@ -83,66 +84,86 @@ function createAutoClosingAlert(delay) {
     $("#ruleAlert").show();
     window.setTimeout(function() { $("#ruleAlert").hide(); }, delay);
 }
-
-//suffix
-var sufTrID = "_trID";
-var sufDetail = "_detail";
-
-//parameter package
-var parameterPackage = [];
-var indexInService = 0;
-var countDelete = 0;
-
-
-
-//rule engine data
-var dataSourceList = [];//initialization ??
-var modelList = [];
-var varList = [];
-var modelAndVar = [];
-var map = {};
-var jsonfiedData ="";
+	//dataList
+	var dataListContent = "";
+	
+	
+	//suffix
+	var sufTrID = "_trID";
+	var sufDetail = "_detail";
+	
+	//parameter package
+	var parameterPackage = [];
+	var indexInService = 0;
+	var countDelete = 0;
+	
+	
+	
+	//rule engine data
+	var dataSourceList = [];//initialization ??
+	var modelList = [];
+	var varList = [];
+	var modelAndVar = [];
+	var map = {};
+	var jsonfiedData ="";
+	var dependency_list = "";
 
 function addDataSource() {
-source = document.getElementById("dataSource").value;
-dataSourceList.push(source);
-document.getElementById("demo1").value= source ;
-createAutoClosingAlert(500);
-    
+	source = document.getElementById("dataSource").value;
+	dataSourceList.push(source);
+	document.getElementById("demo1").value= source ;
+	createAutoClosingAlert(500);    
 }
 
 function addGroup() {
-group = document.getElementById("dataGroup").value;
-modelList.push(group);   
-document.getElementById("demo1").value= group  ; 
-createAutoClosingAlert(500);
+	group = document.getElementById("dataGroup").value;
+	modelList.push(group);   
+	document.getElementById("demo1").value= group  ; 
+	createAutoClosingAlert(500);
 }
 
 function resetDataSource() {
-dataSourceList = [];
+	dataSourceList = [];
 }
 
 function addVariable() {
-variable= document.getElementById("variable").value;
-varList.push(variable); 
-document.getElementById("demo1").value= variable  ; 
-createAutoClosingAlert(500);
+	variable= document.getElementById("variable").value;
+	varList.push(variable); 
+	document.getElementById("demo1").value= variable  ; 
+	createAutoClosingAlert(500);
 }
+
+function oneClickAdd() {
+	addDataSource();
+	addGroup();
+	addVariable();
+}
+
 
 function continue1() {
-modelAndVar.push(modelList);
-modelAndVar.push(varList);
-map[dataSourceList] = modelAndVar;
-
-jsonfiedData = JSON.stringify(map);
-document.getElementById("preview").value= jsonfiedData;
-dataSourceList = [];
-modelList = [];
-varList = [];
-modelAndVar = [];
-createAutoClosingAlert(500);
+	modelAndVar.push(modelList);
+	modelAndVar.push(varList);
+	map[dataSourceList] = modelAndVar;
+	
+	jsonfiedData = JSON.stringify(map);
+	document.getElementById("preview").value= jsonfiedData;		
+	
+	dataSourceList = [];
+	modelList = [];
+	varList = [];
+	modelAndVar = [];
+	createAutoClosingAlert(500);
 }
 
+
+function addDataList() {
+	dataListContent += "var " + dependency_list +"="+ jsonfiedData + ";";
+	dependency_list = "";
+	jsonfiedData ="";
+}
+
+
+//deprecated
 function postAllData() {
 	$.ajax({
 		url: "ruleEngineData",
@@ -156,11 +177,11 @@ function postAllData() {
 
 
 function resetVariable() {
-modelAndVar = [];
+	modelAndVar = [];
 }
 
 function deleteAllData() {
-map = {};
+	map = {};
 }
 
 function isValidJson(json) {
@@ -183,15 +204,20 @@ function validate() {
 }
 
 
-
+function addDependency() {
+	dependency_list = document.getElementById("dependence1").value + "_list";
+	var dependency1 = document.getElementById("dependence1").value + "_select";
+	var dependency2 = document.getElementById("dependence2").value + "_select";	
+	onchangeText =  "put_var('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");"
+	document.getElementById(dependency1).setAttribute("onChange",onchangeText);
+	console.log("add dependency finished...");
+}
 
 
 
 function addButton() {
 	var outputName = document.getElementById("outputName");
 	var outputUrl = document.getElementById("outputUrl");
-	//var str = '<button type=\"button\" class=\"btn btn-success btn-lg\" a=\"'+ outputUrl.value+ '\">'+ outputName.value+'</button>';
-	//<input type="button" onclick="window.location.href='http://www.google.com';" value="Go to Google" />
 	var str = '<button type="button" class="btn btn-success btn-lg" name="' +outputUrl.value + '"  id="' +outputName.value + '" onclick="window.location.href=\''+ outputUrl.value +'\';">'+ outputName.value+'</button>';
 	$("#output").append(str);
 	
@@ -367,7 +393,7 @@ function appendDropdownList(name, nameFunc, values, defaultValues, indexInServic
     var str = "";
     str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
 
-    str += '<td><select class="form-control">';
+    str += '<td><select class="form-control" id="'+ nameFunc.value +'_select">';
     for (i = 0; i < array.length; i++) {
         str += '<option ';
         if (array[i].trim() == defaultValues.value.trim()) {
@@ -534,22 +560,23 @@ function sendValues(url) {
         console.log("map key: " + key);
         console.log("map value: " + map[key]);
     } // end of for-loop
-
-//    alert(JSON.stringify(map));
-
-//    map["model"] = "NASA_AIRS";
-//    map["var"] = "ta";
-//    map["start_time"] = "200402";
-//    map["end_time"] = "200412";
-//    map["pr"] = "50000";
-//    map["lon1"] = "0";
-//    map["lon2"] = "360";
-//    map["lat1"] = "-90";
-//    map["lat2"] = "90";
-//    map["months"] = "1,2,3,4,5,6,7,8,9,10,11,12";
-//    map["scale"] = "0";
-//    map["purpose"] = "test";
-
+    
+    
+/***********************
+    alert(JSON.stringify(map));
+    map["model"] = "NASA_AIRS";
+    map["var"] = "ta";
+    map["start_time"] = "200402";
+    map["end_time"] = "200412";
+    map["pr"] = "50000";
+    map["lon1"] = "0";
+    map["lon2"] = "360";
+    map["lat1"] = "-90";
+    map["lat2"] = "90";
+    map["months"] = "1,2,3,4,5,6,7,8,9,10,11,12";
+    map["scale"] = "0";
+    map["purpose"] = "test";
+************************/
     $.ajax({
         url: "climateService/serviceModels",
         type: "POST",
@@ -586,9 +613,7 @@ function sendValues(url) {
 }
 
 function load() {
-
     console.log("Page load finished");
-
 }
 
 
@@ -596,12 +621,7 @@ function load() {
 function replaceFile(id) {
 	console.log(id);
 	var x = document.getElementById(id).files[0];
-	
-	var fileName = "testtttt";
-	console.log("!!!!!!!!!!!!!!!!!!");
-	console.log(x);
-	
-	
+		
 	$.ajax({
 	    url: "replaceFile",
 	    type: "POST",
