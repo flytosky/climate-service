@@ -1,11 +1,13 @@
-@(servicePage: String, confItems: List[ServiceConfigurationItem], serviceLog: ServiceExecutionLog)
+@(servicePage: String, moreScript: String, confItems: List[ServiceConfigurationItem], serviceLog: ServiceExecutionLog)
 
 @import helper._
 
 @scripts = {
-	
 	<script type="text/javascript">
+	@Html(moreScript)
+	
 	window.onload = function() {
+		
 		var value = "";
 		var parameterPurpose = "";
 		var parameterRule = "";
@@ -107,6 +109,7 @@
 >>>>>>> 24d068dd3a275d9761f68b848be370b1843372b0
 */
 	}
+	
 	</script>
 }
 

@@ -92,8 +92,9 @@ public class ServiceExecutionLogController extends Controller {
 		
 
 		String body = parseServicePageBody(serviceName);
+		String script = parseServicePageScript(serviceName);
 
-		return ok(serviceDetail.render(body, serviceConfigItemList, serviceLog));
+		return ok(serviceDetail.render(body, script, serviceConfigItemList, serviceLog));
 	}
 	
 	public static String parseServicePageBody(String serviceName) {
@@ -112,6 +113,25 @@ public class ServiceExecutionLogController extends Controller {
 		}
 
 		return body;
+    }
+	
+	public static String parseServicePageScript(String serviceName) {
+
+    	String location = "public/html/service" + handleServiceName(serviceName) + ".html";
+    	File htmlFile = new File(location);
+    	String entireHtml = null;
+    	String script = null;
+		try {
+			
+			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
+			String temp = entireHtml.substring(entireHtml.indexOf("<script>")+8, entireHtml.indexOf("<body>"));
+			script = temp.substring(0, temp.indexOf("</script>"));
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return script;
     }
 	
 	public static String handleServiceName(String temp){
