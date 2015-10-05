@@ -12,6 +12,9 @@ public class ServiceExecutionLog {
 	private String executionEndTime;
 	private String plotUrl;
 	private String dataUrl;
+	private String serviceName;
+	private String dataSetStartTime;
+	private String dataSetEndTime;
 
 	public long getId() {
 		return id;
@@ -91,6 +94,30 @@ public class ServiceExecutionLog {
 
 	public void setDataUrl(String dataUrl) {
 		this.dataUrl = dataUrl;
+	}
+	
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public String getDataSetStartTime() {
+		return dataSetStartTime;
+	}
+
+	public void setDataSetStartTime(String dataSetStartTime) {
+		this.dataSetStartTime = dataSetStartTime;
+	}
+
+	public String getDataSetEndTime() {
+		return dataSetEndTime;
+	}
+
+	public void setDataSetEndTime(String dataSetEndTime) {
+		this.dataSetEndTime = dataSetEndTime;
 	}
 	
 	@Override

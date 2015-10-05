@@ -196,21 +196,32 @@ public class ServiceExecutionLogController extends Controller {
 		String userId = "";
 		String startTime = "";
 		String endTime = "";
-		Date start = null, end= null;
 		
+		String dataSetStartTime = "";
+		String dataSetEndTime = "";
+		
+		Date executionStartTime = null, executionEndTime= null;
 		try {
 			dataSource = dc.field("Data Source").value().replace("/", "_");
+			//Logger.info("data "+dataSource);
 			variableName = dc.field("Variable Name").value();
 			executionPurpose = dc.field("Execution Purpose").value();
-			userId = dc.field("User Id").value().replace(" ", "%20");
-			startTime = dc.field("Start Time").value();
-			endTime = dc.field("End Time").value();
+			//userId = dc.field("User Id").value().replace(" ", "%20");
+			//Logger.info("data "+test);
+			//startTime = TimeConvert.datetoTimeStamp(dc.field("Start Time").value());
+			//endTime = TimeConvert.datetoTimeStamp(dc.field("End Time").value());
+			startTime = dc.field("Execution Start Time").value();
+			endTime = dc.field("Execution End Time").value();
+			//startLatitude = dc.field("Start Latitude").value();
+			//endLatitude = dc.field("End Latitude").value();
+			dataSetStartTime = dc.field("Dataset Start Time").value();
+			dataSetEndTime = dc.field("Dataset End Time").value();
 
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
 			if (!startTime.isEmpty()) {
 				try {
-					start = simpleDateFormat.parse(startTime);
+					executionStartTime = simpleDateFormat.parse(startTime);
 				} catch (ParseException e) {
 					System.out.println("Wrong Date Format :" + startTime);
 					return badRequest("Wrong Date Format :" + startTime);
@@ -218,63 +229,95 @@ public class ServiceExecutionLogController extends Controller {
 			}
 			if (!endTime.isEmpty()) {
 				try {
-					end = simpleDateFormat.parse(endTime);
+					executionEndTime = simpleDateFormat.parse(endTime);
 				} catch (ParseException e) {
 					System.out.println("Wrong Date Format :" + endTime);
 					return badRequest("Wrong Date Format :" + endTime);
 				}
 			}
 
-			if (variableName.equals("Total Cloud Fraction")) {
-				variableName = "clt";
-			} else if (variableName.equals("Leaf Area Index")) {
-				variableName = "lai";
-			} else if (variableName.equals("Surface Temperature")) {
-				variableName = "ts";
-			} else if (variableName.equals("Sea Surface Temperature")) {
-				variableName = "tos";
-			} else if (variableName.equals("Precipitation Flux")) {
-				variableName = "pr";
+			if (variableName.equals("Air Temperature")) {
+				variableName = "ta";
+			} else if (variableName.equals("Cloud Ice Water Content")) {
+				variableName = "cli";
+			} else if (variableName.equals("Cloud Liquid Water Content")) {
+				variableName = "clw";
 			} else if (variableName.equals("Eastward Near-Surface Wind")) {
 				variableName = "uas";
-			} else if (variableName.equals("Northward Near-Surface Wind")) {
-				variableName = "vas";
-			} else if (variableName.equals("Near-Surface Wind Speed")) {
-				variableName = "sfcWind";
-			} else if (variableName.equals("Sea Surface Height")) {
-				variableName = "zos";
 			} else if (variableName.equals("Equivalent Water Height Over Land")) {
 				variableName = "zl";
-			} else if (variableName.equals("Equivalent Water Height Over Ocean")) {
+			} else if (variableName
+					.equals("Equivalent Water Height Over Ocean")) {
 				variableName = "zo";
-			} else if (variableName.equals("Ocean Heat Content Anomaly within 700 m Depth")) {
-				variableName = "ohc700";
-			} else if (variableName.equals("Ocean Heat Content Anomaly within 2000 m Depth")) {
+			} else if (variableName.equals("Leaf Area Index")) {
+				variableName = "lai";
+			} else if (variableName.equals("Near-Surface Air Temperature")) {
+				variableName = "tas";
+			} else if (variableName.equals("Near-Surface Relative Humidity")) {
+				variableName = "hurs";
+			} else if (variableName.equals("Near-Surface Wind Speed")) {
+				variableName = "sfcWind";
+			} else if (variableName.equals("Northward Near-Surface Wind")) {
+				variableName = "vas";
+			} else if (variableName
+					.equals("Ocean Heat Content Anomaly within 2000 m Depth")) {
 				variableName = "ohc2000";
-			} else if (variableName.equals("Surface Downwelling Longwave Radiation")) {
-				variableName = "rlds";
-			} else if (variableName.equals("Surface Downwelling Shortwave Radiation")) {
-				variableName = "rsds";
-			} else if (variableName.equals("Surface Upwelling Longwave Radiation")) {
-				variableName = "rlus";
-			} else if (variableName.equals("Surface Upwelling Shortwave Radiation")) {
-				variableName = "rsus";
-			} else if (variableName.equals("Surface Downwelling Clear-Sky Longwave Radiation")) {
+			} else if (variableName
+					.equals("Ocean Heat Content Anomaly within 700 m Depth")) {
+				variableName = "ohc700";
+			} else if (variableName.equals("Ocean Salinity")) {
+				variableName = "os";
+			} else if (variableName.equals("Ocean Temperature")) {
+				variableName = "ot";
+			} else if (variableName.equals("Precipitation Flux")) {
+				variableName = "pr";
+			} else if (variableName.equals("Relative Humidity")) {
+				variableName = "hur";
+			} else if (variableName.equals("Sea Surface Height")) {
+				variableName = "zos";
+			} else if (variableName.equals("Sea Surface Temperature")) {
+				variableName = "tos";
+			} else if (variableName.equals("Specific Humidity")) {
+				variableName = "hus";
+			} else if (variableName
+					.equals("Surface Downwelling Clear-Sky Longwave Radiation")) {
 				variableName = "rldscs";
-			} else if (variableName.equals("Surface Downwelling Clear-Sky Shortwave Radiation")) {
+			} else if (variableName
+					.equals("Surface Downwelling Clear-Sky Shortwave Radiation")) {
 				variableName = "rsdscs";
-			} else if (variableName.equals("Surface Upwelling Clear-Sky Shortwave Radiation")) {
+			} else if (variableName
+					.equals("Surface Downwelling Longwave Radiation")) {
+				variableName = "rlds";
+			} else if (variableName
+					.equals("Surface Downwelling Shortwave Radiation")) {
+				variableName = "rsds";
+			} else if (variableName.equals("Surface Temperature")) {
+				variableName = "ts";
+			} else if (variableName
+					.equals("Surface Upwelling Clear-Sky Shortwave Radiation")) {
 				variableName = "rsuscs";
+			} else if (variableName
+					.equals("Surface Upwelling Longwave Radiation")) {
+				variableName = "rlus";
+			} else if (variableName
+					.equals("Surface Upwelling Shortwave Radiation")) {
+				variableName = "rsus";
 			} else if (variableName.equals("TOA Incident Shortwave Radiation")) {
 				variableName = "rsdt";
-			} else if (variableName.equals("TOA Outgoing Clear-Sky Longwave Radiation")) {
+			} else if (variableName
+					.equals("TOA Outgoing Clear-Sky Longwave Radiation")) {
 				variableName = "rlutcs";
+			} else if (variableName
+					.equals("TOA Outgoing Clear-Sky Shortwave Radiation")) {
+				variableName = "rsutcs";
 			} else if (variableName.equals("TOA Outgoing Longwave Radiation")) {
 				variableName = "rlut";
-			} else if (variableName.equals("TOA Outgoing Clear-Sky Shortwave Radiation")) {
-				variableName = "rsutcs";
 			} else if (variableName.equals("TOA Outgoing Shortwave Radiation")) {
 				variableName = "rsut";
+			} else if (variableName.equals("Total Cloud Fraction")) {
+				variableName = "clt";
+			} else if (variableName.equals("Vertical Wind Velocity")) {
+				variableName = "wap";
 			}
 
 		} catch (IllegalStateException e) {
@@ -290,15 +333,19 @@ public class ServiceExecutionLogController extends Controller {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("model", dataSource);
 		parameters.put("var", variableName);
+		parameters.put("start_time", dataSetStartTime);
+		parameters.put("end_time", dataSetEndTime);
 
-		List<ServiceExecutionLog> response = queryServiceExecutionLogs(userId, start, end, executionPurpose, parameters);
+		List<ServiceExecutionLog> response = queryServiceExecutionLogs(userId, executionStartTime, executionEndTime, executionPurpose, dataSetStartTime, dataSetEndTime, parameters);
 		return ok(searchServiceLogResult.render(response));
 	}
 
 	private static List<ServiceExecutionLog> queryServiceExecutionLogs(
 			String userId, Date startTime, Date endTime,
-			String executionPurpose, Map<String, String> parameters) {
-	List<ServiceExecutionLog> serviceLogList = new ArrayList<ServiceExecutionLog>();
+			String executionPurpose, String dataSetStartTime,
+			String dataSetEndTime, Map<String, String> parameters) {
+		
+		List<ServiceExecutionLog> serviceLogList = new ArrayList<ServiceExecutionLog>();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode queryJson = mapper.createObjectNode();
 		if (userId != null && !userId.isEmpty()) {
@@ -309,6 +356,12 @@ public class ServiceExecutionLogController extends Controller {
 		}
 		if (endTime != null) {
 			queryJson.put("executionEndTime", endTime.getTime());
+		}
+		if (dataSetStartTime != null) {
+			queryJson.put("dataSetStartTime", dataSetStartTime);
+		}
+		if (dataSetEndTime != null) {
+			queryJson.put("dataSetEndTime", dataSetEndTime);
 		}
 		if (executionPurpose != null && !executionPurpose.isEmpty()) {
 			queryJson.put("purpose", executionPurpose);
@@ -336,20 +389,68 @@ public class ServiceExecutionLogController extends Controller {
 		// parse the json string into object
 		for (int i = 0; i < serviceLogNode.size(); i++) {
 			JsonNode json = serviceLogNode.path(i);
-			ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
-			newServiceLog.setId(json.get("id").asLong());
-			newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
-			newServiceLog.setPurpose(json.get("purpose").asText());
-			newServiceLog.setUserName(json.get("user").get("firstName").asText()
-					+ " " + json.get("user").get("lastName").asText());
-			newServiceLog.setServiceConfigurationId(json
-					.get("serviceConfiguration").get("id").asText());
-			newServiceLog.setExecutionStartTime(json.findPath(
-					"executionStartTime").asText());
-			newServiceLog.setExecutionEndTime(json.findPath("executionEndTime").asText());
+			ServiceExecutionLog newServiceLog = deserializeJsonToServiceLog(json);
 			serviceLogList.add(newServiceLog);
 		}
 		return serviceLogList;
+	}
+	
+	private static ServiceExecutionLog deserializeJsonToServiceLog(JsonNode json) {
+		ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
+		newServiceLog.setId(json.get("id").asLong());
+		newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
+		newServiceLog.setServiceName(json.get("climateService").get("name").asText());
+		newServiceLog.setPurpose(json.get("purpose").asText());
+		newServiceLog.setUserName(json.get("user").get("firstName").asText()
+				+ " " + json.get("user").get("lastName").asText());
+		newServiceLog.setServiceConfigurationId(json.get("serviceConfiguration").get("id").asText());
+		
+		String executionStartTime = json.findPath("executionStartTime").asText();
+		String executionEndTime = json.findPath("executionEndTime").asText();
+		
+		String datasetStudyStartTime = json.findPath("datasetStudyStartTime").asText();
+		String datasetStudyEndTime = json.findPath("datasetStudyEndTime").asText();
+		
+		Date tmpTime = null;
+		try {
+			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(executionStartTime);		
+			if (tmpTime != null) {
+				newServiceLog.setExecutionStartTime(new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(tmpTime));
+			}
+	    } catch (ParseException e) {	    
+	    }
+		
+		try {
+			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(executionEndTime);			
+			if (tmpTime != null) {
+				newServiceLog.setExecutionEndTime(new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(tmpTime));
+			}
+	    } catch (ParseException e) {	    
+	    }
+		
+		try {
+			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyStartTime);
+			
+			if (tmpTime != null) {
+				newServiceLog.setDataSetStartTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+			}
+	    } catch (ParseException e){	    
+//	    	e.printStackTrace();
+	    }
+		
+		try {
+			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyEndTime);
+			
+			if (tmpTime != null) {
+				newServiceLog.setDataSetEndTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+			}
+	    } catch (ParseException e){	    
+//	    	e.printStackTrace();
+	    }
+		
+		newServiceLog.setDatasetLogId(json.findPath("datasetLogId").asText());
+		
+		return newServiceLog;
 	}
 
 }

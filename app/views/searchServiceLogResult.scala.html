@@ -2,35 +2,42 @@
 
 @import helper._
 
-@main("Result Service Logs"){  
+@main("Result Service Logs"){
 	 
-<h1>@serviceLogs.size() Service Logs</h1>
+    <h1>@serviceLogs.size() Service Logs Found</h1>
 
-<table class="table table-striped table-bordered table-condensed">
+	<table class="table table-striped table-bordered table-condensed tablesorter" id ="myTable3">
+	<thead>
 	<tr>
-		<td>ServiceId</td>
-		<td>User</td>
-		<td>Purpose</td>
-		<td>StartTime</td>
-		<td>EndTime</td>
-		<td>ServiceConfigurationId</td>
+		<th style = "vertical-align: top;" class="col-sm-4">Service Name</th>
+		<th style = "vertical-align: top;" class="col-sm-2">User Name</th>
+		<th style = "vertical-align: top;" class="col-sm-2">Purpose</th>
+		<th style = "vertical-align: top;" class="col-sm-2">Execution Start Time</th>
+		<th style = "vertical-align: top;" class="col-sm-2">Execution End Time</th>		
+		<th style = "vertical-align: top;" class="col-sm-1">DataSet Start Time</th>
+		<th style = "vertical-align: top;" class="col-sm-1">DataSet End Time</th>
+		<th style = "vertical-align: top;" class="col-sm-1">Details</th>
 	</tr>
+	</thead>
 	@for(serviceLog <- serviceLogs) {
-	<tr>
-		<td>@serviceLog.getServiceId</td>
-		<td>@serviceLog.getUserName</td>
-		<td>@serviceLog.getPurpose</td>
-		<td>@serviceLog.getExecutionStartTime</td>
-		<td>@serviceLog.getExecutionEndTime</td>
+		<tr>
+		<td><font size="2">@serviceLog.getServiceName</font></td>
+		<td><font size="2">@serviceLog.getUserName</font></td>
+		<td><font size="2">@serviceLog.getPurpose</font></td>
+		<td><font size="2">@serviceLog.getExecutionStartTime</font></td>
+		<td><font size="2">@serviceLog.getExecutionEndTime</font></td>
+		<td><font size="2">@serviceLog.getDataSetStartTime</font></td>
+		<td><font size="2">@serviceLog.getDataSetEndTime</font></td>
 		<td>
-			@form(routes.Application.home()){ <input
-			name="serviceId" class="hidden" type="hidden"
-			value="@serviceLog.getServiceId"> <input name="logId"
-			class="hidden" type="hidden"
-			value="@serviceLog.getServiceConfigurationId"> <input
-			type="submit" class="btn btn-link" value="see detail"> }
+		@form(routes.ServiceExecutionLogController.getConfigurationByConfId()){
+		<input
+			name="logId" class="hidden" type="hidden"
+			value="@serviceLog.getId">
+		<input
+			type="submit" class="btn btn-link" value="see detail">
+		}
 		</td>
-	</tr>
+		</tr>
 	}
-</table>
+	</table>
 }
