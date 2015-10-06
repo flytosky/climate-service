@@ -38,6 +38,7 @@ GET 		/getConfigurationByConfId                               controllers.Servic
 # Dataset
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
+GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
 
 # Analytics
 GET     /serviceLogRecommend                        controllers.AnalyticsController.getRecommend()

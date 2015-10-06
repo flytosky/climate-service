@@ -3,160 +3,514 @@
 @import helper._
 
 @scripts = {
-	
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 	<script type="text/javascript">
 	$(function() {
 	    var availableDataSetNames = [
-	      "ARGO Ocean Temperature",
-	      "ARGO Ocean Salinity",
-	      "GRACE equivalent water height over land",
-	      "GRACE equivalent water height over ocean",
-	      "NOAA Global Ocean Heat Content",
-	      "AIRS Water Vapor",
-	      "AIRS Air Temperature",
-	      "MLS Water Vapor",
-	      "MLS Air Temperature	NASA",
-	      "MODIS Total Area Cloud Fraction",
-	      "TRMM precipitation",
-	      "GPCP precipitation",
-	      "AMSRE sea surface temperature",
-	      "QuikSCAT Eastward Near-Surfaces Wind",
-	      "QuikSCAT Northward Near-Surface Wind",
-	      "QuikSCAT Near-Surface Wind Speed",
-	      "AVISO sea surface height",
-	      "MODIS leaf area index",
-	      "CERES Radiation"
-	    ];
-	    var availableAgency = [
-	       "NOAA",
-	       "NASA"
-	    ];
-	    
-	    var availableInstruments = [
-	        "ARGO",
-	        "GRACE",
-	        "NODC",
-	        "AIRS",
-	        "MLS",
-	        "MODIS",
-	        "TRMM",
-	        "GPCP",
-	        "AMSRE",
-	        "QuikSCAT",
-	        "AVISO",
-	        "CERES"
-	    ];
-	    var availablePhysicalVariable = [
-	        "Ocean temperature",
-	        "Ocean Salinity",
-	         "Equivalent Water Height Over Land",
-	         "Equivalent water height over ocean",
-	         "Ocean Heat Content Anomaly within 700 m Depth",
-	        "Ocean Heat Content Anomaly within 2000 m Depth",
-	        "Specific Humidity",
-	        "Air Temperature",
-	        "Specific Humidity",
-	        "Air Temperature",
-	        "Total Cloud Fraction",
-	        "Precipitation Flux",
-	        "Sea Surface Temperature",
-	        "Eastward Near-Surface Wind",
-	        "Northward Near-Surface Wind",
-	        "Near-Surface Wind Speed",
-	        "Sea Surface Height",
-	        "Leaf Area Index",
-	        "Surface Downwelling Longwave Radiation",
-	        "Surface Upwelling Shortwave Radiation",
-	        "Surface Downwelling Clear-Sky Longwave Radiation",
-	        "Surface Downwelling Shortwave Radiation",
-	        "Surface Upwelling Clear-Sky Shortwave Radiation",
-	        "Surface Upwelling Longwave Radiation",
-	        "Surface Downwelling Clear-Sky Shortwave Radiation",
-	        "TOA Outgoing Clear-Sky Longwave Radiation",
-	        "TOA Outgoing Shortwave Radiation",
-	        "TOA Incident Shortwave Radiation",
-	        "TOA Outgoing Clear-Sky Shortwave Radiation",
-	        "TOA Outgoing Longwave Radiation"
-	    ];
-	    var availableGridDimension = [
-	       "3D",
-	       "2D"
-	    ];
-	    $( "#dataSetName" ).autocomplete({
-	      source: availableDataSetNames
-	    });
-	    $( "#agency" ).autocomplete({
-		  source: availableAgency
-		});
-	    $( "#instrument" ).autocomplete({
-		  source: availableInstruments
-		});
-	    $( "#physicalVariable" ).autocomplete({
-		  source: availablePhysicalVariable
-		});
-	    $( "#gridDimension" ).autocomplete({
-		  source: availableGridDimension
-		});
-	  });
-	
-	$(document).ready(function(){
-		$( "#preview" ).click(function() {
-			var target = document.getElementById("show");
-			if(target.style.display=="none"){
-				target.style.display="block";
-				$( "#preview" ).text("Hide");
-				var dataS = $("#dataSetName").val();
-				var varName = $("#agency").val();
-				var exectionPurpose = $("#instrument").val();
-				var userId = $("#physicalVariable").val();
-				var startTime = $("#gridDimension").val();
+	                "AIRS Air Temperature",
+					"AIRS Near-Surface Air Temperature",
+					"AIRS Specific Humidity",
+					"AMSRE Sea Surface Temperature",
+					"ARGO Ocean Salinity",
+					"ARGO Ocean Temperature",
+					"AVISO Sea Surface Height",
+					"CAM5 Air Temperature",
+					"CAM5 Cloud Ice Water Content",
+					"CAM5 Cloud Liquid Water Content",
+					"CAM5 Leaf Area Index",
+					"CAM5 Near-Surface Wind Speed",
+					"CAM5 Precipitation Flux",
+					"CAM5 Relative Humidity",
+					"CAM5 Sea Surface Height",
+					"CAM5 Sea Surface Temperature",
+					"CAM5 Specific Humidity",
+					"CAM5 Surface Downwelling Clear-Sky Shortwave Radiation",
+					"CAM5 Surface Downwelling Longwave Radiation",
+					"CAM5 Surface Downwelling Shortwave Radiation",
+					"CAM5 Surface Temperature",
+					"CAM5 Surface Upwelling Clear-Sky Shortwave Radiation",
+					"CAM5 Surface Upwelling Longwave Radiation",
+					"CAM5 Surface Upwelling Shortwave Radiation",
+					"CAM5 TOA Incident Shortwave Radiation",
+					"CAM5 TOA Outgoing Clear-Sky Longwave Radiation",
+					"CAM5 TOA Outgoing Clear-Sky Shortwave Radiation",
+					"CAM5 TOA Outgoing Longwave Radiation",
+					"CAM5 TOA Outgoing Shortwave Radiation",
+					"CAM5 Total Cloud Fraction",
+					"CAM5 Vertical Wind Velocity",
+					"CANAM4 Air Temperature",
+					"CANAM4 Cloud Ice Water Content",
+					"CANAM4 Cloud Liquid Water Content",
+					"CANAM4 Eastward Near-Surface Wind",
+					"CANAM4 Near-Surface Air Temperature",
+					"CANAM4 Near-Surface Relative Humidity",
+					"CANAM4 Near-Surface Wind Speed",
+					"CANAM4 Northward Near-Surface Wind",
+					"CANAM4 Precipitation Flux",
+					"CANAM4 Relative Humidity",
+					"CANAM4 Specific Humidity",
+					"CANAM4 Surface Downwelling Clear-Sky Longwave Radiation",
+					"CANAM4 Surface Downwelling Clear-Sky Shortwave Radiation",
+					"CANAM4 Surface Downwelling Longwave Radiation",
+					"CANAM4 Surface Downwelling Shortwave Radiation",
+					"CANAM4 Surface Temperature",
+					"CANAM4 Surface Upwelling Clear-Sky Shortwave Radiation",
+					"CANAM4 Surface Upwelling Longwave Radiation",
+					"CANAM4 Surface Upwelling Shortwave Radiation",
+					"CANAM4 TOA Incident Shortwave Radiation",
+					"CANAM4 TOA Outgoing Clear-Sky Longwave Radiation",
+					"CANAM4 TOA Outgoing Clear-Sky Shortwave Radiation",
+					"CANAM4 TOA Outgoing Longwave Radiation",
+					"CANAM4 TOA Outgoing Shortwave Radiation",
+					"CANAM4 Total Cloud Fraction",
+					"CANAM4 Vertical Wind Velocity",
+					"CERES Surface Downwelling Clear-Sky Longwave Radiation",
+					"CERES Surface Downwelling Clear-Sky Shortwave Radiation",
+					"CERES Surface Downwelling Longwave Radiation",
+					"CERES Surface Downwelling Shortwave Radiation",
+					"CERES Surface Upwelling Clear-Sky Shortwave Radiation",
+					"CERES Surface Upwelling Longwave Radiation",
+					"CERES Surface Upwelling Shortwave Radiation",
+					"CERES TOA Incident Shortwave Radiation",
+					"CERES TOA Outgoing Clear-Sky Longwave Radiation",
+					"CERES TOA Outgoing Clear-Sky Shortwave Radiation",
+					"CERES TOA Outgoing Longwave Radiation",
+					"CERES TOA Outgoing Shortwave Radiation",
+					"CM3 Air Temperature",
+					"CM3 Cloud Ice Water Content",
+					"CM3 Cloud Liquid Water Content",
+					"CM3 Eastward Near-Surface Wind",
+					"CM3 Near-Surface Wind Speed",
+					"CM3 Northward Near-Surface Wind",
+					"CM3 Precipitation Flux",
+					"CM3 Relative Humidity",
+					"CM3 Specific Humidity",
+					"CM3 Surface Downwelling Clear-Sky Longwave Radiation",
+					"CM3 Surface Downwelling Clear-Sky Shortwave Radiation",
+					"CM3 Surface Downwelling Longwave Radiation",
+					"CM3 Surface Downwelling Shortwave Radiation",
+					"CM3 Surface Temperature",
+					"CM3 Surface Upwelling Clear-Sky Shortwave Radiation",
+					"CM3 Surface Upwelling Longwave Radiation",
+					"CM3 Surface Upwelling Shortwave Radiation",
+					"CM3 TOA Incident Shortwave Radiation",
+					"CM3 TOA Outgoing Clear-Sky Longwave Radiation",
+					"CM3 TOA Outgoing Clear-Sky Shortwave Radiation",
+					"CM3 TOA Outgoing Longwave Radiation",
+					"CM3 TOA Outgoing Shortwave Radiation",
+					"CM3 Total Cloud Fraction",
+					"CM3 Vertical Wind Velocity",
+					"CM5A-LR Air Temperature",
+					"CM5A-LR Cloud Ice Water Content",
+					"CM5A-LR Cloud Liquid Water Content",
+					"CM5A-LR Eastward Near-Surface Wind",
+					"CM5A-LR Leaf Area Index",
+					"CM5A-LR Near-Surface Wind Speed",
+					"CM5A-LR Northward Near-Surface Wind",
+					"CM5A-LR Precipitation Flux",
+					"CM5A-LR Specific Humidity",
+					"CM5A-LR Surface Downwelling Clear-Sky Longwave Radiation",
+					"CM5A-LR Surface Downwelling Clear-Sky Shortwave Radiation",
+					"CM5A-LR Surface Downwelling Longwave Radiation",
+					"CM5A-LR Surface Downwelling Shortwave Radiation",
+					"CM5A-LR Surface Temperature",
+					"CM5A-LR Surface Upwelling Clear-Sky Shortwave Radiation",
+					"CM5A-LR Surface Upwelling Longwave Radiation",
+					"CM5A-LR Surface Upwelling Shortwave Radiation",
+					"CM5A-LR TOA Incident Shortwave Radiation",
+					"CM5A-LR TOA Outgoing Clear-Sky Longwave Radiation",
+					"CM5A-LR TOA Outgoing Clear-Sky Shortwave Radiation",
+					"CM5A-LR TOA Outgoing Longwave Radiation",
+					"CM5A-LR TOA Outgoing Shortwave Radiation",
+					"CM5A-LR Total Cloud Fraction",
+					"E2-H Air Temperature",
+					"E2-H Cloud Ice Water Content",
+					"E2-H Cloud Liquid Water Content",
+					"E2-H Eastward Near-Surface Wind",
+					"E2-H Near-Surface Wind Speed",
+					"E2-H Northward Near-Surface Wind",
+					"E2-H Precipitation Flux",
+					"E2-H Relative Humidity",
+					"E2-H Sea Surface Temperature",
+					"E2-H Specific Humidity",
+					"E2-H Surface Downwelling Clear-Sky Longwave Radiation",
+					"E2-H Surface Downwelling Clear-Sky Shortwave Radiation",
+					"E2-H Surface Downwelling Longwave Radiation",
+					"E2-H Surface Downwelling Shortwave Radiation",
+					"E2-H Surface Temperature",
+					"E2-H Surface Upwelling Clear-Sky Shortwave Radiation",
+					"E2-H Surface Upwelling Longwave Radiation",
+					"E2-H Surface Upwelling Shortwave Radiation",
+					"E2-H TOA Incident Shortwave Radiation",
+					"E2-H TOA Outgoing Clear-Sky Longwave Radiation",
+					"E2-H TOA Outgoing Clear-Sky Shortwave Radiation",
+					"E2-H TOA Outgoing Longwave Radiation",
+					"E2-H TOA Outgoing Shortwave Radiation",
+					"E2-H Total Cloud Fraction",
+					"E2-H Vertical Wind Velocity",
+					"E2-R Air Temperature",
+					"E2-R Cloud Ice Water Content",
+					"E2-R Cloud Liquid Water Content",
+					"E2-R Eastward Near-Surface Wind",
+					"E2-R Near-Surface Wind Speed",
+					"E2-R Northward Near-Surface Wind",
+					"E2-R Precipitation Flux",
+					"E2-R Relative Humidity",
+					"E2-R Sea Surface Height",
+					"E2-R Sea Surface Temperature",
+					"E2-R Specific Humidity",
+					"E2-R Surface Downwelling Clear-Sky Longwave Radiation",
+					"E2-R Surface Downwelling Clear-Sky Shortwave Radiation",
+					"E2-R Surface Downwelling Shortwave Radiation",
+					"E2-R Surface Temperature",
+					"E2-R Surface Upwelling Clear-Sky Shortwave Radiation",
+					"E2-R Surface Upwelling Longwave Radiation",
+					"E2-R Surface Upwelling Shortwave Radiation",
+					"E2-R TOA Incident Shortwave Radiation",
+					"E2-R TOA Outgoing Clear-Sky Longwave Radiation",
+					"E2-R TOA Outgoing Clear-Sky Shortwave Radiation",
+					"E2-R TOA Outgoing Longwave Radiation",
+					"E2-R TOA Outgoing Shortwave Radiation",
+					"E2-R Total Cloud Fraction",
+					"E2-R Vertical Wind Velocity",
+					"ESM2G Air Temperature",
+					"ESM2G Cloud Ice Water Content",
+					"ESM2G Cloud Liquid Water Content",
+					"ESM2G Eastward Near-Surface Wind",
+					"ESM2G Leaf Area Index",
+					"ESM2G Near-Surface Wind Speed",
+					"ESM2G Northward Near-Surface Wind",
+					"ESM2G Precipitation Flux",
+					"ESM2G Relative Humidity",
+					"ESM2G Sea Surface Height",
+					"ESM2G Sea Surface Temperature",
+					"ESM2G Specific Humidity",
+					"ESM2G Surface Downwelling Clear-Sky Longwave Radiation",
+					"ESM2G Surface Downwelling Longwave Radiation",
+					"ESM2G Surface Temperature",
+					"ESM2G Surface Upwelling Longwave Radiation",
+					"ESM2G TOA Incident Shortwave Radiation",
+					"ESM2G TOA Outgoing Clear-Sky Longwave Radiation",
+					"ESM2G TOA Outgoing Clear-Sky Shortwave Radiation",
+					"ESM2G TOA Outgoing Longwave Radiation",
+					"ESM2G TOA Outgoing Shortwave Radiation",
+					"ESM2G Total Cloud Fraction",
+					"ESM2G Vertical Wind Velocity",
+					"GPCP Precipitation Flux",
+					"GRACE Equivalent Water Height Over Land",
+					"GRACE Equivalent Water Height Over Ocean",
+					"HadGEM2-A Air Temperature",
+					"HadGEM2-A Cloud Ice Water Content",
+					"HadGEM2-A Cloud Liquid Water Content",
+					"HadGEM2-A Eastward Near-Surface Wind",
+					"HadGEM2-A Near-Surface Relative Humidity",
+					"HadGEM2-A Near-Surface Wind Speed",
+					"HadGEM2-A Northward Near-Surface Wind",
+					"HadGEM2-A Precipitation Flux",
+					"HadGEM2-A Relative Humidity",
+					"HadGEM2-A Specific Humidity",
+					"HadGEM2-A Surface Downwelling Clear-Sky Longwave Radiation",
+					"HadGEM2-A Surface Downwelling Clear-Sky Shortwave Radiation",
+					"HadGEM2-A Surface Downwelling Longwave Radiation",
+					"HadGEM2-A Surface Downwelling Shortwave Radiation",
+					"HadGEM2-A Surface Temperature",
+					"HadGEM2-A Surface Upwelling Clear-Sky Shortwave Radiation",
+					"HadGEM2-A Surface Upwelling Longwave Radiation",
+					"HadGEM2-A Surface Upwelling Shortwave Radiation",
+					"HadGEM2-A TOA Incident Shortwave Radiation",
+					"HadGEM2-A TOA Outgoing Clear-Sky Longwave Radiation",
+					"HadGEM2-A TOA Outgoing Clear-Sky Shortwave Radiation",
+					"HadGEM2-A TOA Outgoing Longwave Radiation",
+					"HadGEM2-A TOA Outgoing Shortwave Radiation",
+					"HadGEM2-A Total Cloud Fraction",
+					"HadGEM2-A Vertical Wind Velocity",
+					"HadGEM2-ES Air Temperature",
+					"HadGEM2-ES Cloud Ice Water Content",
+					"HadGEM2-ES Cloud Liquid Water Content",
+					"HadGEM2-ES Eastward Near-Surface Wind",
+					"HadGEM2-ES Leaf Area Index",
+					"HadGEM2-ES Near-Surface Wind Speed",
+					"HadGEM2-ES Northward Near-Surface Wind",
+					"HadGEM2-ES Precipitation Flux",
+					"HadGEM2-ES Relative Humidity",
+					"HadGEM2-ES Sea Surface Height",
+					"HadGEM2-ES Sea Surface Temperature",
+					"HadGEM2-ES Specific Humidity",
+					"HadGEM2-ES Surface Downwelling Clear-Sky Longwave Radiation",
+					"HadGEM2-ES Surface Downwelling Clear-Sky Shortwave Radiation",
+					"HadGEM2-ES Surface Downwelling Longwave Radiation",
+					"HadGEM2-ES Surface Downwelling Shortwave Radiation",
+					"HadGEM2-ES Surface Temperature",
+					"HadGEM2-ES Surface Upwelling Clear-Sky Shortwave Radiation",
+					"HadGEM2-ES Surface Upwelling Longwave Radiation",
+					"HadGEM2-ES Surface Upwelling Shortwave Radiation",
+					"HadGEM2-ES TOA Incident Shortwave Radiation",
+					"HadGEM2-ES TOA Outgoing Clear-Sky Longwave Radiation",
+					"HadGEM2-ES TOA Outgoing Clear-Sky Shortwave Radiation",
+					"HadGEM2-ES TOA Outgoing Longwave Radiation",
+					"HadGEM2-ES TOA Outgoing Shortwave Radiation",
+					"HadGEM2-ES Total Cloud Fraction",
+					"HadGEM2-ES Vertical Wind Velocity",
+					"MIROC5 Air Temperature", "MIROC5 Cloud Ice Water Content",
+					"MIROC5 Cloud Liquid Water Content",
+					"MIROC5 Eastward Near-Surface Wind",
+					"MIROC5 Leaf Area Index", "MIROC5 Near-Surface Wind Speed",
+					"MIROC5 Northward Near-Surface Wind",
+					"MIROC5 Precipitation Flux", "MIROC5 Relative Humidity",
+					"MIROC5 Specific Humidity",
+					"MIROC5 Surface Downwelling Clear-Sky Longwave Radiation",
+					"MIROC5 Surface Downwelling Clear-Sky Shortwave Radiation",
+					"MIROC5 Surface Downwelling Longwave Radiation",
+					"MIROC5 Surface Downwelling Shortwave Radiation",
+					"MIROC5 Surface Temperature",
+					"MIROC5 Surface Upwelling Clear-Sky Shortwave Radiation",
+					"MIROC5 Surface Upwelling Longwave Radiation",
+					"MIROC5 Surface Upwelling Shortwave Radiation",
+					"MIROC5 TOA Incident Shortwave Radiation",
+					"MIROC5 TOA Outgoing Clear-Sky Longwave Radiation",
+					"MIROC5 TOA Outgoing Clear-Sky Shortwave Radiation",
+					"MIROC5 TOA Outgoing Longwave Radiation",
+					"MIROC5 TOA Outgoing Shortwave Radiation",
+					"MIROC5 Total Cloud Fraction",
+					"MIROC5 Vertical Wind Velocity", "MK3.6 Air Temperature",
+					"MK3.6 Cloud Ice Water Content",
+					"MK3.6 Cloud Liquid Water Content",
+					"MK3.6 Eastward Near-Surface Wind",
+					"MK3.6 Near-Surface Wind Speed",
+					"MK3.6 Northward Near-Surface Wind",
+					"MK3.6 Precipitation Flux", "MK3.6 Relative Humidity",
+					"MK3.6 Specific Humidity",
+					"MK3.6 Surface Downwelling Clear-Sky Longwave Radiation",
+					"MK3.6 Surface Downwelling Clear-Sky Shortwave Radiation",
+					"MK3.6 Surface Downwelling Longwave Radiation",
+					"MK3.6 Surface Downwelling Shortwave Radiation",
+					"MK3.6 Surface Temperature",
+					"MK3.6 Surface Upwelling Clear-Sky Shortwave Radiation",
+					"MK3.6 Surface Upwelling Longwave Radiation",
+					"MK3.6 Surface Upwelling Shortwave Radiation",
+					"MK3.6 TOA Incident Shortwave Radiation",
+					"MK3.6 TOA Outgoing Clear-Sky Longwave Radiation",
+					"MK3.6 TOA Outgoing Clear-Sky Shortwave Radiation",
+					"MK3.6 TOA Outgoing Longwave Radiation",
+					"MK3.6 TOA Outgoing Shortwave Radiation",
+					"MK3.6 Total Cloud Fraction",
+					"MK3.6 Vertical Wind Velocity", "MLS Air Temperature",
+					"MLS Specific Humidity", "MODIS Leaf Area Index",
+					"MODIS Total Cloud Fraction",
+					"NODC Ocean Heat Content Anomaly within 2000 m Depth",
+					"NODC Ocean Heat Content Anomaly within 700 m Depth",
+					"NORESM Air Temperature", "NORESM Cloud Ice Water Content",
+					"NORESM Cloud Liquid Water Content",
+					"NORESM Eastward Near-Surface Wind",
+					"NORESM Leaf Area Index",
+					"NORESM Northward Near-Surface Wind",
+					"NORESM Precipitation Flux", "NORESM Relative Humidity",
+					"NORESM Sea Surface Height",
+					"NORESM Sea Surface Temperature",
+					"NORESM Specific Humidity",
+					"NORESM Surface Downwelling Clear-Sky Longwave Radiation",
+					"NORESM Surface Downwelling Clear-Sky Shortwave Radiation",
+					"NORESM Surface Downwelling Longwave Radiation",
+					"NORESM Surface Downwelling Shortwave Radiation",
+					"NORESM Surface Temperature",
+					"NORESM Surface Upwelling Clear-Sky Shortwave Radiation",
+					"NORESM Surface Upwelling Longwave Radiation",
+					"NORESM Surface Upwelling Shortwave Radiation",
+					"NORESM TOA Incident Shortwave Radiation",
+					"NORESM TOA Outgoing Clear-Sky Longwave Radiation",
+					"NORESM TOA Outgoing Clear-Sky Shortwave Radiation",
+					"NORESM TOA Outgoing Longwave Radiation",
+					"NORESM TOA Outgoing Shortwave Radiation",
+					"NORESM Total Cloud Fraction",
+					"NORESM Vertical Wind Velocity",
+					"QuikSCAT Eastward Near-Surface Wind",
+					"QuikSCAT Near-Surface Wind Speed",
+					"QuikSCAT Northward Near-Surface Wind",
+					"TRMM Precipitation Flux",
+					"interim Eastward Near-Surface Wind",
+					"interim Near-Surface Wind Speed",
+					"interim Northward Near-Surface Wind",
+					"interim Relative Humidity",
+					"interim Sea Surface Temperature",
+					"interim Total Cloud Fraction",
+					"interim Vertical Wind Velocity" ];
+			
+			var availableAgency = [ "ARGO", "CCCMA", "CSIRO", "ECMWF",
+					"Flux,kg", "GFDL", "GFDL", "GISS", "IPSL", "MIROC", "NASA",
+					"NASA", "NCAR", "NCC", "NOAA", "UKMO", "UKMO" ];
 
-				if(dataS!=""){
-					$("#content").append(" Data Set Name = "+dataS);	
-				}
-				if(varName!="" && varName!=null){
-					$("#content").append(" Agency = "+varName);	
-				}
-				if(exectionPurpose!="" && exectionPurpose!=null){
-					$("#content").append(" Instrument = "+exectionPurpose);	
-				}
-				if(userId!="" && userId!=null){
-					$("#content").append(" Physical Variable = "+userId);	
-				}
-				if(startTime!="" && startTime!=null){
-					$("#content").append(" Grid Dimension = "+startTime);	
-				}
-				
-			}else {
-				$("#content").val('');	
-                target.style.display="none";
-                $( "#preview" ).text("Preview");
-            }
+			var availableInstruments = [ "AIRS", "AMSRE", "ARGO", "AVISO",
+					"CAM5", "CANAM4", "CERES", "CM3", "CM5A-LR", "E2-H",
+					"E2-R", "ESM2G", "GPCP", "GRACE", "HadGEM2-A",
+					"HadGEM2-ES", "MIROC5", "MK3.6", "MLS", "MODIS", "NODC",
+					"NORESM", "QuikSCAT", "TRMM", "interim" ];
+
+		var availablePhysicalVariable = [ "Air Temperature",
+					"Cloud Ice Water Content", "Cloud Liquid Water Content",
+					"Eastward Near-Surface Wind",
+					"Equivalent Water Height Over Land",
+					"Equivalent Water Height Over Ocean", "Leaf Area Index",
+					"Near-Surface Air Temperature",
+					"Near-Surface Relative Humidity",
+					"Near-Surface Wind Speed", "Northward Near-Surface Wind",
+					"Ocean Heat Content Anomaly within 2000 m Depth",
+					"Ocean Heat Content Anomaly within 700 m Depth",
+					"Ocean Salinity", "Ocean Temperature",
+					"Precipitation Flux", "Precipitation", "Relative Humidity",
+					"Sea Surface Height", "Sea Surface Temperature",
+					"Specific Humidity",
+					"Surface Downwelling Clear-Sky Longwave Radiation",
+					"Surface Downwelling Clear-Sky Shortwave Radiation",
+					"Surface Downwelling Longwave Radiation",
+					"Surface Downwelling Shortwave Radiation",
+					"Surface Temperature",
+					"Surface Upwelling Clear-Sky Shortwave Radiation",
+					"Surface Upwelling Longwave Radiation",
+					"Surface Upwelling Shortwave Radiation",
+					"TOA Incident Shortwave Radiation",
+					"TOA Outgoing Clear-Sky Longwave Radiation",
+					"TOA Outgoing Clear-Sky Shortwave Radiation",
+					"TOA Outgoing Longwave Radiation",
+					"TOA Outgoing Shortwave Radiation", "Total Cloud Fraction",
+					"Vertical Wind Velocity" ];
+			var availableGridDimension = [ "2D", "3D" ];
+			$("#dataSetName").autocomplete({
+				source : availableDataSetNames
+			});
+			$("#agency").autocomplete({
+				source : availableAgency
+			});
+			$("#instrument").autocomplete({
+				source : availableInstruments
+			});
+			$("#physicalVariable").autocomplete({
+				source : availablePhysicalVariable
+			});
+			$("#gridDimension").autocomplete({
+				source : availableGridDimension
+			});
 		});
-	});
-		
+
+		$(document)
+				.ready(
+						function() {
+							$("#preview")
+									.click(
+											function() {
+												var target = document
+														.getElementById("show");
+												if (target.style.display == "none") {
+													target.style.display = "block";
+													$("#preview").text("Hide");
+													var dataSetName = $(
+															"#dataSetName")
+															.val();
+													var agency = $("#agency")
+															.val();
+													var instrument = $(
+															"#instrument")
+															.val();
+													var physicalVariable = $(
+															"#physicalVariable")
+															.val();
+													var gridDimension = $(
+															"#gridDimension")
+															.val();
+													var dataSetStartTime = $(
+															"#dataSetStartTime")
+															.val();
+													var dataSetEndTime = $(
+															"#dataSetEndTime")
+															.val();
+
+													if (dataSetName != "") {
+														$("#content")
+																.append(
+																		" Dataset Name = "
+																				+ dataSetName);
+													}
+													if (agency != ""
+															&& agency != null) {
+														$("#content")
+																.append(
+																		" Agency = "
+																				+ agency);
+													}
+													if (instrument != ""
+															&& instrument != null) {
+														$("#content")
+																.append(
+																		" Instrument = "
+																				+ instrument);
+													}
+													if (physicalVariable != ""
+															&& physicalVariable != null) {
+														$("#content")
+																.append(
+																		" Physical Variable = "
+																				+ physicalVariable);
+													}
+													if (gridDimension != ""
+															&& gridDimension != null) {
+														$("#content")
+																.append(
+																		" Grid Dimension = "
+																				+ gridDimension);
+													}
+													if (dataSetStartTime != ""
+															&& dataSetStartTime != null) {
+														$("#content")
+																.append(
+																		" Dataset Start Time = "
+																				+ dataSetStartTime);
+													}
+													if (dataSetEndTime != ""
+															&& dataSetEndTime != null) {
+														$("#content")
+																.append(
+																		" Dataset End Time = "
+																				+ dataSetEndTime);
+													}
+
+												} else {
+													$("#content").val('');
+													target.style.display = "none";
+													$("#preview").text(
+															"Preview");
+												}
+											});
+						});
 	</script>
 }
 
-@main("Service Logs", scripts){
+@main("Search Dataset", scripts){ 
 	 
-	 
-    <h1 style="margin-left:500px">Search DataSet</h1>
+    <h1 style="margin-left:490px">Search Dataset</h1>
+    @helper.form(routes.DatasetController.getSearchResult()) {
     	<div class="ui-widget col-sm-offset-3 col-sm-7">
     	<div class = "form-group">
-    		@inputText(dataSetForm("Data Set Name"), 'id -> "dataSetName", '_label -> Messages("Data Set Name"), 'placeholder -> "ARGO Ocean Temperature", 'class -> "form-control", 'size->70) 
+    		@inputText(dataSetForm("Dataset Name"), 'class -> "form-control", 'id -> "dataSetName", '_label -> Messages("Dataset Name"), 'placeholder -> "ARGO Ocean Temperature", 'size->70) 
     	</div>
     	<div class = "form-group">
-    		@inputText(dataSetForm("Agency"), 'id -> "agency", '_label -> Messages("Agency"), 'placeholder -> "NOAA", 'class -> "form-control", 'size->70) 
+    		@inputText(dataSetForm("Agency"), 'class -> "form-control", 'id -> "agency", '_label -> Messages("Agency"), 'placeholder -> "NOAA", 'size->70) 
     	</div>
     	<div class = "form-group">
-    		@inputText(dataSetForm("Instrument"), 'id -> "instrument", '_label -> Messages("Instrument"), 'placeholder -> "ARGO", 'class -> "form-control", 'size->70) 
+    		@inputText(dataSetForm("Instrument"), 'class -> "form-control", 'id -> "instrument", '_label -> Messages("Instrument"), 'placeholder -> "ARGO", 'size->70) 
        	</div>
        	<div class = "form-group">
-       		@inputText(dataSetForm("Physical Variable"), 'id -> "physicalVariable", '_label -> Messages("Physical Variable"), 'placeholder -> "Ocean temperature", 'class -> "form-control", 'size->70)
+       		@inputText(dataSetForm("Physical Variable"), 'class -> "form-control", 'id -> "physicalVariable", '_label -> Messages("Physical Variable"), 'placeholder -> "Ocean temperature", 'size->70)
 	    </div>
 	    <div class = "form-group">
-	    	@inputText(dataSetForm("Grid Dimension"), 'id -> "gridDimension", '_label -> Messages("Grid Dimension"), 'placeholder -> "3D", 'class -> "form-control", 'size->70)
+	    	@inputText(dataSetForm("Grid Dimension"), 'class -> "form-control", 'id -> "gridDimension", '_label -> Messages("Grids Dimension"), 'placeholder -> "3D", 'size->70)
+	    	
+	    </div>
+	    <div class = "form-group">
+	    	@inputText(dataSetForm("Dataset Start Time"), 'class -> "form-control", 'id -> "dataSetStartTime", '_label -> Messages("Dataset Start Time"), 'placeholder -> "YYYYMM", 'size->70)
+	    	@inputText(dataSetForm("Dataset End Time"), 'class -> "form-control", 'id -> "dataSetEndTime", '_label -> Messages("Dataset End Time"), 'placeholder -> "YYYYMM", 'size->70)
+	    	
 	    	<div id="show" style="display: none;">
 	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
 	    	</div>
@@ -166,5 +520,6 @@
 	    	<input class="btn" type="submit" value="Search">
 	    </div>
 	    </div>
-	   
+	    
+	    }
 	 }
