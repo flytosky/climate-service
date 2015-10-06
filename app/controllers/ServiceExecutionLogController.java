@@ -167,17 +167,7 @@ public class ServiceExecutionLogController extends Controller {
 		// parse the json string into object
 		for (int i = 0; i < serviceLogNode.size(); i++) {
 			JsonNode json = serviceLogNode.path(i);
-			ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
-			newServiceLog.setId(json.get("id").asLong());
-			newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
-			newServiceLog.setPurpose(json.get("purpose").asText());
-			newServiceLog.setUserName(json.get("user").get("firstName").asText()
-					+ " " + json.get("user").get("lastName").asText());
-			newServiceLog.setServiceConfigurationId(json
-					.get("serviceConfiguration").get("id").asText());
-			newServiceLog.setExecutionStartTime(json.findPath(
-					"executionStartTime").asText());
-			newServiceLog.setExecutionEndTime(json.findPath("executionEndTime").asText());
+			ServiceExecutionLog newServiceLog = deserializeJsonToServiceLog(json);
 			serviceLogList.add(newServiceLog);
 		}		
 		return ok(serviceLog.render(serviceLogList, serviceLogForm));
