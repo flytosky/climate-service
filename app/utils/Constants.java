@@ -1,4 +1,5 @@
 package utils;
+
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
@@ -39,6 +40,7 @@ public class Constants {
 
 	// dataset
 	public static final String GET_ALL_DATASETS = "/dataset/getAllDatasets/json";
+	public static final String DATASET_QUERY = "/dataset/queryDataset";
 	
 	// users
 	public static final String GET_ALL_USERS = "/users/getAllUsers/json";

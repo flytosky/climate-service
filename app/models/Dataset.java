@@ -41,6 +41,8 @@ public class Dataset {
 	private String dataSourceInputParameterToCallScienceApplicationCode;
 	private String variableNameInputParameterToCallScienceApplicationCode;
 	private String comment;
+	private String startTime;
+	private String endTime;
 
 	public Dataset() {
 	}
@@ -227,6 +229,22 @@ public class Dataset {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	@Override
