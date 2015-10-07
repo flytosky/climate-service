@@ -4,18 +4,21 @@
 @main("All Climate Services") {
 
     <h1>@climateServices.size() Climate Services</h1>
-		<table class="table table-striped table-bordered table-condensed ex2">
+		<table class="table table-striped table-bordered table-condensed ex2 tablesorter" id = "csTable">
+	<thead>
 	<tr>
-		<td class="col-md-2">Climate Service Name</td>
-		<td class="col-md-4">Purpose</td>
-		<td class="col-md-4">URL</td>
-		<td class="col-md-2">Scenario</td>
-		<td class="col-md-2">Version No</td>
-		<td class="col-md-2">Root Service Id</td>
+		<th style = "vertical-align: top;" class="col-md-2">Climate Service Name</th>
+		<th style = "vertical-align: top;" class="col-md-4">Purpose</th>
+		<th style = "vertical-align: top;" class="col-md-4">URL</th>
+		<th style = "vertical-align: top;" class="col-md-2">Scenario</th>
+		<th style = "vertical-align: top;" class="col-md-2">Version No</th>
+		<th style = "vertical-align: top;" class="col-md-2">Root Service Id</th>
 		 @if(true){
-			<td class="col-md-3">Operation</td> 
+			<th style = "vertical-align: top;" class="col-md-3">Operation</th> 
 	     } 
 	</tr>
+	</thead>
+	<tbody>
 	@for(climateService <- climateServices) {
 	<tr>
 		<td><a href = "@climateService.getUrl()">@climateService.getName()</a></td>
@@ -40,5 +43,6 @@
 	
 	</tr>
 	}
+	</tbody>
     </table>
 }

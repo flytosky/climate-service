@@ -57,23 +57,7 @@ public class DatasetController extends Controller {
 		// parse the json string into object
 		for (int i = 0; i < dataSetsNode.size(); i++) {
 			JsonNode json = dataSetsNode.path(i);
-			Dataset oneDataset = new Dataset();
-			oneDataset.setId(json.get("id").asLong());
-			oneDataset.setName(json.get("name").asText());
-			oneDataset.setAgencyId(json.get("agencyId").asText());
-			oneDataset.setInstrument(json.get("instrument").get("name").asText());
-			oneDataset.setPhysicalVariable(json.get("physicalVariable").asText());
-			oneDataset.setCMIP5VarName(json.get("CMIP5VarName").asText());
-			oneDataset.setUnits(json.get("units").asText());
-			oneDataset.setGridDimension(json.get("gridDimension").asText());
-			oneDataset.setSource(json.get("source").asText());
-			oneDataset.setStatus(json.get("status").asText());
-			oneDataset.setResponsiblePerson(json.get("responsiblePerson").asText());
-			oneDataset.setComment(json.get("comment").asText());
-			oneDataset.setDataSourceNameinWebInterface(json.get("dataSourceNameinWebInterface").asText());
-			oneDataset.setVariableNameInWebInterface(json.get("variableNameInWebInterface").asText());
-			oneDataset.setDataSourceInputParameterToCallScienceApplicationCode(json.get("dataSourceInputParameterToCallScienceApplicationCode").asText());
-			oneDataset.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
+			Dataset oneDataset = deserializeJsonToDataSet(json);
 			dataSetsList.add(oneDataset);
 		}
 
