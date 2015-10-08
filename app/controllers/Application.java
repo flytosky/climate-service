@@ -22,8 +22,7 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	public static Form<Login> loginForm = Form
-			.form(Login.class);
+	//public static Form<Login> loginForm = Form.form(Login.class);
 	
 	final static Form<User> userForm = Form
 			.form(User.class);
@@ -53,7 +52,7 @@ public class Application extends Controller {
 	}
 
 	public static Result login() {
-	    return ok(login.render(loginForm));
+	    return ok(login.render(Form.form(Login.class)));
 	}
 	
 	public static Result logout() {
@@ -67,7 +66,7 @@ public class Application extends Controller {
 	}
 	
 	public static Result authenticate() {
-	    loginForm = loginForm.bindFromRequest();
+		Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
 	    if (loginForm.hasErrors()) {
 	        return badRequest(login.render(loginForm));
 	    } else {
