@@ -54,6 +54,7 @@ GET		/scientist/searchUser 					 	controllers.UsersController.searchUser()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
+
 # About
 GET     /aboutUs					controllers.AboutController.aboutUs()
 GET     /aboutProject				controllers.AboutController.aboutProject()

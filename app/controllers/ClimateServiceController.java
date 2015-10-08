@@ -63,12 +63,13 @@ public class ClimateServiceController extends Controller {
 			return ok(allClimateServices.render(climateServicesList,
 				climateServiceForm));
 		}
-
+	
 		// parse the json string into object
 		for (int i = 0; i < climateServicesNode.size(); i++) {
 			JsonNode json = climateServicesNode.path(i);
 			ClimateService oneService = new ClimateService();
 			oneService.setName(json.path("name").asText());
+			System.out.println("****************"+json.path("name").asText());
 			oneService.setPurpose(json.path("purpose").asText());
 			// URL here is the dynamic page url
 			String name = json.path("name").asText();
