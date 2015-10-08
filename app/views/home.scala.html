@@ -1,28 +1,31 @@
+
 @import helper._ 
 
 @main("Home") {
 
 <div class="jumbotron">
 	<div class="row">
-
-		<div class="col-lg-6">
-			</br></br>
-			<img src="/assets/images/JPL_Cover.jpg" height="430" width="500" />
+		<div class="col-lg-5">
+			<img src="/assets/images/main.jpg" height="480" width="330" style="margin:10px 0px"/>
 		</div>
-		<div class="col-lg-6">
-			<h1>Climate Model Analysis</h1>
-			<p> JPL has provided a repository of web services for multi-aspect
-				physics-based and phenomenon-oriented phenomenon-oriented climate
-				model performance evaluation and diagnosis through the comprehensive
-				and synergistic use of multiple observational data, reanalysis data,
-				and model outputs.</p>
-			<p>
-				<a class="btn btn-lg btn-default" href="/tutorial"
-					role="button">Getting Started &raquo;</a>
+		<div class="col-lg-7">
+			<h2>Climate Model Diagnostic Analyzer</h2>
+			<br>
+			<p> A repository of web services for multi-aspect physics-based and 
+				phenomenon-oriented phenomenon-oriented climate model performance
+				evaluation and diagnosis through the comprehensive and synergistic 
+				use of multiple observational data, reanalysis data, and model outputs.
 			</p>
+			<br>
+			<p> This repository is specially customized to support the 2015 JPL Center
+				for Climate Sciences Summer School. The theme of the summer school is 
+				<b>Using Satellite Observations to Advance Climate Models</b>. This repository 
+				provides datasets and analysis tools for the students to use for their 
+				group research projects.
+			</p>
+			
 			<!-- @if(!session.get("username")){ -->
-			<p>We will help you learn the available web services, how to use
-				them, and help you to design your climate analytics workflows.
+			
 			<p>
 				@if(false){ <a class="btn btn-primary" href="climate/register"
 					role="button">Register &raquo;</a> }
