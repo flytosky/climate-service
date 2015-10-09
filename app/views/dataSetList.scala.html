@@ -1,6 +1,7 @@
 @(dataSets: List[Dataset], dataSetForm: play.data.Form[Dataset])
 
 @import helper._
+@import java.math.BigInteger;var k=1;
 
 @scripts = {
 	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
@@ -40,79 +41,114 @@
 	</thead>
 	<tbody>
 -->
-	@for(dataSet <- dataSets){
-	<div class="text-left ">
-			<div class="well col-lg-offset-4 col-lg-4 ">
-				<div class="text-center">
-					<img class="card-img-top" style=" width:60%;"
-						src='@routes.Assets.at("images/data.png")' >
-				</div>
-				<div class="card-block text-center">
-					<h4 class="card-title">@dataSet.getName()</h4>
-					<p class="card-text text-muted">A data set (or dataset) is a collection of data.</p>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><strong>Agency:</strong> <code>@dataSet.getAgencyId()</code></li>
-					<li class="list-group-item"><strong>Instrument:</strong> <code>@dataSet.getInstrument()</code></li>
-					<li class="list-group-item"><strong>Status:</strong> <code>@dataSet.getStatus()</code></li>
-					<li class="list-group-item"><strong>Physical Variable:</strong> <code>@dataSet.getPhysicalVariable()</code></li>
-					<li class="list-group-item"><strong>Responsible Person:</strong> <code>@dataSet.getResponsiblePerson()</code></li>
-					
-					<!--  
-					<li class="list-group-item"><strong>Start Time:</strong> <code>@dataSet.getStartTime()</code></li>
-					<li class="list-group-item"><strong>End Time::</strong> <code>@dataSet.getEndTime</code></li>
-					-->
-				</ul>
-				<div class="card-block">
-					<a href="#" class="card-link col-lg-offset-2 col-lg-4">Card link</a> 
-					<a href="#" class="card-link col-lg-4">Another link</a>
-				</div>
-				
-				<br>
-				<div>
-					<h4 class="card-title text-center"><strong>People also research:</strong></h4>
-				</div>
-				
-				<div class="row">
-				  <div class="col-md-6">
-				    <div class="thumbnail">
-				      <img src='@routes.Assets.at("images/github.png")' >
-				      <div class="caption">
-				        <h5>NASA</h5>				        
-				        <p><a href="#" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
-				      </div>				      
-				    </div>
-				  </div>
-				  <div class="col-md-6">
-				    <div class="thumbnail">
-				      <img src='@routes.Assets.at("images/bug.png")' >
-				      <div class="caption">
-				        <h5>ARGO</h5>				        
-				        <p><a href="#" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
-				      </div>				      
-				    </div>
-				  </div>
-				</div>
-				
-			</div>
-	</div>
-<!--  
-			<tr>
-				<td><font size="2">@dataSet.getId()</font></td>
-				<td><font size="2">@dataSet.getName()</font></td>
-				<td><font size="2">@dataSet.getAgencyId()</font></td>
-				<td><font size="2">@dataSet.getInstrument()</font></td>
-				<td><font size="2">@dataSet.getPhysicalVariable()</font></td>
-				<td><font size="2">@dataSet.getCMIP5VarName()</font></td>
-				<td><font size="2">@dataSet.getUnits()</font></td>
-				<td><font size="2">@dataSet.getGridDimension()</font></td>
-				<td><font size="2">@dataSet.getVariableNameInWebInterface()</font></td>
-				<td><font size="2">@dataSet.getDataSourceInputParameterToCallScienceApplicationCode()</font></td>
-				<td><font size="2">@dataSet.getStartTime()</font></td>
-				<td><font size="2">@dataSet.getEndTime()</font></td>
-			</tr>
--->
-	}
+
+
+<section id="courses">
+    <div id="carousel1" class="carousel slide" data-ride="carousel"> 
+        <!-- Indicators -->         
+
+        <ol class="carousel-indicators"> 
+            <li data-target="#carousel1" data-slide-to="0" class="active"></li>             
+
+            <li data-target="#carousel1" data-slide-to="1"></li>             
+
+            <li data-target="#carousel1" data-slide-to="2"></li>             
+        </ol>         
+
+        <!-- Wrapper for slides -->         
+
+        <div class="carousel-inner"> 
+				   @for(dataSet <- dataSets){
+				   @if(k == 1) {
+				    <div class="item active">
+				    @{k=0}				    
+				    }else{
+				    <div class="item"> 
+				    }
+						<div class="text-left ">
+								<div class="well col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
+									<div class="text-center">
+										<img class="card-img-top" style=" width:60%;"
+											src='@routes.Assets.at("images/data.png")' >
+									</div>
+									<div class="card-block text-center">
+										<h4 class="card-title">@dataSet.getName()</h4>
+										<p class="card-text text-muted">A data set (or dataset) is a collection of data.</p>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item"><strong>Agency:</strong> <code>@dataSet.getAgencyId()</code></li>
+										<li class="list-group-item"><strong>Instrument:</strong> <code>@dataSet.getInstrument()</code></li>
+										<li class="list-group-item"><strong>Units:</strong> <code>@dataSet.getUnits()</code></li>
+										<li class="list-group-item"><strong>Start Time:</strong> <code>@dataSet.getStartTime()</code></li>
+										<li class="list-group-item"><strong>End Time:</strong> <code>@dataSet.getEndTime()</code></li>
+										<li class="list-group-item"><strong>Physical Variable:</strong> <code>@dataSet.getPhysicalVariable()</code></li>
+										
+										<!--  
+										<li class="list-group-item"><strong>Start Time:</strong> <code>@dataSet.getStartTime()</code></li>
+										<li class="list-group-item"><strong>End Time::</strong> <code>@dataSet.getEndTime</code></li>
+										-->
+									</ul>
+									<div class="card-block">
+										<a href="#" class="card-link col-lg-offset-2 col-lg-4">Card link</a> 
+										<a href="#" class="card-link col-lg-4">Another link</a>
+									</div>
+									
+									<br>
+									<div>
+										<h4 class="card-title text-center"><strong>People also research:</strong></h4>
+									</div>
+									
+									<div class="row">
+									  <div class="col-md-6">
+									    <div class="thumbnail">
+									      <img src='@routes.Assets.at("images/github.png")' >
+									      <div class="caption">
+									        <h5>NASA</h5>				        
+									        <p><a href="#" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
+									      </div>				      
+									    </div>
+									  </div>
+									  <div class="col-md-6">
+									    <div class="thumbnail">
+									      <img src='@routes.Assets.at("images/bug.png")' >
+									      <div class="caption">
+									        <h5>ARGO</h5>				        
+									        <p><a href="#" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
+									      </div>				      
+									    </div>
+									  </div>
+									</div>
+									
+								</div>
+						</div>
+					</div>
+				<!--  
+							<tr>
+								<td><font size="2">@dataSet.getId()</font></td>
+								<td><font size="2">@dataSet.getName()</font></td>
+								<td><font size="2">@dataSet.getAgencyId()</font></td>
+								<td><font size="2">@dataSet.getInstrument()</font></td>
+								<td><font size="2">@dataSet.getPhysicalVariable()</font></td>
+								<td><font size="2">@dataSet.getCMIP5VarName()</font></td>
+								<td><font size="2">@dataSet.getUnits()</font></td>
+								<td><font size="2">@dataSet.getGridDimension()</font></td>
+								<td><font size="2">@dataSet.getVariableNameInWebInterface()</font></td>
+								<td><font size="2">@dataSet.getDataSourceInputParameterToCallScienceApplicationCode()</font></td>
+								<td><font size="2">@dataSet.getStartTime()</font></td>
+								<td><font size="2">@dataSet.getEndTime()</font></td>
+							</tr>
+				-->
+					}
+        </div>         
+
+        <!-- Controls -->         
+
+        <a class="left carousel-control" href="#carousel1" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <a class="right carousel-control" href="#carousel1" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span>  </a>          
+    </div>          
+</section>
+
+	
 	</tbody>
     </table>
     </div>
