@@ -4,7 +4,7 @@
     
     @helper.form(routes.Application.authenticate) {
 
-		<div class="container" style="background-image:url(https://msha.teds.com/EveryOne/images/login-background.jpg); height:80vh; background-size: 100%;">
+		<div class="container" style="background-image:url('@routes.Assets.at("images/login-background.jpg")'); height:80vh; background-size: 100%;">
 			<div class="col-sm-6 col-md-4 col-md-offset-4" style="background: rgba(255,255,255,0.7); border-radius:3px; top:25%;">
 			<form class="form-signin">
 				<h1 class="form-signin-heading" align="center">Sign in</h1>
