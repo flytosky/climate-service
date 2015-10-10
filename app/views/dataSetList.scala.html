@@ -44,7 +44,7 @@
 
 
 <section id="courses">
-    <div id="carousel1" class="carousel slide" data-ride="carousel"> 
+    <div id="carousel1" class="carousel slide" data-ride="carousel" > 
         <!-- Indicators -->         
 
         <ol class="carousel-indicators"> 
@@ -57,15 +57,15 @@
 
         <!-- Wrapper for slides -->         
 
-        <div class="carousel-inner"> 
+        <div class="carousel-inner" style="background: url('@routes.Assets.at("images/pc.gif")') no-repeat left center; background-size: cover; -webkit-filter: blur(0px);  -moz-filter: blur(2px);  -o-filter: blur(2px);  -ms-filter: blur(2px);  filter: blur(2px);"> 
 				   @for(dataSet <- dataSets){
 				   @if(k == 1) {
-				    <div class="item active">
+				    <div class="item active" >
 				    @{k=0}				    
 				    }else{
-				    <div class="item"> 
+				    <div class="item" > 
 				    }
-						<div class="text-left ">
+						<div class="text-left " >
 								<div class="well col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
 									<div class="text-center">
 										<img class="card-img-top" style=" width:60%;"
