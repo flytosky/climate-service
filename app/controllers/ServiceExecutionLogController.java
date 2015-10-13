@@ -73,12 +73,9 @@ public class ServiceExecutionLogController extends Controller {
 				System.out.println("Print Parameter Purpose: " + json.get("parameter").get("purpose").asText());
 				System.out.println("Print Parameter Value: " + json.findPath("value").asText());
 				serviceConfigItemList.add(serviceConfigItem);
-			}	
+			}			
 			
-			
-			
-			System.out.println("Print service Name: " + serviceName);
-			//System.out.println("Print service configs: " + responseConfigItems);
+			System.out.println("Print service Name: " + serviceName);			
 			
 		}catch (IllegalStateException e) {
 			e.printStackTrace();

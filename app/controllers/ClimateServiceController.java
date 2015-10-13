@@ -408,12 +408,12 @@ public class ClimateServiceController extends Controller {
 			newService.setId(json.get("id").asLong());
 			newService.setName(json.get("name").asText());
 			newService.setPurpose(json.findPath("purpose").asText());
-			//newService.setUrl(json.findPath("url").asText());
+			
 			String name = json.path("name").asText();
 			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
 					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
 			newService.setUrl(pageUrl);
-			//newService.setCreateTime(json.findPath("createTime").asText());
+			
 			newService.setScenario(json.findPath("scenario").asText());
 			newService.setVersionNo(json.findPath("versionNo").asText());
 			newService.setRootServiceId(json.findPath("rootServiceId").asLong());
@@ -439,8 +439,7 @@ public class ClimateServiceController extends Controller {
 	        while (line != null && count < 22) {
 	            sb.append(line);
 	            sb.append("\n");
-	            line = br.readLine();
-	            //System.out.println("line:  "+line.toString());
+	            line = br.readLine();	          
 	            count++;
 	        }
 	        br.close();

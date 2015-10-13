@@ -22,7 +22,6 @@ import views.html.*;
 
 public class Application extends Controller {
 	
-	//public static Form<Login> loginForm = Form.form(Login.class);
 	
 	final static Form<User> userForm = Form
 			.form(User.class);
