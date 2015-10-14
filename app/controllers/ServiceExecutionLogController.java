@@ -88,47 +88,35 @@ public class ServiceExecutionLogController extends Controller {
 		Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		
 
-		String body = parseServicePageBody(serviceName);
-		String script = parseServicePageScript(serviceName);
+		String body = parseServicePageBody(serviceName, new String("body"));
+		String script = parseServicePageBody(serviceName, new String("script"));
 
 		return ok(serviceDetail.render(body, script, serviceConfigItemList, serviceLog));
 	}
 	
-	public static String parseServicePageBody(String serviceName) {
+	public static String parseServicePageBody(String serviceName, String partName) {
 
     	String location = "public/html/service" + handleServiceName(serviceName) + ".html";
     	File htmlFile = new File(location);
     	String entireHtml = null;
-    	String body = null;
+    	String part = null;
 		try {
 			
 			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
-			body = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
-			
+			if (partName.equals("body")) { 
+				part = entireHtml.substring(entireHtml.indexOf("<body>"), entireHtml.indexOf("</body>")+7);
+			}
+			// Change temp if the html format change
+			if (partName.equals("script")) {
+				String temp = entireHtml.substring(entireHtml.indexOf("<script>")+8, entireHtml.indexOf("<!-- Bootstrap -->"));
+				part = temp.substring(0, temp.indexOf("</script>"));
+				
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		return body;
-    }
-	
-	public static String parseServicePageScript(String serviceName) {
-
-    	String location = "public/html/service" + handleServiceName(serviceName) + ".html";
-    	File htmlFile = new File(location);
-    	String entireHtml = null;
-    	String script = null;
-		try {
-			
-			entireHtml = new Scanner(htmlFile).useDelimiter("\\A").next();
-			String temp = entireHtml.substring(entireHtml.indexOf("<script>")+8, entireHtml.indexOf("<body>"));
-			script = temp.substring(0, temp.indexOf("</script>"));
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return script;
+		return part;
     }
 	
 	public static String handleServiceName(String temp){
