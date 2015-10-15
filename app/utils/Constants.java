@@ -42,6 +42,9 @@ public class Constants {
 	public static final String GET_ALL_DATASETS = "/dataset/getAllDatasets/json";
 	public static final String DATASET_QUERY = "/dataset/queryDataset";
 	
+	// dataset log
+	public static final String GET_ALL_DATASETLOGS = "/datasetLog/getAllDatasetLogs/json";
+	
 	// users
 	public static final String GET_ALL_USERS = "/users/getAllUsers/json";
 	
