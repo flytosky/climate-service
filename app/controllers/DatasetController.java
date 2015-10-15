@@ -76,6 +76,7 @@ public class DatasetController extends Controller {
 		String startTime = "";
 		String endTime = "";
 		Date dataSetStartTime = new Date(0), dataSetEndTime = new Date();
+		List<Dataset> datasetsTopK = getFirstKDatasets();
 		
 		try {
 			dataSetName = dc.field("Dataset Name").value();
@@ -131,7 +132,7 @@ public class DatasetController extends Controller {
 		}
 
 		List<Dataset> response = queryDataSet(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime);
-		return ok(dataSetList.render(response, dataSetForm));
+		return ok(dataSetList.render(response, dataSetForm, datasetsTopK));
 	}
 	
 public static List<Dataset> queryDataSet(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime) {
@@ -209,4 +210,29 @@ public static List<Dataset> queryDataSet(String dataSetName, String agency, Stri
 	    }
 		return newDataSet;
 	}
+	
+	// Get the first k Dataset to show
+    public static List<Dataset> getFirstKDatasets() {
+        List<Dataset> datasets = new ArrayList<Dataset>();
+        JsonNode response = null;
+        int k = 5;
+        try {
+            response = RESTfulCalls.getAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_K_POPULAR_DATASETS_CALL + "/" + k);
+        }catch (IllegalStateException e) {
+            e.printStackTrace();
+            Application.flashMsg(RESTfulCalls
+                    .createResponse(ResponseType.CONVERSIONERROR));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Application.flashMsg(RESTfulCalls
+                    .createResponse(ResponseType.UNKNOWN));
+        }
+        // parse the json string into object
+        for (int i = 0; i < response.size(); i++) {
+            JsonNode json1 = response.path(i);
+            Dataset newDataSet = deserializeJsonToDataSet(json1);
+            datasets.add(newDataSet);
+        }
+        return datasets;
+    }
 }
