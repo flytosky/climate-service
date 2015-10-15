@@ -1,4 +1,4 @@
-@(dataSets: List[Dataset], dataSetForm: play.data.Form[Dataset])
+@(dataSets: List[Dataset], dataSetForm: play.data.Form[Dataset], datasetsTopK: List[Dataset])
 
 @import helper._
 @import java.math.BigInteger;var k=1;
@@ -58,7 +58,7 @@
         <!-- Wrapper for slides -->         
 
         <div class="carousel-inner" style="background: url('@routes.Assets.at("images/pc.gif")') no-repeat left center; background-size: cover; -webkit-filter: blur(0px);  -moz-filter: blur(2px);  -o-filter: blur(2px);  -ms-filter: blur(2px);  filter: blur(2px);"> 
-				   @for(dataSet <- dataSets){
+				   @for(dataSet <- datasetsTopK){
 				   @if(k == 1) {
 				    <div class="item active" >
 				    @{k=0}				    
