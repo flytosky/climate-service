@@ -1,7 +1,7 @@
 @(dataSets: List[Dataset], dataSetForm: play.data.Form[Dataset], datasetsTopK: List[Dataset])
 
 @import helper._
-@import java.math.BigInteger;var k=1;
+@import java.math.BigInteger;var k=1;var n = 0;
 
 @scripts = {
 	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
@@ -48,11 +48,14 @@
         <!-- Indicators -->         
 
         <ol class="carousel-indicators"> 
-            <li data-target="#carousel1" data-slide-to="0" class="active"></li>             
-
-            <li data-target="#carousel1" data-slide-to="1"></li>             
-
-            <li data-target="#carousel1" data-slide-to="2"></li>             
+        @for(dataSet <- datasetsTopK) {
+	        @if(n == 0) {
+	        	<li data-target="#carousel1" data-slide-to="@n" class="active"></li>	        	
+	        }else{
+	        	<li data-target="#carousel1" data-slide-to="@n"></li>  	        	
+	        }
+	        @{n = n + 1}
+        }    
         </ol>         
 
         <!-- Wrapper for slides -->         
