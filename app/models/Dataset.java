@@ -43,6 +43,7 @@ public class Dataset {
 	private String comment;
 	private String startTime;
 	private String endTime;
+	private String duration;
 
 	public Dataset() {
 	}
@@ -55,7 +56,7 @@ public class Dataset {
 			String responsiblePerson, String variableNameInWebInterface,
 			String dataSourceInputParameterToCallScienceApplicationCode,
 			String variableNameInputParameterToCallScienceApplicationCode,
-			String comment) {
+			String comment, String duration) {
 		super();
 		this.name = name;
 		this.dataSourceNameinWebInterface = dataSourceNameinWebInterface;
@@ -75,6 +76,15 @@ public class Dataset {
 		this.dataSourceInputParameterToCallScienceApplicationCode = dataSourceInputParameterToCallScienceApplicationCode;
 		this.variableNameInputParameterToCallScienceApplicationCode = variableNameInputParameterToCallScienceApplicationCode;
 		this.comment = comment;
+		this.duration = duration;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public long getId() {
@@ -264,7 +274,8 @@ public class Dataset {
 				+ dataSourceInputParameterToCallScienceApplicationCode
 				+ ", variableNameInputParameterToCallScienceApplicationCode="
 				+ variableNameInputParameterToCallScienceApplicationCode
-				+ ", comment=" + comment + "]";
+				+ ", comment=" + comment + ", duration=" + duration 
+				+ "]";
 	}
 	
 }
