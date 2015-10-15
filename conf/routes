@@ -40,6 +40,9 @@ GET     /dataSet/allDatasets                        controllers.DatasetControlle
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
 
+# Dataset Log
+GET		/datasetLog/allDatasetLogs					controllers.DatasetLogController.getAllDatasetLogs()
+
 # Analytics
 GET     /serviceLogRecommend                        controllers.AnalyticsController.getRecommend()
 GET     /datasetRecommend                           controllers.AnalyticsController.getDatasetRecommend()

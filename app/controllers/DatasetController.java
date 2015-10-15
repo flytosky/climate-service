@@ -1,36 +1,32 @@
 package controllers;
 
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import models.Dataset;
+
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import utils.RESTfulCalls;
 import utils.Constants;
 import utils.RESTfulCalls;
 import utils.RESTfulCalls.ResponseType;
-import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import views.html.*;
 
 public class DatasetController extends Controller {
 	final static Form<Dataset> dataSetForm = Form
@@ -52,6 +48,8 @@ public class DatasetController extends Controller {
 		if (dataSetsNode == null || dataSetsNode.has("error")
 				|| !dataSetsNode.isArray()) {
 			System.out.println("All oneDatasets format has error!");
+			return ok(allDatasets.render(dataSetsList,
+					dataSetForm));
 		}
 
 		// parse the json string into object
@@ -222,26 +220,39 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		newDataSet.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
 		String startTime = json.findPath("startTime").asText();
 		String endTime = json.findPath("endTime").asText();
-		Date tmpTime = null;
+		Date tmpStartTime = null;
+		Date tmpEndTime = null;
 		
 		try {
-			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(startTime);
+			tmpStartTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(startTime);
 			
-			if (tmpTime != null) {
-				newDataSet.setStartTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+			if (tmpStartTime != null) {
+				newDataSet.setStartTime(new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
 			}
 	    } catch (ParseException e){	    
 	    }
 		
 		try {
-			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(endTime);
+			tmpEndTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(endTime);
 			
-			if (tmpTime != null) {
-				newDataSet.setEndTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+			if (tmpEndTime != null) {
+				newDataSet.setEndTime(new SimpleDateFormat("YYYY-MM").format(tmpEndTime));
 			}
 	    } catch (ParseException e){	    
 	    	
 	    }
+		
+		DateTime dateTimeFrom = new DateTime(tmpStartTime);  
+        DateTime dateTimeTo = new DateTime(tmpEndTime); 
+        Period period = new Period(dateTimeFrom, dateTimeTo).minusYears(1);
+        PeriodFormatter formatter = new PeriodFormatterBuilder()  
+        .appendYears().appendSuffix(" year "," years ")
+        .appendMonths().appendSuffix(" month "," months ")
+        .printZeroNever()  
+        .toFormatter();
+		String duration = String.valueOf(formatter.print(period));
+		newDataSet.setDuration(duration);
+		
 		return newDataSet;
 	}
 }

@@ -7,7 +7,9 @@
 		<table class="table table-striped table-bordered table-condensed ex2 tablesorter" id ="myTable">
 	<thead>
 	<tr>
+		<!--  
 		<th style = "vertical-align: top;" class="col-md-1 header">Id</th>
+		-->
 		<th style = "vertical-align: top;" class="col-md-2">Dataset Name</th>
 		<th style = "vertical-align: top;" class="col-md-1">Agency</th>
 		<th style = "vertical-align: top;" class="col-md-1">Instrument</th>
@@ -26,12 +28,15 @@
 		<!-- <th style = "vertical-align: top;" class="col-md-3">Variable Name Input Parameter</th> -->
 		<th style = "vertical-align: top;" class="col-md-1">Dataset Start Time</th>
 		<th style = "vertical-align: top;"class="col-md-1">Dataset End Time</th>
+		<th style = "vertical-align: top;"class="col-md-1">Duration</th>
 	</tr>
 	</thead>
 	<tbody>
 	@for(dataSet <- dataSets){
 	<tr>
-		<td><font size="2">@dataSet.getId()</font></td>
+		<!--  
+		<td><font size="2">@dataSet.getId()</font></td> 
+		-->
 		<td><font size="2">@dataSet.getName()</font></td>
 		<td><font size="2">@dataSet.getAgencyId()</font></td>
 		<td><font size="2">@dataSet.getInstrument()</font></td>
@@ -50,6 +55,7 @@
 		<!--<td><font size="2">@dataSet.getVariableNameInputParameterToCallScienceApplicationCode()</font></td> -->
 		<td><font size="2">@dataSet.getStartTime()</font></td>
 		<td><font size="2">@dataSet.getEndTime()</font></td>
+		<td><font size="2">@dataSet.getDuration()</font></td>
 		
 	</tr>
 	
