@@ -76,7 +76,6 @@ public class DatasetController extends Controller {
 		String startTime = "";
 		String endTime = "";
 		Date dataSetStartTime = new Date(0), dataSetEndTime = new Date();
-		List<Dataset> datasetsTopK = getFirstKDatasets();
 		
 		try {
 			dataSetName = dc.field("Dataset Name").value();
@@ -132,6 +131,8 @@ public class DatasetController extends Controller {
 		}
 
 		List<Dataset> response = queryDataSet(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime);
+		int k = 5;
+		List<Dataset> datasetsTopK = queryFirstKDatasets(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime, k);
 		return ok(dataSetList.render(response, dataSetForm, datasetsTopK));
 	}
 	
@@ -166,6 +167,39 @@ public static List<Dataset> queryDataSet(String dataSetName, String agency, Stri
 		}
 		return dataset;
 	}
+
+public static List<Dataset> queryFirstKDatasets(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime, int k) {
+	
+	List<Dataset> dataset = new ArrayList<Dataset>();
+	ObjectMapper mapper = new ObjectMapper();
+	ObjectNode queryJson = mapper.createObjectNode();
+	queryJson.put("name", dataSetName);
+	queryJson.put("agencyId", agency);
+	queryJson.put("instrument", instrument);
+	queryJson.put("physicalVariable", physicalVariable);
+	queryJson.put("gridDimension", gridDimension);
+	queryJson.put("k", k);
+	if (dataSetEndTime != null) {
+		queryJson.put("dataSetEndTime", dataSetEndTime.getTime());
+	}
+	if (dataSetStartTime != null) {
+		queryJson.put("dataSetStartTime", dataSetStartTime.getTime());
+	}
+	JsonNode dataSetNode = RESTfulCalls.postAPI(Constants.URL_HOST
+			+ Constants.CMU_BACKEND_PORT + Constants.GET_MOST_K_POPULAR_DATASETS_CALL, queryJson);
+	if (dataSetNode == null || dataSetNode.has("error")
+			|| !dataSetNode.isArray()) {
+		return dataset;
+	}
+
+	// parse the json string into object
+	for (int i = 0; i < dataSetNode.size(); i++) {
+		JsonNode json = dataSetNode.path(i);
+		Dataset newDataSet = deserializeJsonToDataSet(json);
+		dataset.add(newDataSet);
+	}
+	return dataset;
+}
 
 	private static Dataset deserializeJsonToDataSet(JsonNode json) {
 		Dataset newDataSet = new Dataset();
@@ -210,29 +244,4 @@ public static List<Dataset> queryDataSet(String dataSetName, String agency, Stri
 	    }
 		return newDataSet;
 	}
-	
-	// Get the first k Dataset to show
-    public static List<Dataset> getFirstKDatasets() {
-        List<Dataset> datasets = new ArrayList<Dataset>();
-        JsonNode response = null;
-        int k = 5;
-        try {
-            response = RESTfulCalls.getAPI(Constants.URL_HOST + Constants.CMU_BACKEND_PORT + Constants.GET_MOST_K_POPULAR_DATASETS_CALL + "/" + k);
-        }catch (IllegalStateException e) {
-            e.printStackTrace();
-            Application.flashMsg(RESTfulCalls
-                    .createResponse(ResponseType.CONVERSIONERROR));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Application.flashMsg(RESTfulCalls
-                    .createResponse(ResponseType.UNKNOWN));
-        }
-        // parse the json string into object
-        for (int i = 0; i < response.size(); i++) {
-            JsonNode json1 = response.path(i);
-            Dataset newDataSet = deserializeJsonToDataSet(json1);
-            datasets.add(newDataSet);
-        }
-        return datasets;
-    }
 }
