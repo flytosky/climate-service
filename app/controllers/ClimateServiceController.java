@@ -69,13 +69,20 @@ public class ClimateServiceController extends Controller {
 			JsonNode json = climateServicesNode.path(i);
 			ClimateService oneService = new ClimateService();
 			oneService.setName(json.path("name").asText());
-			System.out.println("****************"+json.path("name").asText());
 			oneService.setPurpose(json.path("purpose").asText());
 			// URL here is the dynamic page url
 			String name = json.path("name").asText();
-			String pageUrl = Constants.URL_SERVER + Constants.LOCAL_HOST_PORT + "/assets/html/service" + 
-					name.substring(0, 1).toUpperCase() + name.substring(1) + ".html";
-			oneService.setUrl(pageUrl);
+			String url = json.path("url").asText();
+			// Parse NASA URL 
+			if (url.contains("/cmac/web")) {
+				oneService.setUrl(url);
+			} else {
+				String pageUrl = Constants.URL_SERVER
+						+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+						+ name.substring(0, 1).toUpperCase()
+						+ name.substring(1) + ".html";
+				oneService.setUrl(pageUrl);
+			}
 			// newService.setCreateTime(json.path("createTime").asText());
 			oneService.setScenario(json.path("scenario").asText());
 			oneService.setVersionNo(json.path("versionNo").asText());
