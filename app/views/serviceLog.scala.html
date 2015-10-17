@@ -57,12 +57,19 @@
 	<td><font size="2">@serviceLog.getDataSetStartTime</font></td>
 	<td><font size="2">@serviceLog.getDataSetEndTime</font></td>
 	<td>
-	@form(routes.ServiceExecutionLogController.getConfigurationByConfId()){
-		<input
-			name="logId" class="hidden" type="hidden"
-			value="@serviceLog.getId">
-		<input
-			type="submit"  value="see details">
+	@if(serviceLog.getUrl() != null){
+		<form method="post" action="@serviceLog.getUrl">
+			<input type="submit"  value="see details">
+		</form>
+	
+	}else{
+		@form(routes.ServiceExecutionLogController.getConfigurationByConfId()){
+			<input
+				name="logId" class="hidden" type="hidden"
+				value="@serviceLog.getId">
+			<input
+				type="submit"  value="see details">
+		}
 	}
 	</td>
 	<!--

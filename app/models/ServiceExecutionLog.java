@@ -15,6 +15,8 @@ public class ServiceExecutionLog {
 	private String serviceName;
 	private String dataSetStartTime;
 	private String dataSetEndTime;
+	private String url;
+
 
 	public long getId() {
 		return id;
@@ -54,6 +56,10 @@ public class ServiceExecutionLog {
 
 	public String getDataUrl() {
 		return dataUrl;
+	}
+	
+	public String getUrl() {
+		return url;
 	}
 
 	public void setId(long id) {
@@ -120,6 +126,10 @@ public class ServiceExecutionLog {
 		this.dataSetEndTime = dataSetEndTime;
 	}
 	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 	@Override
 	public String toString() {
 		return "ServiceExecutionLog [id=" + id + ", serviceId="
@@ -127,6 +137,7 @@ public class ServiceExecutionLog {
 				+ serviceConfigurationId + ", purpose=" + purpose
 				+ ", executionStartTime=" + executionStartTime
 				+ ", executionEndTime=" + executionEndTime + ", plotUrl="
-				+ plotUrl + ", dataUrl=" + dataUrl + "]";
+				+ plotUrl + ", dataUrl=" + dataUrl + ", url=" + url 
+				+ "]";
 	}
 }

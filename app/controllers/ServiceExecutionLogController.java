@@ -424,6 +424,8 @@ public class ServiceExecutionLogController extends Controller {
 	    }
 		
 		newServiceLog.setDatasetLogId(json.findPath("datasetLogId").asText());
+		if(json.get("url") != null)
+			newServiceLog.setUrl(json.get("url").asText());
 		
 		return newServiceLog;
 	}
