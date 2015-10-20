@@ -374,7 +374,8 @@ public class ServiceExecutionLogController extends Controller {
 		ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
 		newServiceLog.setId(json.get("id").asLong());
 		newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
-		newServiceLog.setServiceName(json.get("climateService").get("name").asText());
+		String serviceName = json.get("climateService").get("name").asText();
+		newServiceLog.setServiceName(serviceName);
 		newServiceLog.setPurpose(json.get("purpose").asText());
 		newServiceLog.setUserName(json.get("user").get("firstName").asText()
 				+ " " + json.get("user").get("lastName").asText());
@@ -424,8 +425,13 @@ public class ServiceExecutionLogController extends Controller {
 	    }
 		
 		newServiceLog.setDatasetLogId(json.findPath("datasetLogId").asText());
-		if(json.get("url") != null)
-			newServiceLog.setUrl(json.get("url").asText());
+		if(json.get("url") != null) {
+			String pageUrl = Constants.URL_SERVER
+					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+					+ serviceName.substring(0, 1).toUpperCase()
+					+ serviceName.substring(1) + ".html" + json.get("url").asText();
+			newServiceLog.setUrl(pageUrl);
+		}
 		
 		return newServiceLog;
 	}
