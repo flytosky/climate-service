@@ -15,6 +15,7 @@ public class Instrument {
 	private String name;
 	private String description;
 	private Date launchDate;
+	private String instrumentURL;
 	
 	public Instrument() {
 	}
@@ -24,6 +25,14 @@ public class Instrument {
 		this.name = name;
 		this.description = description;
 		this.launchDate = launchDate;
+	}
+	
+	public String getInstrumentURL() {
+		return instrumentURL;
+	}
+
+	public void setInstrumentURL(String instrumentURL) {
+		this.instrumentURL = instrumentURL;
 	}
 
 	public long getId() {

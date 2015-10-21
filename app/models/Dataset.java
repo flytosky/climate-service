@@ -44,6 +44,8 @@ public class Dataset {
 	private String startTime;
 	private String endTime;
 	private String duration;
+	private String agencyURL;
+	private String instrumentURL;
 
 	public Dataset() {
 	}
@@ -77,6 +79,22 @@ public class Dataset {
 		this.variableNameInputParameterToCallScienceApplicationCode = variableNameInputParameterToCallScienceApplicationCode;
 		this.comment = comment;
 		this.duration = duration;
+	}
+
+	public String getInstrumentURL() {
+		return instrumentURL;
+	}
+
+	public void setInstrumentURL(String instrumentURL) {
+		this.instrumentURL = instrumentURL;
+	}
+
+	public String getAgencyURL() {
+		return agencyURL;
+	}
+
+	public void setAgencyURL(String agencyURL) {
+		this.agencyURL = agencyURL;
 	}
 
 	public String getDuration() {
