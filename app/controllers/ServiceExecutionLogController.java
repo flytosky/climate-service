@@ -374,7 +374,8 @@ public class ServiceExecutionLogController extends Controller {
 		ServiceExecutionLog newServiceLog = new ServiceExecutionLog();
 		newServiceLog.setId(json.get("id").asLong());
 		newServiceLog.setServiceId(json.get("climateService").get("id").asLong());
-		newServiceLog.setServiceName(json.get("climateService").get("name").asText());
+		String serviceName = json.get("climateService").get("name").asText();
+		newServiceLog.setServiceName(serviceName);
 		newServiceLog.setPurpose(json.get("purpose").asText());
 		newServiceLog.setUserName(json.get("user").get("firstName").asText()
 				+ " " + json.get("user").get("lastName").asText());
@@ -407,7 +408,7 @@ public class ServiceExecutionLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyStartTime);
 			
 			if (tmpTime != null) {
-				newServiceLog.setDataSetStartTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newServiceLog.setDataSetStartTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
@@ -417,13 +418,20 @@ public class ServiceExecutionLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyEndTime);
 			
 			if (tmpTime != null) {
-				newServiceLog.setDataSetEndTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newServiceLog.setDataSetEndTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
 	    }
 		
 		newServiceLog.setDatasetLogId(json.findPath("datasetLogId").asText());
+		if(json.get("url") != null) {
+			String pageUrl = Constants.URL_SERVER
+					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+					+ serviceName.substring(0, 1).toUpperCase()
+					+ serviceName.substring(1) + ".html" + json.get("url").asText();
+			newServiceLog.setUrl(pageUrl);
+		}
 		
 		return newServiceLog;
 	}
