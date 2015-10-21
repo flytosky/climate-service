@@ -59,7 +59,7 @@ public class DatasetLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyStartTime);
 			
 			if (tmpTime != null) {
-				newDatasetLog.setDatasetStudyStartTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newDatasetLog.setDatasetStudyStartTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
@@ -69,7 +69,7 @@ public class DatasetLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyEndTime);
 			
 			if (tmpTime != null) {
-				newDatasetLog.setDatasetStudyEndTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newDatasetLog.setDatasetStudyEndTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
