@@ -504,15 +504,39 @@ function get_querystring() {
 
 
 function showUrl(inputs) {
+  var v1q, v2, key0, key1;
   try {
     var temp1 = "";
-    for (var i=0; i<inputs.length; i++) {
-      key1 = inputs[i];
-      if ( key1 != "Image" && key1 != "data_url" ) {
-        try {
-          temp1 += key1 + "=" + $("#"+key1).val() + "&";
-        } catch(err) {}
-      }
+    //for (var i=0; i<inputs.length; i++) {
+    for (key0 in inputs) {
+      if (!inputs.hasOwnProperty(key0)) { continue; }
+      if ( key0 == "Image" || key0 == "data_url" ) { continue; }
+      key1 = inputs[key0];
+
+      try {
+        v1q = $("#"+key1).val();
+
+        if ( key0.slice(0,5) == "model" ) {
+          v1q = v1q.replace("/", "_");
+        }
+
+        if ( key0 == "startT" || key0 == "endT" ) {
+          v1q = v1q.replace("-", "");
+        }
+
+        if ( key0 == "purpose" ) {
+          v1q = escape(v1q);
+        }
+
+/*
+        if ( key0.slice(0,4) == "pres" ) {
+          if ( Number(v1q) == NaN ) {
+            v1q = "-999999";
+          }
+        }
+*/
+        temp1 += key0 + "=" + v1q + "&";
+      } catch(err) {}
     }
     temp1 = temp1.slice(0,-1);
   } catch(err) { 
