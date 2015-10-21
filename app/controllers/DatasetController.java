@@ -129,7 +129,7 @@ public class DatasetController extends Controller {
 		}
 
 		List<Dataset> response = queryDataSet(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime);
-		int k = 5;
+		int k = 5; // Set the first popular K datasets
 		List<Dataset> datasetsTopK = queryFirstKDatasets(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime, k);
 		return ok(dataSetList.render(response, dataSetForm, datasetsTopK));
 	}
@@ -218,6 +218,8 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		newDataSet.setVariableNameInWebInterface(json.get("variableNameInWebInterface").asText());
 		newDataSet.setDataSourceInputParameterToCallScienceApplicationCode(json.get("dataSourceInputParameterToCallScienceApplicationCode").asText());
 		newDataSet.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
+		newDataSet.setAgencyURL(json.get("agencyURL").asText());
+		newDataSet.setInstrumentURL(json.get("instrument").get("instrumentURL").asText());
 		String startTime = json.findPath("startTime").asText();
 		String endTime = json.findPath("endTime").asText();
 		Date tmpStartTime = null;

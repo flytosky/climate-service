@@ -72,15 +72,15 @@
 								<div class="well col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
 									<div class="text-center">
 										<img class="card-img-top" style=" width:60%;"
-											src='@routes.Assets.at("images/data.png")' >
+											src='@routes.Assets.at("images/giphy.gif")' >
 									</div>
 									<div class="card-block text-center">
 										<h4 class="card-title">@dataSet.getName()</h4>
 										<p class="card-text text-muted">A data set (or dataset) is a collection of data.</p>
 									</div>
 									<ul class="list-group list-group-flush">
-										<li class="list-group-item"><strong>Agency:</strong> <code>@dataSet.getAgencyId()</code></li>
-										<li class="list-group-item"><strong>Instrument:</strong> <code>@dataSet.getInstrument()</code></li>
+										<li class="list-group-item"><strong>Agency:</strong> <a href="@dataSet.getAgencyURL()" target="_blank"><code>@dataSet.getAgencyId()</code></a></li>
+										<li class="list-group-item"><strong>Instrument:</strong> <a href="@dataSet.getInstrumentURL()" target="_blank"><code>@dataSet.getInstrument()</code></a></li>
 										<li class="list-group-item"><strong>Units:</strong> <code>@dataSet.getUnits()</code></li>
 										<li class="list-group-item"><strong>Start Time:</strong> <code>@dataSet.getStartTime()</code></li>
 										<li class="list-group-item"><strong>End Time:</strong> <code>@dataSet.getEndTime()</code></li>
