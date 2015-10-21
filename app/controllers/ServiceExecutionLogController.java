@@ -408,7 +408,7 @@ public class ServiceExecutionLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyStartTime);
 			
 			if (tmpTime != null) {
-				newServiceLog.setDataSetStartTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newServiceLog.setDataSetStartTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
@@ -418,7 +418,7 @@ public class ServiceExecutionLogController extends Controller {
 			tmpTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(datasetStudyEndTime);
 			
 			if (tmpTime != null) {
-				newServiceLog.setDataSetEndTime(new SimpleDateFormat("YYYYMM").format(tmpTime));
+				newServiceLog.setDataSetEndTime(new SimpleDateFormat("YYYY-MM").format(tmpTime));
 			}
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
