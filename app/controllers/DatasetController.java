@@ -223,30 +223,25 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		newDataSet.setSource(json.get("source").asText());
 		newDataSet.setStatus(json.get("status").asText());
 		newDataSet.setResponsiblePerson(json.get("responsiblePerson").asText());
-	//	dataset.setComments(json.get(""));
 		newDataSet.setDataSourceNameinWebInterface(json.get("dataSourceNameinWebInterface").asText());
-	//	Console.print("aaa"+dataset.getDataSourceName());
 		newDataSet.setVariableNameInWebInterface(json.get("variableNameInWebInterface").asText());
 		newDataSet.setDataSourceInputParameterToCallScienceApplicationCode(json.get("dataSourceInputParameterToCallScienceApplicationCode").asText());
 		newDataSet.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
 		newDataSet.setAgencyURL(json.findPath("agencyURL").asText());
 		newDataSet.setInstrumentURL(json.findPath("instrument").findPath("instrumentURL").asText());
 		String startTime = json.get("startTime").asText();
-		System.out.println("^^^^^^^^^^^^^"+startTime);
 		String endTime = json.get("endTime").asText();
 		Date tmpStartTime = null;
 		Date tmpEndTime = null;
 		
 		try {
-			System.out.println("@@@@@@@@@@@@"+startTime);
 			tmpStartTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(startTime);
 			
 			if (tmpStartTime != null) {
 				newDataSet.setStartTime(new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
-				System.out.println("*************************************"+new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
 			}
 	    } catch (ParseException e){	    
-	    	System.out.println("nonononoononnonnon" +e);
+	    	System.out.println(e);
 	    }
 		
 		try {
@@ -256,7 +251,7 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 				newDataSet.setEndTime(new SimpleDateFormat("YYYY-MM").format(tmpEndTime));
 			}
 	    } catch (ParseException e){	    
-	    	
+	    	System.out.println(e);
 	    }
 		
 		DateTime dateTimeFrom = new DateTime(tmpStartTime);  
