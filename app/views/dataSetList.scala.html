@@ -102,15 +102,18 @@
 									</div>
 									
 									<div class="row">
+									@for(climateService <- dataSet.getClimateServices()) {
 									  <div class="col-md-6">
 									    <div class="thumbnail">
 									      <img src='@routes.Assets.at("images/github.png")' >
 									      <div class="caption">
-									        <h5>NASA</h5>				        
-									        <p><a href="#" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
+									        <h5>@climateService.getName()</h5>				        
+									        <p><a href="@climateService.getUrl()" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
 									      </div>				      
 									    </div>
 									  </div>
+									  }
+									  <!--  
 									  <div class="col-md-6">
 									    <div class="thumbnail">
 									      <img src='@routes.Assets.at("images/bug.png")' >
@@ -120,6 +123,7 @@
 									      </div>				      
 									    </div>
 									  </div>
+									  -->
 									</div>
 									
 								</div>

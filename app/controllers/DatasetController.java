@@ -229,8 +229,8 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		newDataSet.setVariableNameInWebInterface(json.get("variableNameInWebInterface").asText());
 		newDataSet.setDataSourceInputParameterToCallScienceApplicationCode(json.get("dataSourceInputParameterToCallScienceApplicationCode").asText());
 		newDataSet.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
-		newDataSet.setAgencyURL(json.get("agencyURL").asText());
-		newDataSet.setInstrumentURL(json.get("instrument").get("instrumentURL").asText());
+		newDataSet.setAgencyURL(json.findPath("agencyURL").asText());
+		newDataSet.setInstrumentURL(json.findPath("instrument").findPath("instrumentURL").asText());
 		String startTime = json.findPath("startTime").asText();
 		String endTime = json.findPath("endTime").asText();
 		Date tmpStartTime = null;
