@@ -231,18 +231,22 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		newDataSet.setVariableNameInputParameterToCallScienceApplicationCode(json.get("variableNameInputParameterToCallScienceApplicationCode").asText());
 		newDataSet.setAgencyURL(json.findPath("agencyURL").asText());
 		newDataSet.setInstrumentURL(json.findPath("instrument").findPath("instrumentURL").asText());
-		String startTime = json.findPath("startTime").asText();
-		String endTime = json.findPath("endTime").asText();
+		String startTime = json.get("startTime").asText();
+		System.out.println("^^^^^^^^^^^^^"+startTime);
+		String endTime = json.get("endTime").asText();
 		Date tmpStartTime = null;
 		Date tmpEndTime = null;
 		
 		try {
+			System.out.println("@@@@@@@@@@@@"+startTime);
 			tmpStartTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(startTime);
 			
 			if (tmpStartTime != null) {
 				newDataSet.setStartTime(new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
+				System.out.println("*************************************"+new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
 			}
 	    } catch (ParseException e){	    
+	    	System.out.println("nonononoononnonnon" +e);
 	    }
 		
 		try {
