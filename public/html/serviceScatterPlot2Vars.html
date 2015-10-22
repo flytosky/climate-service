@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -50,23 +49,24 @@
     
 
     
-      var inputs = [
-'data1',
-'var1',
-'pres1',
-'data2',
-'var2',
-'pres2',
-'lon0',
-'lon1',
-'lat0',
-'lat1',
-'nSample',
-'t0',
-'t1',
-'Image',
-'data_url',
-];
+      var inputs = {
+'model1':'data1',
+'var1':'var1',
+'pres1':'pres1',
+'model2':'data2',
+'var2':'var2',
+'pres2':'pres2',
+'lon1':'lon0',
+'lon2':'lon1',
+'lat1':'lat0',
+'lat2':'lat1',
+'nSample':'nSample',
+'startT':'t0',
+'endT':'t1',
+'purpose':'purpose',
+'Image':'Image',
+'data_url':'data_url',
+};
     
 
     // called on load or reload
@@ -90,14 +90,27 @@
       queries = get_querystring();
       //for (var key in queries) { if (queries.hasOwnProperty(key)) { alert(key + " -> " + queries[key]); } }
 
-      var key1, v1q;
+      var key0, key1, v1q;
 
-      for (var i=0; i<inputs.length; i++) {
-      key1 = inputs[i];
-      if (queries.hasOwnProperty(key1)) {
-        v1q = queries[key1];
-        //v1q = v1q.replace("_", "/");
+      for (key0 in queries) {
+        if (!queries.hasOwnProperty(key0)) { continue; }
+        if (!inputs.hasOwnProperty(key0)) { continue; }
+        key1 = inputs[key0];
+        v1q = queries[key0];
         v1q = v1q.trim();
+
+        if ( key0.slice(0,5) == "model" ) {
+          v1q = v1q.replace("_", "/");
+        }
+
+        if ( key0 == "startT" || key0 == "endT" ) {
+          v1q = v1q.slice(0,4) + "-" + v1q.slice(4,6);
+        }
+
+        if ( key0 == "purpose" ) {
+          v1q = unescape(v1q);
+        }
+
         try {
           if ( key1 == "Image" ) {
             $("#"+key1).html( "<img src='" + v1q + "' width='820'/>" );
@@ -109,7 +122,6 @@
             $("#"+key1).change();
           }
         } catch(err) {}
-      }
       }
 
 /*
@@ -161,8 +173,7 @@
         // sample url: http://cmacws.jpl.nasa.gov:8090/svc/scatterPlot2V?model1=ukmo_hadgem2-a&var1=ts&pres1=200&model2=ukmo_hadgem2-a&var2=clt&pres2=200&start_time=199001&end_time=199512&lon1=0&lon2=100&lat1=-29&lat2=29
         // form url string
         // var url = "http://cmacws.jpl.nasa.gov:8090/svc/scatterPlot2V?";
-        //var url = "http://" + window.location.hostname + ":8890/svc/scatterPlot2V?";
-        var url = "http://einstein.sv.cmu.edu:9002/svc/newScatterPlot2V?";
+        var url = "http://" + window.location.hostname + ":9002/svc/newScatterPlot2V?";
         // alert("url: " + url);
 
         var d1 = $("#data1").val();
@@ -250,9 +261,7 @@
         // url = url + arglist;
         // alert("url: " + url);
 
-        //var urlTimeBounds = "http://" + window.location.hostname + ":8890/svc/two_time_bounds?";
-        var urlTimeBounds = "http://einstein.sv.cmu.edu:9002/svc/two_time_bounds?";
-        
+        var urlTimeBounds = "http://" + window.location.hostname + ":9002/svc/two_time_bounds?";
         var arglistTB = "";
         arglistTB = arglistTB.concat("serviceType=");
         arglistTB = arglistTB.concat("2");
@@ -366,8 +375,8 @@
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-    $("#Response").html("error!");
-    $("#data_url").html("error!");
+		$("#Response").html("error!");
+		$("#data_url").html("error!");
                 // alert("xhr.status: "+xhr.status);
                 // alert("error status: "+textStatus);
             },
@@ -639,7 +648,7 @@ Data Subsetting
     <textarea readonly id="actionUrl" >Service URL Here</textarea>
   </div>
 </div> <!-- row -->
-      
+ 			
 <div class="row" center1>
   <div class="col-sm-12 center1">
     <div id="Image">Image Here</div>
