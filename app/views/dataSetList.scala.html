@@ -105,10 +105,12 @@
 									@for(climateService <- dataSet.getClimateServices()) {
 									  <div class="col-md-6">
 									    <div class="thumbnail">
+									    <a href="@climateService.getUrl()">
 									      <img src='@routes.Assets.at("images/github.png")' >
+								      	</a>
 									      <div class="caption">
 									        <h5>@climateService.getName()</h5>				        
-									        <p><a href="@climateService.getUrl()" class="btn btn-primary" role="button">Go</a> <a href="#" class="btn btn-default" role="button">Ignore</a></p>
+									        
 									      </div>				      
 									    </div>
 									  </div>
