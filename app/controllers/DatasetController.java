@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import models.ClimateService;
 import models.Dataset;
 
 import org.joda.time.DateTime;
@@ -194,6 +195,16 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 	for (int i = 0; i < dataSetNode.size(); i++) {
 		JsonNode json = dataSetNode.path(i);
 		Dataset newDataSet = deserializeJsonToDataSet(json);
+		long id = newDataSet.getId();
+		JsonNode climateSetNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT + Constants.GET_TOP_K_USED_CLIMATE_SERVICES_BY_DATASET_ID + "/" + id);
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+		for (int j = 0; j < climateSetNode.size(); j++) {
+			JsonNode json1 = climateSetNode.path(j);
+			ClimateService oneService = ClimateServiceController.deserializeJsonToClimateService(json1);
+			climateServices.add(oneService);
+		}
+		newDataSet.setClimateServices(climateServices);
 		dataset.add(newDataSet);
 	}
 	return dataset;

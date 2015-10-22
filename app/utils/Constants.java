@@ -25,6 +25,7 @@ public class Constants {
 	
 	public static final String GET_MOST_RECENTLY_USED_CLIMATE_SERVICES_CALL = "/climateService/getAllMostRecentClimateServicesByLatestAccessTime/json";
 	public static final String GET_CLIMATE_SERVICES_CALL = "/climateService/getAllClimateServices/json";
+	public static final String GET_TOP_K_USED_CLIMATE_SERVICES_BY_DATASET_ID = "/climateService/getTopKUsedClimateServicesByDatasetId";
 	
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";

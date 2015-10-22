@@ -465,7 +465,7 @@ public class ClimateServiceController extends Controller {
 		}
 	}
 	
-	private static ClimateService deserializeJsonToClimateService(JsonNode json) {
+	public static ClimateService deserializeJsonToClimateService(JsonNode json) {
 		
 		ClimateService oneService = new ClimateService();
 		oneService.setName(json.path("name").asText());
