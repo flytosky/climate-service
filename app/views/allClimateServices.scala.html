@@ -11,10 +11,10 @@
 		<th style = "vertical-align: middle;" class="col-md-4">Purpose</th>
 		<th style = "vertical-align: middle;" class="col-md-4">URL</th>
 		<th style = "vertical-align: middle;" class="col-md-3">Scenario</th>
-		<th style = "vertical-align: middle;" class="col-md-3">Version_No</th>
+		<th style = "vertical-align: middle;" class="col-md-3">Version No</th>
 		<th style = "vertical-align: middle;" class="col-md-3">Root Service_Id</th>
 		 @if(true){
-			<th style = "vertical-align: middle;" class="col-md-3">Operation</th> 
+			<th style = "vertical-align: middle;" class="col-md-2">Operation</th> 
 	     } 
 	     <th style = "vertical-align: middle;" class="col-md-2">Operation</th>
 	</tr>
@@ -27,14 +27,21 @@
 		<td><span class="@climateService.getName() editable" data-name='purpose'>
 				@{
 					if (climateService.getPurpose().length > 5 ) {
-						climateService.getPurpose().substring(0,5);
+						climateService.getPurpose().substring(0,5) + "...";
 					}else {
 						climateService.getPurpose();
 					}
-				} ... </span></td>
+				}  </span></td>
 		
 		<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
-				<a href = "@climateService.getUrl()">@climateService.getUrl()</a></span></td>
+				<a href = "@climateService.getUrl()">
+				@{
+					if (climateService.getUrl().length > 5 ) {
+						"..." + climateService.getUrl().substring(31);
+					}else {
+						climateService.getUrl();
+					}
+				}</a></span></td>
 				
 		<td><span class="@climateService.getName() editable" data-name='scenario'>
 				@climateService.getScenario() </span></td>
