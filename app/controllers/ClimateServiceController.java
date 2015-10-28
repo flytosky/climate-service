@@ -359,6 +359,19 @@ public class ClimateServiceController extends Controller {
 		
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
 		
+		List<User> usersList = new ArrayList<User>();
+		
+		JsonNode usersNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_ALL_USERS);
+		
+		// if no value is returned or error or is not json array
+		if (usersNode == null || usersNode.has("error")
+				|| !usersNode.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
+		}
+
+		
 //		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
 //				+ Constants.CMU_BACKEND_PORT
 //				+ Constants.GET_ALL_DATASETS);
@@ -374,7 +387,7 @@ public class ClimateServiceController extends Controller {
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
 				|| !climateServicesNode.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
 		}
 		
 //		// if no value is returned or error or is not json array
@@ -397,10 +410,28 @@ public class ClimateServiceController extends Controller {
 //			Dataset oneDataset = DatasetController.deserializeJsonToDataSet(json);
 //			dataSetsList.add(oneDataset);
 //		}
+		
+		
+		// parse the json string into object
+		for (int i = 0; i < usersNode.size(); i++) {
+			JsonNode json = usersNode.path(i);
+			User oneUser = new User();
+			oneUser.setId(json.findPath("id").asLong());
+			oneUser.setUserName(json.findPath("userName").asText());
+			oneUser.setPassword(json.findPath("password").asText());
+			oneUser.setFirstName(json.findPath("firstName").asText());
+			oneUser.setMiddleInitial(json.findPath("middleInitial").asText());
+			oneUser.setLastName(json.findPath("lastName").asText());
+			oneUser.setAffiliation(json.findPath("affiliation").asText());
+			oneUser.setEmail(json.findPath("email").asText());
+			oneUser.setResearchFields(json.findPath("researchFields").asText());
+			
+			usersList.add(oneUser);
+		}
 
 		int k = Integer.MAX_VALUE; // Set the first popular K datasets
 		dataSetsList = DatasetController.queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), k);
-		return ok(recommendationSummary.render(climateServices, dataSetsList));
+		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
 	}
 
 	public static Result mostRecentlyUsedClimateServices() {

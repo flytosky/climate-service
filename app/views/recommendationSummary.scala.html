@@ -1,4 +1,4 @@
-@(climateServices: List[ClimateService], dataSets: List[Dataset])
+@(climateServices: List[ClimateService], dataSets: List[Dataset], users: List[User])
 
 @import helper._
 
@@ -22,7 +22,7 @@
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#mostPopService" aria-controls="home" role="tab" data-toggle="tab">Most Popular Service</a></li>
 	    <li role="presentation"><a href="#mostPopDataset" aria-controls="profile" role="tab" data-toggle="tab">Most Popular Dataset</a></li>
-	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Most Active User</a></li>
+	    <li role="presentation"><a href="#mostActUsers" aria-controls="messages" role="tab" data-toggle="tab">Most Active User</a></li>
 	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
 	  </ul>	
 	  <!-- Tab panes -->
@@ -63,7 +63,7 @@
     	</div>
     	
 	    <div role="tabpanel" class="tab-pane" id="mostPopDataset">
-				<table class="table table-striped table-bordered table-condensed ex2 tablesorter" id ="myTable">
+				<table class="table table-striped table-bordered table-condensed ex2 tablesorter" >
 					<thead>
 					<tr>
 						<!--  
@@ -121,7 +121,45 @@
 				    </table>
 		
 		</div>
-	    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+	    <div role="tabpanel" class="tab-pane" id="mostActUsers">
+
+			<table class="table table-striped table-bordered table-condensed ex2">
+				<tr>
+					<td class="col-md-1">Id</td>
+					<td class="col-md-2">User Name</td>
+					<td class="col-md-2">First Name</td>
+					<td class="col-md-2">Middle Name</td>
+					<td class="col-md-2">Last Name</td>
+					<td class="col-md-2">Afflication</td>
+					<td class="col-md-4">Email</td>
+					<td class="col-md-2">Research Area</td>
+					
+				</tr>
+				@for(user <- users){
+				<tr>
+					<td>@user.getId()</td>
+					
+					<td><span class="@user.getId() editable" data-name='username'>@user.getUserName()</span></td>
+							
+					<td><span class="@user.getId() editable" data-name='firstName'>@user.getFirstName()</span></td>
+							
+					<td><span class="@user.getId() editable" data-name='middleInitial'>@user.getMiddleInitial()</span></td>
+							
+					<td><span class="@user.getId() editable" data-name='lastName'>@user.getLastName()</span></td>
+					
+					<td><span class="@user.getId() editable" data-name='affiliation'>@user.getAffiliation()</span></td>
+							
+					<td><span class="@user.getId() editable" data-name='email'>@user.getEmail()</span></td>
+							
+					<td><span class="@user.getId() editable" data-name='researchFields'>@user.getResearchFields()</span></td>
+						
+				</tr>
+				}
+		    </table>
+		
+		
+		
+		</div>
 	    <div role="tabpanel" class="tab-pane" id="settings">...</div>
 	  </div>
 	</div>
