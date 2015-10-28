@@ -24,6 +24,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import models.ClimateService;
+import models.Dataset;
 import models.ServiceConfigurationItem;
 import models.User;
 import play.Logger;
@@ -351,6 +352,55 @@ public class ClimateServiceController extends Controller {
 		}
 
 		return ok(mostPopularServices.render(climateServices));
+	}
+	
+	public static Result recommendationSummary() {
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+		
+		List<Dataset> dataSetsList = new ArrayList<Dataset>();
+		
+//		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
+//				+ Constants.CMU_BACKEND_PORT
+//				+ Constants.GET_ALL_DATASETS);
+//		
+//		System.out.println("GET API: " + Constants.URL_HOST
+//				+ Constants.CMU_BACKEND_PORT
+//				+ Constants.GET_ALL_DATASETS);
+
+		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
+
+		// if no value is returned or error or is not json array
+		if (climateServicesNode == null || climateServicesNode.has("error")
+				|| !climateServicesNode.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList));
+		}
+		
+//		// if no value is returned or error or is not json array
+//		if (dataSetsNode == null || dataSetsNode.has("error")
+//				|| !dataSetsNode.isArray()) {
+//			System.out.println("All oneDatasets format has error!");
+//			return ok(recommendationSummary.render(climateServices, dataSetsList));
+//		}
+
+		// parse the json string into object
+		for (int i = 0; i < climateServicesNode.size(); i++) {
+			JsonNode json = climateServicesNode.path(i);
+			ClimateService newService = deserializeJsonToClimateService(json);
+			climateServices.add(newService);
+		}		
+
+//		// parse the json string into object
+//		for (int i = 0; i < dataSetsNode.size(); i++) {
+//			JsonNode json = dataSetsNode.path(i);
+//			Dataset oneDataset = DatasetController.deserializeJsonToDataSet(json);
+//			dataSetsList.add(oneDataset);
+//		}
+
+		int k = Integer.MAX_VALUE; // Set the first popular K datasets
+		dataSetsList = DatasetController.queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), k);
+		return ok(recommendationSummary.render(climateServices, dataSetsList));
 	}
 
 	public static Result mostRecentlyUsedClimateServices() {
