@@ -429,7 +429,7 @@ public class ClimateServiceController extends Controller {
 		}
 
 		int k = Integer.MAX_VALUE; // Set the first popular K datasets
-		dataSetsList = DatasetController.queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), k);
+		dataSetsList = DatasetController.queryFirstKDatasetsWithoutClimateService("", "", "", "", "", new Date(0), new Date(), k);
 		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
 	}
 
