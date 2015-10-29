@@ -1,0 +1,277 @@
+@(jsonData: String)
+@import helper._
+
+@scripts = {
+	<link rel="stylesheet" href='@routes.Assets.at("stylesheets/vis.css")'>
+	<style type="text/css">
+	        html, body {
+	            font: 10pt arial;
+	          }
+	        #mynetwork {
+	            width: 900px;
+	            height: 900px;
+	            border: 1px solid lightgray;
+	        }
+	        #loadingBar {
+	            position:absolute;
+	            top:0px;
+	            left:0px;
+	            width: 902px;
+	            height: 902px;
+	            background-color:rgba(200,200,200,0.8);
+	            -webkit-transition: all 0.5s ease;
+	            -moz-transition: all 0.5s ease;
+	            -ms-transition: all 0.5s ease;
+	            -o-transition: all 0.5s ease;
+	            transition: all 0.5s ease;
+	            opacity:1;
+	        }
+	        #wrapper {
+	            position:relative;
+	            width:900px;
+	            height:900px;
+	        }
+	
+	        #text {
+	            position:absolute;
+	            top:0px;
+	            left:530px;
+	            width:30px;
+	            height:50px;
+	            margin:auto auto auto auto;
+	            font-size:22px;
+	            color: #000000;
+	        }
+	
+	
+	        div.outerBorder {
+	            position:relative;
+	            top:400px;
+	            width:600px;
+	            height:44px;
+	            margin:auto auto auto auto;
+	            border:8px solid rgba(0,0,0,0.1);
+	            background: rgb(252,252,252); /* Old browsers */
+	            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+	            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+	            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+	            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+	            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+	            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+	            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+	            border-radius:72px;
+	            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	        }
+	
+	        #border {
+	            position:absolute;
+	            top:2px;
+	            left:10px;
+	            width:500px;
+	            height:23px;
+	            margin:auto auto auto auto;
+	            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+	            border-radius:10px;
+	        }
+	
+	        #bar {
+	            position:absolute;
+	            top:1px;
+	            left:0px;
+	            width:20px;
+	            height:20px;
+	            margin:auto auto auto auto;
+	            border-radius:11px;
+	            border:2px solid rgba(30,30,30,0.05);
+	            background: rgb(153, 255, 255); /* Old browsers */
+	            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	        }
+	
+	        #config {            
+	            
+	            width: 400px;
+	            height: 600px;
+	
+	        }
+	        #config input {
+	            display: inline-block;
+	        }
+	        #config input.vis-configuration.vis-config-rangeinput {
+	            height: 15px;
+	        }
+	        #config button, input, select, textarea {
+	            line-height: 100%;
+	        }
+	</style>
+	
+	<script type="text/javascript" src='@routes.Assets.at("javascripts/exampleUtil.js")'></script>
+	<script type="text/javascript" src='@routes.Assets.at("javascripts/vis.js")'></script>
+	<script type="text/javascript">
+	$(document).ready(function() {  
+	    $("#panel").hide(); 
+	    $("#config").hide();
+	    
+	    draw();
+	  })
+
+	    var nodes = null;
+	    var edges = null;
+	    var network = null;
+
+	    var visConfig = 1;
+
+	    function hideConfig() {
+	        if (visConfig == 0) {
+	            $("#config").hide();
+	            visConfig =1;
+	        }else {
+	            $("#config").show();
+	            visConfig =0;
+	        }
+	    }
+
+	    function draw() {
+	    	console.log("draw");
+	      // create people.
+	      // value corresponds with the age of the person
+	      var jsonString = $('#jsonData').text();
+	      var test = jsonString;
+	      
+	      //test = JSON.stringify(test);
+	      console.log("test: " + test);
+	      test = JSON.parse(test);
+	      var nodes = test.nodes;
+	      console.log("nodes: " + nodes);
+	      var edges = test.edges;
+	      console.log("edges: " + edges); 
+
+	      // Instantiate our network object.
+	      var container = document.getElementById('mynetwork');
+	      var data = {
+	        nodes: nodes,
+	        edges: edges
+	      };
+	      var options = {
+	        nodes: {
+	          color: {
+	            highlight: {
+	              background: 'pink',
+	              border: 'red'
+	            }
+	          },
+	          shape: 'dot',
+	        },
+	        groups: {
+	          dataset: {
+	            color:"#A9E2F3"
+	          },
+	          user: {
+	            color:"#F781F3"
+	          }
+	        },
+	        layout:{
+	          randomSeed:34
+	        },
+	        physics: {          
+	          stabilization: {
+	            enabled:true,
+	            iterations:200,
+	            updateInterval:1
+	          }
+	        },
+	        configure: {
+	          filter:function (option, path) {
+	            if (path.indexOf('physics') !== -1 || option === 'physics') {
+	              return true;
+	            }
+	            if (path.indexOf('smooth') !== -1 || option === 'smooth') {
+	              return true;
+	            }
+	            return true;
+	          },
+	          container: document.getElementById('config')
+	        }
+	      };
+	      network = new vis.Network(container, data, options);
+
+	      network.on("stabilizationProgress", function(params) {
+	                var maxWidth = 496;
+	                var minWidth = 20;
+	                var widthFactor = params.iterations/params.total;
+	                var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	                document.getElementById('bar').style.width = width + 'px';
+	                document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	            });
+	            network.once("stabilizationIterationsDone", function() {
+	                document.getElementById('text').innerHTML = '100%';
+	                document.getElementById('bar').style.width = '496px';
+	                document.getElementById('loadingBar').style.opacity = 0;
+	                // really clean the dom element
+	                setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	            });
+
+	      //network.focusOnNode(19);
+	      network.on('select', function(properties) {
+	        var select_node = $.grep(data.nodes, function(e){
+	          return e["id"] == properties.nodes[0];
+	        })[0];
+
+	        $("#nodeName").text(select_node["title"]);
+	        //alert(select_node["title"]);
+	        $("#id").text(select_node["id"]);
+	        $("#cluster").text(select_node["cluster"]);
+	        $("#label").text(select_node["label"]);
+
+	        $("#panel").show();
+	      });
+	    }
+	    
+	    
+	</script>
+	<script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
+}
+
+@main("Knowledge Graph", scripts){
+	<div id="jsonData" style="display: none;">@jsonData</div>
+	<div id="knowledgeGraph">
+	   <div id="loadingBar">
+	    <div class="outerBorder" >
+	        <div id="text">0%</div>
+	        <div id="border">
+	            <div id="bar"></div>
+	        </div>
+	    </div>
+	  </div>
+	  <div id="mynetwork" class="col-lg-3"></div> 
+	  <div class = "col-lg-offset-7">
+	        <button type="button" onclick="hideConfig()" class="btn btn-default btn-lg "><span class="glyphicon glyphicon-star" aria-hidden="true">
+	        </span> Show Advanced Settings </button>
+	  </div>
+	  <div id="config" class="col-lg-offset-7"></div>  
+	</div>
+	
+	<br>
+	
+	<div id="panel" class="col-lg-offset-7">  
+	  <div class="well col-lg-5">
+	    <div class="text-center">
+	      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
+	    </div>
+	    <div class="card-block text-center">
+	      <h4 class="card-title" id="nodeName">card</h4>
+	      <p class="card-text text-muted" >A data set (or dataset) is a collection of data.</p>
+	    </div>
+	    <ul class="list-group list-group-flush">
+	      <li class="list-group-item"><strong>Id:</strong><code id="id"></code></li>
+	      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
+	      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
+	    </ul>
+	    <div class="card-block">
+	      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a> 
+	      <a href="#" class="card-link col-lg-6">Another link</a>
+	    </div>    
+	  </div>  
+	</div>
+  
+}
