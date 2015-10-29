@@ -19,6 +19,14 @@
 				<ul class="nav navbar-nav navbar-right">
 					
 					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="text-danger">Recommendation</span><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="@routes.ClimateServiceController.recommendationSummary()">Summary</a></li>
+							
+						</ul>				
+					</li>
+					
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Web Service<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="@routes.ClimateServiceController.mostRecentlyAddedClimateServices()">Most Recently Added</a></li>
@@ -50,7 +58,7 @@
 							<li><a href="@routes.ServiceExecutionLogController.getServiceLog">Service Execution Log</a></li>
 							<li><a href="@routes.ServiceExecutionLogController.searchServiceLog">Search Service Log</a></li>
 							<li><a href="@routes.DatasetLogController.getAllDatasetLogs">Dataset Log</a></li>
-							<li><a href="@routes.AnalyticsController.getRecommend">Semantic Service Analytics</a></li>
+							<li><a href="@routes.AnalyticsController.getKnowledgeGraph">Knowledge Graph</a></li>
 							<li><a href="@routes.AnalyticsController.getDatasetRecommend">Semantic Dataset Analytics</a></li>
 							<li><a href="@routes.AnalyticsController.getScientistRecommend">User Analytics</a></li>
 							<li><a href="@routes.AnalyticsController.getLogGraph">Service Execution Log Analytics</a></li>

@@ -12,6 +12,9 @@ GET		/createNewUser				controllers.Application.createNewUser()
 GET		/createSuccess				controllers.Application.createSuccess()
 POST	/isEmailExisted				controllers.Application.isEmailExisted()
 
+#recommendation overview
+GET		/climateService/recommendationSummary					controllers.ClimateServiceController.recommendationSummary()
+
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
 POST		/climateService/add											controllers.ClimateServiceController.addClimateService()
@@ -52,6 +55,7 @@ GET     /datasetRecommend                           controllers.AnalyticsControl
 GET     /profileRecommend                           controllers.AnalyticsController.getScientistRecommend()
 GET     /serviceLogGraph                            controllers.AnalyticsController.getLogGraph()
 GET 	/searchAndGenerateWorkflow					controllers.AnalyticsController.getSearchAndGenerateWorkflow()
+GET     /serviceKnowledgeGraph                      controllers.AnalyticsController.getKnowledgeGraph()
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()

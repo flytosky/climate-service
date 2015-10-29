@@ -352,6 +352,86 @@ public class ClimateServiceController extends Controller {
 
 		return ok(mostPopularServices.render(climateServices));
 	}
+	
+	public static Result recommendationSummary() {
+		List<ClimateService> climateServices = new ArrayList<ClimateService>();
+		
+		List<Dataset> dataSetsList = new ArrayList<Dataset>();
+		
+		List<User> usersList = new ArrayList<User>();
+		
+		JsonNode usersNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_ALL_USERS);
+		
+		// if no value is returned or error or is not json array
+		if (usersNode == null || usersNode.has("error")
+				|| !usersNode.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
+		}
+
+		
+//		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
+//				+ Constants.CMU_BACKEND_PORT
+//				+ Constants.GET_ALL_DATASETS);
+//		
+//		System.out.println("GET API: " + Constants.URL_HOST
+//				+ Constants.CMU_BACKEND_PORT
+//				+ Constants.GET_ALL_DATASETS);
+
+		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_MOST_POPULAR_CLIMATE_SERVICES_CALL);
+
+		// if no value is returned or error or is not json array
+		if (climateServicesNode == null || climateServicesNode.has("error")
+				|| !climateServicesNode.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
+		}
+		
+//		// if no value is returned or error or is not json array
+//		if (dataSetsNode == null || dataSetsNode.has("error")
+//				|| !dataSetsNode.isArray()) {
+//			System.out.println("All oneDatasets format has error!");
+//			return ok(recommendationSummary.render(climateServices, dataSetsList));
+//		}
+
+		// parse the json string into object
+		for (int i = 0; i < climateServicesNode.size(); i++) {
+			JsonNode json = climateServicesNode.path(i);
+			ClimateService newService = deserializeJsonToClimateService(json);
+			climateServices.add(newService);
+		}		
+
+//		// parse the json string into object
+//		for (int i = 0; i < dataSetsNode.size(); i++) {
+//			JsonNode json = dataSetsNode.path(i);
+//			Dataset oneDataset = DatasetController.deserializeJsonToDataSet(json);
+//			dataSetsList.add(oneDataset);
+//		}
+		
+		
+		// parse the json string into object
+		for (int i = 0; i < usersNode.size(); i++) {
+			JsonNode json = usersNode.path(i);
+			User oneUser = new User();
+			oneUser.setId(json.findPath("id").asLong());
+			oneUser.setUserName(json.findPath("userName").asText());
+			oneUser.setPassword(json.findPath("password").asText());
+			oneUser.setFirstName(json.findPath("firstName").asText());
+			oneUser.setMiddleInitial(json.findPath("middleInitial").asText());
+			oneUser.setLastName(json.findPath("lastName").asText());
+			oneUser.setAffiliation(json.findPath("affiliation").asText());
+			oneUser.setEmail(json.findPath("email").asText());
+			oneUser.setResearchFields(json.findPath("researchFields").asText());
+			
+			usersList.add(oneUser);
+		}
+
+		int k = Integer.MAX_VALUE; // Set the first popular K datasets
+		dataSetsList = DatasetController.queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), k);
+		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList));
+	}
 
 	public static Result mostRecentlyUsedClimateServices() {
 

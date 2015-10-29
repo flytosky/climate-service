@@ -212,7 +212,7 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 	return dataset;
 }
 
-	private static Dataset deserializeJsonToDataSet(JsonNode json) {
+	public static Dataset deserializeJsonToDataSet(JsonNode json) {
 		Dataset newDataSet = new Dataset();
 		newDataSet.setId(json.get("id").asLong());
 		newDataSet.setName(json.get("name").asText());
