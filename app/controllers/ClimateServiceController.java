@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import models.ClimateService;
+import models.Dataset;
 import models.ServiceConfigurationItem;
 import models.User;
 import play.Logger;
@@ -38,6 +40,7 @@ import utils.RESTfulCalls.ResponseType;
 import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ClimateServiceController extends Controller {
@@ -52,9 +55,6 @@ public class ClimateServiceController extends Controller {
 	public static Result showAllClimateServices() {
 		List<ClimateService> climateServicesList = new ArrayList<ClimateService>();
 		JsonNode climateServicesNode = RESTfulCalls.getAPI(Constants.URL_HOST
-				+ Constants.CMU_BACKEND_PORT
-				+ Constants.GET_ALL_CLIMATE_SERVICES);
-		System.out.println("GET API: " + Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_CLIMATE_SERVICES);
 		// if no value is returned or error or is not json array
@@ -490,5 +490,62 @@ public class ClimateServiceController extends Controller {
 		
 		return oneService;
 	}
+	
+	// Get all climate Services
+	public static Result searchClimateServices() {
+		return ok(searchClimateService.render(climateServiceForm));
+	}
 
+
+	public static Result getSearchResult(){
+		Form<ClimateService> cs = climateServiceForm.bindFromRequest();
+		ObjectNode jsonData = Json.newObject();
+		
+		String name = "";
+		String purpose = "";
+		String scenario = "";
+		String url = "";
+		String versionNo = "";
+		
+		try {
+			name = cs.field("Climate Service Name").value();
+			purpose = cs.field("Purpose").value();
+			url = cs.field("Url").value();
+			scenario = cs.field("Scenario").value();
+			versionNo = cs.field("Version Number").value();
+		
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		}
+
+		List<ClimateService> response = queryClimateService(name, purpose, url, scenario, versionNo);
+		return ok(climateServiceList.render(response));
+	}
+	
+public static List<ClimateService> queryClimateService(String name, String purpose, String url, String scenario, String versionNo) {
+		
+		List<ClimateService> climateService = new ArrayList<ClimateService>();
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode queryJson = mapper.createObjectNode();
+		queryJson.put("name", name);
+		queryJson.put("purpose", purpose);
+		queryJson.put("url", url);
+		queryJson.put("scenario", scenario);
+		queryJson.put("versionNo", versionNo);
+		
+		JsonNode climateServiceNode = RESTfulCalls.postAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT + Constants.QUERY_CLIMATE_SERVICE, queryJson);
+		// parse the json string into object
+		for (int i = 0; i < climateServiceNode.size(); i++) {
+			JsonNode json = climateServiceNode.path(i);
+			ClimateService newClimateService = deserializeJsonToClimateService(json);
+			climateService.add(newClimateService);
+		}
+		return climateService;
+	}
 }

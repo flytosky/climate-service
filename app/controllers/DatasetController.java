@@ -37,12 +37,14 @@ public class DatasetController extends Controller {
 		return ok(searchDataSet.render(dataSetForm));
 	}
 	
+//	public static Result mostPopularDatasets() {
+//		List<Dataset> datasets = queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), 1);
+//		return ok(dataSetListPopular.render(dataSetForm, datasets));
+//	}
+	
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
 		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
-				+ Constants.CMU_BACKEND_PORT
-				+ Constants.GET_ALL_DATASETS);
-		System.out.println("GET API: " + Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_DATASETS);
 		// if no value is returned or error or is not json array
@@ -267,4 +269,5 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		
 		return newDataSet;
 	}
+	
 }

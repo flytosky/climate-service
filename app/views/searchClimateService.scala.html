@@ -1,0 +1,117 @@
+@(climateServiceForm: play.data.Form[ClimateService])
+
+@import helper._
+
+@scripts = {
+	<script src='@routes.Assets.at("javascripts/edit_button.js")'></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("#preview")
+									.click(
+											function() {
+												var target = document
+														.getElementById("show");
+												if (target.style.display == "none") {
+													target.style.display = "block";
+													$("#preview").text("Hide");
+													var climateServiceName = $(
+															"#climateServiceName")
+															.val();
+													var purpose = $("#purpose")
+															.val();
+													var scenario = $(
+															"#scenario")
+															.val();
+													var url = $(
+															"#url")
+															.val();
+													var versionNo = $(
+															"#versionNo")
+															.val();
+												
+													if (climateServiceName != "") {
+														$("#content")
+																.append(
+																		" Climate Service Name = "
+																				+ climateServiceName);
+													}
+													if (purpose != ""
+															&& purpose != null) {
+														$("#content")
+																.append(
+																		" Purpose = "
+																				+ purpose);
+													}
+												
+													if (scenario != ""
+															&& scenario != null) {
+														$("#content")
+																.append(
+																		" Scenario = "
+																				+ scenario);
+													}
+													if (url != ""
+															&& url != null) {
+														$("#content")
+																.append(
+																		" URL = "
+																				+ url);
+													}
+													if (versionNo != ""
+															&& versionNo != null) {
+														$("#content")
+																.append(
+																		" Version Number = "
+																				+ versionNo);
+													}
+
+												} else {
+													$("#content").val('');
+													target.style.display = "none";
+													$("#preview").text(
+															"Preview");
+												}
+											});
+						});
+	</script>
+}
+
+@main("Search Climate Service", scripts){ 
+	 
+    <h1 style="margin-left:420px">Search Climate Service</h1>
+    @helper.form(routes.ClimateServiceController.getSearchResult()) {
+    	<div class="ui-widget col-sm-offset-3 col-sm-7">
+    	<div class = "form-group">
+    		@inputText(climateServiceForm("Climate Service Name"), 'class -> "form-control", 'id -> "climateServiceName", '_label -> Messages("Climate Service Name"), 'placeholder -> "twoDimSlice3D", 'size->70) 
+    	</div>
+    	<div class = "form-group">
+    		@inputText(climateServiceForm("Purpose"), 'class -> "form-control", 'id -> "purpose", '_label -> Messages("Purpose"), 'placeholder -> "service purpose", 'size->70) 
+    	</div>
+    	
+       	<div class = "form-group">
+       		@inputText(climateServiceForm("Scenario"), 'class -> "form-control", 'id -> "scenario", '_label -> Messages("Scenario"), 'placeholder -> "1", 'size->70)
+	    </div>
+	    <div class = "form-group">
+	    	@inputText(climateServiceForm("Url"), 'class -> "form-control", 'id -> "url", '_label -> Messages("Url"), 'placeholder -> "http://", 'size->70)
+	    	
+	    </div>
+	    <div class = "form-group">
+       		@inputText(climateServiceForm("Version Number"), 'class -> "form-control", 'id -> "versionNo", '_label -> Messages("Version Number"), 'placeholder -> "1", 'size->70)
+	    
+	    	<div id="show" style="display: none;">
+	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
+	    	</div>
+	    </div>
+	    <div align="center">
+	    	<button id="preview" type="button" class="btn btn-info"> Preview</button>
+	    	<input class="btn" type="submit" value="Search">
+	    </div>
+	    </div>
+	    
+	    }
+	 }

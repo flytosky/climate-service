@@ -29,6 +29,7 @@ public class Constants {
 	
 	// climate service page
 	public static final String SAVE_CLIMATE_SERVICE_PAGE = "/climateService/savePage";
+	public static final String QUERY_CLIMATE_SERVICE = "/climateService/queryClimateService";
 	
 	// user
 	public static final String IS_USER_VALID = "/users/isUserValid";

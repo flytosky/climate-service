@@ -1,0 +1,62 @@
+@(climateServices: List[ClimateService])
+@import helper._
+
+@main("All Climate Services") {
+
+    <h1>@climateServices.size() Climate Services</h1>
+		<table class="table table-striped table-bordered table-condensed ex2 tablesorter" id = "csTable">
+	<thead>
+	<tr class="text-center">
+		<th style = "vertical-align: middle;" class="col-md-2">Climate Service Name</th>
+		<th style = "vertical-align: middle;" class="col-md-4">Purpose</th>
+		<th style = "vertical-align: middle;" class="col-md-4">URL</th>
+		<th style = "vertical-align: middle;" class="col-md-3">Scenario</th>
+		<th style = "vertical-align: middle;" class="col-md-3">Version No</th>
+		<th style = "vertical-align: middle;" class="col-md-3">Root Service_Id</th>
+		 @if(true){
+			<th style = "vertical-align: middle;" class="col-md-2">Operation</th> 
+	     } 
+	     <th style = "vertical-align: middle;" class="col-md-2">Operation</th>
+	</tr>
+	</thead>
+	<tbody>
+	@for(climateService <- climateServices) {
+	<tr>
+		<td><a href = "@climateService.getUrl()">@climateService.getName()</a></td>
+
+		<td><span class="@climateService.getName() editable" data-name='purpose'>
+				@{
+					if (climateService.getPurpose().length > 5 ) {
+						climateService.getPurpose().substring(0,5) + "...";
+					}else {
+						climateService.getPurpose();
+					}
+				}  </span></td>
+		
+		<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
+				<a href = "@climateService.getUrl()">
+				@{
+					if (climateService.getUrl().length > 5 ) {
+						"..." + climateService.getUrl().substring(31);
+					}else {
+						climateService.getUrl();
+					}
+				}</a></span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='scenario'>
+				@climateService.getScenario() </span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='versionNo'>
+				@climateService.getVersionNo() </span></td>
+				
+		<td><span class="@climateService.getName() editable" data-name='rootServiceId'>
+				@climateService.getRootServiceId() </span></td>
+				
+		<td><input type="file" class="btn btn-info" id ="upload @climateService.getName()" ></button></td>
+		<td><button type="button" class="btn btn-danger" id ="doReplace"  onclick="Javascript:replaceFile('upload '+'@climateService.getName()')" >Execute</button></td>
+	
+	</tr>
+	}
+	</tbody>
+    </table>
+}

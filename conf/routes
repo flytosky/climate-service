@@ -24,6 +24,8 @@ POST		/climateService/ruleEngineData									controllers.ClimateServiceControlle
 GET     	/climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
 GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
 GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
+GET		/climateService/searchClimateService 					 		controllers.ClimateServiceController.searchClimateServices()
+GET 	/climateService/getSearchResult				    controllers.ClimateServiceController.getSearchResult()
 
 #replace page
 POST 	/climateService/replaceFile								controllers.ClimateServiceController.replaceFile()
@@ -39,6 +41,7 @@ GET 		/getConfigurationByConfId                               controllers.Servic
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
+#GET     /dataSet/mostPopularDatasets				controllers.DatasetController.mostPopularDatasets()
 
 # Dataset Log
 GET		/datasetLog/allDatasetLogs					controllers.DatasetLogController.getAllDatasetLogs()
