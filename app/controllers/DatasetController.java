@@ -37,10 +37,10 @@ public class DatasetController extends Controller {
 		return ok(searchDataSet.render(dataSetForm));
 	}
 	
-//	public static Result mostPopularDatasets() {
-//		List<Dataset> datasets = queryFirstKDatasets("", "", "", "", "", new Date(0), new Date(), 1);
-//		return ok(dataSetListPopular.render(dataSetForm, datasets));
-//	}
+	public static Result mostPopularDatasets() {
+		List<Dataset> datasets = queryFirstKDatasetsWithoutClimateService("", "", "", "", "", new Date(0), new Date(), Integer.MAX_VALUE);
+		return ok(dataSetListPopular.render(dataSetForm, datasets));
+	}
 	
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
@@ -211,6 +211,39 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 	}
 	return dataset;
 }
+	
+	public static List<Dataset> queryFirstKDatasetsWithoutClimateService(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime, int k) {
+		
+		List<Dataset> dataset = new ArrayList<Dataset>();
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode queryJson = mapper.createObjectNode();
+		queryJson.put("name", dataSetName);
+		queryJson.put("agencyId", agency);
+		queryJson.put("instrument", instrument);
+		queryJson.put("physicalVariable", physicalVariable);
+		queryJson.put("gridDimension", gridDimension);
+		queryJson.put("k", k);
+		if (dataSetEndTime != null) {
+			queryJson.put("dataSetEndTime", dataSetEndTime.getTime());
+		}
+		if (dataSetStartTime != null) {
+			queryJson.put("dataSetStartTime", dataSetStartTime.getTime());
+		}
+		JsonNode dataSetNode = RESTfulCalls.postAPI(Constants.URL_HOST
+				+ Constants.CMU_BACKEND_PORT + Constants.GET_MOST_K_POPULAR_DATASETS_CALL, queryJson);
+		if (dataSetNode == null || dataSetNode.has("error")
+				|| !dataSetNode.isArray()) {
+			return dataset;
+		}
+	
+		// parse the json string into object
+		for (int i = 0; i < dataSetNode.size(); i++) {
+			JsonNode json = dataSetNode.path(i);
+			Dataset newDataSet = deserializeJsonToDataSet(json);
+			dataset.add(newDataSet);
+		}
+		return dataset;
+	}
 
 	public static Dataset deserializeJsonToDataSet(JsonNode json) {
 		Dataset newDataSet = new Dataset();

@@ -44,7 +44,7 @@ GET 		/getConfigurationByConfId                               controllers.Servic
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
-#GET     /dataSet/mostPopularDatasets				controllers.DatasetController.mostPopularDatasets()
+GET     /dataSet/mostPopularDatasets				controllers.DatasetController.mostPopularDatasets()
 
 # Dataset Log
 GET		/datasetLog/allDatasetLogs					controllers.DatasetLogController.getAllDatasetLogs()
