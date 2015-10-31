@@ -228,7 +228,10 @@
 	            if (path.indexOf('smooth') !== -1 || option === 'smooth') {
 	              return true;
 	            }
-	            return true;
+	            if (path.indexOf('layout') !== -1 || option === 'layout') {
+		              return true;
+		            }
+	            return false;
 	          },
 	          container: document.getElementById('config')
 	        }
