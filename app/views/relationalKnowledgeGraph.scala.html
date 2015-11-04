@@ -108,9 +108,9 @@
 	    $("#panel").hide(); 
 	    $("#config").hide();
 	    
-	    draw();
 	  })
 
+	    var responseJson = null;
 	    var nodes = null;
 	    var edges = null;
 	    var network = null;
@@ -120,14 +120,14 @@
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
 			var temp2 = temp1.split(" ");
-			var type1 = temp2[0];
-			var type2 = temp2[1];
-	    	var type3 = temp2[2];
+			var p1 = temp2[0];
+			var p2 = temp2[1];
+	    	var p3 = temp2[2];
 	    	
 	    	var parameters = {
-	    			param1:type1,
-	    			param2:type2,
-	    			param3:type3
+	    			param1:p1,
+	    			param2:p2,
+	    			param3:p3
 	    	}
 	    	
 	    	$.ajax({
@@ -138,15 +138,15 @@
 	            dataType: "text"
 	        }).done(function(data1) {
 	        	console.log("success");
-	        	var responseJson = JSON.parse(data1);
-	        	console.log(responseJson);
-	        	
+	        	responseJson = data1;
+	        	draw();
 	        }).fail(function(xhr, textStatus, errorThrown) {
 	        	console.log("error!");
 	        	console.log(xhr);
 	        	console.log(textStatus);
 	            console.log(errorThrown);
 	        })
+	        
 	    }
 	    
 
@@ -164,8 +164,7 @@
 	    	console.log("draw");
 	      // create people.
 	      // value corresponds with the age of the person
-	      var jsonString = $('#jsonData').text();
-	      var test = jsonString;
+	      var test = responseJson;
 	      
 	      //test = JSON.stringify(test);
 	      console.log("test: " + test);
@@ -326,7 +325,7 @@
             <form>
                 <div class="form-group">
                     <label>Parameter Type1</label>
-                    <select class="form-control" id="paramCombination" onchange="Javascript:disableItem()">
+                    <select class="form-control" id="paramCombination">
                         <option value="User User Dataset">User × User | Dataset</option>
                         <option value="User User Service">User × User | Service</option>
                         <option value="Dataset Dataset User">Dataset × Dataset | User</option>
