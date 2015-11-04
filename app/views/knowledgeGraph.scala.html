@@ -108,10 +108,11 @@
 	$(document).ready(function() {  
 	    $("#panel").hide(); 
 	    $("#config").hide();
+	    $("#basicConf").hide();
 	    
 	    draw();
 	  })
-
+		var degrees = 1;// graph level setting
 	    var nodes = null;
 	    var edges = null;
 	    var network = null;
@@ -120,16 +121,32 @@
 		var highlightActive = false;
 	    var nodesDataset = new vis.DataSet(nodes); 
 	    var edgesDataset = new vis.DataSet(edges); 
-	    var visConfig = 1;
-
-	    function hideConfig() {
-	        if (visConfig == 0) {
+	    var visAdvancedConfig = 1;
+	    var visBasicConfig = 1;
+	    
+	    function showBasicConfig() {
+	        if (visBasicConfig == 0) {
+	            $("#basicConf").hide();
+	            visBasicConfig =1;
+	        }else {
+	            $("#basicConf").show();
+	            visBasicConfig =0;
+	        }
+	    }
+	    
+	    function showAdvancedConfig() {
+	        if (visAdvancedConfig == 0) {
 	            $("#config").hide();
-	            visConfig =1;
+	            visAdvancedConfig =1;
 	        }else {
 	            $("#config").show();
-	            visConfig =0;
+	            visAdvancedConfig =0;
 	        }
+	    }
+	    
+	    function setGraphLevel() {
+	    	degrees = $("#graphLevel").val();
+	    	alert(degrees);
 	    }
 
 	    function draw() {
@@ -288,7 +305,7 @@
 	    	      var i,j;
 	    	      var selectedNode = params.nodes[0];
 	    	      
-	    	      var degrees = 2;
+	    	      
 
 	    	      // mark all nodes as hard to read.
 	    	      for (var nodeId in allNodes) {
@@ -385,9 +402,24 @@
 	   
 	  <div id="mynetwork" class="col-lg-3"></div>
 	  <div class = "col-lg-offset-7">
-	        <button type="button" onclick="hideConfig()" class="btn btn-default btn-lg "><span class="glyphicon glyphicon-star" aria-hidden="true">
+	        <button type="button" onclick="showBasicConfig()" class="btn btn-default  "><span class="glyphicon glyphicon-cog" aria-hidden="true">
+	        </span> Show Basic Settings </button>
+	        <button type="button" onclick="showAdvancedConfig()" class="btn btn-default  "><span class="glyphicon glyphicon-wrench" aria-hidden="true">
 	        </span> Show Advanced Settings </button>
 	  </div>
+	  
+	  <div id="basicConf" class="col-lg-offset-7">
+	  	<br>
+  			<div class="col-lg-4">
+  				<label>Graph Level</label>		     
+			    <div class="input-group">	
+			    <input type="number" class="form-control" placeholder="1~3" id = "graphLevel">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
+			      </span>
+			    </div>
+			</div>
+	  </div>  
 	  <div id="config" class="col-lg-offset-7"></div>  
 	</div>
 	
