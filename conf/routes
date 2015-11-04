@@ -56,6 +56,9 @@ GET     /profileRecommend                           controllers.AnalyticsControl
 GET     /serviceLogGraph                            controllers.AnalyticsController.getLogGraph()
 GET 	/searchAndGenerateWorkflow					controllers.AnalyticsController.getSearchAndGenerateWorkflow()
 GET     /serviceKnowledgeGraph                      controllers.AnalyticsController.getKnowledgeGraph()
+GET     /relationalKnowledgeGraph                   controllers.AnalyticsController.getRelationalKnowledgeGraph()
+POST	/getSpecifiedKnowledgeGraph					controllers.AnalyticsController.getSpecifiedKnowledgeGraph()
+
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()

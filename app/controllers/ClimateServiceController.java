@@ -607,7 +607,7 @@ public class ClimateServiceController extends Controller {
 		return ok(climateServiceList.render(response));
 	}
 	
-public static List<ClimateService> queryClimateService(String name, String purpose, String url, String scenario, String versionNo) {
+	public static List<ClimateService> queryClimateService(String name, String purpose, String url, String scenario, String versionNo) {
 		
 		List<ClimateService> climateService = new ArrayList<ClimateService>();
 		ObjectMapper mapper = new ObjectMapper();

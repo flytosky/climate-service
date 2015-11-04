@@ -2,13 +2,16 @@ package controllers;
 
 import models.ServiceExecutionLog;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import utils.Constants;
 import utils.RESTfulCalls;
+import utils.RESTfulCalls.ResponseType;
 import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class AnalyticsController extends Controller{
 
@@ -21,6 +24,10 @@ public class AnalyticsController extends Controller{
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
 		String resStr = response.toString();
 		return ok(knowledgeGraph.render(resStr));
+	}
+	
+	public static Result getRelationalKnowledgeGraph() {
+		return ok(relationalKnowledgeGraph.render());
 	}
 	
 	public static Result getRecommend() {
@@ -49,5 +56,32 @@ public class AnalyticsController extends Controller{
 	
 	public static Result getSearchAndGenerateWorkflow() {
 		return ok(searchGenerateWorkflow.render(serviceLogForm));
+	}
+	
+	public static Result getSpecifiedKnowledgeGraph() {
+		JsonNode json = request().body().asJson();
+		String parameter1 = json.path("param1").asText();
+		String parameter2 = json.path("param2").asText();
+		String parameter3 = json.path("param3").asText();
+		System.out.println(parameter1 + "*******" + parameter2 + "*******" + parameter3);
+		JsonNode response = null;
+		ObjectNode jsonData = Json.newObject();
+		try {
+			jsonData.put("param1", parameter1);
+			jsonData.put("param2", parameter2);
+			jsonData.put("param3", parameter2);
+			response = RESTfulCalls.postAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER, jsonData);
+			Application.flashMsg(response);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
 	}
 }
