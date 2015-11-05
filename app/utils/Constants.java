@@ -83,6 +83,6 @@ public class Constants {
 	
 	//Analytics
 	public static final String GET_DATASET_AND_USER = "/analytics/getAllDatasetAndUserWithCount/json";
-	
-	
+	public static final String GET_SERVICE_AND_USER = "/analytics/getAllServiceAndUserWithCount/json";
+	public static final String GET_DATASET_AND_SERVICE = "/analytics/getAllServiceAndDatasetWithCount/json";
 }
