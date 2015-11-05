@@ -20,7 +20,7 @@ public class AnalyticsController extends Controller{
 	
 	
 	public static Result getKnowledgeGraph() {
-		JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER
+		JsonNode response = RESTfulCalls.getAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
 		String resStr = response.toString();
 		return ok(knowledgeGraph.render(resStr));
@@ -73,13 +73,13 @@ public class AnalyticsController extends Controller{
 //			response = RESTfulCalls.postAPI(Constants.URL_HOST
 //					+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER, jsonData);
 			if(parameter1.equals("User") && parameter2.equals("Dataset")) {
-				response = RESTfulCalls.getAPI(Constants.URL_SERVER
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
 			}else if(parameter1.equals("User") && parameter2.equals("Service")) {
-				response = RESTfulCalls.getAPI(Constants.URL_SERVER
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + Constants.GET_SERVICE_AND_USER);
 			}else if(parameter1.equals("Dataset") && parameter2.equals("Service")) {
-				response = RESTfulCalls.getAPI(Constants.URL_SERVER
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_SERVICE);
 			}
 			Application.flashMsg(response);
