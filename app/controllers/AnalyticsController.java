@@ -20,7 +20,7 @@ public class AnalyticsController extends Controller{
 	
 	
 	public static Result getKnowledgeGraph() {
-		JsonNode response = RESTfulCalls.getAPI(Constants.URL_HOST
+		JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
 		String resStr = response.toString();
 		return ok(knowledgeGraph.render(resStr));

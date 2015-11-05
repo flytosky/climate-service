@@ -105,13 +105,17 @@
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/exampleUtil.js")'></script>
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/vis.js")'></script>
 	<script type="text/javascript">
+	
+	var responseJson = null;     ///////////////////////////////////////////
+    var jsonString = null;		 ///////////////////////////////////////////
 	$(document).ready(function() {  
 	    $("#panel").hide(); 
 	    $("#config").hide();
 	    $("#basicConf").hide();
-	    
+	    jsonString =  $('#jsonData').text();
 	    draw();
 	  })
+	    
 		var degrees = 1;// graph level setting
 	    var nodes = null;
 	    var edges = null;
@@ -123,6 +127,40 @@
 	    var edgesDataset = new vis.DataSet(edges); 
 	    var visAdvancedConfig = 1;
 	    var visBasicConfig = 1;
+	    
+	    
+	    function getParameters() {
+	    	var temp1 = document.getElementById("paramCombination").value;
+			var temp2 = temp1.split(" ");
+			var p1 = temp2[0];
+			var p2 = temp2[1];
+	    	var p3 = temp2[2];
+	    	
+	    	var parameters = {
+	    			param1:p1,
+	    			param2:p2,
+	    			param3:p3
+	    	}
+	    	
+	    	$.ajax({
+	            url: "/getSpecifiedKnowledgeGraph",
+	            type: "POST",
+	            contentType: "application/json",
+	            data: JSON.stringify(parameters),
+	            dataType: "text"
+	        }).done(function(data1) {
+	        	console.log("success");
+	        	jsonString = data1;
+	        	draw();
+	        }).fail(function(xhr, textStatus, errorThrown) {
+	        	console.log("error!");
+	        	console.log(xhr);
+	        	console.log(textStatus);
+	            console.log(errorThrown);
+	        })
+	        
+	    }
+	    
 	    
 	    function showBasicConfig() {
 	        if (visBasicConfig == 0) {
@@ -153,7 +191,6 @@
 	    	console.log("draw");
 	      // create people.
 	      // value corresponds with the age of the person
-	      var jsonString = $('#jsonData').text();
 	      var test = jsonString;
 	      
 	      //test = JSON.stringify(test);
@@ -279,22 +316,6 @@
 	                setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
 	            });
 
-	      //network.focusOnNode(19);
-	      /*
-	      network.on('select', function(properties) {
-	        var select_node = $.grep(data.nodes, function(e){
-	          return e["id"] == properties.nodes[0];
-	        })[0];
-
-	        $("#nodeName").text(select_node["title"]);
-	        //alert(select_node["title"]);
-	        $("#id").text(select_node["id"]);
-	        $("#cluster").text(select_node["cluster"]);
-	        $("#label").text(select_node["label"]);
-
-	        $("#panel").show();
-	      });
-	      */
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      network.on('select',neighbourhoodHighlight);
 	      
@@ -420,6 +441,26 @@
 			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
 			      </span>
 			    </div>
+			    <br>
+			    <label>Rational Graph</label>
+			    <form>
+                <div class="form-group">
+                    <select class="form-control" id="paramCombination">
+                        <option value="User User Dataset">User × User | Dataset</option>
+                        <option value="User User Service">User × User | Service</option>
+                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
+                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
+                        <option value="Service Service User">Service × Service | User</option>
+                        <option value="Service Service Dataset">Service × Service | Dataset</option>
+                        <option value="User Dataset Service">User × Dataset | Service</option>
+                        <option value="User Service Dataset">User × Service | Dataset</option>
+                        <option value="Dataset Service User">Dataset × Service | User</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
+                </div>
+            </form>
 			</div>
 	  </div>  
 	  <div id="config" class="col-lg-offset-7"></div>  
