@@ -177,8 +177,8 @@
    		  nodes: {
    			    color: {
    			      highlight: {
-   			        border: "red",
-   			        background: "pink"
+   			        border: "rgba(255,0,255,0.3)",
+   			        background: "rgba(255,0,255,0.3)"
    			      }
    			    },
    			    scaling: {
@@ -217,10 +217,10 @@
    			  },
 	         groups: {
 	          dataset: {
-	            color:"#A9E2F3"
+	            color:"rgba(0,0,255,0.3)"
 	          },
 	          user: {
-	        	color:"#F781F3"
+	        	color:"rgba(255,0,0,0.3)"
 	          }
 	        },
 	        
@@ -230,7 +230,7 @@
 	        	  springLength: 195,
 	              springConstant: 0.185,
 	        	  damping: 0.25,
-	              avoidOverlap: 0.2
+	              avoidOverlap: 0.5
    			    },
    			 	maxVelocity: 10,
    			    minVelocity: 0.75,
@@ -278,106 +278,141 @@
 	     
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      allEdges = edgesDataset.get({returnType:"Object"});
-	      console.log(allEdges);
-	      network.on('select',neighbourhoodHighlight);
+	      //console.log(allEdges);
+	      network.on('select',neighbourhoodHighlight);      
 	      
-	      function neighbourhoodHighlight(params) {
-	    	    // if something is selected:
-	    	    if (params.nodes.length > 0) {
-	    	      highlightActive = true;
-	    	      var i,j;
-	    	      var selectedNode = params.nodes[0];
-	    	      
-	    	      // mark all nodes as hard to read.
-	    	      for (var nodeId in allNodes) {
-	    	        allNodes[nodeId].color = 'rgba(200,200,200,0.5)';
-	    	        if (allNodes[nodeId].hiddenLabel === undefined) {
-	    	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
-	    	          allNodes[nodeId].label = undefined;
-	    	        }
-	    	      }
-	    	      var connectedNodes = network.getConnectedNodes(selectedNode);
-	    	      var allConnectedNodes = [];
-
-	    	      // get the second degree nodes
-	    	      for (i = 1; i < degrees; i++) {
-	    	        for (j = 0; j < connectedNodes.length; j++) {
-	    	          allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
-	    	        }
-	    	      }
-
-	    	      // all second degree nodes get a different color and their label back
-	    	      for (i = 0; i < allConnectedNodes.length; i++) {
-	    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.3)';
-	    	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
-	    	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
-	    	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
-	    	        }
-	    	      }
-
-	    	      // all first degree nodes get their own color and their label back
-	    	      for (i = 0; i < connectedNodes.length; i++) {
-	    	        allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.3)';
-	    	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
-	    	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
-	    	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
-	    	        }
-	    	      }
-
-	    	      var curNode = allNodes[selectedNode];	   
-	    	      
-	    	      $("#nodeName").text(curNode.title);		  	       
-		  	      $("#id").text(curNode.id);
-		  	      $("#cluster").text(curNode.cluster);
-		  	      $("#label").text(curNode.label);
-	  	          $("#panel").show();
-	    	      
-	    	      // the main node gets its own color and its label back.
-	    	      
-	    	      
-	    	      allNodes[selectedNode].color = 'rgba(0,0,255,0.3)'
-	    	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
-	    	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
-	    	        allNodes[selectedNode].hiddenLabel = undefined;
-	    	      }
-	    	    }
-	    	    else if (highlightActive === true) {
-	    	      // reset all nodes
-	    	      for (var nodeId in allNodes) {
-	    	        allNodes[nodeId].color = undefined;
-	    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
-	    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
-	    	          allNodes[nodeId].hiddenLabel = undefined;
-	    	        }
-	    	      }
-	    	      highlightActive = false
-	    	    }
-	    	    
-	    	  	  //console.log(allEdges);	    	      
-	    	      var connectedE = network.getConnectedEdges(selectedNode);
-	    	      //console.log(connectedE);
-	    	      
-	    	      
-	    	      for (var i = 0; i< connectedE.length ; i++) {
-	    	    	  console.log(allEdges[connectedE[i]]);	   
-	    	    	  allEdges[connectedE[i]].color = 'rgba(0,0,255,0.3)';
-	    	      }
-	    	    
-	    	    // transform the object into an array
-	    	    var updateArray = [];
+	    }
+	    
+	    function selectThatNode() {
+	    	console.log("TTT");		    	
+	    		 
+	    	 var count = 0;
+	    	 for (var node in allNodes) {
+	    		 count++;
+	    	 }	    	
+		    	
+	    	  for (var i = 1; i<= count ; i++) {
+	    		  
+	    		  if (allNodes[i.toString()].color == undefined){
+	    		 	allNodes[i.toString()].color = 'rgba(255,255,255,1)';
+	    		  }else{
+	    			  allNodes[i.toString()].color = 'rgba(255,255,255,1)';
+	    		  }		    		 
+	    	  }	    
+	    	  
+	    	  var updateArray = [];
 	    	    for (nodeId in allNodes) {
 	    	      if (allNodes.hasOwnProperty(nodeId)) {
 	    	        updateArray.push(allNodes[nodeId]);
 	    	      }
-	    	    }
-	    	        	    
-	    	    nodesDataset.update(updateArray);
-	    	  }
-	      
-	      
-	      
-	    }
-	    draw()
+	    	    }	    	
+	    	
+	    	    nodesDataset.update(updateArray);    	    
+	      }
+	    
+	    function neighbourhoodHighlight(params) {
+    	    // if something is selected:
+    	    if (params.nodes.length > 0) {
+    	      highlightActive = true;
+    	      var i,j;
+    	      var selectedNode = params.nodes[0];
+    	      
+    	      // mark all nodes as hard to read.
+    	      for (var nodeId in allNodes) {
+    	        allNodes[nodeId].color = 'rgba(200,200,200,0.5)';
+    	        if (allNodes[nodeId].hiddenLabel === undefined) {
+    	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+    	          allNodes[nodeId].label = undefined;
+    	        }
+    	      }
+    	      var connectedNodes = network.getConnectedNodes(selectedNode);
+    	      var allConnectedNodes = [];
+
+    	      // get the second degree nodes
+    	      for (i = 1; i < degrees; i++) {
+    	        for (j = 0; j < connectedNodes.length; j++) {
+    	          allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
+    	        }
+    	      }
+
+    	      // all second degree nodes get a different color and their label back
+    	      for (i = 0; i < allConnectedNodes.length; i++) {
+    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.3)';
+    	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+    	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
+    	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      // all first degree nodes get their own color and their label back
+    	      for (i = 0; i < connectedNodes.length; i++) {
+    	        allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.3)';
+    	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+    	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
+    	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      var curNode = allNodes[selectedNode];	   
+    	      
+    	      $("#nodeName").text(curNode.title);		  	       
+	  	      $("#id").text(curNode.id);
+	  	      $("#cluster").text(curNode.cluster);
+	  	      $("#label").text(curNode.label);
+  	          $("#panel").show();
+    	      
+    	      // the main node gets its own color and its label back.
+    	      
+    	      
+    	      allNodes[selectedNode].color = 'rgba(0,0,255,0.3)'
+    	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
+    	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+    	        allNodes[selectedNode].hiddenLabel = undefined;
+    	      }
+    	    }
+    	    else if (highlightActive === true) {
+    	      // reset all nodes
+    	      for (var nodeId in allNodes) {
+    	        allNodes[nodeId].color = undefined;
+    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
+    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+    	          allNodes[nodeId].hiddenLabel = undefined;
+    	        }
+    	      }
+    	      highlightActive = false;
+    	    } 	  	  
+    	    
+    	    
+    	    
+    	  	  //console.log(allEdges);	    	      
+    	      var connectedE = network.getConnectedEdges(selectedNode);
+    	      //console.log(connectedE);
+    	      
+    	      
+    	      for (var i = 0; i< connectedE.length ; i++) {
+    	    	  //console.log(allEdges[connectedE[i]]);	   
+    	    	  allEdges[connectedE[i]].color = 'rgba(0,255,255,0.3)';
+    	    	  
+    	      }
+    	      
+    	      
+    	    // transform the object into an array
+    	    var updateArray = [];
+    	    for (nodeId in allNodes) {
+    	      if (allNodes.hasOwnProperty(nodeId)) {
+    	        updateArray.push(allNodes[nodeId]);
+    	      }
+    	    }
+    	    
+    	  
+    	        	    
+    	    nodesDataset.update(updateArray);
+    	  }
+	    
+	    
+	    
+	  //  draw();
+	    
 	    
 	</script>
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
@@ -415,6 +450,11 @@
 			      </span>
 			    </div>
 			</div>
+			<div class="input-group col-lg-4">
+				<label>Actions</label>		     
+				<button type="button" onclick="selectThatNode()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
+		        </span> Clear All Node </button>
+	        </div>
 	  </div>  
 	  <div id="config" class="col-lg-offset-7"></div>  
 	</div>
