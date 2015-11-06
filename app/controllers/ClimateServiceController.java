@@ -554,7 +554,7 @@ public class ClimateServiceController extends Controller {
 		String name = json.path("name").asText();
 		String url = json.path("url").asText();
 		// Parse NASA URL
-		if (url.contains("/cmac/web")) {
+		if (url.contains("/cmac/web") || name.length() == 0 || name == null) {
 			oneService.setUrl(url);
 		} else {
 			String pageUrl = Constants.URL_SERVER
