@@ -567,6 +567,7 @@ public class ClimateServiceController extends Controller {
 		oneService.setScenario(json.path("scenario").asText());
 		oneService.setVersionNo(json.path("versionNo").asText());
 		oneService.setRootServiceId(json.path("rootServiceId").asLong());
+		oneService.setImageURL();
 		
 		return oneService;
 	}
