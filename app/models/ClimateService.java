@@ -37,6 +37,7 @@ public class ClimateService {
 	private Date createTime;
 
 	private String versionNo;
+	private String imageURL;
 
 	public ClimateService() {
 	}
@@ -128,6 +129,21 @@ public class ClimateService {
 
 	public void setVersionNo(String versionNo) {
 		this.versionNo = versionNo;
+	}
+	
+	public void setImageURL(){
+		if(name.equals("scatterPlot2Vars")) {
+			imageURL = "/assets/images/ScatterPlot.png";
+		}else if(name.equals("twoDimSlice3D")) {
+			imageURL = "/assets/images/TwoDimSlice3D.jpeg";
+		}else {
+			//photo = "http://i1-mac.softpedia-static.com/screenshots/Climate-Data-Analysis-Tools_1.png";
+			imageURL = "http://upload.wikimedia.org/wikipedia/commons/3/33/White_square_with_question_mark.png";
+		}
+	}
+	
+	public String getImageURL() {
+		return imageURL;
 	}
 	
 	@Override

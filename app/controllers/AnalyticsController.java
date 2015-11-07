@@ -63,7 +63,6 @@ public class AnalyticsController extends Controller{
 		String parameter1 = json.path("param1").asText();
 		String parameter2 = json.path("param2").asText();
 		String parameter3 = json.path("param3").asText();
-		System.out.println(parameter1 + "*******" + parameter2 + "*******" + parameter3);
 		JsonNode response = null;
 		//ObjectNode jsonData = Json.newObject();
 		try {

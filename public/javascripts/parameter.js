@@ -11,6 +11,10 @@ $(document).ready(function() {
 		scenario = document.getElementById("scenario").value;
 		version = document.getElementById("version").value;
 		rootServiceId = document.getElementById("rootServiceId").value;
+		if(name == "" || purpose == "" || serviceUrl == "" || scenario == "" || version == "" || rootServiceId == "") {
+			$("#msg").show("slow");
+			return;
+		}
 		var serviceData = {
 			name: name,
 			purpose: purpose,
