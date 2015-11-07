@@ -3,45 +3,13 @@
 @scripts = {
 
 <script type="text/javascript">	
-	
-
 	$(document).ready(function(){
-		
-	    
-		$( "#preview" ).click(function() {
-			var target = document.getElementById("show");
-			if(target.style.display=="none"){
-				target.style.display="block";
-				$( "#preview" ).text("Hide");
-				var userName = $("#userName").val();
-				var affiliation = $("#affiliation").val();
-				var email = $("#email").val();
-				var researchFields = $("#researchFields").val();
-
-				if(userName!=""){
-					$("#content").append(" User Name = "+userName);	
-				}
-				if(affiliation!="" && affiliation!=null){
-					$("#content").append(" Affiliation = "+affiliation);	
-				}
-				if(email!="" && email!=null){
-					$("#content").append(" Email = "+email);	
-				}
-				if(researchFields!="" && researchFields!=null){
-					$("#content").append(" Research Area = "+researchFields);	
-				}
-				
-			}else {
-				$("#content").val('');	
-                target.style.display="none";
-                $("#preview" ).text("Preview");
-            }
-		});
+		$("#msg").hide();
 	});
 		
 	</script>
 } 
-@main("Register A New Climate Service") {
+@main("Register A New Climate Service", scripts) {
 <script type="text/javascript">
 console.log("register started");
 $(window).load(function(){
@@ -77,27 +45,27 @@ $(window).load(function(){
     	<h4>Step 1 : Add Climate Service Metadata</h3>
     	<br>
         <div class="form-group">
-            <label>Name</label>
+            <label>Name<font color="red"> *</font></label>
             <input type="text" class="form-control" id="name" name="name" placeholder="2-D-Variable-Map">
         </div>
         <div class="form-group">
-            <label>Purpose</label>
+            <label>Purpose<font color="red"> *</font></label>
             <input type="text" class="form-control" id="purpose" name="purpose" placeholder="climate service description">
         </div>
         <div class="form-group">
-            <label>Web Service API</label>
+            <label>Web Service API<font color="red"> *</font></label>
             <input type="text" class="form-control" id="url" name="url" placeholder="cmac/web/twoDimMap">
         </div>
         <div class="form-group">
-            <label>Scenario</label>
+            <label>Scenario<font color="red"> *</font></label>
             <input type="text" class="form-control" id="scenario" name="scenario" placeholder="12">
         </div>
         <div class="form-group">
-            <label>Version</label>
+            <label>Version<font color="red"> *</font></label>
             <input type="text" class="form-control" id="version" name="version" placeholder="1">
         </div>
         <div class="form-group">
-            <label>Root Service Id</label>
+            <label>Root Service Id<font color="red"> *</font></label>
             <input type="text" class="form-control" id="rootServiceId" name="rootServiceId" placeholder="2">
         </div>
         <div class="form-group">
@@ -336,8 +304,12 @@ $(window).load(function(){
         </div>
     </form>
     
+    <div id="msg" class="alert alert-danger fade in">
+	    <strong></strong> Please fill out all blanks with *.
+	</div>
+    
     <div class="text-center">
-            <button type="button" class="btn btn-primary btn-lg" id="addAClimateService">Add a Climate Service</button>
+         <button type="button" class="btn btn-primary btn-lg" id="addAClimateService">Add a Climate Service</button>
     </div>
     
     
