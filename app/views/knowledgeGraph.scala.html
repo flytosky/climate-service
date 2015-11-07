@@ -222,7 +222,7 @@
    			      min: 12
    			    },
    			    shadow: {
-   			      enabled: true,
+   			      enabled: false,
    			      size: 8
    			    },
 	   			 font: {
@@ -236,6 +236,9 @@
    			    }
    			  },
    			  edges: {
+   				 color: {
+   			      inherit : false
+   			    },
    			    arrows: {
    			      to: {
    			        enabled: true,
@@ -249,7 +252,6 @@
  			    }
    			  },
    			  interaction: {
-   			    hover: true,
    			    multiselect: true
    			  },
 	         groups: {
@@ -316,26 +318,27 @@
 	      allEdges = edgesDataset.get({returnType:"Object"});
 	      //console.log(allEdges);
 	      network.on('select',neighbourhoodHighlight);      
-	      
+	      network.on('doubleClick',selectThatNode);      
 	    }
 	    
-	    function selectThatNode() {
-	    	console.log("TTT");		    	
-	    		 
-	    	 var count = 0;
-	    	 for (var node in allNodes) {
-	    		 count++;
-	    	 }	    	
-		    	
-	    	  for (var i = 1; i<= count ; i++) {
-	    		  
-	    		  if (allNodes[i.toString()].color == undefined){
-	    		 	allNodes[i.toString()].color = 'rgba(255,255,255,1)';
-	    		  }else{
-	    			  allNodes[i.toString()].color = 'rgba(255,255,255,1)';
-	    		  }		    		 
-	    	  }	    
-	    	  
+	    function selectThatNode(params) {
+	    	 if (params.nodes.length > 0) {
+	    		console.log("TTT");		
+	    		
+	    		var node1 = params.nodes[0];
+	    		var connectedEdges = network.getConnectedEdges(node1); //String
+	    		var edge1 = connectedEdges[0];
+	    		allEdges[edge1].color.highlight = 'rgba(255,0,0,0.3)'; //object
+	    		var connectedNodes = network.getConnectedNodes(edge1);
+	    		var node2 = connectedNodes[0];
+	    		allNodes[node2].color.highlight = 'rgba(255,0,0,0.3)';
+	    		connectedEdges = network.getConnectedEdges(node2); //String
+	    		var edge2 = connectedEdges[0];
+	    		allEdges[edge2].color.highlight = 'rgba(255,0,0,0.3)'; //object
+	    		connectedNodes = network.getConnectedNodes(edge2);
+	    		var node3= connectedNodes[0];
+	    		allNodes[node3].color.highlight = 'rgba(255,0,0,0.3)';
+	    		
 	    	  var updateArray = [];
 	    	    for (nodeId in allNodes) {
 	    	      if (allNodes.hasOwnProperty(nodeId)) {
@@ -343,7 +346,18 @@
 	    	      }
 	    	    }	    	
 	    	
-	    	    nodesDataset.update(updateArray);    	    
+	    	    nodesDataset.update(updateArray);    	 
+	    	     
+	    	    updateArray = [];
+	    	    for (edgeId in allEdges) {
+	    	      if (allEdges.hasOwnProperty(edgeId)) {
+	    	        updateArray.push(allEdges[edgeId]);
+	    	      }
+	    	    }
+	    	    
+	    	    edgesDataset.update(updateArray);    
+	    	 }
+	    	    
 	      }
 	    
 	    function neighbourhoodHighlight(params) {
@@ -352,10 +366,11 @@
     	      highlightActive = true;
     	      var i,j;
     	      var selectedNode = params.nodes[0];
+    	      //console.log(selectedNode);
     	      
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
-    	        allNodes[nodeId].color = 'rgba(200,200,200,0.5)';
+    	        allNodes[nodeId].color = 'rgba(192,192,192,0.0)';
     	        if (allNodes[nodeId].hiddenLabel === undefined) {
     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
     	          allNodes[nodeId].label = undefined;
@@ -419,18 +434,18 @@
     	    } 	  	  
     	    
     	    
-    	    
+    	    /*
     	  	  //console.log(allEdges);	    	      
     	      var connectedE = network.getConnectedEdges(selectedNode);
     	      //console.log(connectedE);
     	      
     	      
     	      for (var i = 0; i< connectedE.length ; i++) {
-    	    	  //console.log(allEdges[connectedE[i]]);	   
+    	    	  console.log(allEdges[connectedE[i]]);	   
     	    	  allEdges[connectedE[i]].color = 'rgba(0,255,255,0.3)';
     	    	  
     	      }
-    	      
+    	      */
     	      
     	    // transform the object into an array
     	    var updateArray = [];
@@ -438,9 +453,7 @@
     	      if (allNodes.hasOwnProperty(nodeId)) {
     	        updateArray.push(allNodes[nodeId]);
     	      }
-    	    }
-    	    
-    	  
+    	    }   	  
     	        	    
     	    nodesDataset.update(updateArray);
     	  }
@@ -477,7 +490,7 @@
 	  
 	  <div id="basicConf" class="col-lg-offset-7">
 	  	<br>
-  			<div class="col-lg-4">
+  			<div class="col-lg-6">
   				<label>Graph Level</label>		     
 			    <div class="input-group">	
 			    <input type="number" class="form-control" placeholder="1~2" id = "graphLevel">
@@ -485,57 +498,63 @@
 			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
 			      </span>
 			    </div>
-			    <br>
-			    <label>Rational Graph</label>
-			    <form>
-                <div class="form-group">
-                    <select class="form-control" id="paramCombination">
-                        <option value="User User Dataset">User × User | Dataset</option>
-                        <option value="User User Service">User × User | Service</option>
-                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
-                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
-                        <option value="Service Service User">Service × Service | User</option>
-                        <option value="Service Service Dataset">Service × Service | Dataset</option>
-                        <option value="User Dataset Service">User × Dataset | Service</option>
-                        <option value="User Service Dataset">User × Service | Dataset</option>
-                        <option value="Dataset Service User">Dataset × Service | User</option>
-                    </select>
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
-                </div>
-            </form>
+			    <div class="input-group col-lg-6">
+					<label>Actions</label>		     
+					<button type="button" onclick="selectThatNode()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
+			        </span> Clear All Node </button>
+	        	</div>
+			    <br>			    
 			</div>
-			<div class="input-group col-lg-4">
-				<label>Actions</label>		     
-				<button type="button" onclick="selectThatNode()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
-		        </span> Clear All Node </button>
-	        </div>
+			
+			<div class="col-lg-offset-0 col-lg-6">
+			    <form>
+				    <label>Rational Graph</label>
+		                <div class="form-group">
+		                    <select class="form-control" id="paramCombination">
+		                        <option value="User User Dataset">User × User | Dataset</option>
+		                        <option value="User User Service">User × User | Service</option>
+		                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
+		                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
+		                        <option value="Service Service User">Service × Service | User</option>
+		                        <option value="Service Service Dataset">Service × Service | Dataset</option>
+		                        <option value="User Dataset Service">User × Dataset | Service</option>
+		                        <option value="User Service Dataset">User × Service | Dataset</option>
+		                        <option value="Dataset Service User">Dataset × Service | User</option>
+		                    </select>
+		                </div>
+		                <div class="text-center">
+		                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
+		                </div>
+            	</form>
+			</div>
+			
 	  </div>  
-	  <div id="config" class="col-lg-offset-7"></div>  
+	  <div id="config" class="row col-lg-offset-7"></div>  
 	</div>
 	
-	<br>
+
 	
-	<div id="panel" class="col-lg-offset-7">  
-	  <div class="well col-lg-5">
-	    <div class="text-center">
-	      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
-	    </div>
-	    <div class="card-block text-center">
-	      <h4 class="card-title" id="nodeName">card</h4>
-	      <p class="card-text text-muted" >A data set (or dataset) is a collection of data.</p>
-	    </div>
-	    <ul class="list-group list-group-flush">
-	      <li class="list-group-item"><strong>Id:</strong><code id="id"></code></li>
-	      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
-	      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
-	    </ul>
-	    <div class="card-block">
-	      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a> 
-	      <a href="#" class="card-link col-lg-6">Another link</a>
-	    </div>    
-	  </div>  
+	<div class = "row">
+		<div id="panel" class="col-lg-offset-7">  
+		  <div class="well col-lg-5">
+		    <div class="text-center">
+		      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
+		    </div>
+		    <div class="card-block text-center">
+		      <h4 class="card-title" id="nodeName">card</h4>
+		      <p class="card-text text-muted" >A data set (or dataset) is a collection of data.</p>
+		    </div>
+		    <ul class="list-group list-group-flush">
+		      <li class="list-group-item"><strong>Id:</strong><code id="id"></code></li>
+		      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
+		      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
+		    </ul>
+		    <div class="card-block">
+		      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a> 
+		      <a href="#" class="card-link col-lg-6">Another link</a>
+		    </div>    
+		  </div>  
+		</div>
 	</div>
   
 }
