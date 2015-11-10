@@ -28,10 +28,10 @@ public class AnalyticsController extends Controller{
 		try {
 			jsonData.put("param1", parameter1);
 			jsonData.put("param2", parameter2);
-			jsonData.put("param3", parameter2);
+			jsonData.put("param3", parameter3);
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
-		Application.flashMsg(response);
+			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls
@@ -87,11 +87,10 @@ public class AnalyticsController extends Controller{
 		try {
 			jsonData.put("param1", parameter1);
 			jsonData.put("param2", parameter2);
-			jsonData.put("param3", parameter2);
+			jsonData.put("param3", parameter3);
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 
-			Application.flashMsg(response);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls
