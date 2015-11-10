@@ -20,8 +20,27 @@ public class AnalyticsController extends Controller{
 	
 	
 	public static Result getKnowledgeGraph() {
-		JsonNode response = RESTfulCalls.getAPI(Constants.URL_HOST
-				+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
+		String parameter1 = "User";
+		String parameter2 = "Dataset";
+		String parameter3 = "Service";
+		JsonNode response = null;
+		ObjectNode jsonData = Json.newObject();
+		try {
+			jsonData.put("param1", parameter1);
+			jsonData.put("param2", parameter2);
+			jsonData.put("param3", parameter3);
+			response = RESTfulCalls.postAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
 		String resStr = response.toString();
 		return ok(knowledgeGraph.render(resStr));
 	}
@@ -64,24 +83,14 @@ public class AnalyticsController extends Controller{
 		String parameter2 = json.path("param2").asText();
 		String parameter3 = json.path("param3").asText();
 		JsonNode response = null;
-		//ObjectNode jsonData = Json.newObject();
+		ObjectNode jsonData = Json.newObject();
 		try {
-//			jsonData.put("param1", parameter1);
-//			jsonData.put("param2", parameter2);
-//			jsonData.put("param3", parameter2);
-//			response = RESTfulCalls.postAPI(Constants.URL_HOST
-//					+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER, jsonData);
-			if(parameter1.equals("User") && parameter2.equals("Dataset")) {
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_USER);
-			}else if(parameter1.equals("User") && parameter2.equals("Service")) {
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + Constants.GET_SERVICE_AND_USER);
-			}else if(parameter1.equals("Dataset") && parameter2.equals("Service")) {
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + Constants.GET_DATASET_AND_SERVICE);
-			}
-			Application.flashMsg(response);
+			jsonData.put("param1", parameter1);
+			jsonData.put("param2", parameter2);
+			jsonData.put("param3", parameter3);
+			response = RESTfulCalls.postAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
+
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls
