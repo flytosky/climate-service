@@ -82,7 +82,5 @@ public class Constants {
 	public static final String GET_CONFIG_ITEMS_BY_CONFIG= "/serviceConfigurationItemByServiceConfig";
 	
 	//Analytics
-	public static final String GET_DATASET_AND_USER = "/analytics/getAllDatasetAndUserWithCount/json";
-	public static final String GET_SERVICE_AND_USER = "/analytics/getAllServiceAndUserWithCount/json";
-	public static final String GET_DATASET_AND_SERVICE = "/analytics/getAllServiceAndDatasetWithCount/json";
+	public static final String GET_RELATIONAL_GRAPH = "/analytics/getRelationalKnowledgeGraph/json";
 }
