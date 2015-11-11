@@ -116,7 +116,7 @@
 	    draw();
 	  })
 	    
-		var degrees = 2;// graph level setting
+		var degrees = 1;// graph level setting
 	    var nodes = null;
 	    var edges = null;
 	    var network = null;
@@ -183,7 +183,7 @@
 	    }
 	    
 	    function setGraphLevel() {
-	    	degrees = $("#graphLevel").val() + 1;
+	    	degrees = $("#graphLevel").val();
 	    	//alert(degrees);
 	    }
 
@@ -404,6 +404,9 @@
     	          allNodes[nodeId].label = undefined;
     	        }
     	      }
+    	      
+    	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+    	      
     	      var connectedNodes = network.getConnectedNodes(selectedNode);
     	      var allConnectedNodes = [];
 
