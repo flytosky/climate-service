@@ -116,7 +116,7 @@
 	    draw();
 	  })
 	    
-		var degrees = 1;// graph level setting
+		var degrees = 2;// graph level setting
 	    var nodes = null;
 	    var edges = null;
 	    var network = null;
@@ -183,7 +183,7 @@
 	    }
 	    
 	    function setGraphLevel() {
-	    	degrees = $("#graphLevel").val();
+	    	degrees = $("#graphLevel").val() + 1;
 	    	//alert(degrees);
 	    }
 
