@@ -321,6 +321,34 @@
 	      network.on('doubleClick',selectThatNode);      
 	    }
 	    
+	    function findShortestPath() {
+	    	var startId = $("#startPoint").val();
+	    	var endId = $("#endPoint").val();
+	    	//console.log(startId + endId);
+	    	
+	    	var ids = {
+	    			startId : startId,
+	    			endId : endId
+	    		}
+	    	
+	    	$.ajax({
+	            url: "/getShortestPath",
+	            type: "POST",
+	            contentType: "application/json",
+	            data: JSON.stringify(ids),
+	            dataType: "text"
+	        }).done(function(data1) {
+	        	console.log("success");
+	        	jsonString = data1;
+	        	//draw();
+	        }).fail(function(xhr, textStatus, errorThrown) {
+	        	console.log("error!");
+	        	console.log(xhr);
+	        	console.log(textStatus);
+	            console.log(errorThrown);
+	        })
+	    }
+	    
 	    function selectThatNode(params) {
 	    	 if (params.nodes.length > 0) {
 	    		console.log("TTT");		
@@ -328,16 +356,16 @@
 	    		var node1 = params.nodes[0];
 	    		var connectedEdges = network.getConnectedEdges(node1); //String
 	    		var edge1 = connectedEdges[0];
-	    		allEdges[edge1].color.highlight = 'rgba(255,0,0,0.3)'; //object
+	    		allEdges[edge1].color = 'rgba(255,0,0,0.3)'; //object
 	    		var connectedNodes = network.getConnectedNodes(edge1);
 	    		var node2 = connectedNodes[0];
-	    		allNodes[node2].color.highlight = 'rgba(255,0,0,0.3)';
+	    		allNodes[node2].color = 'rgba(255,0,0,0.3)';
 	    		connectedEdges = network.getConnectedEdges(node2); //String
 	    		var edge2 = connectedEdges[0];
-	    		allEdges[edge2].color.highlight = 'rgba(255,0,0,0.3)'; //object
+	    		allEdges[edge2].color = 'rgba(255,0,0,0.3)'; //object
 	    		connectedNodes = network.getConnectedNodes(edge2);
 	    		var node3= connectedNodes[0];
-	    		allNodes[node3].color.highlight = 'rgba(255,0,0,0.3)';
+	    		allNodes[node3].color= 'rgba(255,0,0,0.3)';
 	    		
 	    	  var updateArray = [];
 	    	    for (nodeId in allNodes) {
@@ -361,7 +389,7 @@
 	      }
 	    
 	    function neighbourhoodHighlight(params) {
-    	    // if something is selected:
+    	     // if something is selected:
     	    if (params.nodes.length > 0) {
     	      highlightActive = true;
     	      var i,j;
@@ -370,7 +398,7 @@
     	      
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
-    	        allNodes[nodeId].color = 'rgba(192,192,192,0.0)';
+    	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
     	        if (allNodes[nodeId].hiddenLabel === undefined) {
     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
     	          allNodes[nodeId].label = undefined;
@@ -490,9 +518,9 @@
 	  
 	  <div id="basicConf" class="col-lg-offset-7">
 	  	<br>
-  			<div class="col-lg-6">
+  			<div class="col-lg-8">
   				<label>Graph Level</label>		     
-			    <div class="input-group">	
+			    <div class="input-group col-lg-5">	
 			    <input type="number" class="form-control" placeholder="1~2" id = "graphLevel">
 			      <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
@@ -503,38 +531,57 @@
 					<button type="button" onclick="selectThatNode()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
 			        </span> Clear All Node </button>
 	        	</div>
-			    <br>			    
+	        	<br>
+	        	<div class="input-group">
+				  <span class="input-group-addon" id="basic-addon1">Start Point</span>
+				  <input type="text" class="form-control" placeholder="Type in Id" aria-describedby="basic-addon1" id="startPoint">
+			    </div>
+			    <br>
+			    <div class="input-group">
+				  <span class="input-group-addon" id="basic-addon2">End Point</span>
+				  <input type="text" class="form-control" placeholder="Type in Id" aria-describedby="basic-addon2" id="endPoint">
+				</div>
+				<br>
+				<div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="findShortestPath()">Shortest Path</button>
+                </div>	
+				<br>
+			    <div class="col-lg-offset-0">
+				    <form>
+					    <label>Rational Graph</label>
+			                <div class="form-group">
+			                    <select class="form-control" id="paramCombination">
+			                        <option value="User User Dataset">User × User | Dataset</option>
+			                        <option value="User User Service">User × User | Service</option>
+			                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
+			                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
+			                        <option value="Service Service User">Service × Service | User</option>
+			                        <option value="Service Service Dataset">Service × Service | Dataset</option>
+			                        <option value="User Dataset Service">User × Dataset | Service</option>
+			                        <option value="User Service Dataset">User × Service | Dataset</option>
+			                        <option value="Dataset Service User">Dataset × Service | User</option>
+			                    </select>
+			                </div>
+			                <div class="text-center">
+			                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
+			                </div>
+	            	</form>
+	            	<br>
+	            	<br>
+				</div>				
+					    
 			</div>
 			
-			<div class="col-lg-offset-0 col-lg-6">
-			    <form>
-				    <label>Rational Graph</label>
-		                <div class="form-group">
-		                    <select class="form-control" id="paramCombination">
-		                        <option value="User User Dataset">User × User | Dataset</option>
-		                        <option value="User User Service">User × User | Service</option>
-		                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
-		                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
-		                        <option value="Service Service User">Service × Service | User</option>
-		                        <option value="Service Service Dataset">Service × Service | Dataset</option>
-		                        <option value="User Dataset Service">User × Dataset | Service</option>
-		                        <option value="User Service Dataset">User × Service | Dataset</option>
-		                        <option value="Dataset Service User">Dataset × Service | User</option>
-		                    </select>
-		                </div>
-		                <div class="text-center">
-		                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
-		                </div>
-            	</form>
-			</div>
-			
+				
 	  </div>  
+  		
 	  <div id="config" class="row col-lg-offset-7"></div>  
 	</div>
 	
 
 	
 	<div class = "row">
+		<br>
 		<div id="panel" class="col-lg-offset-7">  
 		  <div class="well col-lg-5">
 		    <div class="text-center">
