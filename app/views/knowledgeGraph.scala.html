@@ -295,6 +295,8 @@
 	          container: document.getElementById('config')
 	        }
 	      };
+
+	      $("#config").html("");
 	      network = new vis.Network(container, data, options);
 
 	      network.on("stabilizationProgress", function(params) {
