@@ -129,4 +129,55 @@ public class AnalyticsController extends Controller{
 		}
 		return ok(response);
 	}
+	
+	public static Result getPartKnowledgeGraph() {
+		JsonNode json = request().body().asJson();
+		String parameter1 = json.path("param1").asText();
+		String parameter2 = json.path("param2").asText();
+		String groupName = json.path("groupName").asText();
+		String combination = parameter1 + parameter2 + groupName;
+		long id = json.path("id").asLong();
+		JsonNode response = null;
+		ObjectNode jsonData = Json.newObject();
+		try {
+			switch(combination) {
+			case "UserDatasetuser":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllDatasetAndCountByUserId/" + id + "/json");
+				break;
+			case "UserDatasetdataset":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllUserAndCountByDatasetId/" + id + "/json");
+				break;
+			case "UserServiceuser":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllServiceAndCountByUserId/" + id + "/json");
+				break;
+			case "UserServiceservice":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllUserAndCountByServiceId/" + id + "/json");
+				break;
+			case "DatasetServiceservice":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllDatasetAndCountByServiceId/" + id + "/json");
+				break;
+			case "DatasetServicedataset":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllServiceAndCountByDatasetId/" + id + "/json");
+				break;
+			default:
+				break;
+			}
+
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
+	}
 }
