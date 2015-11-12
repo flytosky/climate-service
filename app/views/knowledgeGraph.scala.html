@@ -496,6 +496,15 @@
     	        }
     	      }
     	      
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = 'rgba(192,192,192,0.3)';
+      	        if (allEdges[edgeId].hiddenLabel == undefined) {
+      	        	allEdges[edgeId].hiddenLabel = allEdges[edgeId].label;
+      	        	allEdges[edgeId].label = undefined;
+      	        }
+      	      }
+      	      
+    	      
     	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	      
     	      var connectedNodes = network.getConnectedNodes(selectedNode);
@@ -525,7 +534,7 @@
     	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
     	        }
     	      }
-
+    	      
     	      var curNode = allNodes[selectedNode];	   
     	      
     	      $("#nodeName").text(curNode.title);		  	       
@@ -542,16 +551,28 @@
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
-    	    }
-    	    else if (highlightActive === true) {
+    	     
+    	    }    else if (highlightActive === true) {
     	      // reset all nodes
+    	       
     	      for (var nodeId in allNodes) {
     	        allNodes[nodeId].color = undefined;
+    	       
     	        if (allNodes[nodeId].hiddenLabel !== undefined) {
     	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
     	          allNodes[nodeId].hiddenLabel = undefined;
     	        }
     	      }
+    	      
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = undefined;
+    	    	  
+      	        
+      	        	console.log(allEdges[edgeId].color);
+      	        	allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+      	        	allEdges[edgeId].hiddenLabel = undefined;
+      	        
+      	      }
     	      highlightActive = false;
     	    } 	  	  
     	    
@@ -578,8 +599,19 @@
     	    }   	  
     	        	    
     	    nodesDataset.update(updateArray);
+    	    
+    	    
+    	    updateArray = [];
+    	    for (edgeId in allEdges) {
+    	      if (allEdges.hasOwnProperty(edgeId)) {
+    	        updateArray.push(allEdges[edgeId]);
+    	      }
+    	    }
+    	    
+    	    edgesDataset.update(updateArray);  
     	  }
 	    
+	      
 	    
 	    
 	  //  draw();
