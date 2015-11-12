@@ -116,9 +116,9 @@
 	    draw();
 	  })
 	  	
-	  	var p1 = null;
-		var p2 = null;
-	    var p3 = null;
+	  	var p1 = "User";
+		var p2 = "Dataset";
+	    var p3 = "Service";
 	  
 	  
 		var degrees = 1;// graph level setting
@@ -382,6 +382,8 @@
 	    		
 	    		console.log("id: " + id);
 	    		console.log("idP: " + node1);
+	    		console.log("p1: " + p1);
+	    		console.log("p2: " + p2);
 	    		
 	    		var parameters = {
 		    			param1:p1,
@@ -405,43 +407,7 @@
 		        	console.log(textStatus);
 		            console.log(errorThrown);
 		        })
-	    		/* var connectedEdges = network.getConnectedEdges(node1); //String
-	    		var edge1 = connectedEdges[0];
-	    		allEdges[edge1].color = 'rgba(255,0,0,1)'; //object
-	    		var connectedNodes = network.getConnectedNodes(edge1);
-	    		var node2 = connectedNodes[0];
-	    		allNodes[node2].color = 'rgba(255,0,0,1)';
-	    		connectedEdges = network.getConnectedEdges(node2); //String
-	    		var edge2 = connectedEdges[0];
-	    		allEdges[edge2].color = 'rgba(255,0,0,1)'; //object
-	    		connectedNodes = network.getConnectedNodes(edge2);
-	    		console.log("oooooo" + connectedNodes[1]);
-	    		var node3= connectedNodes[1];
-	    		allNodes[node3].color= 'rgba(255,0,0,1)';
-	    		connectedEdges = network.getConnectedEdges(node3); //String
-	    		var edge3 = connectedEdges[1];
-	    		allEdges[edge3].color = 'rgba(255,0,0,1)'; //object
-	    		connectedNodes = network.getConnectedNodes(edge3);
-	    		var node4= connectedNodes[0];
-	    		allNodes[node4].color= 'rgba(255,0,0,1)';
-	    		
-	    	  var updateArray = [];
-	    	    for (nodeId in allNodes) {
-	    	      if (allNodes.hasOwnProperty(nodeId)) {
-	    	        updateArray.push(allNodes[nodeId]);
-	    	      }
-	    	    }	    	
-	    	
-	    	    nodesDataset.update(updateArray);    	 
-	    	     
-	    	    updateArray = [];
-	    	    for (edgeId in allEdges) {
-	    	      if (allEdges.hasOwnProperty(edgeId)) {
-	    	        updateArray.push(allEdges[edgeId]);
-	    	      }
-	    	    }
-	    	    
-	    	    edgesDataset.update(updateArray);  */   
+	    		  
 	    	 }
 	    	    
 	      }
@@ -663,6 +629,29 @@
 		    </div>    
 		  </div>  
 		</div>
+	</div>
+	<br>
+	<div id="userConfig" class="col-lg-8">
+	<form>
+   		<label>Customized ID</label>
+   			<div class="row">
+   			<div class="col-sm-4 col-md-2">
+	             <div class="form-group">
+	                 <select class="form-control" id="paramCombination">
+	                     <option value="user">User</option>
+	                     <option value="service">Service</option>
+	                     <option value="dataset">Dataset</option>
+	                 </select>
+	             </div>
+             </div>
+             <div class="col-sm-4 col-md-2">
+             	<input type="text" class="form-control col-lg-3" id="userConfId" placeholder="1">
+             </div>
+             <div class="col-sm-4 col-md-4">
+                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:getParameters()">Run</button>
+             </div>
+             </div>
+       	</form>
 	</div>
   
 }
