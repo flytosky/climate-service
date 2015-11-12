@@ -236,12 +236,11 @@
    			    }
    			  },
    			  edges: {
-   				 color: {
-   			      inherit : false
-   			    },
+   				 color: 'rgba(192,192,192,0.3)',
    			    arrows: {
+   			    	
    			      to: {
-   			        enabled: true,
+   			        enabled: false,
    			        scaleFactor: 0.4
    			      }
    			    },
@@ -295,6 +294,10 @@
 	          container: document.getElementById('config')
 	        }
 	      };
+	      
+	      
+	      $("#config").html("");
+
 	      network = new vis.Network(container, data, options);
 
 	      network.on("stabilizationProgress", function(params) {
@@ -340,7 +343,8 @@
 	        }).done(function(data1) {
 	        	console.log("success");
 	        	jsonString = data1;
-	        	//draw();
+	        	
+	        	
 	        }).fail(function(xhr, textStatus, errorThrown) {
 	        	console.log("error!");
 	        	console.log(xhr);
@@ -356,16 +360,23 @@
 	    		var node1 = params.nodes[0];
 	    		var connectedEdges = network.getConnectedEdges(node1); //String
 	    		var edge1 = connectedEdges[0];
-	    		allEdges[edge1].color = 'rgba(255,0,0,0.3)'; //object
+	    		allEdges[edge1].color = 'rgba(255,0,0,1)'; //object
 	    		var connectedNodes = network.getConnectedNodes(edge1);
 	    		var node2 = connectedNodes[0];
-	    		allNodes[node2].color = 'rgba(255,0,0,0.3)';
+	    		allNodes[node2].color = 'rgba(255,0,0,1)';
 	    		connectedEdges = network.getConnectedEdges(node2); //String
 	    		var edge2 = connectedEdges[0];
-	    		allEdges[edge2].color = 'rgba(255,0,0,0.3)'; //object
+	    		allEdges[edge2].color = 'rgba(255,0,0,1)'; //object
 	    		connectedNodes = network.getConnectedNodes(edge2);
-	    		var node3= connectedNodes[0];
-	    		allNodes[node3].color= 'rgba(255,0,0,0.3)';
+	    		console.log("oooooo" + connectedNodes[1]);
+	    		var node3= connectedNodes[1];
+	    		allNodes[node3].color= 'rgba(255,0,0,1)';
+	    		connectedEdges = network.getConnectedEdges(node3); //String
+	    		var edge3 = connectedEdges[1];
+	    		allEdges[edge3].color = 'rgba(255,0,0,1)'; //object
+	    		connectedNodes = network.getConnectedNodes(edge3);
+	    		var node4= connectedNodes[0];
+	    		allNodes[node4].color= 'rgba(255,0,0,1)';
 	    		
 	    	  var updateArray = [];
 	    	    for (nodeId in allNodes) {
