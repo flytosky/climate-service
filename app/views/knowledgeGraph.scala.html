@@ -349,6 +349,13 @@
 	        }).done(function(data1) {
 	        	var connectedNodes =  null;
 	        	
+	        	 for (var nodeId in allNodes) {
+	     	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
+	     	        if (allNodes[nodeId].hiddenLabel == undefined) {
+	     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+	     	          allNodes[nodeId].label = undefined;
+	     	        }
+	     	      }
 	        	
 	        	console.log(data1);
 	        	data1 = JSON.parse(data1);
