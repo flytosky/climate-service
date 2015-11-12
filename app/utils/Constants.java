@@ -83,5 +83,6 @@ public class Constants {
 	
 	//Analytics
 	public static final String GET_RELATIONAL_GRAPH = "/analytics/getRelationalKnowledgeGraph/json";
-	public static final String GET_SHORTEST_PATH = "/analytics/getShortestPath/json";
+	public static final String GET_SHORTEST_PATH = "/graphAlgorithm/getShortestPath/source/";
+	
 }
