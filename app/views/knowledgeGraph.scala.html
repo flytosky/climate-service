@@ -444,6 +444,41 @@
 	    	    
 	      }
 	    
+	    function selectThatNodeCustomized() {
+	    	
+	    	 var group = document.getElementById("paramCombination1").value;
+	    	 var id = document.getElementById("userConfId").value;
+	    		
+	    		console.log("id: " + id);
+	    		console.log("group: " + group);
+	    		console.log("p1: " + p1);
+	    		console.log("p2: " + p2);
+	    		
+	    		var parameters = {
+		    			param1:p1,
+		    			param2:p2,
+		    			id:id,
+		    			groupName:group
+		    	}
+	    		$.ajax({
+		            url: "/getPartKnowledgeGraph",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data1) {
+		        	console.log("success");
+		        	jsonString = data1;
+		        	draw();
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+	    	    
+	      }
+	    
 	    function neighbourhoodHighlight(params) {
     	     // if something is selected:
     	    if (params.nodes.length > 0) {
@@ -669,7 +704,7 @@
    			<div class="row">
    			<div class="col-sm-4 col-md-2">
 	             <div class="form-group">
-	                 <select class="form-control" id="paramCombination">
+	                 <select class="form-control" id="paramCombination1">
 	                     <option value="user">User</option>
 	                     <option value="service">Service</option>
 	                     <option value="dataset">Dataset</option>
@@ -680,7 +715,7 @@
              	<input type="text" class="form-control col-lg-3" id="userConfId" placeholder="1">
              </div>
              <div class="col-sm-4 col-md-4">
-                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:getParameters()">Run</button>
+                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
              </div>
              </div>
        	</form>
