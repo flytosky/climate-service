@@ -61,7 +61,8 @@ GET 	/searchAndGenerateWorkflow					controllers.AnalyticsController.getSearchAnd
 GET     /serviceKnowledgeGraph                      controllers.AnalyticsController.getKnowledgeGraph()
 GET     /relationalKnowledgeGraph                   controllers.AnalyticsController.getRelationalKnowledgeGraph()
 POST	/getSpecifiedKnowledgeGraph					controllers.AnalyticsController.getSpecifiedKnowledgeGraph()
-POST		/getShortestPath 				controllers.AnalyticsController.getShortestPath()
+POST	/getShortestPath 							controllers.AnalyticsController.getShortestPath()
+POST	/getPartKnowledgeGraph						controllers.AnalyticsController.getPartKnowledgeGraph()
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()

@@ -115,7 +115,12 @@
 	    jsonString =  $('#jsonData').text();
 	    draw();
 	  })
-	    
+	  	
+	  	var p1 = null;
+		var p2 = null;
+	    var p3 = null;
+	  
+	  
 		var degrees = 1;// graph level setting
 	    var nodes = null;
 	    var edges = null;
@@ -132,9 +137,9 @@
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
 			var temp2 = temp1.split(" ");
-			var p1 = temp2[0];
-			var p2 = temp2[1];
-	    	var p3 = temp2[2];
+			p1 = temp2[0];
+			p2 = temp2[1];
+	    	p3 = temp2[2];
 	    	
 	    	var parameters = {
 	    			param1:p1,
@@ -391,7 +396,48 @@
 	    		console.log("TTT");		
 	    		
 	    		var node1 = params.nodes[0];
-	    		var connectedEdges = network.getConnectedEdges(node1); //String
+	    		var group = allNodes[node1].group;
+	    		var id = null;
+	    		switch(group) {
+	    		case "service":
+	    			id = allNodes[node1].serviceId;
+	    			break;
+	    		case "dataset":
+	    			id = allNodes[node1].datasetId;
+	    			break;
+	    		case "user":
+	    			id = allNodes[node1].userId;
+	    			break;
+	    		default:
+	    			break;
+	    		}
+	    		
+	    		console.log("id: " + id);
+	    		console.log("idP: " + node1);
+	    		
+	    		var parameters = {
+		    			param1:p1,
+		    			param2:p2,
+		    			id:id,
+		    			groupName:group
+		    	}
+	    		$.ajax({
+		            url: "/getPartKnowledgeGraph",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data1) {
+		        	console.log("success");
+		        	jsonString = data1;
+		        	draw();
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+	    		/* var connectedEdges = network.getConnectedEdges(node1); //String
 	    		var edge1 = connectedEdges[0];
 	    		allEdges[edge1].color = 'rgba(255,0,0,1)'; //object
 	    		var connectedNodes = network.getConnectedNodes(edge1);
@@ -427,7 +473,7 @@
 	    	      }
 	    	    }
 	    	    
-	    	    edgesDataset.update(updateArray);    
+	    	    edgesDataset.update(updateArray);  */   
 	    	 }
 	    	    
 	      }
@@ -443,7 +489,7 @@
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
     	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
-    	        if (allNodes[nodeId].hiddenLabel === undefined) {
+    	        if (allNodes[nodeId].hiddenLabel == undefined) {
     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
     	          allNodes[nodeId].label = undefined;
     	        }
