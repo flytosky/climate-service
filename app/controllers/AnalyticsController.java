@@ -87,8 +87,8 @@ public class AnalyticsController extends Controller{
 			jsonData.put("startId", startId);
 			jsonData.put("endId", endId);
 			
-			response = RESTfulCalls.postAPI(Constants.URL_HOST
-					+ Constants.CMU_BACKEND_PORT + Constants.GET_SHORTEST_PATH, jsonData);
+			response = RESTfulCalls.getAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + Constants.GET_SHORTEST_PATH + startId + "/target/" + endId + "/json");
 
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
