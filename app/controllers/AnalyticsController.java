@@ -84,8 +84,8 @@ public class AnalyticsController extends Controller{
 		String endId = json.path("endId").asText();
 		ObjectNode jsonData = Json.newObject();
 		try {
-			jsonData.put("param1", startId);
-			jsonData.put("param2", endId);
+			jsonData.put("startId", startId);
+			jsonData.put("endId", endId);
 			
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_SHORTEST_PATH, jsonData);
