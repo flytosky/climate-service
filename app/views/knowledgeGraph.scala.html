@@ -133,6 +133,8 @@
 	    var visAdvancedConfig = 1;
 	    var visBasicConfig = 1;
 	    
+	    document.getElementById("paramCombination1").disabled = true;
+	    
 	    
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
@@ -411,12 +413,7 @@
 	    		default:
 	    			break;
 	    		}
-	    		
-	    		console.log("id: " + id);
-	    		console.log("idP: " + node1);
-	    		console.log("p1: " + p1);
-	    		console.log("p2: " + p2);
-	    		
+
 	    		var parameters = {
 		    			param1:p1,
 		    			param2:p2,
@@ -448,11 +445,6 @@
 	    	
 	    	 var group = document.getElementById("paramCombination1").value;
 	    	 var id = document.getElementById("userConfId").value;
-	    		
-	    		console.log("id: " + id);
-	    		console.log("group: " + group);
-	    		console.log("p1: " + p1);
-	    		console.log("p2: " + p2);
 	    		
 	    		var parameters = {
 		    			param1:p1,
@@ -526,10 +518,26 @@
     	        }
     	      }
 
-    	      var curNode = allNodes[selectedNode];	   
-    	      
-    	      $("#nodeName").text(curNode.title);		  	       
-	  	      $("#id").text(curNode.id);
+    	      var curNode = allNodes[selectedNode];
+    	      var group = curNode.group;
+	    		var id = null;
+	    		switch(group) {
+	    		case "service":
+	    			id = curNode.serviceId;
+	    			break;
+	    		case "dataset":
+	    			id = curNode.datasetId;
+	    			break;
+	    		case "user":
+	    			id = curNode.userId;
+	    			break;
+	    		default:
+	    			break;
+	    		}
+    	      $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:");
+    	      $("#nodeName").text(curNode.title);
+    	      $("#id").text(id);
+	  	      $("#nodeId").text(curNode.id);
 	  	      $("#cluster").text(curNode.cluster);
 	  	      $("#label").text(curNode.label);
   	          $("#panel").show();
@@ -628,12 +636,12 @@
 	        	<br>
 	        	<div class="input-group">
 				  <span class="input-group-addon" id="basic-addon1">Start Point</span>
-				  <input type="text" class="form-control" placeholder="Type in Id" aria-describedby="basic-addon1" id="startPoint">
+				  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon1" id="startPoint">
 			    </div>
 			    <br>
 			    <div class="input-group">
 				  <span class="input-group-addon" id="basic-addon2">End Point</span>
-				  <input type="text" class="form-control" placeholder="Type in Id" aria-describedby="basic-addon2" id="endPoint">
+				  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon2" id="endPoint">
 				</div>
 				<br>
 				<div class="text-center">
@@ -686,7 +694,8 @@
 		      <p class="card-text text-muted" >A data set (or dataset) is a collection of data.</p>
 		    </div>
 		    <ul class="list-group list-group-flush">
-		      <li class="list-group-item"><strong>Id:</strong><code id="id"></code></li>
+		      <li class="list-group-item"><strong id="groupId"></strong><code id="id"></code></li>
+		      <li class="list-group-item"><strong>Node Id:</strong><code id="nodeId"></code></li>
 		      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
 		      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
 		    </ul>
@@ -711,8 +720,8 @@
 	                 </select>
 	             </div>
              </div>
-             <div class="col-sm-4 col-md-2">
-             	<input type="text" class="form-control col-lg-3" id="userConfId" placeholder="1">
+             <div class="col-sm-4 col-md-4">
+             	<input type="text" class="form-control col-lg-4" id="userConfId" placeholder="User/Dataset/Service Id">
              </div>
              <div class="col-sm-4 col-md-4">
                  <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
