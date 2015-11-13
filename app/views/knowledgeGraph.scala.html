@@ -526,7 +526,7 @@
 
     	      // all second degree nodes get a different color and their label back
     	      for (i = 0; i < allConnectedNodes.length; i++) {
-    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.3)';
+    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.9)';
     	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
     	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
@@ -535,7 +535,7 @@
 
     	      // all first degree nodes get their own color and their label back
     	      for (i = 0; i < connectedNodes.length; i++) {
-    	        allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.3)';
+    	        allNodes[connectedNodes[i]].color = 'rgba(255,255,0,0.9)';
     	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
     	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
@@ -553,7 +553,7 @@
     	      // the main node gets its own color and its label back.
     	      
     	      
-    	      allNodes[selectedNode].color = 'rgba(0,0,255,0.3)'
+    	      allNodes[selectedNode].color = 'rgba(255,0,255,0.9)'
     	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
@@ -737,27 +737,6 @@
 		</div>
 	</div>
 	<br>
-	<div id="userConfig" class="col-lg-8">
-	<form>
-   		<label>Customized ID</label>
-   			<div class="row">
-   			<div class="col-sm-4 col-md-2">
-	             <div class="form-group">
-	                 <select class="form-control" id="paramCombination1">
-	                     <option value="user">User</option>
-	                     <option value="service">Service</option>
-	                     <option value="dataset">Dataset</option>
-	                 </select>
-	             </div>
-             </div>
-             <div class="col-sm-4 col-md-2">
-             	<input type="text" class="form-control col-lg-3" id="userConfId" placeholder="1">
-             </div>
-             <div class="col-sm-4 col-md-4">
-                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
-             </div>
-             </div>
-       	</form>
-	</div>
+	
   
 }
