@@ -351,6 +351,13 @@
 	        }).done(function(data1) {
 	        	var connectedNodes =  null;
 	        	
+	        	 for (var nodeId in allNodes) {
+	     	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
+	     	        if (allNodes[nodeId].hiddenLabel == undefined) {
+	     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+	     	          allNodes[nodeId].label = undefined;
+	     	        }
+	     	      }
 	        	
 	        	console.log(data1);
 	        	data1 = JSON.parse(data1);
@@ -488,6 +495,15 @@
     	        }
     	      }
     	      
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = 'rgba(192,192,192,0.3)';
+      	        if (allEdges[edgeId].hiddenLabel == undefined) {
+      	        	allEdges[edgeId].hiddenLabel = allEdges[edgeId].label;
+      	        	allEdges[edgeId].label = undefined;
+      	        }
+      	      }
+      	      
+    	      
     	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	      
     	      var connectedNodes = network.getConnectedNodes(selectedNode);
@@ -502,7 +518,7 @@
 
     	      // all second degree nodes get a different color and their label back
     	      for (i = 0; i < allConnectedNodes.length; i++) {
-    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.3)';
+    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.9)';
     	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
     	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
@@ -511,12 +527,13 @@
 
     	      // all first degree nodes get their own color and their label back
     	      for (i = 0; i < connectedNodes.length; i++) {
-    	        allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.3)';
+    	        allNodes[connectedNodes[i]].color = 'rgba(255,255,0,0.9)';
     	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
     	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
     	        }
     	      }
+<<<<<<< HEAD
 
     	      var curNode = allNodes[selectedNode];
     	      var group = curNode.group;
@@ -538,6 +555,13 @@
     	      $("#nodeName").text(curNode.title);
     	      $("#id").text(id);
 	  	      $("#nodeId").text(curNode.id);
+=======
+    	      
+    	      var curNode = allNodes[selectedNode];	   
+    	      
+    	      $("#nodeName").text(curNode.title);		  	       
+	  	      $("#id").text(curNode.id);
+>>>>>>> 434e3c690d465c0be9751dcb87a123a5d7796a03
 	  	      $("#cluster").text(curNode.cluster);
 	  	      $("#label").text(curNode.label);
   	          $("#panel").show();
@@ -545,21 +569,33 @@
     	      // the main node gets its own color and its label back.
     	      
     	      
-    	      allNodes[selectedNode].color = 'rgba(0,0,255,0.3)'
+    	      allNodes[selectedNode].color = 'rgba(255,0,255,0.9)'
     	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
-    	    }
-    	    else if (highlightActive === true) {
+    	     
+    	    }    else if (highlightActive === true) {
     	      // reset all nodes
+    	       
     	      for (var nodeId in allNodes) {
     	        allNodes[nodeId].color = undefined;
+    	       
     	        if (allNodes[nodeId].hiddenLabel !== undefined) {
     	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
     	          allNodes[nodeId].hiddenLabel = undefined;
     	        }
     	      }
+    	      
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = undefined;
+    	    	  
+      	        
+      	        	console.log(allEdges[edgeId].color);
+      	        	allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+      	        	allEdges[edgeId].hiddenLabel = undefined;
+      	        
+      	      }
     	      highlightActive = false;
     	    } 	  	  
     	    
@@ -586,8 +622,19 @@
     	    }   	  
     	        	    
     	    nodesDataset.update(updateArray);
+    	    
+    	    
+    	    updateArray = [];
+    	    for (edgeId in allEdges) {
+    	      if (allEdges.hasOwnProperty(edgeId)) {
+    	        updateArray.push(allEdges[edgeId]);
+    	      }
+    	    }
+    	    
+    	    edgesDataset.update(updateArray);  
     	  }
 	    
+	      
 	    
 	    
 	  //  draw();
@@ -707,6 +754,7 @@
 		</div>
 	</div>
 	<br>
+<<<<<<< HEAD
 	<div id="userConfig" class="col-lg-8">
 	<form>
    		<label>Customized ID</label>
@@ -729,5 +777,8 @@
              </div>
        	</form>
 	</div>
+=======
+	
+>>>>>>> 434e3c690d465c0be9751dcb87a123a5d7796a03
   
 }
