@@ -17,5 +17,9 @@ public class AboutController extends Controller {
     public static Result tutorial() {
 		return ok(tutorial.render());
 	}
+    
+    public static Result FAQs() {
+		return ok(frequentlyAskedQuestions.render());
+	}
 
 }
