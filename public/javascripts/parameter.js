@@ -1,5 +1,8 @@
 $(document).ready(function() {
     $("#ruleAlert").hide();
+    $('#uploadJsBtn').hide();
+    
+    
 
 	$('#addAClimateService').click(function() {
 		console.log("beeping");
@@ -128,6 +131,10 @@ function addGroup() {
 
 function resetDataSource() {
 	dataSourceList = [];
+}
+
+function uploadVarJs() {
+	$("#uploadJsBtn").show();
 }
 
 function addVariable() {
@@ -453,26 +460,33 @@ function addTable() {
 
 
 function disableItem() {
+	
+	
     var type = document.getElementById("parameterType");
-
+   
     switch(type.value) {
         case "Input text":
+        	$("#uploadJsBtn").hide();
             document.getElementById("parameterValues").disabled = true;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Input area":
+        	$("#uploadJsBtn").hide();
             document.getElementById("parameterValues").disabled = true;
             document.getElementById("defaultValues").disabled = true;
             break;
         case "Multiple selects":
+        	$("#uploadJsBtn").hide();
             document.getElementById("parameterValues").disabled = false;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Radio button":
+        	$("#uploadJsBtn").hide();
             document.getElementById("parameterValues").disabled = false;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Dropdown list":
+        	$("#uploadJsBtn").show();
             document.getElementById("parameterValues").disabled = false;
             document.getElementById("defaultValues").disabled = false;
             break;
