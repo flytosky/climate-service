@@ -549,19 +549,16 @@
 	    			break;
 	    		default:
 	    			break;
-	    		}
-    	      $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:");
-    	      $("#nodeName").text(curNode.title);
-    	      $("#id").text(id);
-	  	      $("#nodeId").text(curNode.id);
-
-    	      var curNode = allNodes[selectedNode];	   
-    	      
-    	      $("#nodeName").text(curNode.title);		  	       
-	  	      $("#id").text(curNode.id);
+	    		}  
+    	      		  	      
+	    	  $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+	  	      $("#nodeName").text(curNode.title);
+	  	      $("#id").text(id);
+		  	  $("#nodeId").text(curNode.id);
 	  	      $("#cluster").text(curNode.cluster);
 	  	      $("#label").text(curNode.label);
   	          $("#panel").show();
+
     	      
     	      // the main node gets its own color and its label back.
     	      
