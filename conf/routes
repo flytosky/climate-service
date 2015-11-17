@@ -58,7 +58,7 @@ GET     /datasetRecommend                           controllers.AnalyticsControl
 GET     /profileRecommend                           controllers.AnalyticsController.getScientistRecommend()
 GET     /serviceLogGraph                            controllers.AnalyticsController.getLogGraph()
 GET 	/searchAndGenerateWorkflow					controllers.AnalyticsController.getSearchAndGenerateWorkflow()
-GET     /serviceKnowledgeGraph                      controllers.AnalyticsController.getKnowledgeGraph()
+GET     /serviceKnowledgeGraph                      controllers.AnalyticsController.getKnowledgeGraph(param1 ?= "User", param2 ?= "Dataset", param3 ?= "Service")
 GET     /relationalKnowledgeGraph                   controllers.AnalyticsController.getRelationalKnowledgeGraph()
 POST	/getSpecifiedKnowledgeGraph					controllers.AnalyticsController.getSpecifiedKnowledgeGraph()
 POST	/getShortestPath 							controllers.AnalyticsController.getShortestPath()

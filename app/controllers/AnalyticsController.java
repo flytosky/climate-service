@@ -19,10 +19,10 @@ public class AnalyticsController extends Controller{
 			.form(ServiceExecutionLog.class);
 	
 	
-	public static Result getKnowledgeGraph() {
-		String parameter1 = "User";
-		String parameter2 = "Dataset";
-		String parameter3 = "Service";
+	public static Result getKnowledgeGraph(String param1, String param2, String param3) {
+		String parameter1 = param1;
+		String parameter2 = param2;
+		String parameter3 = param3;
 		JsonNode response = null;
 		ObjectNode jsonData = Json.newObject();
 		try {
