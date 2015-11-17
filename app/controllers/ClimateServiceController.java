@@ -470,12 +470,19 @@ public class ClimateServiceController extends Controller {
 					result.getAbsolutePath()));
 			StringBuilder sb = new StringBuilder();
 			line = br.readLine();
-			int count = 0;
-			while (line != null && count < 22) {
+			//int count = 0;
+			String fileNameLine = "<h2 class=\"text-center\">";
+			while (line != null ) {
 				sb.append(line);
 				sb.append("\n");
 				line = br.readLine();
-				count++;
+				
+//				if (line.length() > 23)
+//					System.out.println("pair1" + line.substring(0, 24));
+//					System.out.println("pair2" + fileNameLine);
+				if (line.length()>= 24 && line.substring(0, 24).equals(fileNameLine)) 
+					break;
+				//count++;
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -487,6 +494,7 @@ public class ClimateServiceController extends Controller {
 		}
 
 		// TEMPOARY SOLUTION : get the fileName from the html page
+		System.out.println("original Name" + line);
 		String tempName = line.substring(24, line.length() - 5);
 		String fileName = "public/html/service"
 				+ tempName.substring(0, 1).toUpperCase()
