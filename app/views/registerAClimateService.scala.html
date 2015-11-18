@@ -102,17 +102,26 @@ $(window).load(function(){
                         <option value="Multiple selects">Multiple selects</option>
                         <option value="Radio button">Radio button</option>
                         <option value="Dropdown list">Dropdown list</option>
-                    </select>
+                    </select>                
+
+                    <div class="col-log-12 " id = "dropdownNameDataDiv">
                     
-                    <div class="col-log-12 " id = "uploadJsBtn">
-                    <br>
-                    	<div class="col-log-1 pull-left">
-	                    	<input type="file" class="btn btn-info" id ="uploadVarJs" >        
-	                    </div>                    
-	                    <div class="col-offset-log-1 col-log-1">         
-	                    	<button type="button" class="btn btn-danger" id ="uploadVarJsBtn">Execute</button>
-	                    </div>
-                    </div>
+                    <div class="radio">                   
+					      <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onchange="disableDropdownItem()" checked>
+						    Load backend API names <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here API names mean..."></span>
+						  <button type="button" class="btn btn-primary btn-sm" onclick="showDropdownExample1()">Show example</button>
+						  </label>
+					 </div>
+					 <div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onchange = "disableDropdownItem()">
+						    Display descriptive names, embed backend API names <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here API names mean... and Descriptive names mean..."></span>
+					 		<button type="button" class="btn btn-primary btn-sm" onclick="showDropdownExample2()">Show example</button>
+					 		</label>
+					 </div>					 
+                      		<textarea class="form-control" rows="3" id="dropdownNameData" placeholder ="Placeholder for the js format data"></textarea>
+                     </div>
                 </div>
                 <div class="form-group">
                     <label>Parameter Values</label>

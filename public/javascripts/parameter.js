@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#ruleAlert").hide();
-    $('#uploadJsBtn').hide();
+    $('#dropdownNameDataDiv').hide();
     
     
 
@@ -236,18 +236,49 @@ function addButton() {
 
 
 function addRow() {
-
+	var isUsingDropdownData = false;
     var name = document.getElementById("parameterNameDescriptive");
     var nameFunc = document.getElementById("parameterNameFunctional");
     var type = document.getElementById("parameterType");
-    var values = document.getElementById("parameterValues");
+    var values = document.getElementById("parameterValues");// from input area dropdown list
+    
     var defaultValues = document.getElementById("defaultValues");
     
     var parameterBag = {};
     
-    var rule = "*|Type|*" + type.value+ "*|Value|*" + values.value + "*|DefaultValue|*" + defaultValues.value;
-    parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
-    parameterPackage.push(parameterBag);
+    if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1") {
+    	isUsingDropdownData = true;
+    	
+    	var rule = "*|Type|*" + type.value+ "*|Value|*" + values.value + "*|DefaultValue|*" + defaultValues.value;
+        parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
+        parameterPackage.push(parameterBag);
+        
+    }else {
+    	isUsingDropdownData = false;
+    	var dataValues = document.getElementById("dropdownNameData").value; // from textarea dropdown list
+    	dataValues = JSON.parse(dataValues);
+    	console.log(dataValues.APIvalue);
+    	
+	    var descriptiveValues = null;	    
+    	values = dataValues.APIvalue; // this is what the attri is called in TextArea
+    	descriptiveValues = dataValues.descriptiveValues;  
+    	
+    	var tempValue = ""; //for compatible purpose
+	    for (var item in values) {
+	    	tempValue += values[item];
+	    	tempValue += ",";
+	    }
+	    tempValue = tempValue.substring(0, tempValue.length -1);
+	   
+	    
+	    var rule = "*|Type|*" + type.value+ "*|Value|*" + values + "*|DefaultValue|*" + defaultValues.value;
+	    parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
+	    parameterPackage.push(parameterBag);
+    }
+    
+    
+    
+    
 
     var table = document.getElementById("parameterPreview");
 
@@ -267,7 +298,11 @@ function addRow() {
             appendRadioButton(name, nameFunc, values, defaultValues, indexInService);
             break;
         case "Dropdown list":
-            appendDropdownList(name, nameFunc, values, defaultValues, indexInService);
+        	if (isUsingDropdownData == false) {
+            	appendDropdownListText(name, nameFunc, values, descriptiveValues, defaultValues, indexInService);
+    		}else {
+    			appendDropdownList(name, nameFunc, values, defaultValues, indexInService);
+    		}
             break;
         default:
             appendInput(name, nameFunc, defaultValues);
@@ -407,11 +442,40 @@ function appendDropdownList(name, nameFunc, values, defaultValues, indexInServic
     str += '<td><select class="form-control" id="'+ nameFunc.value +'_select">';
     for (i = 0; i < array.length; i++) {
         str += '<option ';
+        str += 'value="' +array[i] + '"';
         if (array[i].trim() == defaultValues.value.trim()) {
             str += ' selected';
         }
         str += '>';
         str += array[i];
+        str += '</option>';
+    }
+    str += '</select></td>';
+
+    str += '<td><button type="button" class="btn btn-danger"' +
+                   'onclick="Javascript:deleteRow(this,' + indexInService + ')">delete</button></td></tr>';
+
+    $("#tbody").append(str);
+}
+
+function appendDropdownListText(name, nameFunc, values, descriptiveValues, defaultValues, indexInService) { // for input area
+	
+    // generate value array
+    var array = values;
+    var arrayDes = descriptiveValues;
+
+    var str = "";
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+
+    str += '<td><select class="form-control" id="'+ nameFunc.value +'_select">';
+    for (i = 0; i < array.length; i++) {
+        str += '<option ';
+        str += 'value="' +array[i] + '"';
+        if (array[i].trim() == defaultValues.value.trim()) {
+            str += ' selected';
+        }
+        str += '>';
+        str += arrayDes[i];
         str += '</option>';
     }
     str += '</select></td>';
@@ -458,37 +522,47 @@ function addTable() {
 
 }
 
+function disableDropdownItem() {
+	 if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1"){	 
+     	document.getElementById("dropdownNameData").disabled = true;
+     	document.getElementById("parameterValues").disabled = false;
+     }else {    	
+     	document.getElementById("dropdownNameData").disabled = false;
+     	document.getElementById("parameterValues").disabled = true;
+     }
+}
 
 function disableItem() {
-	
 	
     var type = document.getElementById("parameterType");
    
     switch(type.value) {
         case "Input text":
-        	$("#uploadJsBtn").hide();
+        	$("#dropdownNameDataDiv").hide();
             document.getElementById("parameterValues").disabled = true;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Input area":
-        	$("#uploadJsBtn").hide();
+        	$("#dropdownNameDataDiv").hide();
             document.getElementById("parameterValues").disabled = true;
             document.getElementById("defaultValues").disabled = true;
             break;
         case "Multiple selects":
-        	$("#uploadJsBtn").hide();
+        	$("#dropdownNameDataDiv").hide();
             document.getElementById("parameterValues").disabled = false;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Radio button":
-        	$("#uploadJsBtn").hide();
+        	$("#dropdownNameDataDiv").hide();
             document.getElementById("parameterValues").disabled = false;
             document.getElementById("defaultValues").disabled = false;
             break;
         case "Dropdown list":
-        	$("#uploadJsBtn").show();
+        	$("#dropdownNameDataDiv").show();
             document.getElementById("parameterValues").disabled = false;
-            document.getElementById("defaultValues").disabled = false;
+            document.getElementById("defaultValues").disabled = false;         
+            document.getElementById("dropdownNameData").disabled = true;
+         	document.getElementById("parameterValues").disabled = false;
             break;
     }
 }
@@ -537,7 +611,7 @@ function sendValues(url) {
         		
 	        	for (var k = 0, length = selects.length; k < length; k++) {
 	        	    if (selects[k].selected) {
-	        	        value = selects[k].innerHTML;	        	        
+	        	        value = selects[k].value;	        	        // 1117changeslog
 	        	        break;
 	        	    }
 	        	}
@@ -634,7 +708,15 @@ function load() {
     console.log("Page load finished");
 }
 
+function showDropdownExample1() {
+	$("#parameterValues").val("variable1, variable2, variable3, variable4, variable5");
+	$("#defaultValues").val("variable3");
+}
 
+function showDropdownExample2() {
+	$("#dropdownNameData").val("{\r\n\"APIvalue\" : [\"variable1\", \"variable2\", \"variable3\", \"variable4\", \"variable5\"],\r\n\"descriptiveValues\" : [\"variableName1\", \"variableName2\", \"variableName3\", \"variableName4\", \"variableName5\"]\r\n}");
+	$("#defaultValues").val("variable2");
+}
 
 function replaceFile(id) {
 	console.log(id);
