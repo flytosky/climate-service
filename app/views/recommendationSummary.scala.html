@@ -1,129 +1,93 @@
-@(climateServices: List[ClimateService], dataSets: List[Dataset], users: List[User], userBasedDataset: List[String], featureBasedDataset : List[String], itemBasedDataset : List[String], currentUser: String)
+@(climateServices: List[ClimateService], dataSets: List[Dataset], users:
+List[User], userBasedDataset: List[String], featureBasedDataset :
+List[String], itemBasedDataset : List[String], currentUser: String)
 
-@import helper._
-
-@scripts = {
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$('#myTabs a').click(function (e) {
-			  e.preventDefault()
-			  $(this).tab('show')
+@import helper._ @scripts = {
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#myTabs a').click(function(e) {
+			e.preventDefault()
+			$(this).tab('show')
 		})
 	});
-	
+
 	function sendUserId() {
 		var userIdSent = $("#UserIdForRecommend").val();
 		window.location = "/climateService/recommendationSummary/" + userIdSent;
-		/*
-		var userIdJson = {
-				userIdSent : userIdSent
-		};
-		console.log("here");
-		$.ajax({
-            url: "sendUserIdForRecommend",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(userIdJson),
-            dataType: "text"
-        }).done(function(data1) {
-        	console.log("success");
-        	location.reload();
-        }).fail(function(xhr, textStatus, errorThrown) {
-        	console.log("error!");
-        	console.log(xhr);
-        	console.log(textStatus);
-            console.log(errorThrown);
-        });
-		*/
 	}
-	
-	
-	</script>
-}
+</script>
+} @main("Climate Services", scripts) {
 
-@main("Climate Services", scripts) {
-	 
-    <h1>Recommendation</h1>
-    
-    <div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" ><a href="#mostPopService" aria-controls="home" role="tab" data-toggle="tab">Most Popular Service</a></li>
-	    <li role="presentation"><a href="#mostPopDataset" aria-controls="profile" role="tab" data-toggle="tab">Most Popular Dataset</a></li>
-	    <li role="presentation"><a href="#mostActUsers" aria-controls="messages" role="tab" data-toggle="tab">Most Active User</a></li>
-	    <li role="presentation" class="active"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">ML Based Recommendation</a></li>
-	  </ul>	
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane " id="mostPopService">
-				<table class="table table-striped table-bordered table-condensed ex2">
+<h1>Recommendation</h1>
+
+<div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation"><a href="#mostPopService"
+			aria-controls="home" role="tab" data-toggle="tab">Most Popular
+				Service</a></li>
+		<li role="presentation"><a href="#mostPopDataset"
+			aria-controls="profile" role="tab" data-toggle="tab">Most Popular
+				Dataset</a></li>
+		<li role="presentation"><a href="#mostActUsers"
+			aria-controls="messages" role="tab" data-toggle="tab">Most Active
+				User</a></li>
+		<li role="presentation" class="active"><a href="#settings"
+			aria-controls="settings" role="tab" data-toggle="tab">ML Based
+				Recommendation</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane " id="mostPopService">
+			<br>
+			<table class="table table-striped table-bordered table-condensed ex2">
+				<thead>
 					<tr>
-						<td class="col-md-2">Climate Service Name</td>
-						<td class="col-md-2">Purpose</td>
-						<td class="col-md-4">Url</td>
-						<td class="col-md-2">Scenario</td>
-						<td class="col-md-2">Version</td>
-						<td class="col-md-2">Root_Service</td>						  
+						<th class="col-md-3">Climate Service Name</th>
+						<th class="col-md-2">Purpose</th>
+						<th class="col-md-4">Url</th>
+						<th class="col-md-2">Scenario</th>
+						<th class="col-md-2">Version</th>
+						<th class="col-md-2">Root_Service</th>
 					</tr>
-					
+				</thead>
+				<tbody>
 					@for(climateService <- climateServices){
 					<tr>
-						<td><a href = "@climateService.getUrl()">@climateService.getName()</a></td>
-				
-						<td><span class="@climateService.getName() editable" data-name='purpose'>
-								@climateService.getPurpose() </span></td>
-						
-						<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
-								<a href = "@climateService.getUrl()">
-								@climateService.getUrl()</a> </span></td>
-								
-						<td><span class="@climateService.getName() editable" data-name='scenario'>
-								@climateService.getScenario() </span></td>
-								
-						<td><span class="@climateService.getName() editable" data-name='versionNo'>
-								@climateService.getVersionNo() </span></td>
-								
-						<td><span class="@climateService.getName() editable" data-name='rootServiceId'>
-								@climateService.getRootServiceId() </span></td>						
+						<td><a href="@climateService.getUrl()">@climateService.getName()</a></td>
+						<td>@climateService.getPurpose()</td>
+						<td><a href="@climateService.getUrl()">@climateService.getUrl()</a></td>
+						<td>@climateService.getScenario()</td>
+						<td>@climateService.getVersionNo()</td>
+						<td>@climateService.getRootServiceId()</td>
 					</tr>
 					}
-			    </table>
-    	</div>
-    	
-	    <div role="tabpanel" class="tab-pane" id="mostPopDataset">
-				<table class="table table-striped table-bordered table-condensed ex2" >
-					<thead>
+				</tbody>
+			</table>
+		</div>
+
+		<div role="tabpanel" class="tab-pane" id="mostPopDataset">
+			<br>
+			<table class="table table-striped table-bordered table-condensed ex2">
+				<thead>
 					<tr>
-						<!--  
-						<th style = "vertical-align: top;" class="col-md-1 header">Id</th>
-						-->
-						<th style = "vertical-align: top;" class="col-md-2">Dataset Name</th>
-						<th style = "vertical-align: top;" class="col-md-1">Agency</th>
-						<th style = "vertical-align: top;" class="col-md-1">Instrument/Model Experiment</th>
-						<th style = "vertical-align: top;" class="col-md-2">Physical variable</th>
-						<th style = "vertical-align: top;" class="col-md-1">Variable short name</th>
-						<th style = "vertical-align: top;" class="col-md-1">Units</th>
-						<th style = "vertical-align: top;" class="col-md-1">Grid Dimension</th>
-						<!--  
-						<th style = "vertical-align: top;" class="col-md-3">Source</th> 
-						<th style = "vertical-align: top;" class="col-md-3">Status</th>
-						<th style = "vertical-align: top;" class="col-md-4">Responsible Person</th>
-						<th style = "vertical-align: top;" class="col-md-4">Data Source Name in Web Interface</th> 
-						-->
-						<th style = "vertical-align: top;" class="col-md-2">Variable Name in Web Interface</th>
-						<th style = "vertical-align: top;" class="col-md-1">Data Source Input Parameter</th>
-						<!-- <th style = "vertical-align: top;" class="col-md-3">Variable Name Input Parameter</th> -->
-						<th style = "vertical-align: top;" class="col-md-1">Dataset Start Time</th>
-						<th style = "vertical-align: top;"class="col-md-1">Dataset End Time</th>
-						<th style = "vertical-align: top;"class="col-md-1">Duration</th>
+						<th style="vertical-align: top;" class="col-md-2">Dataset Name</th>
+						<th style="vertical-align: top;" class="col-md-1">Agency</th>
+						<th style="vertical-align: top;" class="col-md-1">Instrument/Model Experiment</th>
+						<th style="vertical-align: top;" class="col-md-2">Physical variable</th>
+						<th style="vertical-align: top;" class="col-md-1">Variable short name</th>
+						<th style="vertical-align: top;" class="col-md-1">Units</th>
+						<th style="vertical-align: top;" class="col-md-1">Grid	Dimension</th>
+						<th style="vertical-align: top;" class="col-md-2">Variable Name in Web Interface</th>
+						<th style="vertical-align: top;" class="col-md-1">Data Source 	Input Parameter</th>
+						<th style="vertical-align: top;" class="col-md-1">Dataset Start Time</th>
+						<th style="vertical-align: top;" class="col-md-1">Dataset End Time</th>
+						<th style="vertical-align: top;" class="col-md-1">Duration</th>
 					</tr>
-					</thead>
-					<tbody>
+				</thead>
+				<tbody>
 					@for(dataSet <- dataSets){
 					<tr>
-						<!--  
-						<td><font size="2">@dataSet.getId()</font></td> 
-						-->
 						<td><font size="2">@dataSet.getName()</font></td>
 						<td><font size="2">@dataSet.getAgencyId()</font></td>
 						<td><font size="2">@dataSet.getInstrument()</font></td>
@@ -131,209 +95,197 @@
 						<td><font size="2">@dataSet.getCMIP5VarName()</font></td>
 						<td><font size="2">@dataSet.getUnits()</font></td>
 						<td><font size="2">@dataSet.getGridDimension()</font></td>
-						<!--
-						<td><font size="2">@dataSet.getSource()</font></td>
-						<td><font size="2">@dataSet.getStatus()</font></td>
-						<td><font size="2">@dataSet.getResponsiblePerson()</font></td>
-						<td><font size="2">@dataSet.getDataSourceNameinWebInterface()</font></td>
-						-->
 						<td><font size="2">@dataSet.getVariableNameInWebInterface()</font></td>
 						<td><font size="2">@dataSet.getDataSourceInputParameterToCallScienceApplicationCode()</font></td>
-						<!--<td><font size="2">@dataSet.getVariableNameInputParameterToCallScienceApplicationCode()</font></td> -->
 						<td><font size="2">@dataSet.getStartTime()</font></td>
 						<td><font size="2">@dataSet.getEndTime()</font></td>
-						<td><font size="2">@dataSet.getDuration()</font></td>						
-					</tr>					
+						<td><font size="2">@dataSet.getDuration()</font></td>
+					</tr>
 					}
-					</tbody>
-				    </table>
-		
+				</tbody>
+			</table>
 		</div>
-	    <div role="tabpanel" class="tab-pane" id="mostActUsers">
-
+		<div role="tabpanel" class="tab-pane" id="mostActUsers">
+			<br>
 			<table class="table table-striped table-bordered table-condensed ex2">
-				<tr>
-					<td class="col-md-1">Id</td>
-					<td class="col-md-2">User Name</td>
-					<td class="col-md-2">First Name</td>
-					<td class="col-md-2">Middle Name</td>
-					<td class="col-md-2">Last Name</td>
-					<td class="col-md-2">Afflication</td>
-					<td class="col-md-4">Email</td>
-					<td class="col-md-2">Research Area</td>
-					
-				</tr>
+				<thead>
+					<tr>
+						<th class="col-md-1">Id</th>
+						<th class="col-md-1">User Name</th>
+						<th class="col-md-1">First Name</th>
+						<th class="col-md-2">Middle Name</th>
+						<th class="col-md-1">Last Name</th>
+						<th class="col-md-1">Afflication</th>
+						<th class="col-md-2">Email</th>
+						<th class="col-md-2">Research Area</th>
+					</tr>
+				</thead>
+				</tbody>
 				@for(user <- users){
 				<tr>
 					<td>@user.getId()</td>
-					
 					<td><span class="@user.getId() editable" data-name='username'>@user.getUserName()</span></td>
-							
 					<td><span class="@user.getId() editable" data-name='firstName'>@user.getFirstName()</span></td>
-							
 					<td><span class="@user.getId() editable" data-name='middleInitial'>@user.getMiddleInitial()</span></td>
-							
 					<td><span class="@user.getId() editable" data-name='lastName'>@user.getLastName()</span></td>
-					
 					<td><span class="@user.getId() editable" data-name='affiliation'>@user.getAffiliation()</span></td>
-							
 					<td><span class="@user.getId() editable" data-name='email'>@user.getEmail()</span></td>
-							
 					<td><span class="@user.getId() editable" data-name='researchFields'>@user.getResearchFields()</span></td>
-						
 				</tr>
 				}
-		    </table>
-		
-		
-		
+				</tbody>
+			</table>
 		</div>
-	    <div role="tabpanel" class="tab-pane active " id="settings">
-	    <br>
-	    
-	    	
-	    	    
+
+		<div role="tabpanel" class="tab-pane active " id="settings">
+			<br>
 			<form class="form-inline" role="form">
-			  <div class="form-group">
-			    <label >User Id:</label>
-			    <select class="form-control" id="UserIdForRecommend" >
-                 <option value="ochimborazo">ochimborazo</option>
-                 
-                 <option value="fcannon">fcannon</option>
-                 <option value="kwillmot">kwillmot</option>
-                 <option value="nkille">nkille</option>
-                 <option value="jnanteza">jnanteza</option>
-                 <option value="ksauter">ksauter</option>
-                 <option value="jgristey">jgristey</option>
-                 <option value="caquilinger">caquilinger</option>
-                 <option value="fpolverari">fpolverari</option>
-                 <option value="kneff">kneff</option>
-                 <option value="emaroon">emaroon</option>
-                 <option value="rbuchholz">rbuchholz</option>
-                 <option value="abeatriz">abeatriz</option>
-                 <option value="htseng">htseng</option>
-                 <option value="mlinz">mlinz</option>
-                 <option value="kzhang">kzhang</option>
-                 <option value="jbrodie">jbrodie</option>
-                 <option value="dzermenodia">dzermenodia</option>
-                 <option value="cmartinezvi">cmartinezvi</option>
-                 <option value="mclavner">mclavner</option>
-                 <option value="hwei">hwei</option>
-                 <option value="gmarques">gmarques</option>
-                 <option value="mroge">mroge</option>
-                   
-                 
-             </select>
-			  </div>			  
-			  <button type="button" class="btn btn-info" onclick = "sendUserId()">Recommend</button>
-			</form>	
-	    
-		    <br>
-	        
-	        <h4>Current User: @currentUser</h4>
-	      <div class="row well col-lg-10">
-		      <div class = "col-lg-offset-0 col-lg-6">
-				<div class="panel panel-success">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading">Recommended based on dataset similarity and the user's past behavior</div>
-				  <div class="panel-body">
-				    <p>The supporting algorithms are Latent Dirichlet Allocation (LDA) and Collaborative Filtering (CF), which take into account of semetic meaning of dataset 
-				    as well as the user's past dataset usage history.</p>
-				  </div>
-				
-				  <!-- Table -->
-				  <table class="table">
-				    <thead>
-				      <tr>
-				        <th>Dataset Name</th>
-					        <th>...</th>
-					        <th>...</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-				    @for(String <- featureBasedDataset){
-			    	 <tr>
-				        <td>@String.substring(1, String.length-1)</td>
-				        <td>...</td>
-				        <td>...</td>
-			         </tr>
-				    }
-				      
-				    </tbody>
-				  </table>
+				<div class="form-group">
+					<label>User Id:</label> <select class="form-control"
+						id="UserIdForRecommend">
+						<option value="ochimborazo">ochimborazo</option>
+						<option value="fcannon">fcannon</option>
+						<option value="kwillmot">kwillmot</option>
+						<option value="nkille">nkille</option>
+						<option value="jnanteza">jnanteza</option>
+						<option value="ksauter">ksauter</option>
+						<option value="jgristey">jgristey</option>
+						<option value="caquilinger">caquilinger</option>
+						<option value="fpolverari">fpolverari</option>
+						<option value="kneff">kneff</option>
+						<option value="emaroon">emaroon</option>
+						<option value="rbuchholz">rbuchholz</option>
+						<option value="abeatriz">abeatriz</option>
+						<option value="htseng">htseng</option>
+						<option value="mlinz">mlinz</option>
+						<option value="kzhang">kzhang</option>
+						<option value="jbrodie">jbrodie</option>
+						<option value="dzermenodia">dzermenodia</option>
+						<option value="cmartinezvi">cmartinezvi</option>
+						<option value="mclavner">mclavner</option>
+						<option value="hwei">hwei</option>
+						<option value="gmarques">gmarques</option>
+						<option value="mroge">mroge</option>
+					</select>
 				</div>
-				</div>
-	
-		    	<div class = " col-lg-6">
-					<div class="panel panel-danger ">
-					  <!-- Default panel contents -->
-					  <div class="panel-heading">Recommended based on peer scientists' dataset usage behavior</div>
-					  <div class="panel-body">
-					    <p>The supporting algorithm is User-based Collaborative Filtering, which takes into account the dataset usage preferences from other scientists with similar profiles and background.</p>
-					  </div>
-					
-					  <!-- Table -->
-					  <table class="table">
-					    <thead>
-					      <tr>
-					        <th>Dataset Name</th>
-					        <th>...</th>
-					        <th>...</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					      @for(String <- userBasedDataset){
-					    	 <tr>
-						        <td>@String.substring(1, String.length-1)</td>
-						        <td>...</td>
-						        <td>...</td>
-					         </tr>
-				    		}
-					    </tbody>
-					  </table>
+				<button type="button" class="btn btn-info" onclick="sendUserId()">Recommend</button>
+			</form>
+
+			<br>
+
+			<h4>Current User: @currentUser</h4>
+			<div class="row well col-lg-10">
+				<div class="col-lg-offset-0 col-lg-6">
+					<div class="panel panel-success">
+						<!-- Default panel contents -->
+						<div class="panel-heading">Recommended based on dataset
+							similarity and the user's past behavior</div>
+						<div class="panel-body">
+							<p>The supporting algorithms are Latent Dirichlet Allocation
+								(LDA) and Collaborative Filtering (CF), which take into account
+								of semetic meaning of dataset as well as the user's past dataset
+								usage history.</p>
+						</div>
+
+						<!-- Table -->
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Dataset Name</th>
+									<th>...</th>
+									<th>...</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(String <- featureBasedDataset){
+								<tr>
+									<td>@String.substring(1, String.length-1)</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								}
+
+							</tbody>
+						</table>
 					</div>
 				</div>
-	    	</div>
-	    	
-	    	<div class="row">
-			    	<div class = "well col-lg-offset-0 col-lg-5">
-						<div class="panel panel-info">
-						  <!-- Default panel contents -->
-						  <div class="panel-heading">Recommended based on past dataset usage history</div>
-						  <div class="panel-body">
-						    <p>The supporting algorithm is Item-based Collaborative Filtering, which takes into account the dataset usage preferences from the user.</p>
-						  </div>
-						
-						  <!-- Table -->
-						  <table class="table">
-						    <thead>
-						      <tr>
-						        <th>Dataset Name</th>
-						        <th>...</th>
-						        <th>...</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						      @for(String <- itemBasedDataset){
-						    	 <tr>
-							        <td>@String.substring(1, String.length-1)</td>
-							        <td>...</td>
-							        <td>...</td>
-						         </tr>
-					    		}
-						    </tbody>
-						  </table>
+
+				<div class=" col-lg-6">
+					<div class="panel panel-danger ">
+						<!-- Default panel contents -->
+						<div class="panel-heading">Recommended based on peer scientists' dataset usage behavior</div>
+						<div class="panel-body">
+							<p>The supporting algorithm is User-based Collaborative
+								Filtering, which takes into account the dataset usage
+								preferences from other scientists with similar profiles and
+								background.</p>
 						</div>
-					</div>	
-			   </div>	
-		 	</div>	
-		 					
+
+						<!-- Table -->
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Dataset Name</th>
+									<th>...</th>
+									<th>...</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(String <- userBasedDataset){
+								<tr>
+									<td>@String.substring(1, String.length-1)</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="well col-lg-offset-0 col-lg-5">
+					<div class="panel panel-info">
+						<!-- Default panel contents -->
+						<div class="panel-heading">Recommended based on past dataset
+							usage history</div>
+						<div class="panel-body">
+							<p>The supporting algorithm is Item-based Collaborative
+								Filtering, which takes into account the dataset usage
+								preferences from the user.</p>
+						</div>
+
+						<!-- Table -->
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Dataset Name</th>
+									<th>...</th>
+									<th>...</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(String <- itemBasedDataset){
+								<tr>
+									<td>@String.substring(1, String.length-1)</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
-	  </div>
+
 	</div>
-    
-	
- 
-    
-     
+</div>
+</div>
+
+
+
+
+
 }
