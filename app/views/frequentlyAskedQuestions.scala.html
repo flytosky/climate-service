@@ -54,13 +54,16 @@
    <h3>Dynamic Statistics</h3>
    <ul>
    <li style="margin-bottom: 5px;">
-   <a href='@routes.ClimateServiceController.recommendationSummary()'>Most popular service</a>
+   <a href='@routes.ClimateServiceController.mostPopularServices()'>Most popular service</a>
    </li>
    <li style="margin-bottom: 5px;">
    <a href='@routes.DatasetController.mostPopularDatasets()'>Most popular dataset</a>
    </li>
    <li style="margin-bottom: 5px;">
    <a href='@routes.UsersController.getAllUsers()'>Most active user</a>
+   </li>
+   <li style="margin-bottom: 5px;">
+   <a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo")'>ML Based Recommendation</a>
    </li>
    </ul>
    
