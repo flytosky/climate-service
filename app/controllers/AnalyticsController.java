@@ -1,5 +1,9 @@
 package controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import models.ServiceExecutionLog;
 import play.data.Form;
 import play.libs.Json;
@@ -135,38 +139,74 @@ public class AnalyticsController extends Controller{
 		String parameter1 = json.path("param1").asText();
 		String parameter2 = json.path("param2").asText();
 		String groupName = json.path("groupName").asText();
-		String combination = parameter1 + parameter2 + groupName;
+		
+		
+		String startTime = json.path("startTime").asText();
+		String endTime = json.path("endTime").asText();
+		
 		long id = json.path("id").asLong();
-		JsonNode response = null;
+		
 		ObjectNode jsonData = Json.newObject();
+		
+		Date executionStartTime = null, executionEndTime= null;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		
+		if (!startTime.isEmpty()) {
+			try {
+				executionStartTime = simpleDateFormat.parse(startTime);
+		        jsonData.put("executionStartTime", executionStartTime.getTime());
+			} catch (ParseException e) {
+				System.out.println("Wrong Date Format :" + startTime);
+				return badRequest("Wrong Date Format :" + startTime);
+			}
+		}
+		if (!endTime.isEmpty()) {
+			try {
+				executionEndTime = simpleDateFormat.parse(endTime);
+				jsonData.put("executionEndTime", executionEndTime.getTime());
+			} catch (ParseException e) {
+				System.out.println("Wrong Date Format :" + endTime);
+				return badRequest("Wrong Date Format :" + endTime);
+			}
+		}
+		
+		String combination = parameter1 + parameter2 + groupName;
+		JsonNode response = null;
+		
 		try {
-			switch(combination) {
-			case "UserDatasetuser":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllDatasetAndCountByUserId/" + id + "/json");
-				break;
-			case "UserDatasetdataset":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllUserAndCountByDatasetId/" + id + "/json");
-				break;
-			case "UserServiceuser":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllServiceAndCountByUserId/" + id + "/json");
-				break;
-			case "UserServiceservice":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllUserAndCountByServiceId/" + id + "/json");
-				break;
-			case "DatasetServiceservice":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllDatasetAndCountByServiceId/" + id + "/json");
-				break;
-			case "DatasetServicedataset":
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllServiceAndCountByDatasetId/" + id + "/json");
-				break;
-			default:
-				break;
+			jsonData.put("id", id);
+			if(!startTime.isEmpty() || !endTime.isEmpty()) {
+				response = RESTfulCalls.postAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
+			}else {
+				switch(combination) {
+				case "UserDatasetuser":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllDatasetAndCountByUserId/" + id + "/json");
+					break;
+				case "UserDatasetdataset":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllUserAndCountByDatasetId/" + id + "/json");
+					break;
+				case "UserServiceuser":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllServiceAndCountByUserId/" + id + "/json");
+					break;
+				case "UserServiceservice":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllUserAndCountByServiceId/" + id + "/json");
+					break;
+				case "DatasetServiceservice":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllDatasetAndCountByServiceId/" + id + "/json");
+					break;
+				case "DatasetServicedataset":
+					response = RESTfulCalls.getAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllServiceAndCountByDatasetId/" + id + "/json");
+					break;
+				default:
+					break;
+				}
 			}
 
 		} catch (IllegalStateException e) {
