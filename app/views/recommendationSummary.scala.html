@@ -2,39 +2,34 @@
 List[User], userBasedDataset: List[String], featureBasedDataset :
 List[String], itemBasedDataset : List[String], currentUser: String)
 
-@import helper._ @scripts = {
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#myTabs a').click(function(e) {
-			e.preventDefault()
-			$(this).tab('show')
-		})
-	});
+@import helper._ 
+@scripts = {
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#myTabs a').click(function(e) {
+				e.preventDefault()
+				$(this).tab('show')
+			})
+		});
+	
+		function sendUserId() {
+			var userIdSent = $("#UserIdForRecommend").val();
+			window.location = "/climateService/recommendationSummary/" + userIdSent;
+		}
+	</script>
+} 
 
-	function sendUserId() {
-		var userIdSent = $("#UserIdForRecommend").val();
-		window.location = "/climateService/recommendationSummary/" + userIdSent;
-	}
-</script>
-} @main("Climate Services", scripts) {
+@main("Climate Services", scripts) {
 
 <h1>Recommendation</h1>
 
 <div>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation"><a href="#mostPopService"
-			aria-controls="home" role="tab" data-toggle="tab">Most Popular
-				Service</a></li>
-		<li role="presentation"><a href="#mostPopDataset"
-			aria-controls="profile" role="tab" data-toggle="tab">Most Popular
-				Dataset</a></li>
-		<li role="presentation"><a href="#mostActUsers"
-			aria-controls="messages" role="tab" data-toggle="tab">Most Active
-				User</a></li>
-		<li role="presentation" class="active"><a href="#settings"
-			aria-controls="settings" role="tab" data-toggle="tab">ML Based
-				Recommendation</a></li>
+		<li role="presentation"><a href="#mostPopService" aria-controls="home" role="tab" data-toggle="tab">Most Popular Service</a></li>
+		<li role="presentation"><a href="#mostPopDataset" aria-controls="profile" role="tab" data-toggle="tab">Most Popular Dataset</a></li>
+		<li role="presentation"><a href="#mostActUsers" aria-controls="messages" role="tab" data-toggle="tab">Most Active User</a></li>
+		<li role="presentation" class="active"><a href="#settings"	aria-controls="settings" role="tab" data-toggle="tab">ML Based Recommendation</a></li>
 	</ul>
 	<!-- Tab panes -->
 	<div class="tab-content">
