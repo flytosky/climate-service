@@ -123,12 +123,12 @@ public class DatasetController extends Controller {
 			
 
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			Application.flashMsg(RESTfulCalls
-					.createResponse(ResponseType.CONVERSIONERROR));
+//			e.printStackTrace();
+//			Application.flashMsg(RESTfulCalls
+//					.createResponse(ResponseType.CONVERSIONERROR));
 		} catch (Exception e) {
-			e.printStackTrace();
-			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+//			e.printStackTrace();
+//			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		}
 
 		List<Dataset> response = queryDataSet(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime);

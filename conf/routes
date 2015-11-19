@@ -16,7 +16,9 @@ POST	/isEmailExisted				controllers.Application.isEmailExisted()
 
 
 #recommendation overview
-GET		/climateService/recommendationSummary					controllers.ClimateServiceController.recommendationSummary()
+GET		/climateService/recommendationSummary/:userId				controllers.ClimateServiceController.recommendationSummary(userId: String)
+
+
 
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()

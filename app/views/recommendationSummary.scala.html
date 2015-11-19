@@ -1,4 +1,4 @@
-@(climateServices: List[ClimateService], dataSets: List[Dataset], users: List[User])
+@(climateServices: List[ClimateService], dataSets: List[Dataset], users: List[User], userBasedDataset: List[String], featureBasedDataset : List[String], itemBasedDataset : List[String], currentUser: String)
 
 @import helper._
 
@@ -10,6 +10,34 @@
 			  $(this).tab('show')
 		})
 	});
+	
+	function sendUserId() {
+		var userIdSent = $("#UserIdForRecommend").val();
+		window.location = "/climateService/recommendationSummary/" + userIdSent;
+		/*
+		var userIdJson = {
+				userIdSent : userIdSent
+		};
+		console.log("here");
+		$.ajax({
+            url: "sendUserIdForRecommend",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(userIdJson),
+            dataType: "text"
+        }).done(function(data1) {
+        	console.log("success");
+        	location.reload();
+        }).fail(function(xhr, textStatus, errorThrown) {
+        	console.log("error!");
+        	console.log(xhr);
+        	console.log(textStatus);
+            console.log(errorThrown);
+        });
+		*/
+	}
+	
+	
 	</script>
 }
 
@@ -20,14 +48,14 @@
     <div>
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#mostPopService" aria-controls="home" role="tab" data-toggle="tab">Most Popular Service</a></li>
+	    <li role="presentation" ><a href="#mostPopService" aria-controls="home" role="tab" data-toggle="tab">Most Popular Service</a></li>
 	    <li role="presentation"><a href="#mostPopDataset" aria-controls="profile" role="tab" data-toggle="tab">Most Popular Dataset</a></li>
 	    <li role="presentation"><a href="#mostActUsers" aria-controls="messages" role="tab" data-toggle="tab">Most Active User</a></li>
-	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+	    <li role="presentation" class="active"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">ML Based Recommendation</a></li>
 	  </ul>	
 	  <!-- Tab panes -->
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="mostPopService">
+	    <div role="tabpanel" class="tab-pane " id="mostPopService">
 				<table class="table table-striped table-bordered table-condensed ex2">
 					<tr>
 						<td class="col-md-2">Climate Service Name</td>
@@ -160,7 +188,147 @@
 		
 		
 		</div>
-	    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+	    <div role="tabpanel" class="tab-pane active " id="settings">
+	    <br>
+	    
+	    	
+	    	    
+			<form class="form-inline" role="form">
+			  <div class="form-group">
+			    <label >User Id:</label>
+			    <select class="form-control" id="UserIdForRecommend" >
+                 <option value="ochimborazo">ochimborazo</option>
+                 
+                 <option value="fcannon">fcannon</option>
+                 <option value="kwillmot">kwillmot</option>
+                 <option value="nkille">nkille</option>
+                 <option value="jnanteza">jnanteza</option>
+                 <option value="ksauter">ksauter</option>
+                 <option value="jgristey">jgristey</option>
+                 <option value="caquilinger">caquilinger</option>
+                 <option value="fpolverari">fpolverari</option>
+                 <option value="kneff">kneff</option>
+                 <option value="emaroon">emaroon</option>
+                 <option value="rbuchholz">rbuchholz</option>
+                 <option value="abeatriz">abeatriz</option>
+                 <option value="htseng">htseng</option>
+                 <option value="mlinz">mlinz</option>
+                 <option value="kzhang">kzhang</option>
+                 <option value="jbrodie">jbrodie</option>
+                 <option value="dzermenodia">dzermenodia</option>
+                 <option value="cmartinezvi">cmartinezvi</option>
+                 <option value="mclavner">mclavner</option>
+                 <option value="hwei">hwei</option>
+                 <option value="gmarques">gmarques</option>
+                 <option value="mroge">mroge</option>
+                   
+                 
+             </select>
+			  </div>			  
+			  <button type="button" class="btn btn-info" onclick = "sendUserId()">Recommend</button>
+			</form>	
+	    
+		    <br>
+	        
+	        <h4>Current User: @currentUser</h4>
+	      <div class="row well col-lg-10">
+		      <div class = "col-lg-offset-0 col-lg-6">
+				<div class="panel panel-success">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Recommended based on dataset similarity and the user's past behavior</div>
+				  <div class="panel-body">
+				    <p>The supporting algorithms are Latent Dirichlet Allocation (LDA) and Collaborative Filtering (CF), which take into account of semetic meaning of dataset 
+				    as well as the user's past dataset usage history.</p>
+				  </div>
+				
+				  <!-- Table -->
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th>Dataset Name</th>
+					        <th>...</th>
+					        <th>...</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    @for(String <- featureBasedDataset){
+			    	 <tr>
+				        <td>@String.substring(1, String.length-1)</td>
+				        <td>...</td>
+				        <td>...</td>
+			         </tr>
+				    }
+				      
+				    </tbody>
+				  </table>
+				</div>
+				</div>
+	
+		    	<div class = " col-lg-6">
+					<div class="panel panel-danger ">
+					  <!-- Default panel contents -->
+					  <div class="panel-heading">Recommended based on peer scientists' dataset usage behavior</div>
+					  <div class="panel-body">
+					    <p>The supporting algorithm is User-based Collaborative Filtering, which takes into account the dataset usage preferences from other scientists with similar profiles and background.</p>
+					  </div>
+					
+					  <!-- Table -->
+					  <table class="table">
+					    <thead>
+					      <tr>
+					        <th>Dataset Name</th>
+					        <th>...</th>
+					        <th>...</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      @for(String <- userBasedDataset){
+					    	 <tr>
+						        <td>@String.substring(1, String.length-1)</td>
+						        <td>...</td>
+						        <td>...</td>
+					         </tr>
+				    		}
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+	    	</div>
+	    	
+	    	<div class="row">
+			    	<div class = "well col-lg-offset-0 col-lg-5">
+						<div class="panel panel-info">
+						  <!-- Default panel contents -->
+						  <div class="panel-heading">Recommended based on past dataset usage history</div>
+						  <div class="panel-body">
+						    <p>The supporting algorithm is Item-based Collaborative Filtering, which takes into account the dataset usage preferences from the user.</p>
+						  </div>
+						
+						  <!-- Table -->
+						  <table class="table">
+						    <thead>
+						      <tr>
+						        <th>Dataset Name</th>
+						        <th>...</th>
+						        <th>...</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      @for(String <- itemBasedDataset){
+						    	 <tr>
+							        <td>@String.substring(1, String.length-1)</td>
+							        <td>...</td>
+							        <td>...</td>
+						         </tr>
+					    		}
+						    </tbody>
+						  </table>
+						</div>
+					</div>	
+			   </div>	
+		 	</div>	
+		 					
+		</div>
 	  </div>
 	</div>
     

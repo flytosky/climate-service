@@ -3,14 +3,16 @@ package utils;
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
-	public static final String URL_SERVER = "http://localhost";
+	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	//public static final String URL_SERVER = "http://localhost";
+	
 	
 	// port
 	public static final String JPL_BACKEND_PORT = ":9002";
 	public static final String LOCAL_HOST_PORT = ":9032";
 	public static final String CMU_BACKEND_PORT = ":9035"; 
-
+	public static final String URL_FLASK = ":9040";
+	
 	// API Call format
 	public static final String FORMAT = "json";
 	
@@ -85,5 +87,11 @@ public class Constants {
 	public static final String GET_RELATIONAL_GRAPH = "/analytics/getRelationalKnowledgeGraph/json";
 	public static final String GET_SHORTEST_PATH = "/graphAlgorithm/getShortestPath/source/";
 	
-	
+	//recommendation
+	public static final String GET_TOP_K_USER_BASED_DATASET1 = "/getTopKUserBasedCFRecommendedDatasetByUsername?username=";
+	public static final String GET_TOP_K_USER_BASED_DATASET2 = "&top_num=";
+	public static final String GET_TOP_K_ITEM_BASED_DATASET1 = "/getTopKItemBasedCFRecommendedDatasetByUsername?username=";
+	public static final String GET_TOP_K_ITEM_BASED_DATASET2 = "&top_num=";
+	public static final String GET_TOP_K_FEATURE_BASED_DATASET1 = "/getTopKLDABasedRecommendedDatasetByUsername?username=";
+	public static final String GET_TOP_K_FEATURE_BASED_DATASET2 = "&top_num=";
 }
