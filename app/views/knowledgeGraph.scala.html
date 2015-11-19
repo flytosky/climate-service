@@ -349,49 +349,9 @@
 	            data: JSON.stringify(ids),
 	            dataType: "text"
 	        }).done(function(data1) {
-	        	var connectedNodes =  null;
-	        	
-	        	 for (var nodeId in allNodes) {
-	     	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
-	     	        if (allNodes[nodeId].hiddenLabel == undefined) {
-	     	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
-	     	          allNodes[nodeId].label = undefined;
-	     	        }
-	     	      }
-	        	
-	        	console.log(data1);
-	        	data1 = JSON.parse(data1);
-	        	var edges = data1.edges;
-	        	var nodes = data1.nodes;
-	        	
-	        	console.log(nodes[0].label);
-	        	for (var i = 0; i< nodes.length; i++) {	             		
-	        		allNodes[nodes[i].id].color =  'rgba(0,255,0,1)';        		
-	        	}
-	        	for (var i = 0; i< edges.length; i++) {	             		
-	        		allEdges[edges[i].id].color =  'rgba(0,255,0,1)';        		
-	        	}
-	        	
-	        	
-	        	var updateArray = [];
-	    	    for (nodeId in allNodes) {
-	    	      if (allNodes.hasOwnProperty(nodeId)) {
-	    	        updateArray.push(allNodes[nodeId]);
-	    	      }
-	    	    }	    	
-	    	
-	    	    nodesDataset.update(updateArray);    	 
-	    	     
-	    	    updateArray = [];
-	    	    for (edgeId in allEdges) {
-	    	      if (allEdges.hasOwnProperty(edgeId)) {
-	    	        updateArray.push(allEdges[edgeId]);
-	    	      }
-	    	    }
-	    	    
-	    	    edgesDataset.update(updateArray);  
-	    	    
-	        	
+	        	console.log("success");
+	        	jsonString = data1;
+	        	draw();
 	        }).fail(function(xhr, textStatus, errorThrown) {
 	        	console.log("error!");
 	        	console.log(xhr);
@@ -540,12 +500,15 @@
 	    		switch(group) {
 	    		case "service":
 	    			id = curNode.serviceId;
+	    			$("#description").text("Service ");
 	    			break;
 	    		case "dataset":
 	    			id = curNode.datasetId;
+	    			$("#description").text("Dataset ");
 	    			break;
 	    		case "user":
 	    			id = curNode.userId;
+	    			$("#description").text("User");
 	    			break;
 	    		default:
 	    			break;
@@ -558,8 +521,7 @@
 	  	      $("#cluster").text(curNode.cluster);
 	  	      $("#label").text(curNode.label);
   	          $("#panel").show();
-
-    	      
+  	          
     	      // the main node gets its own color and its label back.
     	      
     	      
@@ -732,7 +694,7 @@
 		    </div>
 		    <div class="card-block text-center">
 		      <h4 class="card-title" id="nodeName">card</h4>
-		      <p class="card-text text-muted" >A data set (or dataset) is a collection of data.</p>
+		      <p class="card-text text-muted" ><code id="description"></code></p>
 		    </div>
 		    <ul class="list-group list-group-flush">
 		      <li class="list-group-item"><strong id="groupId"></strong><code id="id"></code></li>
