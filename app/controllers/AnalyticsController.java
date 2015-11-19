@@ -171,13 +171,14 @@ public class AnalyticsController extends Controller{
 		}
 		
 		String combination = parameter1 + parameter2 + groupName;
+		
 		JsonNode response = null;
 		
 		try {
 			jsonData.put("id", id);
 			if(!startTime.isEmpty() || !endTime.isEmpty()) {
 				response = RESTfulCalls.postAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
+							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryVariables", jsonData);
 			}else {
 				switch(combination) {
 				case "UserDatasetuser":
