@@ -5,5 +5,8 @@ $(document).ready(function()
         $("#myTable3").tablesorter();
         $("#csTable").tablesorter();
         $("#datasetLogTable").tablesorter(); 
+        $("#mostPopServiceTable").tablesorter();
+        $("#mostPopDatasetTable").tablesorter();
+        $("#mostActUsersTable").tablesorter();
     } 
 ); 

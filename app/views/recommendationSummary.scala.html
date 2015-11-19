@@ -11,7 +11,9 @@ List[String], itemBasedDataset : List[String], currentUser: String)
 				$(this).tab('show')
 			})
 		});
-	
+		
+		
+		
 		function sendUserId() {
 			var userIdSent = $("#UserIdForRecommend").val();
 			window.location = "/climateService/recommendationSummary/" + userIdSent;
@@ -35,10 +37,10 @@ List[String], itemBasedDataset : List[String], currentUser: String)
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane " id="mostPopService">
 			<br>
-			<table class="table table-striped table-bordered table-condensed ex2">
+			<table class="table table-striped table-bordered table-condensed tablesorter" id = "mostPopServiceTable">
 				<thead>
 					<tr>
-						<th class="col-md-3">Climate Service Name</th>
+						<th class="col-md-3 ">Climate Service Name</th>
 						<th class="col-md-2">Purpose</th>
 						<th class="col-md-4">Url</th>
 						<th class="col-md-2">Scenario</th>
@@ -63,7 +65,7 @@ List[String], itemBasedDataset : List[String], currentUser: String)
 
 		<div role="tabpanel" class="tab-pane" id="mostPopDataset">
 			<br>
-			<table class="table table-striped table-bordered table-condensed ex2">
+			<table class="table table-striped table-bordered table-condensed tablesorter" id = "mostPopDatasetTable">
 				<thead>
 					<tr>
 						<th style="vertical-align: top;" class="col-md-2">Dataset Name</th>
@@ -102,7 +104,7 @@ List[String], itemBasedDataset : List[String], currentUser: String)
 		</div>
 		<div role="tabpanel" class="tab-pane" id="mostActUsers">
 			<br>
-			<table class="table table-striped table-bordered table-condensed ex2">
+			<table class="table table-striped table-bordered table-condensed tablesorter" id="mostActUsersTable">
 				<thead>
 					<tr>
 						<th class="col-md-1">Id</th>
@@ -115,7 +117,7 @@ List[String], itemBasedDataset : List[String], currentUser: String)
 						<th class="col-md-2">Research Area</th>
 					</tr>
 				</thead>
-				</tbody>
+				<tbody>
 				@for(user <- users){
 				<tr>
 					<td>@user.getId()</td>

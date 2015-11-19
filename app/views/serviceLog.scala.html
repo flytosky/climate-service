@@ -5,13 +5,7 @@
 @main("Service Logs"){ 
 	 
     <h1>@serviceLogs.size() Service Logs</h1>
-    <!--
-    @helper.form(routes.Application.home()) {
-    	<div class = "col-sm-2">
-    		<input class="btn btn-primary" type="submit" value="Sync data" style="margin-top:18px">
-    	</div>
-    }
-    -->
+   
     
     @helper.form(routes.Application.home()) {
     <div class = "container">
@@ -39,10 +33,7 @@
 		<th style = "vertical-align: top;" class="col-sm-2">Execution End Time</th>		
 		<th style = "vertical-align: top;" class="col-sm-1">DataSet Start Time</th>
 		<th style = "vertical-align: top;" class="col-sm-1">DataSet End Time</th>
-		<th style = "vertical-align: top;" class="col-sm-1">Details</th>
-		<!-- 
-		<td class="col-md-2">Operation</td>
-		 -->
+		<th style = "vertical-align: top;" class="col-sm-1">Details</th>		
 	</tr>
 	</thead>
 	<tbody>
