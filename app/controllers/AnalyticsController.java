@@ -152,7 +152,6 @@ public class AnalyticsController extends Controller{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		
 		if (!startTime.isEmpty()) {
-			System.out.println("$$$$$$$$$$$$$$$$$$$");
 			try {
 				executionStartTime = simpleDateFormat.parse(startTime);
 		        jsonData.put("executionStartTime", executionStartTime.getTime());
@@ -162,7 +161,6 @@ public class AnalyticsController extends Controller{
 			}
 		}
 		if (!endTime.isEmpty()) {
-			System.out.println("$$$$$$$$$$$$$$$$$$$");
 			try {
 				executionEndTime = simpleDateFormat.parse(endTime);
 				jsonData.put("executionEndTime", executionEndTime.getTime());
@@ -173,9 +171,6 @@ public class AnalyticsController extends Controller{
 		}
 		
 		String combination = parameter1 + parameter2 + groupName;
-		
-		System.out.println("************" + parameter1 + "****" + parameter2 + "****" + groupName + "***" + startTime + "****" + endTime + "****" + id + combination);
-		
 		JsonNode response = null;
 		
 		try {
