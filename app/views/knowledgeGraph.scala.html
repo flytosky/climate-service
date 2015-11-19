@@ -412,12 +412,16 @@
 	    	
 	    	 var group = document.getElementById("paramCombination1").value;
 	    	 var id = document.getElementById("userConfId").value;
+	    	 var startTime = document.getElementById("startTime").value;
+	    	 var endTime = document.getElementById("endTime").value;
 	    		
 	    		var parameters = {
 		    			param1:p1,
 		    			param2:p2,
 		    			id:id,
-		    			groupName:group
+		    			groupName:group,
+		    			startTime:startTime,
+		    			endTime:endTime
 		    	}
 	    		$.ajax({
 		            url: "/getPartKnowledgeGraph",
@@ -726,6 +730,16 @@
              </div>
              <div class="col-sm-4 col-md-4">
              	<input type="text" class="form-control col-lg-4" id="userConfId" placeholder="User/Dataset/Service Id">
+             </div>
+             </div>
+             <div class="row">
+             <div class="col-sm-4 col-md-4">
+                <label>Start Time</label>
+             	<input type="text" class="form-control col-lg-4" id="startTime" placeholder="MM/DD/YYYY hh:mm">
+             </div>
+             <div class="col-sm-4 col-md-4">
+                <label>End Time</label>
+             	<input type="text" class="form-control col-lg-4" id="endTime" placeholder="MM/DD/YYYY hh:mm">
              </div>
              <div class="col-sm-4 col-md-4">
                  <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
