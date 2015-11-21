@@ -522,6 +522,17 @@ function addTable() {
 
 }
 
+function disableDependencyItem() {
+	 if (jQuery("input:radio[name=dependencyRadio]:checked").val() == "option1"){	 
+	     	$("#dependencyDetailForm").hide();
+	     	$("#cacheForm").hide();
+	     }else {    	
+	    	 $("#dependencyDetailForm").show();
+		     $("#cacheForm").show();
+	     }	
+}
+
+
 function disableDropdownItem() {
 	 if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1"){	 
      	document.getElementById("dropdownNameData").disabled = true;
@@ -716,6 +727,19 @@ function showDropdownExample1() {
 function showDropdownExample2() {
 	$("#dropdownNameData").val("{\r\n\"APIvalue\" : [\"variable1\", \"variable2\", \"variable3\", \"variable4\", \"variable5\"],\r\n\"descriptiveValues\" : [\"variableName1\", \"variableName2\", \"variableName3\", \"variableName4\", \"variableName5\"]\r\n}");
 	$("#defaultValues").val("variable2");
+}
+
+function showDependencyExample1() {
+	$("#preview").val("{\"Dep1Item1\" : [[\"Group Name\"], [\"Dep2Item1\", \"Dep2Item2\", \"Dep2Item3\"]],\r\n\"Dep1Item2\" : [[\"Group Name\"], [\"Dep2Item3\", \"Dep2Item4\", \"Dep2Item5\"]],\r\n\"Dep1Item3\" : [[\"Group Name\"], [\"Dep2Item4\", \"Dep2Item5\", \"Dep2Item6\"]]}");
+	
+}
+
+function showDependencyExample2() {
+	$("#preview").val("");
+	$("#dataSource").val("Dep1Item1");
+	$("#dataGroup").val("Group Name");
+	$("#variable").val("Dep2Item1");
+	
 }
 
 function replaceFile(id) {

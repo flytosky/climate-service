@@ -23,7 +23,9 @@ function put_var(thisID, thatID, rule) {
 	  	thatList.add(new Option(k,k));
 	  	
 	}
-}var t1_list={"1":[["Model: Historical"],["c"]],"2":[["Model: Historical"],["b"]],"3":[["Model: Historical"],["a"]]};var t2_list={"a":[["Model: Historical"],["z"]],"b":[["Model: Historical"],["y"]],"c":[["Model: Historical"],["x"]]};var t4_list={"11":[["Model: Historical"],["cc"]],"22":[["Model: Historical"],["bb"]],"33":[["Model: Historical"],["aa"]]}; </script><!-- Bootstrap -->
+}var t1_list={"Dep1Item1" : [["Group Name"], ["Dep2Item1", "Dep2Item2", "Dep2Item3"]],
+"Dep1Item2" : [["Group Name"], ["Dep2Item3", "Dep2Item4", "Dep2Item5"]],
+"Dep1Item3" : [["Group Name"], ["Dep2Item4", "Dep2Item5", "Dep2Item6"]]}; </script><!-- Bootstrap -->
     <link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -37,7 +39,7 @@ function put_var(thisID, thatID, rule) {
 
 <h2 class="text-center">t1</h2>
 
-<p class="text-center col-md-8 col-md-offset-2">tdddddddddddddddddddddd1</p>
+<p class="text-center col-md-8 col-md-offset-2">tt1</p>
 
 <div class="container col-md-6">
     <form>
@@ -48,7 +50,7 @@ function put_var(thisID, thatID, rule) {
                 <th class="col-md-4">Value</th>
             </tr>
             </thead>
-            <tbody id="dynamicTBody"><tr id="t1_trID"><td id="t1">test1</td><td><select class="form-control" id="t1_select" onchange="put_var('t1_select', 't2_select', t1_list);"><option>1</option><option selected="">2</option><option>3</option></select></td></tr><tr id="t2_trID"><td id="t2">test2</td><td><select class="form-control" id="t2_select" onchange="put_var('t2_select', 't3_select', t2_list);"><option>a</option><option>b</option><option selected="">c</option></select></td></tr><tr id="t3_trID"><td id="t3">test3</td><td><select class="form-control" id="t3_select"><option>x</option><option>y</option><option selected="">z</option></select></td></tr><tr id="t4_trID"><td id="t4">test4</td><td><select class="form-control" id="t4_select" onchange="put_var('t4_select', 't5_select', t4_list);"><option>11</option><option selected="">22</option><option>33</option></select></td></tr><tr id="t5_trID"><td id="t5">test5</td><td><select class="form-control" id="t5_select"><option>aa</option><option>bb</option><option selected="">cc</option></select></td></tr></tbody>
+            <tbody id="dynamicTBody"><tr id="t1_trID"><td id="t1">test1</td><td><select class="form-control" id="t1_select" onchange="put_var('t1_select', 't2_select', t1_list);"><option value="Dep1Item1" selected="">Dep1Item1</option><option value="Dep1Item2">Dep1Item2</option><option value="Dep1Item3">Dep1Item3</option></select></td></tr><tr id="t2_trID"><td id="t2">test2</td><td><select class="form-control" id="t2_select"><option value="Dep2Item1" selected="">Dep2Item1</option><option value="Dep2Item2">Dep2Item2</option><option value="Dep2Item3">Dep2Item3</option><option value="Dep2Item4">Dep2Item4</option><option value="Dep2Item5">Dep2Item5</option></select></td></tr></tbody>
         </table>
     </form>
     <div class="text-center">
