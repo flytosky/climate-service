@@ -178,7 +178,7 @@ public class AnalyticsController extends Controller{
 			jsonData.put("id", id);
 			if(!startTime.isEmpty() || !endTime.isEmpty()) {
 				response = RESTfulCalls.postAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryVariables", jsonData);
+							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
 			}else {
 				switch(combination) {
 				case "UserDatasetuser":

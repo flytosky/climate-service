@@ -158,6 +158,11 @@
 	        }).done(function(data1) {
 	        	console.log("success");
 	        	jsonString = data1;
+	        	if(p1 == "Dataset" || p2 == "Dataset") {
+		    		$("#setShownName").show();
+		    	}else {
+		    		$("#setShownName").hide();
+		    	}
 	        	draw();
 	        }).fail(function(xhr, textStatus, errorThrown) {
 	        	console.log("error!");
@@ -201,12 +206,11 @@
 	      var test = jsonString;
 	      
 	      //test = JSON.stringify(test);
-	      console.log("test: " + test);
 	      test = JSON.parse(test);
 	      var nodes = test.nodes;
-	      console.log("nodes: " + nodes);
+
 	      var edges = test.edges;
-	      console.log("edges: " + edges); 
+
 		  
 	      nodesDataset = new vis.DataSet(nodes); 
 	      edgesDataset = new vis.DataSet(edges); 
@@ -366,7 +370,12 @@
 	    		
 	    		var node1 = params.nodes[0];
 	    		var group = allNodes[node1].group;
+	    		var startTime = "";
+		    	var endTime = "";
+	    		
 	    		var id = null;
+	    		
+	    		console.log("***************" + group)
 	    		switch(group) {
 	    		case "service":
 	    			id = allNodes[node1].serviceId;
@@ -385,7 +394,9 @@
 		    			param1:p1,
 		    			param2:p2,
 		    			id:id,
-		    			groupName:group
+		    			groupName:group,
+		    			startTime:startTime,
+		    			endTime:endTime
 		    	}
 	    		$.ajax({
 		            url: "/getPartKnowledgeGraph",
@@ -414,6 +425,7 @@
 	    	 var id = document.getElementById("userConfId").value;
 	    	 var startTime = document.getElementById("startTime").value;
 	    	 var endTime = document.getElementById("endTime").value;
+	    	 var choice = $('input[name="customizedChoice"]:checked').val();
 	    		
 	    		var parameters = {
 		    			param1:p1,
@@ -431,7 +443,20 @@
 		            dataType: "text"
 		        }).done(function(data1) {
 		        	console.log("success");
-		        	jsonString = data1;
+		        	if(choice === "datasetName") {
+		        		jsonString = data1;
+		        	}else {
+		        		
+		        		data1 = JSON.parse(data1);
+		      	        var nodes = data1.nodes;
+		      	        for(var i=0; i<nodes.length; i++) {
+		      	        	if(nodes[i].group == "dataset") {
+		      	        		var start = nodes[i].label.split(" ")[0].length;
+		      	        		nodes[i].label = nodes[i].label.substring(start+1);
+		      	        	}
+		      	        }
+		        		jsonString = JSON.stringify(data1);
+		        	}
 		        	draw();
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
@@ -741,9 +766,16 @@
                 <label>End Time</label>
              	<input type="text" class="form-control col-lg-4" id="endTime" placeholder="MM/DD/YYYY hh:mm">
              </div>
-             <div class="col-sm-4 col-md-4">
-                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
              </div>
+             <br>
+             <div class="row">
+                <div id = "setShownName" class="col-sm-4 col-md-4">
+             		<input type="radio" id="datasetNameC" name="customizedChoice" checked="checked" value="datasetName" /> Dataset Name
+             		<input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
+             	</div>
+	             <div class="col-sm-4 col-md-4">
+	                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
+	             </div>
              </div>
        	</form>
 	</div>
