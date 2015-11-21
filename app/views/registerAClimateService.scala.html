@@ -5,6 +5,8 @@
 <script type="text/javascript">	
 	$(document).ready(function(){
 		$("#msg").hide();
+		$("#dependencyDetailForm").hide();
+		$("#cacheForm").hide();
 	});
 		
 	</script>
@@ -159,7 +161,23 @@ $(window).load(function(){
 	                    <button type="button" class="btn btn-success" onclick="">Reset dependency</button>
 	                </div> 
              </div>
-			<div class="well">					
+             
+             <div class="radio">                   
+			      <label>
+				    <input type="radio" name="dependencyRadio" id="dependencyRadio1" value="option1" onchange="disableDependencyItem()" checked>
+				    Disable Smart Input<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here I mean..."></span>
+				  <button type="button" class="btn btn-primary btn-sm" onclick="showDependencyExample1()">Show example</button>
+				  </label>
+			 </div>
+             <div class="radio">
+				  <label>
+				    <input type="radio" name="dependencyRadio" id="dependencyRadio2" value="option2" onchange = "disableDependencyItem()">
+				    Enable Smart Input<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here I mean..."></span>
+			 		<button type="button" class="btn btn-primary btn-sm" onclick="showDependencyExample2()">Show example</button>
+			 		</label>
+			 </div>	
+					 
+			<div class="well" id = "dependencyDetailForm">					
 	            <form>
 	            	<div class="form-group">
 	                    <label>Data source</label>
@@ -186,17 +204,10 @@ $(window).load(function(){
 	                    <button type="button" class="btn btn-primary" onclick="Javascript:oneClickAdd()">One-click add</button>
 	                </div>       
 	            </form>
-	            <br>
-	
-	            <div class="well">
-	                <div class="text-center">
-	                    <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add one rule</button>
-	                    <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list</button>
-						<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
-	                </div>
-	            </div>
+	            <br>            
             </div>
-            <div class="well">
+           	
+            <div class="well" >
                 <label>Rule Preview</label>
                 <textarea class="form-control" rows="10" id="preview" placeholder ="Placeholder for the json data"></textarea>
             
@@ -206,17 +217,26 @@ $(window).load(function(){
                     <button class="btn btn-primary" onclick="Javascript:validate()" type="button">Validate Json Format and Save</button>
                     </span>
                 </div><!-- /input-group -->
-
+			
             </div>
-
-            <div class="well">
+            
+			<div class="well" >
+                <div class="text-center">
+                    <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add one rule</button>
+                    <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list</button>
+					<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
+                </div>
+            </div>
+            
+            <div class="well" id = "cacheForm">
                 <div class="form-group">
                     <label>Show Cache</label>
                     <input type="text" class="form-control" id="demo1" placeholder="Show Cache" >
                 </div>
                 <label>Para Preview</label>
                 <textarea class="form-control" rows="10" id="previewPara" placeholder ="Placeholder for the Para data"></textarea>
-            </div>
+            </div>            
+            
         </div>
         
         <div class="well">
