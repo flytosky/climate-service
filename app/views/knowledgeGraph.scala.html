@@ -138,10 +138,14 @@
 	    
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
+	    	var choice = null;
 			var temp2 = temp1.split(" ");
 			p1 = temp2[0];
 			p2 = temp2[1];
 	    	p3 = temp2[2];
+	    	if(p1 == "Dataset" || p2 == "Dataset") {
+	    		choice = $('input[name="customizedChoiceW"]:checked').val();
+	    	}
 	    	
 	    	var parameters = {
 	    			param1:p1,
@@ -157,7 +161,19 @@
 	            dataType: "text"
 	        }).done(function(data1) {
 	        	console.log("success");
-	        	jsonString = data1;
+	        	if(choice == null || choice == "datasetNameW") {
+	        		jsonString = data1;
+	        	}else {
+	        		data1 = JSON.parse(data1);
+	      	        var nodes = data1.nodes;
+	      	        for(var i=0; i<nodes.length; i++) {
+	      	        	if(nodes[i].group == "dataset") {
+	      	        		var start = nodes[i].label.split(" ")[0].length;
+	      	        		nodes[i].label = nodes[i].label.substring(start+1);
+	      	        	}
+	      	        }
+	        		jsonString = JSON.stringify(data1);
+	        	}
 	        	if(p1 == "Dataset" || p2 == "Dataset") {
 		    		$("#setShownName").show();
 		    	}else {
@@ -467,6 +483,15 @@
 	    	    
 	      }
 	    
+	    function schedule(selectedValue){
+	        var parameter = selectedValue.split(" ");
+	        if(parameter[0] === "Dataset" || parameter[1] == "Dataset") {
+	        	$("#setWholeShownName").show();
+	        }else {
+	        	$("#setWholeShownName").hide();
+	        }
+	    }
+	    
 	    function neighbourhoodHighlight(params) {
     	     // if something is selected:
     	    if (params.nodes.length > 0) {
@@ -684,18 +709,27 @@
 				    <form>
 					    <label>Rational Graph</label>
 			                <div class="form-group">
-			                    <select class="form-control" id="paramCombination">
+			                    <select onchange="schedule(this.value)" class="form-control" id="paramCombination">
+			                    	<option value="User Dataset Service">User × Dataset | Service</option>
+			                        <option value="User Service Dataset">User × Service | Dataset</option>
+			                        <option value="Dataset Service User">Dataset × Service | User</option>
 			                        <option value="User User Dataset">User × User | Dataset</option>
 			                        <option value="User User Service">User × User | Service</option>
 			                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
 			                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
 			                        <option value="Service Service User">Service × Service | User</option>
 			                        <option value="Service Service Dataset">Service × Service | Dataset</option>
-			                        <option value="User Dataset Service">User × Dataset | Service</option>
-			                        <option value="User Service Dataset">User × Service | Dataset</option>
-			                        <option value="Dataset Service User">Dataset × Service | User</option>
 			                    </select>
 			                </div>
+			                <div id = "setWholeShownName" class="row col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+				                <div>
+	             					<input type="radio" id="datasetNameW" name="customizedChoiceW" checked="checked" value="datasetNameW" /> Dataset Name
+	                                &nbsp;
+	             					<input type="radio" id="variableNameW" name="customizedChoiceW" value="variableNameW" /> Variable Name
+	             				
+	             				</div>
+	             				<br>
+             				</div>
 			                <div class="text-center">
 			                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
 			                </div>
@@ -771,6 +805,7 @@
              <div class="row">
                 <div id = "setShownName" class="col-sm-4 col-md-4">
              		<input type="radio" id="datasetNameC" name="customizedChoice" checked="checked" value="datasetName" /> Dataset Name
+             		&nbsp;
              		<input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
              	</div>
 	             <div class="col-sm-4 col-md-4">
