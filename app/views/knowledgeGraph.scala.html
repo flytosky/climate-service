@@ -290,15 +290,15 @@
 	        },
 	        
 	        physics: {    
-	          barnesHut: {
-	        	  centralGravity: 1.95,	              
-	        	  springLength: 195,
-	              springConstant: 0.185,
-	        	  damping: 0.25,
-	              avoidOverlap: 0.5
-   			    },
+   			  hierarchicalRepulsion: {
+   				  springConstant: 0.01,
+   		      	  centralGravity: 1.75,
+   		      	  nodeDistance: 120,
+   		      	  
+   		      },
    			 	maxVelocity: 10,
    			    minVelocity: 0.75,
+   			    solver: "hierarchicalRepulsion",
 	          stabilization: {
 	            enabled:true,
 	            iterations:200,
