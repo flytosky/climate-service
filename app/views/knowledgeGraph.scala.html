@@ -133,7 +133,7 @@
 	    var visAdvancedConfig = 1;
 	    var visBasicConfig = 1;
 	    
-	    document.getElementById("paramCombination1").disabled = true;
+	    //document.getElementById("paramCombination1").disabled = true;
 	    
 	    
 	    function getParameters() {
@@ -355,6 +355,38 @@
 	        }).done(function(data1) {
 	        	console.log("success");
 	        	jsonString = data1;
+	        	draw();
+	        }).fail(function(xhr, textStatus, errorThrown) {
+	        	console.log("error!");
+	        	console.log(xhr);
+	        	console.log(textStatus);
+	            console.log(errorThrown);
+	        })
+	    }
+	    
+	    function findKthShortestPath() {
+	    	var startId = $("#startPoint").val();
+	    	var endId = $("#endPoint").val();
+	    	var kth = $("#kth").val();
+	    	//console.log(startId + endId);
+	    	var k = parseInt(kth) - 1;
+	    	var ids = {
+	    			startId : startId,
+	    			endId : endId,
+	    			kth : kth
+	    		}
+	    	
+	    	$.ajax({
+	            url: "/getKthShortestPath",
+	            type: "POST",
+	            contentType: "application/json",
+	            data: JSON.stringify(ids),
+	            dataType: "text"
+	        }).done(function(data1) {
+	        	console.log("success");
+	        	var jsonTmp = JSON.parse(data1);
+	        	jsonString = JSON.stringify(jsonTmp[k]);
+	        	console.log(JSON.stringify(jsonTmp[k]));
 	        	draw();
 	        }).fail(function(xhr, textStatus, errorThrown) {
 	        	console.log("error!");
@@ -676,9 +708,18 @@
 				  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon2" id="endPoint">
 				</div>
 				<br>
+				<div class="input-group">
+				  <span class="input-group-addon" id="basic-addon3">Kth</span>
+				  <input type="number" class="form-control" placeholder="kth" aria-describedby="basic-addon3" id="kth">
+				</div>
+				<br>
 				<div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="findShortestPath()">Shortest Path</button>
-                </div>	
+                </div>
+                <br>	
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="findKthShortestPath()">Kth Shortest Path</button>
+                </div>
 				<br>
 			    <div class="col-lg-offset-0">
 				    <form>

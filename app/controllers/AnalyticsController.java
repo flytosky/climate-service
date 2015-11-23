@@ -105,6 +105,33 @@ public class AnalyticsController extends Controller{
 		}
 		return ok(response);
 	}
+	
+	public static Result getKthShortestPath() {
+		JsonNode response = null;
+		JsonNode json = request().body().asJson();
+		String startId = json.path("startId").asText();
+		String endId = json.path("endId").asText();
+		String kth = json.path("kth").asText();
+		
+		ObjectNode jsonData = Json.newObject();
+		try {
+			jsonData.put("startId", startId);
+			jsonData.put("endId", endId);
+			jsonData.put("kth", kth);
+			response = RESTfulCalls.getAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + Constants.GET_KTH_SHORTEST_PATH + startId + "/target/" + endId + "/k/" + kth + "/json");
+
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
+	}
 
 	
 	

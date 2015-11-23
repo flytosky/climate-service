@@ -3,8 +3,8 @@ package utils;
 public class Constants {
 
 	public static final String URL_HOST = "http://localhost";
-	//public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
-	public static final String URL_SERVER = "http://localhost";
+	public static final String URL_SERVER = "http://einstein.sv.cmu.edu";
+	//public static final String URL_SERVER = "http://localhost";
 
 	
 	// port
@@ -86,6 +86,7 @@ public class Constants {
 	//Analytics
 	public static final String GET_RELATIONAL_GRAPH = "/analytics/getRelationalKnowledgeGraph/json";
 	public static final String GET_SHORTEST_PATH = "/graphAlgorithm/getShortestPath/source/";
+	public static final String GET_KTH_SHORTEST_PATH = "/graphAlgorithm/getKthShortestPath/source/";
 	
 	//recommendation
 	public static final String GET_TOP_K_USER_BASED_DATASET1 = "/getTopKUserBasedCFRecommendedDatasetByUsername?username=";
