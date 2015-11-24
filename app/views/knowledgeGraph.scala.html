@@ -133,8 +133,6 @@
 	    var visAdvancedConfig = 1;
 	    var visBasicConfig = 1;
 	    
-	    document.getElementById("paramCombination1").disabled = true;
-	    
 	    
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
@@ -150,7 +148,8 @@
 	    	var parameters = {
 	    			param1:p1,
 	    			param2:p2,
-	    			param3:p3
+	    			param3:p3,
+	    			choice:choice
 	    	}
 	    	
 	    	$.ajax({
@@ -161,19 +160,7 @@
 	            dataType: "text"
 	        }).done(function(data1) {
 	        	console.log("success");
-	        	if(choice == null || choice == "datasetNameW") {
-	        		jsonString = data1;
-	        	}else {
-	        		data1 = JSON.parse(data1);
-	      	        var nodes = data1.nodes;
-	      	        for(var i=0; i<nodes.length; i++) {
-	      	        	if(nodes[i].group == "dataset") {
-	      	        		var start = nodes[i].label.split(" ")[0].length;
-	      	        		nodes[i].label = nodes[i].label.substring(start+1);
-	      	        	}
-	      	        }
-	        		jsonString = JSON.stringify(data1);
-	        	}
+	        	jsonString = data1;
 	        	if(p1 == "Dataset" || p2 == "Dataset") {
 		    		$("#setShownName").show();
 		    	}else {
@@ -449,7 +436,8 @@
 		    			id:id,
 		    			groupName:group,
 		    			startTime:startTime,
-		    			endTime:endTime
+		    			endTime:endTime,
+		    			choice:choice
 		    	}
 	    		$.ajax({
 		            url: "/getPartKnowledgeGraph",
@@ -459,20 +447,7 @@
 		            dataType: "text"
 		        }).done(function(data1) {
 		        	console.log("success");
-		        	if(choice === "datasetName") {
-		        		jsonString = data1;
-		        	}else {
-		        		
-		        		data1 = JSON.parse(data1);
-		      	        var nodes = data1.nodes;
-		      	        for(var i=0; i<nodes.length; i++) {
-		      	        	if(nodes[i].group == "dataset") {
-		      	        		var start = nodes[i].label.split(" ")[0].length;
-		      	        		nodes[i].label = nodes[i].label.substring(start+1);
-		      	        	}
-		      	        }
-		        		jsonString = JSON.stringify(data1);
-		        	}
+		        	jsonString = data1;
 		        	draw();
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");

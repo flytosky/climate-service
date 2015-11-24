@@ -113,12 +113,15 @@ public class AnalyticsController extends Controller{
 		String parameter1 = json.path("param1").asText();
 		String parameter2 = json.path("param2").asText();
 		String parameter3 = json.path("param3").asText();
+		String choice = json.path("choice").asText();
+		
 		JsonNode response = null;
 		ObjectNode jsonData = Json.newObject();
 		try {
 			jsonData.put("param1", parameter1);
 			jsonData.put("param2", parameter2);
 			jsonData.put("param3", parameter3);
+			jsonData.put("choice", choice);
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 
@@ -146,11 +149,14 @@ public class AnalyticsController extends Controller{
 		
 		long id = json.path("id").asLong();
 		
-		ObjectNode jsonData = Json.newObject();
+		String choice = json.path("choice").asText();
 		
 		Date executionStartTime = null, executionEndTime= null;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		
+		ObjectNode jsonData = Json.newObject();
+		
+		// get startTime and endTime
 		if (!startTime.isEmpty()) {
 			try {
 				executionStartTime = simpleDateFormat.parse(startTime);
@@ -170,15 +176,19 @@ public class AnalyticsController extends Controller{
 			}
 		}
 		
+		
 		String combination = parameter1 + parameter2 + groupName;
-		
 		JsonNode response = null;
-		
 		try {
 			jsonData.put("id", id);
 			if(!startTime.isEmpty() || !endTime.isEmpty()) {
-				response = RESTfulCalls.postAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
+				if(choice.equals("datasetName")){
+					response = RESTfulCalls.postAPI(Constants.URL_HOST
+								+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
+				}else {
+					response = RESTfulCalls.postAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryVariables", jsonData);
+				}
 			}else {
 				switch(combination) {
 				case "UserDatasetuser":
