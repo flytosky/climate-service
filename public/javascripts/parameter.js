@@ -114,6 +114,7 @@ function createAutoClosingAlert(delay) {
 	var map = {};
 	var jsonfiedData ="";
 	var dependency_list = "";
+	var onchangeText = "";
 
 function addDataSource() {
 	source = document.getElementById("dataSource").value;
@@ -173,6 +174,11 @@ function addDataList() {
 	jsonfiedData ="";
 }
 
+function addDataListInput() { //deprecated
+	dataListContent += "var " + dependency_list +"="+ jsonfiedData + ";";
+	dependency_list = "";
+	jsonfiedData ="";
+}
 
 //deprecated
 function postAllData() {
@@ -216,14 +222,22 @@ function validate() {
 
 
 function addDependency() {
-	dependency_list = document.getElementById("dependence1").value + "_list";
+	dependency_list = document.getElementById("dependence1").value + document.getElementById("dependence2").value + "_list";
 	var dependency1 = document.getElementById("dependence1").value + "_select";
 	var dependency2 = document.getElementById("dependence2").value + "_select";	
-	onchangeText =  "put_var('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");"
+	onchangeText +=  "put_var('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");"
 	document.getElementById(dependency1).setAttribute("onChange",onchangeText);
 	console.log("add dependency finished...");
 }
 
+function addDependencyInputArea() { //another button
+	dependency_list = document.getElementById("dependence1").value + document.getElementById("dependence2").value + "_list";
+	var dependency1 = document.getElementById("dependence1").value + "_select";
+	var dependency2 = document.getElementById("dependence2").value + "_detail";	 //sufDetail
+	onchangeText +=  "put_var_input('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");" // set new FUNCTION here
+	document.getElementById(dependency1).setAttribute("onChange",onchangeText);
+	console.log("add dependency input area finished...");
+}
 
 
 function addButton() {
@@ -322,10 +336,10 @@ function appendInput(name, nameFunc, defaultValues, indexInService) {
     }
 
     var str = "";
-    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
+    str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';  //HERE ADD _SELECT
     str += '<td>';
 
-    str += '<input type="text" class="form-control" id="' + text + sufDetail + '" placeholder="' + defaultValues.value + '">';
+    str += '<input type="text" class="form-control" id="' + nameFunc.value + sufDetail + '" placeholder="' + defaultValues.value + '">'; //changed id to t2
 
     str += '</td>';
     str += '<td><button type="button" class="btn btn-danger"' +
