@@ -174,9 +174,9 @@ function addDataList() {
 	jsonfiedData ="";
 }
 
-function addDataListInput() { //deprecated
+function addDataListContinue() { 
 	dataListContent += "var " + dependency_list +"="+ jsonfiedData + ";";
-	dependency_list = "";
+	
 	jsonfiedData ="";
 }
 

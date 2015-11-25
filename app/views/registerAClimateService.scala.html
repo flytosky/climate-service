@@ -149,16 +149,20 @@ $(window).load(function(){
             </div>
             <div class="well">
 					<div class="form-group">
-	                    <label>Dependence1</label>
+	                    <label>Parameter1</label> (API Parameter Name)
 	                    <input type="text" class="form-control" id="dependence1" placeholder="Enter dependence1 API Name" value="test">
 	                </div>
 	                <div class="form-group">
-	                    <label>Dependence2</label>
+	                    <label>Will decide parameter2 </label> (API Parameter Name)
 	                    <input type="text" class="form-control" id="dependence2" placeholder="Enter dependence2 API Name" value="test1">
 	                </div>
-	                <div class="text-center">
+	                <div class="text-center" id = "dependencyBtnGroup">
 	                    <button type="button" class="btn btn-primary" onclick="Javascript:addDependency()">Add dropdown-dropdown dependency</button>
+	                    <br>
+	                    <br>
 	                    <button type="button" class="btn btn-primary" onclick="Javascript:addDependencyInputArea()">Add dropdown-input dependency</button>
+	                    <br>
+	                    <br>
 	                    <button type="button" class="btn btn-success" onclick="">Reset dependency</button>
 	                </div> 
              </div>
@@ -225,6 +229,7 @@ $(window).load(function(){
                 <div class="text-center">
                     <button type="button" class="btn  btn-primary" onclick="Javascript:continue1()">Add one rule</button>
                     <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list</button>
+                    <button type="button" class="btn  btn-primary" onclick="Javascript:addDataListContinue()">Add rule list continue</button>
                    	<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
                 </div>
             </div>
