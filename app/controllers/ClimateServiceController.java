@@ -352,29 +352,59 @@ public class ClimateServiceController extends Controller {
 
 		return ok(mostPopularServices.render(climateServices));
 	}
-	
-	public static Result recommendationSummary(String userId) {		
-		
+
+
+	public static Result getUserByEmail() {
+		JsonNode result = request().body().asJson();
+		String email = result.get("email").toString();
+		email = email.substring(1, email.length()-1);
+
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode queryJson = mapper.createObjectNode();
+		queryJson.put("email", email);
+
+		System.out.println("00getUserByEmailgetUserByEmailgetUserByEmail: " + queryJson);
+
+		JsonNode userIdNode = RESTfulCalls.postAPI(Constants.URL_SERVER
+				+ Constants.CMU_BACKEND_PORT + Constants.GET_USER_BY_EMAIL, queryJson);
+		System.out.println("11getUserByEmailgetUserByEmailgetUserByEmail: " + email);
+		System.out.println("22getUserByEmailgetUserByEmailgetUserByEmail: " + userIdNode);
+		// parse the json string into object
+		JsonNode json = userIdNode.path(0);
+		String id = userIdNode.findPath("id").asText();
+
+		return ok(id);
+	}
+
+	public static Result recommendationSummary(String userId, int id) {
+
 		List<String> userBasedDataset = new ArrayList<String>();
-		
+
 		List<String> itemBasedDataset = new ArrayList<String>();
-		
+
 		List<String> featureBasedDataset = new ArrayList<String>();
-		
+
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
-		
+
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
-		
+
 		List<User> usersList = new ArrayList<User>();
-		
+
+		List<User> userSimilarList = new ArrayList<User>();
+
+
 		JsonNode usersNode = RESTfulCalls.getAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_USERS);
-		
+
+		JsonNode usersSimilarNode = RESTfulCalls.getAPI(Constants.URL_SERVER
+				+ Constants.CMU_BACKEND_PORT
+				+ Constants.GET_TOP_K_SIMILAR_USERS + id + "/k/" + "5" + "/json");
+
 		// if no value is returned or error or is not json array
 		if (usersNode == null || usersNode.has("error")
 				|| !usersNode.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
 		}
 
 
@@ -385,17 +415,17 @@ public class ClimateServiceController extends Controller {
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
 				|| !climateServicesNode.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
 		}
-		
+
 		// parse the json string into object
 		for (int i = 0; i < climateServicesNode.size(); i++) {
 			JsonNode json = climateServicesNode.path(i);
 			ClimateService newService = deserializeJsonToClimateService(json);
 			climateServices.add(newService);
-		}		
+		}
 
-		
+
 		// parse the json string into object
 		for (int i = 0; i < usersNode.size(); i++) {
 			JsonNode json = usersNode.path(i);
@@ -409,50 +439,66 @@ public class ClimateServiceController extends Controller {
 			oneUser.setAffiliation(json.findPath("affiliation").asText());
 			oneUser.setEmail(json.findPath("email").asText());
 			oneUser.setResearchFields(json.findPath("researchFields").asText());
-			
+
 			usersList.add(oneUser);
+		}
+
+		for (int i = 0; i < usersSimilarNode.size(); i++) {
+			JsonNode json = usersSimilarNode.path(i);
+			User oneUser = new User();
+			oneUser.setId(json.findPath("id").asLong());
+			oneUser.setUserName(json.findPath("userName").asText());
+			oneUser.setPassword(json.findPath("password").asText());
+			oneUser.setFirstName(json.findPath("firstName").asText());
+			oneUser.setMiddleInitial(json.findPath("middleInitial").asText());
+			oneUser.setLastName(json.findPath("lastName").asText());
+			oneUser.setAffiliation(json.findPath("affiliation").asText());
+			oneUser.setEmail(json.findPath("email").asText());
+			oneUser.setResearchFields(json.findPath("researchFields").asText());
+
+			userSimilarList.add(oneUser);
 		}
 
 		int k = Integer.MAX_VALUE; // Set the first popular K datasets
 		dataSetsList = DatasetController.queryFirstKDatasetsWithoutClimateService("", "", "", "", "", new Date(0), new Date(), k);
-		
-		
-		
+
+
+
 		JsonNode userBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
 				+ Constants.GET_TOP_K_USER_BASED_DATASET1 + userId
 				+ Constants.GET_TOP_K_USER_BASED_DATASET2 + 10);
-		
+
 		for (int i = 0; i<userBased.size(); i++) {
 			userBasedDataset.add(userBased.path(i).findValue("dataset").toString());
 		}
-		
+
 		JsonNode itemBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
 				+ Constants.GET_TOP_K_ITEM_BASED_DATASET1 + userId
 				+ Constants.GET_TOP_K_ITEM_BASED_DATASET2 + 10);
-		
+
 		for (int i = 0; i<itemBased.size(); i++) {
 			itemBasedDataset.add(itemBased.path(i).findValue("dataset").toString());
 		}
-		
+
 		JsonNode featureBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
 				+ Constants.GET_TOP_K_FEATURE_BASED_DATASET1 + userId
 				+ Constants.GET_TOP_K_FEATURE_BASED_DATASET2 + 10);
-		
+
 		for (int i = 0; i<featureBased.size(); i++) {
 			featureBasedDataset.add(featureBased.path(i).findValue("dataset").toString());
 		}
-		
+
 		System.out.println("--------------------------");
 		System.out.println(userId);
 //		JsonNode test = userBased.path(0);
 //		System.out.println(test.findValue("dataset"));
 		System.out.println(userBasedDataset);
 		System.out.println("--------------------------");
-		
-		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId));
+
+		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
 	}
 
 	public static Result mostRecentlyUsedClimateServices() {
@@ -498,11 +544,11 @@ public class ClimateServiceController extends Controller {
 				sb.append(line);
 				sb.append("\n");
 				line = br.readLine();
-				
+
 //				if (line.length() > 23)
 //					System.out.println("pair1" + line.substring(0, 24));
 //					System.out.println("pair2" + fileNameLine);
-				if (line.length()>= 24 && line.substring(0, 24).equals(fileNameLine)) 
+				if (line.length()>= 24 && line.substring(0, 24).equals(fileNameLine))
 					break;
 				//count++;
 			}
@@ -574,9 +620,9 @@ public class ClimateServiceController extends Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ClimateService deserializeJsonToClimateService(JsonNode json) {
-		
+
 		ClimateService oneService = new ClimateService();
 		oneService.setName(json.path("name").asText());
 		oneService.setPurpose(json.path("purpose").asText());
@@ -598,10 +644,10 @@ public class ClimateServiceController extends Controller {
 		oneService.setVersionNo(json.path("versionNo").asText());
 		oneService.setRootServiceId(json.path("rootServiceId").asLong());
 		oneService.setImageURL();
-		
+
 		return oneService;
 	}
-	
+
 	// Get all climate Services
 	public static Result searchClimateServices() {
 		return ok(searchClimateService.render(climateServiceForm));
@@ -611,20 +657,20 @@ public class ClimateServiceController extends Controller {
 	public static Result getSearchResult(){
 		Form<ClimateService> cs = climateServiceForm.bindFromRequest();
 		ObjectNode jsonData = Json.newObject();
-		
+
 		String name = "";
 		String purpose = "";
 		String scenario = "";
 		String url = "";
 		String versionNo = "";
-		
+
 		try {
 			name = cs.field("Climate Service Name").value();
 			purpose = cs.field("Purpose").value();
 			url = cs.field("Url").value();
 			scenario = cs.field("Scenario").value();
 			versionNo = cs.field("Version Number").value();
-		
+
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls
@@ -637,9 +683,9 @@ public class ClimateServiceController extends Controller {
 		List<ClimateService> response = queryClimateService(name, purpose, url, scenario, versionNo);
 		return ok(climateServiceList.render(response));
 	}
-	
+
 	public static List<ClimateService> queryClimateService(String name, String purpose, String url, String scenario, String versionNo) {
-		
+
 		List<ClimateService> climateService = new ArrayList<ClimateService>();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode queryJson = mapper.createObjectNode();
@@ -648,7 +694,7 @@ public class ClimateServiceController extends Controller {
 		queryJson.put("url", url);
 		queryJson.put("scenario", scenario);
 		queryJson.put("versionNo", versionNo);
-		
+
 		JsonNode climateServiceNode = RESTfulCalls.postAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT + Constants.QUERY_CLIMATE_SERVICE, queryJson);
 		// parse the json string into object

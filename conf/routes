@@ -16,14 +16,14 @@ POST	/isEmailExisted				controllers.Application.isEmailExisted()
 
 
 #recommendation overview
-GET		/climateService/recommendationSummary/:userId				controllers.ClimateServiceController.recommendationSummary(userId: String)
-
+GET		/climateService/recommendationSummary/:userId/userIdNumber/:id				controllers.ClimateServiceController.recommendationSummary(userId: String, id: Integer)
+POST  /getUserByEmail                                             controllers.ClimateServiceController.getUserByEmail()
 
 
 # Climate Service
 GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
 POST		/climateService/add											controllers.ClimateServiceController.addClimateService()
-GET     	/climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()	
+GET     	/climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()
 POST		/climateService/savePage									controllers.ClimateServiceController.passPageStr()
 POST		/assets/html/climateService/serviceModels					controllers.ClimateServiceController.serviceModels()
 POST		/climateService/serviceModels								controllers.ClimateServiceController.serviceModels()

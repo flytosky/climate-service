@@ -17,14 +17,14 @@
 			</div>
 			<div class="navbar-collapse collapse" style="height:">
 				<ul class="nav navbar-nav navbar-right">
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="text-danger">Recommendation</span><b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo")'>Summary</a></li>							
-						</ul>				
+							<li><a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo", 1)'>Summary</a></li>
+						</ul>
 					</li>
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Web Service<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -36,9 +36,9 @@
 								<li><a href="@routes.ClimateServiceController.addAClimateService()">Register A Service</a></li>
 							}
 							<li><a href="@routes.ClimateServiceController.searchClimateServices()">Search Service</a></li>
-						</ul>				
+						</ul>
 					</li>
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dataset<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -50,7 +50,7 @@
 							<li><a href="@routes.DatasetController.searchDataset()">Search Dataset</a></li>
 						</ul>
 					</li>
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Analytics<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -65,7 +65,7 @@
 							<li><a href="@routes.AnalyticsController.getSearchAndGenerateWorkflow">Generate Workflow</a></li>
 						</ul>
 					</li>
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Scientist<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -78,7 +78,7 @@
 							}
 						</ul>
 					</li>
-					
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -89,7 +89,7 @@
 							<li><a href="@routes.AboutController.tutorial()">Tutorial</a></li>
 						</ul>
 					</li>
-					
+
 					@if(!session.get("email")) {
 						<form class="navbar-form navbar-right" action="@routes.Application.login()">
 							<button type="submit" class="btn btn-success">Log in</button>
@@ -102,23 +102,22 @@
 								<li><a href="#">My datasets</a></li>
 							</ul>
 						</li>
-						
+
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">@session.get("email")<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="@routes.Application.logout()">Log out</a></li>
 							</ul>
 						</li>
-					}	
-										
+					}
+
 					@if(false) {
 						<form class="navbar-form navbar-right" action="#">
 							<button type="submit" class="btn btn-success">Admin Console</button>
 						</form>
-					}						
-					
+					}
+
 				</ul>
 			</div>
 		</div>
 	</div>
-	

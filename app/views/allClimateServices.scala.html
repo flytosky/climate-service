@@ -14,8 +14,8 @@
 		<th style = "vertical-align: middle;" class="col-md-3">Version No</th>
 		<th style = "vertical-align: middle;" class="col-md-3">Root Service_Id</th>
 		 @if(true){
-			<th style = "vertical-align: middle;" class="col-md-2">Operation</th> 
-	     } 
+			<th style = "vertical-align: middle;" class="col-md-2">Operation</th>
+	     }
 	     <th style = "vertical-align: middle;" class="col-md-2">Operation</th>
 	</tr>
 	</thead>
@@ -32,7 +32,7 @@
 						climateService.getPurpose();
 					}
 				}  </span></td>
-		
+
 		<td><span class="@climateService.getName() editable" id = "url" data-name='url'>
 				<a href = "@climateService.getUrl()">
 				@{
@@ -42,19 +42,19 @@
 						climateService.getUrl();
 					}
 				}</a></span></td>
-				
+
 		<td><span class="@climateService.getName() editable" data-name='scenario'>
 				@climateService.getScenario() </span></td>
-				
+
 		<td><span class="@climateService.getName() editable" data-name='versionNo'>
 				@climateService.getVersionNo() </span></td>
-				
+
 		<td><span class="@climateService.getName() editable" data-name='rootServiceId'>
 				@climateService.getRootServiceId() </span></td>
-				
+
 		<td><input type="file" class="btn btn-info" id ="upload @climateService.getName()" ></button></td>
 		<td><button type="button" class="btn btn-danger" id ="doReplace"  onclick="Javascript:replaceFile('upload '+'@climateService.getName()')" >Execute</button></td>
-	
+
 	</tr>
 	}
 	</tbody>
