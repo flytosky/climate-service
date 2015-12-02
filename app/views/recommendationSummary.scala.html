@@ -1,6 +1,6 @@
 @(climateServices: List[ClimateService], dataSets: List[Dataset], users:
 List[User], userBasedDataset: List[String], featureBasedDataset :
-List[String], itemBasedDataset : List[String], currentUser: String, userSimilarList: List[User])
+List[String], itemBasedDataset : List[String], currentUser: String, userSimilarList: List[User], userBasedDatasetHybrid: List[String], keyword: String)
 
 @import helper._
 @scripts = {
@@ -31,7 +31,7 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 				console.log("gotcha");
 				console.log(data);
 				returnId = data.toString();
-				window.location = "/climateService/recommendationSummary/" + "ochimborazo" + "/userIdNumber/" + returnId;
+				window.location = "/climateService/recommendationSummary/" + "ochimborazo" + "/userIdNumber/" + returnId + "/keyword/climate" ;
 			});
 
 
@@ -40,7 +40,8 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 
 		function sendUserId() {
 			var userIdSent = $("#UserIdForRecommend").val();
-			window.location = "/climateService/recommendationSummary/" + userIdSent + "/userIdNumber/1";
+			var keyword = $("#keyword").val();
+			window.location = "/climateService/recommendationSummary/" + userIdSent + "/userIdNumber/1" + "/keyword/" + keyword;
 		}
 	</script>
 }
@@ -147,7 +148,7 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 						<th class="col-md-1">Last Name</th>
 						<th class="col-md-1">Afflication</th>
 						<th class="col-md-2">Email</th>
-						<th class="col-md-2">Research Area</th>
+						<th class="col-md-2">Research Areas</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -198,15 +199,19 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 						<option value="mroge">mroge</option>
 					</select>
 				</div>
+				<div class="form-group">
+					<label>Keyword:</label>
+					<input type="text" class="form-control" id="keyword">
+				</div>
 				<button type="button" class="btn btn-info" onclick="sendUserId()">Recommend</button>
 			</form>
 
 			<br>
 
-			<h4>Current User: @currentUser</h4>
+			<h4>Current User: @currentUser // Current Keyword: @keyword</h4>
 			<div class="row well col-lg-10 ">
-				<div class="col-lg-offset-3 col-lg-6">
-					<div class="panel panel-success">
+				<div class="col-lg-offset-0 col-lg-6">
+					<div class="panel panel-info">
 						<!-- Default panel contents -->
 						<div class="panel-heading">Recommended based on dataset
 							similarity and the user's past behavior</div>
@@ -227,7 +232,39 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 								</tr>
 							</thead>
 							<tbody>
-								@for(String <- featureBasedDataset){
+								@for(String <- itemBasedDataset){
+								<tr>
+									<td>@String.substring(1, String.length-1)</td>
+									<td>...</td>
+									<td>...</td>
+								</tr>
+								}
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class=" col-lg-6">
+					<div class="panel panel-success">
+						<!-- Default panel contents -->
+						<div class="panel-heading">Recommended based on dataset
+							similarity and the user's past behavior</div>
+						<div class="panel-body">
+							<p>Keyword based</p>
+						</div>
+
+						<!-- Table -->
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Dataset Name</th>
+									<th>...</th>
+									<th>...</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(String <- userBasedDatasetHybrid){
 								<tr>
 									<td>@String.substring(1, String.length-1)</td>
 									<td>...</td>
@@ -296,7 +333,7 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 								</tr>
 							</thead>
 							<tbody>
-								@for(String <- itemBasedDataset){
+								@for(String <- featureBasedDataset){
 								<tr>
 									<td>@String.substring(1, String.length-1)</td>
 									<td>...</td>
@@ -334,7 +371,7 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 					<th class="col-md-1">Last Name</th>
 					<th class="col-md-1">Afflication</th>
 					<th class="col-md-2">Email</th>
-					<th class="col-md-2">Research Area</th>
+					<th class="col-md-2">Research Areas</th>
 				</tr>
 			</thead>
 			<tbody>

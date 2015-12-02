@@ -94,6 +94,9 @@ public class Constants {
 	//recommendation
 	public static final String GET_TOP_K_USER_BASED_DATASET1 = "/getTopKUserBasedCFRecommendedDatasetByUsername?username=";
 	public static final String GET_TOP_K_USER_BASED_DATASET2 = "&top_num=";
+	public static final String GET_TOP_K_USER_BASED_DATASET_HYBRID1 = "/Hybrid_LDA_Based_AND_CF_Recommendation?username=";
+	public static final String GET_TOP_K_USER_BASED_DATASET_HYBRID2 = "&top_num=";
+  public static final String GET_TOP_K_USER_BASED_DATASET_HYBRID3 = "&text=";
 	public static final String GET_TOP_K_ITEM_BASED_DATASET1 = "/getTopKItemBasedCFRecommendedDatasetByUsername?username=";
 	public static final String GET_TOP_K_ITEM_BASED_DATASET2 = "&top_num=";
 	public static final String GET_TOP_K_FEATURE_BASED_DATASET1 = "/getTopKLDABasedRecommendedDatasetByUsername?username=";
