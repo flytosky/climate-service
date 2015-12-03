@@ -108,6 +108,7 @@
 	
 	var responseJson = null;
     var jsonString = null;
+    var edgeData = null;
 	$(document).ready(function() {  
 	    $("#panel").hide(); 
 	    $("#config").hide();
@@ -334,8 +335,10 @@
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      allEdges = edgesDataset.get({returnType:"Object"});
 	      //console.log(allEdges);
-	      network.on('select',neighbourhoodHighlight);      
-	      network.on('doubleClick',selectThatNode);      
+	      network.on('select', neighbourhoodHighlight);      
+	      network.on('doubleClick', selectThatNode); 
+	      network.on('selectEdge', selectTheEdge);
+	      
 	    }
 	    
 	    function findShortestPath() {
@@ -495,6 +498,52 @@
 	        }else {
 	        	$("#setWholeShownName").hide();
 	        }
+	    }
+	    
+		function selectTheEdge(params) {
+			if (params.edges.length > 0) {
+				var selectedEdge = allEdges[params.edges[0]];
+	    	    var node1 = allNodes[selectedEdge.from];
+	    	    var node2 = allNodes[selectedEdge.to];
+	    	    var userId = null, serviceId = null, datasetId = null;
+	    	    if(node1.group == "user")	userId = node1.userId;
+	    	    if(node1.group == "dataset")	datasetId = node1.datasetId;
+	    	    if(node1.group == "service")	serviceId = node1.serviceId;
+	    	    if(node2.group == "user")	userId = node2.userId;
+	    	    if(node2.group == "dataset")	datasetId = node2.datasetId;
+	    	    if(node2.group == "service")	serviceId = node2.serviceId;
+	    	    var parameters = {
+	    	    		userId: userId,
+	    	    		datasetId: datasetId,
+	    	    		serviceId: serviceId,
+		    	}
+	    	    $.ajax({
+		            url: "/getEdgeData",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data) {
+		        	console.log("success");
+		        	edgeData = JSON.parse(data);
+		        	console.log(edgeData);
+		        	var edgeTable = document.getElementById("edgeTable");
+		        	edgeTable.innerHTML = "";
+		            /* for (var i = 0; i < edgeData.length; i++) {
+		            	var tr = "<tr>";
+		                tr += "<td>" + edgeData[i].id + "</td>";
+		                tr += "<td>" + edgeData[i].climateService.name + "</td>";
+		                tr += "</tr>";
+		                $('#edgeTable').append(tr);
+		            } */
+		        	
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+			}
 	    }
 	    
 	    function neighbourhoodHighlight(params) {
@@ -814,6 +863,11 @@
 	             </div>
              </div>
        	</form>
+	</div>
+	
+	<div id="edgeData">
+		<table id="edgeTable">
+		</table>
 	</div>
   
 }

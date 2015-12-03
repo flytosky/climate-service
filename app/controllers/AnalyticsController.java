@@ -33,6 +33,7 @@ public class AnalyticsController extends Controller{
 			jsonData.put("param1", parameter1);
 			jsonData.put("param2", parameter2);
 			jsonData.put("param3", parameter3);
+			jsonData.put("choice", "datasetNameW");
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 			
@@ -258,4 +259,36 @@ public class AnalyticsController extends Controller{
 		}
 		return ok(response);
 	}
+	
+	public static Result getEdgeData() {
+		JsonNode json = request().body().asJson();
+		long userId = json.path("userId").asLong();
+		long datasetId = json.path("datasetId").asLong();
+		long serviceId = json.path("serviceId").asLong();
+		JsonNode response = null;
+		try {
+			if(userId == 0) {
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + "/datasetLog/getUsersByServiceAndDataset/serviceId/" + serviceId + "/datasetId/" + datasetId +"/json");
+			}
+			else if(datasetId == 0) {
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByServiceAndUser/serviceId/" + serviceId + "/userId/" + userId + "/json");
+			}
+			else {
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getServiceExecutionLogsByDatasetAndUser/datasetId/" + datasetId+ "/userId/" + userId + "/json");
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
+	}
+	
 }

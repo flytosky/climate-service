@@ -65,8 +65,8 @@ GET     /relationalKnowledgeGraph                   controllers.AnalyticsControl
 POST	/getSpecifiedKnowledgeGraph					controllers.AnalyticsController.getSpecifiedKnowledgeGraph()
 POST	/getShortestPath 							controllers.AnalyticsController.getShortestPath()
 POST	/getPartKnowledgeGraph						controllers.AnalyticsController.getPartKnowledgeGraph()
-POST /getKthShortestPath                            controllers.AnalyticsController.getKthShortestPath()
-
+POST    /getKthShortestPath                         controllers.AnalyticsController.getKthShortestPath()
+POST	/getEdgeData								controllers.AnalyticsController.getEdgeData()
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
