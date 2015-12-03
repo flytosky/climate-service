@@ -376,13 +376,17 @@ public class ClimateServiceController extends Controller {
 		return ok(id);
 	}
 
-	public static Result recommendationSummary(String userId, int id) {
+	public static Result recommendationSummary(String userId, int id, String keyword) {
+
+		keyword = keyword.replaceAll(" ", "%20");
 
 		List<String> userBasedDataset = new ArrayList<String>();
 
 		List<String> itemBasedDataset = new ArrayList<String>();
 
 		List<String> featureBasedDataset = new ArrayList<String>();
+
+		List<String> userBasedDatasetHybrid = new ArrayList<String>();
 
 		List<ClimateService> climateServices = new ArrayList<ClimateService>();
 
@@ -393,18 +397,20 @@ public class ClimateServiceController extends Controller {
 		List<User> userSimilarList = new ArrayList<User>();
 
 
+
+
 		JsonNode usersNode = RESTfulCalls.getAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT
 				+ Constants.GET_ALL_USERS);
 
 		JsonNode usersSimilarNode = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.CMU_BACKEND_PORT
-				+ Constants.GET_TOP_K_SIMILAR_USERS + id + "/k/" + "5" + "/json");
+				+ Constants.GET_TOP_K_SIMILAR_USERS + id + "/k/" + "12" + "/json");
 
 		// if no value is returned or error or is not json array
 		if (usersNode == null || usersNode.has("error")
 				|| !usersNode.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, keyword));
 		}
 
 
@@ -415,7 +421,7 @@ public class ClimateServiceController extends Controller {
 		// if no value is returned or error or is not json array
 		if (climateServicesNode == null || climateServicesNode.has("error")
 				|| !climateServicesNode.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, keyword));
 		}
 
 		// parse the json string into object
@@ -473,6 +479,21 @@ public class ClimateServiceController extends Controller {
 			userBasedDataset.add(userBased.path(i).findValue("dataset").toString());
 		}
 
+		JsonNode userBasedHybrid = RESTfulCalls.getAPI(Constants.URL_SERVER
+				+ Constants.URL_FLASK
+				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID1 + userId
+				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID2 + 10
+				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID3 + keyword);
+
+		if (userBasedHybrid == null || userBasedHybrid.has("error")
+				|| !userBasedHybrid.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, "No related topic found!"));
+		}
+
+		for (int i = 0; i<userBasedHybrid.size(); i++) {
+			userBasedDatasetHybrid.add(userBasedHybrid.path(i).findValue("dataset").toString());
+		}
+
 		JsonNode itemBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
 				+ Constants.GET_TOP_K_ITEM_BASED_DATASET1 + userId
@@ -498,7 +519,7 @@ public class ClimateServiceController extends Controller {
 		System.out.println(userBasedDataset);
 		System.out.println("--------------------------");
 
-		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList));
+		return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, keyword));
 	}
 
 	public static Result mostRecentlyUsedClimateServices() {
