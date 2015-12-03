@@ -378,6 +378,8 @@ public class ClimateServiceController extends Controller {
 
 	public static Result recommendationSummary(String userId, int id, String keyword) {
 
+		keyword = keyword.replaceAll(" ", "%20");
+
 		List<String> userBasedDataset = new ArrayList<String>();
 
 		List<String> itemBasedDataset = new ArrayList<String>();
@@ -482,6 +484,11 @@ public class ClimateServiceController extends Controller {
 				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID1 + userId
 				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID2 + 10
 				+ Constants.GET_TOP_K_USER_BASED_DATASET_HYBRID3 + keyword);
+
+		if (userBasedHybrid == null || userBasedHybrid.has("error")
+				|| !userBasedHybrid.isArray()) {
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, "No related topic found!"));
+		}
 
 		for (int i = 0; i<userBasedHybrid.size(); i++) {
 			userBasedDatasetHybrid.add(userBasedHybrid.path(i).findValue("dataset").toString());
