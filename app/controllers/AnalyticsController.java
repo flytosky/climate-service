@@ -165,7 +165,65 @@ public class AnalyticsController extends Controller{
 		return ok(response);
 	}
 	
-	public static Result getPartKnowledgeGraph() {
+	public static Result getDoubleClickedNodeKnowledgeGraph() {
+		JsonNode json = request().body().asJson();
+		String parameter1 = json.path("param1").asText();
+		String parameter2 = json.path("param2").asText();
+		String groupName = json.path("groupName").asText();
+		
+		long id = json.path("id").asLong();
+		
+		ObjectNode jsonData = Json.newObject();
+		
+		
+		
+		String combination = parameter1 + parameter2 + groupName;
+		JsonNode response = null;
+		try {
+			jsonData.put("id", id);
+			switch(combination) {
+			case "UserDatasetuser":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllDatasetAndCountByUserId/" + id + "/json");
+				break;
+			case "UserDatasetdataset":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllUserAndCountByDatasetId/" + id + "/json");
+				break;
+			case "UserServiceuser":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllServiceAndCountByUserId/" + id + "/json");
+				break;
+			case "UserServiceservice":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllUserAndCountByServiceId/" + id + "/json");
+				break;
+			case "DatasetServiceservice":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllDatasetAndCountByServiceId/" + id + "/json");
+				break;
+			case "DatasetServicedataset":
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllServiceAndCountByDatasetId/" + id + "/json");
+				break;
+			default:
+				break;
+			}
+
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.UNKNOWN));
+		}
+		return ok(response);
+	}
+	
+	
+	public static Result getCustomizedNodeKnowledgeGraph() {
 		JsonNode json = request().body().asJson();
 		String parameter1 = json.path("param1").asText();
 		String parameter2 = json.path("param2").asText();
@@ -193,7 +251,16 @@ public class AnalyticsController extends Controller{
 				System.out.println("Wrong Date Format :" + startTime);
 				return badRequest("Wrong Date Format :" + startTime);
 			}
+		}else {
+			try {
+				executionStartTime = new Date(0);
+		        jsonData.put("executionStartTime", executionStartTime.getTime());
+			} catch (Exception e) {
+				System.out.println("Wrong Date Format :" + startTime);
+				return badRequest("Wrong Date Format :" + startTime);
+			}
 		}
+		
 		if (!endTime.isEmpty()) {
 			try {
 				executionEndTime = simpleDateFormat.parse(endTime);
@@ -202,52 +269,26 @@ public class AnalyticsController extends Controller{
 				System.out.println("Wrong Date Format :" + endTime);
 				return badRequest("Wrong Date Format :" + endTime);
 			}
+		}else {
+			try {
+				executionEndTime = new Date();
+				jsonData.put("executionEndTime", executionEndTime.getTime());
+			} catch (Exception e) {
+				System.out.println("Wrong Date Format :" + endTime);
+				return badRequest("Wrong Date Format :" + endTime);
+			}
 		}
 		
-		
-		String combination = parameter1 + parameter2 + groupName;
 		JsonNode response = null;
 		try {
 			jsonData.put("id", id);
-			if(!startTime.isEmpty() || !endTime.isEmpty()) {
-				if(choice.equals("datasetName")){
-					response = RESTfulCalls.postAPI(Constants.URL_HOST
-								+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
-				}else {
-					response = RESTfulCalls.postAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryVariables", jsonData);
-				}
+			if(choice.equals("datasetName")){
+				response = RESTfulCalls.postAPI(Constants.URL_HOST
+							+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryDatasets", jsonData);
 			}else {
-				switch(combination) {
-				case "UserDatasetuser":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllDatasetAndCountByUserId/" + id + "/json");
-					break;
-				case "UserDatasetdataset":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllUserAndCountByDatasetId/" + id + "/json");
-					break;
-				case "UserServiceuser":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneUserWithAllServiceAndCountByUserId/" + id + "/json");
-					break;
-				case "UserServiceservice":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllUserAndCountByServiceId/" + id + "/json");
-					break;
-				case "DatasetServiceservice":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneServiceWithAllDatasetAndCountByServiceId/" + id + "/json");
-					break;
-				case "DatasetServicedataset":
-					response = RESTfulCalls.getAPI(Constants.URL_HOST
-							+ Constants.CMU_BACKEND_PORT + "/analytics/getOneDatasetWithAllServiceAndCountByDatasetId/" + id + "/json");
-					break;
-				default:
-					break;
-				}
+				response = RESTfulCalls.postAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/datasetLog/queryVariables", jsonData);
 			}
-
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls

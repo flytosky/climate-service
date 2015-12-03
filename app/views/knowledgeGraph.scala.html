@@ -336,7 +336,7 @@
 	      allEdges = edgesDataset.get({returnType:"Object"});
 	      //console.log(allEdges);
 	      network.on('select', neighbourhoodHighlight);      
-	      network.on('doubleClick', selectThatNode); 
+	      network.on('doubleClick', selectDoubleClickedNode); 
 	      network.on('selectEdge', selectTheEdge);
 	      
 	    }
@@ -401,7 +401,7 @@
 	        })
 	    }
 	    
-	    function selectThatNode(params) {
+	    function selectDoubleClickedNode(params) {
 	    	 if (params.nodes.length > 0) {
 	    		console.log("TTT");		
 	    		
@@ -435,7 +435,7 @@
 		    			endTime:endTime
 		    	}
 	    		$.ajax({
-		            url: "/getPartKnowledgeGraph",
+		            url: "/getDoubleClickedNodeKnowledgeGraph",
 		            type: "POST",
 		            contentType: "application/json",
 		            data: JSON.stringify(parameters),
@@ -455,7 +455,7 @@
 	    	    
 	      }
 	    
-	    function selectThatNodeCustomized() {
+	    function selectCustomizedNode() {
 	    	
 	    	 var group = document.getElementById("paramCombination1").value;
 	    	 var id = document.getElementById("userConfId").value;
@@ -473,7 +473,7 @@
 		    			choice:choice
 		    	}
 	    		$.ajax({
-		            url: "/getPartKnowledgeGraph",
+		            url: "/getCustomizedNodeKnowledgeGraph",
 		            type: "POST",
 		            contentType: "application/json",
 		            data: JSON.stringify(parameters),
@@ -859,7 +859,7 @@
              		<input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
              	</div>
 	             <div class="col-sm-4 col-md-4">
-	                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectThatNodeCustomized()">Show</button>
+	                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectCustomizedNode()">Show</button>
 	             </div>
              </div>
        	</form>
