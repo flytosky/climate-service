@@ -405,7 +405,7 @@ public class ClimateServiceController extends Controller {
 
 		JsonNode usersSimilarNode = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.CMU_BACKEND_PORT
-				+ Constants.GET_TOP_K_SIMILAR_USERS + id + "/k/" + "5" + "/json");
+				+ Constants.GET_TOP_K_SIMILAR_USERS + id + "/k/" + "12" + "/json");
 
 		// if no value is returned or error or is not json array
 		if (usersNode == null || usersNode.has("error")
