@@ -225,9 +225,9 @@ public class AnalyticsController extends Controller{
 	
 	public static Result getCustomizedNodeKnowledgeGraph() {
 		JsonNode json = request().body().asJson();
-		String parameter1 = json.path("param1").asText();
-		String parameter2 = json.path("param2").asText();
-		String groupName = json.path("groupName").asText();
+//		String parameter1 = json.path("param1").asText();
+//		String parameter2 = json.path("param2").asText();
+//		String groupName = json.path("groupName").asText();
 		
 		
 		String startTime = json.path("startTime").asText();
