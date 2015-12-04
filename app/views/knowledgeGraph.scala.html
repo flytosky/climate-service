@@ -204,6 +204,7 @@
 	    }
 
 	    function draw() {
+	    	"use strict";
 	    	console.log("draw");
 	      // create people.
 	      // value corresponds with the age of the person
@@ -234,7 +235,24 @@
    			      }
    			    },
    			    scaling: {
-   			      min: 12
+   			      min: 10,
+   			      max: 50,
+   			      label: {
+   			        enabled: false,
+   			        min: 14,
+   			        max: 40,
+   			        maxVisible: 40,
+   			        drawThreshold: 5
+   			      },
+   			      customScalingFunction: function (min,max,total,value) {
+   			        if (max === min) {
+   			          return 0.5;
+   			        }
+   			        else {
+   			          let scale = 1 / (max - min);
+   			          return Math.max(0,(value - min)*scale);
+   			        }
+   			      }
    			    },
    			    shadow: {
    			      enabled: false,
@@ -281,7 +299,9 @@
    			  hierarchicalRepulsion: {
    				  springConstant: 0.01,
    		      	  centralGravity: 1.75,
-   		      	  nodeDistance: 120,
+
+   		      	  nodeDistance: 140,
+
 
    		      },
    			 	maxVelocity: 10,
@@ -422,6 +442,9 @@
 	    			break;
 	    		case "user":
 	    			id = allNodes[node1].userId;
+	    			break;
+	    		case "variable":
+	    			id = allNodes[node1].variableId;
 	    			break;
 	    		default:
 	    			break;
@@ -676,6 +699,10 @@
 	  	          $("#panel").show();
 								$("#related").hide();
 	    			break;
+	    		case "variable":
+	    			id = curNode.variableId;
+	    			$("#description").text("Variable");
+	    			break;
 	    		default:
 	    			break;
 	    		}
@@ -778,8 +805,10 @@
 			      </span>
 			    </div>
 			    <div class="input-group col-lg-6">
+
 					<label>Actions</label>
-					<button type="button" onclick="selectThatNode()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
+					<button type="button" onclick="getParameters()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
+
 			        </span> Clear All Node </button>
 	        	</div>
 	        	<br>
