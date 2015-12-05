@@ -1,13 +1,13 @@
 $(document).ready(function() {
     $("#ruleAlert").hide();
     $('#dropdownNameDataDiv').hide();
-    
-    
+
+
 
 	$('#addAClimateService').click(function() {
 		console.log("beeping");
 		myElement = document.getElementById("tbody");
-		
+
 		name = document.getElementById("name").value;
 		purpose = document.getElementById("purpose").value;
 		serviceUrl = document.getElementById("url").value;
@@ -26,7 +26,7 @@ $(document).ready(function() {
 			version: version,
 			rootServiceId: rootServiceId
 		};
-		
+
 		var pageStr = myElement.innerHTML;
 		var pageOutput = document.getElementById("output").innerHTML;
 		console.log(pageStr);
@@ -39,7 +39,7 @@ $(document).ready(function() {
 			purpose: purpose,
 			url: serviceUrl
 		};
-		
+
 		$.ajax({
 			url: "savePage",
 			data: JSON.stringify(obj),
@@ -48,7 +48,7 @@ $(document).ready(function() {
 			},
 			type: "POST"
 		});
-		
+
 		$.ajax({
 			url: "add",
 			data: JSON.stringify(serviceData),
@@ -57,19 +57,19 @@ $(document).ready(function() {
 			},
 			type: "POST"
 		}).done(function(data) {
-			console.log("invoked"); 
+			console.log("invoked");
 			var serviceId = JSON.parse(data);
 			console.log("Get the serviceID: " + serviceId);
-			
+
 //			var paraData = JSON.stringify(parameterPackage);
 			var x;
 			for (x in parameterPackage) {
 				parameterPackage[x].serviceId = serviceId;
 			}
-			
-			
+
+
 		    console.log(JSON.stringify(parameterPackage));
-			
+
 			$.ajax({
 				url: "addAllParameters",
 				data: JSON.stringify(parameterPackage),
@@ -78,12 +78,12 @@ $(document).ready(function() {
 				},
 				type: "POST"
 			}).done(location.reload());
-			
+
 		});
-		
-		
-		
-		
+
+
+
+
 	});
 });
 
@@ -93,19 +93,19 @@ function createAutoClosingAlert(delay) {
 }
 	//dataList
 	var dataListContent = "";
-	
-	
+
+
 	//suffix
 	var sufTrID = "_trID";
 	var sufDetail = "_detail";
-	
+
 	//parameter package
 	var parameterPackage = [];
 	var indexInService = 0;
 	var countDelete = 0;
-	
-	
-	
+
+
+
 	//rule engine data
 	var dataSourceList = [];//initialization ??
 	var modelList = [];
@@ -120,13 +120,13 @@ function addDataSource() {
 	source = document.getElementById("dataSource").value;
 	dataSourceList.push(source);
 	document.getElementById("demo1").value= source ;
-	createAutoClosingAlert(500);    
+	createAutoClosingAlert(500);
 }
 
 function addGroup() {
 	group = document.getElementById("dataGroup").value;
-	modelList.push(group);   
-	document.getElementById("demo1").value= group  ; 
+	modelList.push(group);
+	document.getElementById("demo1").value= group  ;
 	createAutoClosingAlert(500);
 }
 
@@ -140,8 +140,8 @@ function uploadVarJs() {
 
 function addVariable() {
 	variable= document.getElementById("variable").value;
-	varList.push(variable); 
-	document.getElementById("demo1").value= variable  ; 
+	varList.push(variable);
+	document.getElementById("demo1").value= variable  ;
 	createAutoClosingAlert(500);
 }
 
@@ -156,10 +156,10 @@ function continue1() {
 	modelAndVar.push(modelList);
 	modelAndVar.push(varList);
 	map[dataSourceList] = modelAndVar;
-	
+
 	jsonfiedData = JSON.stringify(map);
-	document.getElementById("preview").value= jsonfiedData;		
-	
+	document.getElementById("preview").value= jsonfiedData;
+
 	dataSourceList = [];
 	modelList = [];
 	varList = [];
@@ -174,9 +174,9 @@ function addDataList() {
 	jsonfiedData ="";
 }
 
-function addDataListContinue() { 
+function addDataListContinue() {
 	dataListContent += "var " + dependency_list +"="+ jsonfiedData + ";";
-	
+
 	jsonfiedData ="";
 }
 
@@ -224,7 +224,7 @@ function validate() {
 function addDependency() {
 	dependency_list = document.getElementById("dependence1").value + document.getElementById("dependence2").value + "_list";
 	var dependency1 = document.getElementById("dependence1").value + "_select";
-	var dependency2 = document.getElementById("dependence2").value + "_select";	
+	var dependency2 = document.getElementById("dependence2").value + "_select";
 	onchangeText +=  "put_var('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");"
 	document.getElementById(dependency1).setAttribute("onChange",onchangeText);
 	console.log("add dependency finished...");
@@ -239,13 +239,22 @@ function addDependencyInputArea() { //another button
 	console.log("add dependency input area finished...");
 }
 
+function addDependencyDisable() { //another button
+	dependency_list = document.getElementById("dependence1").value + document.getElementById("dependence2").value + "_list";
+	var dependency1 = document.getElementById("dependence1").value + "_select";
+	var dependency2 = document.getElementById("dependence2").value + "_detail";	 //sufDetail
+	onchangeText +=  "put_var_disable('" +dependency1+ "', '"+ dependency2+"', "+dependency_list+");" // set new FUNCTION here
+	document.getElementById(dependency1).setAttribute("onChange",onchangeText);
+	console.log("add dependency input area disabled finished...");
+}
+
 
 function addButton() {
 	var outputName = document.getElementById("outputName");
 	var outputUrl = document.getElementById("outputUrl");
 	var str = '<button type="button" class="btn btn-success btn-lg" name="' +outputUrl.value + '"  id="' +outputName.value + '" onclick="window.location.href=\''+ outputUrl.value +'\';">'+ outputName.value+'</button>';
 	$("#output").append(str);
-	
+
 }
 
 
@@ -255,44 +264,44 @@ function addRow() {
     var nameFunc = document.getElementById("parameterNameFunctional");
     var type = document.getElementById("parameterType");
     var values = document.getElementById("parameterValues");// from input area dropdown list
-    
+
     var defaultValues = document.getElementById("defaultValues");
-    
+
     var parameterBag = {};
-    
+
     if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1") {
     	isUsingDropdownData = true;
-    	
+
     	var rule = "*|Type|*" + type.value+ "*|Value|*" + values.value + "*|DefaultValue|*" + defaultValues.value;
         parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
         parameterPackage.push(parameterBag);
-        
+
     }else {
     	isUsingDropdownData = false;
     	var dataValues = document.getElementById("dropdownNameData").value; // from textarea dropdown list
     	dataValues = JSON.parse(dataValues);
     	console.log(dataValues.APIvalue);
-    	
-	    var descriptiveValues = null;	    
+
+	    var descriptiveValues = null;
     	values = dataValues.APIvalue; // this is what the attri is called in TextArea
-    	descriptiveValues = dataValues.descriptiveValues;  
-    	
+    	descriptiveValues = dataValues.descriptiveValues;
+
     	var tempValue = ""; //for compatible purpose
 	    for (var item in values) {
 	    	tempValue += values[item];
 	    	tempValue += ",";
 	    }
 	    tempValue = tempValue.substring(0, tempValue.length -1);
-	   
-	    
+
+
 	    var rule = "*|Type|*" + type.value+ "*|Value|*" + values + "*|DefaultValue|*" + defaultValues.value;
 	    parameterBag = {"indexInService" : indexInService, "purpose" : name.value, "rule" : rule, "name" : nameFunc.value, "dataRange" : ""};
 	    parameterPackage.push(parameterBag);
     }
-    
-    
-    
-    
+
+
+
+
 
     var table = document.getElementById("parameterPreview");
 
@@ -473,7 +482,7 @@ function appendDropdownList(name, nameFunc, values, defaultValues, indexInServic
 }
 
 function appendDropdownListText(name, nameFunc, values, descriptiveValues, defaultValues, indexInService) { // for input area
-	
+
     // generate value array
     var array = values;
     var arrayDes = descriptiveValues;
@@ -537,30 +546,30 @@ function addTable() {
 }
 
 function disableDependencyItem() {
-	 if (jQuery("input:radio[name=dependencyRadio]:checked").val() == "option1"){	 
+	 if (jQuery("input:radio[name=dependencyRadio]:checked").val() == "option1"){
 	     	$("#dependencyDetailForm").hide();
 	     	$("#cacheForm").hide();
-	     }else {    	
+	     }else {
 	    	 $("#dependencyDetailForm").show();
 		     $("#cacheForm").show();
-	     }	
+	     }
 }
 
 
 function disableDropdownItem() {
-	 if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1"){	 
+	 if (jQuery("input:radio[name=optionsRadios]:checked").val() == "option1"){
      	document.getElementById("dropdownNameData").disabled = true;
      	document.getElementById("parameterValues").disabled = false;
-     }else {    	
+     }else {
      	document.getElementById("dropdownNameData").disabled = false;
      	document.getElementById("parameterValues").disabled = true;
      }
 }
 
 function disableItem() {
-	
+
     var type = document.getElementById("parameterType");
-   
+
     switch(type.value) {
         case "Input text":
         	$("#dropdownNameDataDiv").hide();
@@ -585,7 +594,7 @@ function disableItem() {
         case "Dropdown list":
         	$("#dropdownNameDataDiv").show();
             document.getElementById("parameterValues").disabled = false;
-            document.getElementById("defaultValues").disabled = false;         
+            document.getElementById("defaultValues").disabled = false;
             document.getElementById("dropdownNameData").disabled = true;
          	document.getElementById("parameterValues").disabled = false;
             break;
@@ -599,7 +608,7 @@ function sendValues(url) {
 
     // declare a HashMap to store the parameter name and value
     var map = {};
-    
+
     // receive climate service model call url
     map["climateServiceCallUrl"] = url;
     console.log("Climate Service Call url: " + url);
@@ -618,7 +627,7 @@ function sendValues(url) {
             temp += res[j].substring(1);
             text += temp;
         }
-        
+
         var value = "";
         var tagName = temp[i].getElementsByTagName("td")[1].firstElementChild.tagName;
         console.log("tagName: " + tagName);
@@ -633,7 +642,7 @@ function sendValues(url) {
 	    	    break;
         	case "SELECT":
         		var selects = temp[i].getElementsByTagName("td")[1].getElementsByTagName("select")[0].getElementsByTagName("option");
-        		
+
 	        	for (var k = 0, length = selects.length; k < length; k++) {
 	        	    if (selects[k].selected) {
 	        	        value = selects[k].value;	        	        // 1117changeslog
@@ -652,7 +661,7 @@ function sendValues(url) {
     	        	    if (radios[k].firstElementChild.checked) {
     	        	        // do whatever you want with the checked radio
     	        	    	// value is used for passing data and innerHTML is for representing
-    	        	        value = radios[k].firstElementChild.value;	        	        
+    	        	        value = radios[k].firstElementChild.value;
     	        	        break;
     	        	    }
     	        	}
@@ -662,7 +671,7 @@ function sendValues(url) {
     	        	for (var k = 0, length = selects.length; k < length; k++) {
     	        	    if (selects[k].firstElementChild.checked) {
     	        	        // do whatever you want with the checked radio
-    	        	        value = value + selects[k].firstElementChild.value + ",";	        	        
+    	        	        value = value + selects[k].firstElementChild.value + ",";
     	        	    }
     	        	}
     	        	value = value.substr(0, value.length - 1);
@@ -677,8 +686,8 @@ function sendValues(url) {
         console.log("map key: " + key);
         console.log("map value: " + map[key]);
     } // end of for-loop
-    
-    
+
+
 /***********************
     alert(JSON.stringify(map));
     map["model"] = "NASA_AIRS";
@@ -703,7 +712,7 @@ function sendValues(url) {
     }).done(function(data) {
     	console.log("success");
     	var responseJson = JSON.parse(data);
-    	
+
     	$('#serviceImg').attr("src", responseJson.url);
     	$('#serviceImgLink').attr("href", responseJson.url);
     	$('#comment').html(responseJson.dataUrl);
@@ -712,15 +721,15 @@ function sendValues(url) {
     	$('#downloadButton').attr("onclick","location.href ='" + responseJson.dataUrl + "';");
     	console.log("done!!!!!")
     	var x=document.getElementById("output").getElementsByTagName("button");
-    	
+
     	for (var i = 0; i < x.length; i ++) {
     		var key = responseJson[x[i].getAttribute("name")];
     		var id = x[i].innerHTML;
     		console.log("key    " + key + "    id    " +id);
     		$('#'+id).attr("onclick","location.href ='" + key + "';");
 		}   	1
-    	
-    	
+
+
     }).fail(function(xhr, textStatus, errorThrown) {
     	console.log("error!");
     	console.log(xhr);
@@ -745,7 +754,7 @@ function showDropdownExample2() {
 
 function showDependencyExample1() {
 	$("#preview").val("{\"Dep1Item1\" : [[\"Group Name\"], [\"Dep2Item1\", \"Dep2Item2\", \"Dep2Item3\"]],\r\n\"Dep1Item2\" : [[\"Group Name\"], [\"Dep2Item3\", \"Dep2Item4\", \"Dep2Item5\"]],\r\n\"Dep1Item3\" : [[\"Group Name\"], [\"Dep2Item4\", \"Dep2Item5\", \"Dep2Item6\"]]}");
-	
+
 }
 
 function showDependencyExample2() {
@@ -753,22 +762,22 @@ function showDependencyExample2() {
 	$("#dataSource").val("Dep1Item1");
 	$("#dataGroup").val("Group Name");
 	$("#variable").val("Dep2Item1");
-	
+
 }
 
 function replaceFile(id) {
 	console.log(id);
 	var x = document.getElementById(id).files[0];
-		
+
 	$.ajax({
 	    url: "replaceFile",
 	    type: "POST",
-	    data: x,	    
+	    data: x,
 	    processData: false,
 	    contentType: false,
 	    success: function (res) {
 	    	 console.log("Page load finished");
 	    }
     });
-	
+
 }

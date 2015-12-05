@@ -367,8 +367,7 @@ public class ClimateServiceController extends Controller {
 
 		JsonNode userIdNode = RESTfulCalls.postAPI(Constants.URL_SERVER
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_USER_BY_EMAIL, queryJson);
-		System.out.println("11getUserByEmailgetUserByEmailgetUserByEmail: " + email);
-		System.out.println("22getUserByEmailgetUserByEmailgetUserByEmail: " + userIdNode);
+	
 		// parse the json string into object
 		JsonNode json = userIdNode.path(0);
 		String id = userIdNode.findPath("id").asText();
