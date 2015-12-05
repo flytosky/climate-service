@@ -329,6 +329,7 @@ public class AnalyticsController extends Controller{
 			Application.flashMsg(RESTfulCalls
 					.createResponse(ResponseType.UNKNOWN));
 		}
+		System.out.print(response);
 		return ok(response);
 	}
 	

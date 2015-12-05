@@ -110,7 +110,8 @@
     var jsonString = null;
     var edgeData = null;
 	$(document).ready(function() {  
-	    $("#panel").hide(); 
+	    $("#panel").hide();
+	    $("#edgeDataPanel").hide();
 	    $("#config").hide();
 	    $("#basicConf").hide();
 	    jsonString =  $('#jsonData').text();
@@ -402,6 +403,7 @@
 	    }
 	    
 	    function selectDoubleClickedNode(params) {
+	    	$("#edgeDataPanel").hide();
 	    	 if (params.nodes.length > 0) {
 	    		console.log("TTT");		
 	    		
@@ -501,6 +503,8 @@
 	    }
 	    
 		function selectTheEdge(params) {
+			$("#panel").hide();
+			//$("#edgeDataPanel").show();
 			if (params.edges.length > 0) {
 				var selectedEdge = allEdges[params.edges[0]];
 	    	    var node1 = allNodes[selectedEdge.from];
@@ -525,17 +529,23 @@
 		            dataType: "text"
 		        }).done(function(data) {
 		        	console.log("success");
-		        	edgeData = JSON.parse(data);
-		        	console.log(edgeData);
-		        	var edgeTable = document.getElementById("edgeTable");
-		        	edgeTable.innerHTML = "";
-		            /* for (var i = 0; i < edgeData.length; i++) {
-		            	var tr = "<tr>";
-		                tr += "<td>" + edgeData[i].id + "</td>";
-		                tr += "<td>" + edgeData[i].climateService.name + "</td>";
-		                tr += "</tr>";
-		                $('#edgeTable').append(tr);
-		            } */
+		        	edgeDatas = JSON.parse(data);
+		        	console.log(edgeDatas);
+		        	
+		        	$('#edgeDataPanel').html("");
+		        	var tr = null;
+		        	tr = "<table class=\"table table-striped\"><thead>" + 
+        			"<tr><th>Service Name</th></tr></thead><tbody>";
+        			
+		        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+		        		console.log(edgeDatas[i].climateService.name);
+		        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td></tr>";
+		        		//$('#edgeDataPanel').append("<tr><td>"+edgeDatas[i].climateService.name+"</td></tr>");
+		        	}
+		        	tr += "</tbody></table>";
+		        	
+		        	$('#edgeDataPanel').append(tr);
+		        	$("#edgeDataPanel").show();
 		        	
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
@@ -547,6 +557,7 @@
 	    }
 	    
 	    function neighbourhoodHighlight(params) {
+	    	$("#edgeDataPanel").hide();
     	     // if something is selected:
     	    if (params.nodes.length > 0) {
     	      highlightActive = true;
@@ -628,6 +639,7 @@
 		  	  $("#nodeId").text(curNode.id);
 	  	      $("#cluster").text(curNode.cluster);
 	  	      $("#label").text(curNode.label);
+	  	      console.log("*************show node");
   	          $("#panel").show();
   	          
     	      // the main node gets its own color and its label back.
@@ -655,7 +667,7 @@
     	    	  allEdges[edgeId].color = undefined;
     	    	  
       	        
-      	        	console.log(allEdges[edgeId].color);
+      	        	//console.log(allEdges[edgeId].color);
       	        	allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
       	        	allEdges[edgeId].hiddenLabel = undefined;
       	        
@@ -800,6 +812,8 @@
 	
 	<div class = "row">
 		<br>
+		
+		
 		<div id="panel" class="col-lg-offset-7">  
 		  <div class="well col-lg-5">
 		    <div class="text-center">
@@ -820,9 +834,12 @@
 		      <a href="#" class="card-link col-lg-6">Another link</a>
 		    </div>    
 		  </div>  
-		</div>
-	</div>
+		 </div>
+		 
+		<div id="edgeDataPanel" class="col-lg-offset-7"></div>
+	
 	<br>
+	</div>
 
 	<div id="userConfig" class="col-lg-8">
 	<form>
@@ -864,10 +881,4 @@
              </div>
        	</form>
 	</div>
-	
-	<div id="edgeData">
-		<table id="edgeTable">
-		</table>
-	</div>
-  
 }
