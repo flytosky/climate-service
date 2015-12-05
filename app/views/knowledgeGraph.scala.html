@@ -14,7 +14,7 @@
 	        }
 	        #loadingBar {
 	            position:absolute;
-	            
+
 	            width: 610px;
 	            height: 610px;
 	            background-color:rgba(200,200,200,0.8);
@@ -30,7 +30,7 @@
 	            width:900px;
 	            height:900px;
 	        }
-	
+
 	        #text {
 	            position:absolute;
 	            top:0px;
@@ -41,8 +41,8 @@
 	            font-size:22px;
 	            color: #000000;
 	        }
-	
-	
+
+
 	        div.outerBorder {
 	            position:relative;
 	            top:300px;
@@ -61,7 +61,7 @@
 	            border-radius:72px;
 	            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 	        }
-	
+
 	        #border {
 	            position:absolute;
 	            top:2px;
@@ -72,10 +72,10 @@
 	            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
 	            border-radius:10px;
 	        }
-	
+
 	        #bar {
 	            position:absolute;
-	            
+
 	            width:10px;
 	            height:20px;
 	            margin:auto auto auto auto;
@@ -84,12 +84,12 @@
 	            background: rgb(153, 255, 255); /* Old browsers */
 	            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
 	        }
-	
-	        #config {            
-	            
+
+	        #config {
+
 	            width: 400px;
 	            height: 600px;
-	
+
 	        }
 	        #config input {
 	            display: inline-block;
@@ -101,28 +101,31 @@
 	            line-height: 100%;
 	        }
 	</style>
-	
+
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/exampleUtil.js")'></script>
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/vis.js")'></script>
 	<script type="text/javascript">
-	
+
 	var responseJson = null;
     var jsonString = null;
     var edgeData = null;
 	$(document).ready(function() {  
 	    $("#panel").hide();
 	    $("#edgeDataPanel").hide();
+	$(document).ready(function() {
+	    $("#panel").hide();
 	    $("#config").hide();
+			$("#related").hide();
 	    $("#basicConf").hide();
 	    jsonString =  $('#jsonData').text();
 	    draw();
 	  })
-	  	
+
 	  	var p1 = "User";
 		var p2 = "Dataset";
 	    var p3 = "Service";
-	  
-	  
+
+
 		var degrees = 1;// graph level setting
 	    var nodes = null;
 	    var edges = null;
@@ -130,11 +133,11 @@
 		var allNodes;
 		var allEdges;
 		var highlightActive = false;
-	    var nodesDataset = new vis.DataSet(nodes); 
-	    var edgesDataset = new vis.DataSet(edges); 
+	    var nodesDataset = new vis.DataSet(nodes);
+	    var edgesDataset = new vis.DataSet(edges);
 	    var visAdvancedConfig = 1;
 	    var visBasicConfig = 1;
-	    
+
 	    function getParameters() {
 	    	var temp1 = document.getElementById("paramCombination").value;
 	    	var choice = null;
@@ -145,14 +148,14 @@
 	    	if(p1 == "Dataset" || p2 == "Dataset") {
 	    		choice = $('input[name="customizedChoiceW"]:checked').val();
 	    	}
-	    	
+
 	    	var parameters = {
 	    			param1:p1,
 	    			param2:p2,
 	    			param3:p3,
 	    			choice:choice
 	    	}
-	    	
+
 	    	$.ajax({
 	            url: "/getSpecifiedKnowledgeGraph",
 	            type: "POST",
@@ -174,10 +177,10 @@
 	        	console.log(textStatus);
 	            console.log(errorThrown);
 	        })
-	        
+
 	    }
-	    
-	    
+
+
 	    function showBasicConfig() {
 	        if (visBasicConfig == 0) {
 	            $("#basicConf").hide();
@@ -187,7 +190,7 @@
 	            visBasicConfig =0;
 	        }
 	    }
-	    
+
 	    function showAdvancedConfig() {
 	        if (visAdvancedConfig == 0) {
 	            $("#config").hide();
@@ -197,28 +200,29 @@
 	            visAdvancedConfig =0;
 	        }
 	    }
-	    
+
 	    function setGraphLevel() {
 	    	degrees = $("#graphLevel").val();
 	    	//alert(degrees);
 	    }
 
 	    function draw() {
+	    	"use strict";
 	    	console.log("draw");
 	      // create people.
 	      // value corresponds with the age of the person
 	      var test = jsonString;
-	      
+
 	      //test = JSON.stringify(test);
 	      test = JSON.parse(test);
 	      var nodes = test.nodes;
 
 	      var edges = test.edges;
 
-		  
-	      nodesDataset = new vis.DataSet(nodes); 
-	      edgesDataset = new vis.DataSet(edges); 
-	      
+
+	      nodesDataset = new vis.DataSet(nodes);
+	      edgesDataset = new vis.DataSet(edges);
+
 	      // Instantiate our network object.
 	      var container = document.getElementById('mynetwork');
 	      var data = {
@@ -234,7 +238,24 @@
    			      }
    			    },
    			    scaling: {
-   			      min: 12
+   			      min: 10,
+   			      max: 50,
+   			      label: {
+   			        enabled: false,
+   			        min: 14,
+   			        max: 40,
+   			        maxVisible: 40,
+   			        drawThreshold: 5
+   			      },
+   			      customScalingFunction: function (min,max,total,value) {
+   			        if (max === min) {
+   			          return 0.5;
+   			        }
+   			        else {
+   			          let scale = 1 / (max - min);
+   			          return Math.max(0,(value - min)*scale);
+   			        }
+   			      }
    			    },
    			    shadow: {
    			      enabled: false,
@@ -253,13 +274,13 @@
    			  edges: {
    				 color: 'rgba(120,120,120,1)',
    			    arrows: {
-   			    	
+
    			      to: {
    			        enabled: false,
    			        scaleFactor: 0.4
    			      }
    			    },
- 			  
+
 		      smooth: {
  			      type: "continuous",
  			      forceDirection: "vertical"
@@ -276,13 +297,15 @@
 	        	color:"rgba(255,0,0,0.3)"
 	          }
 	        },
-	        
-	        physics: {    
+
+	        physics: {
    			  hierarchicalRepulsion: {
    				  springConstant: 0.01,
    		      	  centralGravity: 1.75,
-   		      	  nodeDistance: 120,
-   		      	  
+
+   		      	  nodeDistance: 140,
+
+
    		      },
    			 	maxVelocity: 10,
    			    minVelocity: 0.75,
@@ -310,8 +333,8 @@
 	        }
 	      };
 
-	      
-	      
+
+
 	      $("#config").html("");
 
 	      network = new vis.Network(container, data, options);
@@ -336,22 +359,22 @@
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      allEdges = edgesDataset.get({returnType:"Object"});
 	      //console.log(allEdges);
-	      network.on('select', neighbourhoodHighlight);      
-	      network.on('doubleClick', selectDoubleClickedNode); 
+	      network.on('select', neighbourhoodHighlight);
+	      network.on('doubleClick', selectDoubleClickedNode);
 	      network.on('selectEdge', selectTheEdge);
-	      
+
 	    }
-	    
+
 	    function findShortestPath() {
 	    	var startId = $("#startPoint").val();
 	    	var endId = $("#endPoint").val();
 	    	//console.log(startId + endId);
-	    	
+
 	    	var ids = {
 	    			startId : startId,
 	    			endId : endId
 	    		}
-	    	
+
 	    	$.ajax({
 	            url: "/getShortestPath",
 	            type: "POST",
@@ -369,7 +392,7 @@
 	            console.log(errorThrown);
 	        })
 	    }
-	    
+
 	    function findKthShortestPath() {
 	    	var startId = $("#startPoint").val();
 	    	var endId = $("#endPoint").val();
@@ -381,7 +404,7 @@
 	    			endId : endId,
 	    			kth : kth
 	    		}
-	    	
+
 	    	$.ajax({
 	            url: "/getKthShortestPath",
 	            type: "POST",
@@ -401,17 +424,17 @@
 	            console.log(errorThrown);
 	        })
 	    }
-	    
+
 	    function selectDoubleClickedNode(params) {
 	    	$("#edgeDataPanel").hide();
 	    	 if (params.nodes.length > 0) {
-	    		console.log("TTT");		
-	    		
+	    		console.log("TTT");
+
 	    		var node1 = params.nodes[0];
 	    		var group = allNodes[node1].group;
 	    		var startTime = "";
 		    	var endTime = "";
-	    		
+
 	    		var id = null;
 
 	    		switch(group) {
@@ -423,6 +446,9 @@
 	    			break;
 	    		case "user":
 	    			id = allNodes[node1].userId;
+	    			break;
+	    		case "variable":
+	    			id = allNodes[node1].variableId;
 	    			break;
 	    		default:
 	    			break;
@@ -452,19 +478,19 @@
 		        	console.log(textStatus);
 		            console.log(errorThrown);
 		        })
-	    		  
+
 	    	 }
-	    	    
+
 	      }
-	    
+
 	    function selectCustomizedNode() {
-	    	
+
 	    	 var group = document.getElementById("paramCombination1").value;
 	    	 var id = document.getElementById("userConfId").value;
 	    	 var startTime = document.getElementById("startTime").value;
 	    	 var endTime = document.getElementById("endTime").value;
 	    	 var choice = $('input[name="customizedChoice"]:checked').val();
-	    		
+
 	    		var parameters = {
 		    			param1:p1,
 		    			param2:p2,
@@ -490,9 +516,9 @@
 		        	console.log(textStatus);
 		            console.log(errorThrown);
 		        })
-	    	    
+
 	      }
-	    
+
 	    function schedule(selectedValue){
 	        var parameter = selectedValue.split(" ");
 	        if(parameter[0] === "Dataset" || parameter[1] == "Dataset") {
@@ -501,7 +527,7 @@
 	        	$("#setWholeShownName").hide();
 	        }
 	    }
-	    
+
 		function selectTheEdge(params) {
 			$("#panel").hide();
 			//$("#edgeDataPanel").show();
@@ -546,7 +572,19 @@
 		        	
 		        	$('#edgeDataPanel').append(tr);
 		        	$("#edgeDataPanel").show();
-		        	
+
+		        	edgeData = JSON.parse(data);
+		        	console.log(edgeData);
+		        	var edgeTable = document.getElementById("edgeTable");
+		        	edgeTable.innerHTML = "";
+		            /* for (var i = 0; i < edgeData.length; i++) {
+		            	var tr = "<tr>";
+		                tr += "<td>" + edgeData[i].id + "</td>";
+		                tr += "<td>" + edgeData[i].climateService.name + "</td>";
+		                tr += "</tr>";
+		                $('#edgeTable').append(tr);
+		            } */
+
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
 		        	console.log(xhr);
@@ -555,7 +593,7 @@
 		        })
 			}
 	    }
-	    
+
 	    function neighbourhoodHighlight(params) {
 	    	$("#edgeDataPanel").hide();
     	     // if something is selected:
@@ -564,7 +602,7 @@
     	      var i,j;
     	      var selectedNode = params.nodes[0];
     	      //console.log(selectedNode);
-    	      
+
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
     	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
@@ -573,7 +611,7 @@
     	          allNodes[nodeId].label = undefined;
     	        }
     	      }
-    	      
+
     	      for (var edgeId in allEdges) {
     	    	  allEdges[edgeId].color = 'rgba(192,192,192,0.3)';
       	        if (allEdges[edgeId].hiddenLabel == undefined) {
@@ -581,10 +619,10 @@
       	        	allEdges[edgeId].label = undefined;
       	        }
       	      }
-      	      
-    	      
+
+
     	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
-    	      
+
     	      var connectedNodes = network.getConnectedNodes(selectedNode);
     	      var allConnectedNodes = [];
 
@@ -618,16 +656,77 @@
 	    		var id = null;
 	    		switch(group) {
 	    		case "service":
+					$("#panelsub").attr("class", "well col-lg-5");
 	    			id = curNode.serviceId;
 	    			$("#description").text("Service ");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+		  	      $("#nodeName").text(curNode.title);
+		  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+		  	      $("#cluster").text(curNode.cluster);
+		  	      $("#label").text(curNode.label);
+	  	          $("#panel").show();
+								$("#related").hide();
 	    			break;
 	    		case "dataset":
+						$("#panelsub").attr("class", "well col-lg-8");
 	    			id = curNode.datasetId;
 	    			$("#description").text("Dataset ");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+	  	      $("#nodeName").text(curNode.title);
+	  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+	  	      $("#cluster").text(curNode.cluster);
+	  	      $("#label").text(curNode.label);
+
+						var obj = {
+							datasetName : curNode.title
+						}
+						$.ajax({
+								url: "getRelatedServiceOfDataset",
+								type: "POST",
+								contentType: "application/json",
+								data: JSON.stringify(obj),
+								dataType: "text"
+						}).done(function(data) {
+								console.log("seesee");
+								console.log(data);
+								data = JSON.parse(data);
+								console.log(data.name1);
+								$("#relatedServiceHref1").attr("href", data.url0);
+								$("#relatedServiceImg1").attr("src", data.imageUrl0);
+								$("#relatedServiceName1").html(data.name0);
+
+								if (data.name1 == null) {
+									$("#related2").hide();
+								}else {
+									$("#related2").show();
+								}
+								$("#relatedServiceHref2").attr("href", data.url1);
+								$("#relatedServiceImg2").attr("src", data.imageUrl1);
+								$("#relatedServiceName2").html(data.name1);
+
+								$("#related").show();
+								$("#panel").show();
+						});
+
 	    			break;
 	    		case "user":
+						$("#panelsub").attr("class", "well col-lg-5");
 	    			id = curNode.userId;
 	    			$("#description").text("User");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+		  	      $("#nodeName").text(curNode.title);
+		  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+		  	      $("#cluster").text(curNode.cluster);
+		  	      $("#label").text(curNode.label);
+	  	          $("#panel").show();
+								$("#related").hide();
+	    			break;
+	    		case "variable":
+	    			id = curNode.variableId;
+	    			$("#description").text("Variable");
 	    			break;
 	    		default:
 	    			break;
@@ -641,68 +740,71 @@
 	  	      $("#label").text(curNode.label);
 	  	      console.log("*************show node");
   	          $("#panel").show();
-  	          
+
+	    		}
+
+
     	      // the main node gets its own color and its label back.
-    	      
-    	      
+
+
     	      allNodes[selectedNode].color = 'rgba(255,0,255,0.9)'
     	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
-    	     
+
     	    }    else if (highlightActive === true) {
     	      // reset all nodes
-    	       
+
     	      for (var nodeId in allNodes) {
     	        allNodes[nodeId].color = undefined;
-    	       
+
     	        if (allNodes[nodeId].hiddenLabel !== undefined) {
     	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
     	          allNodes[nodeId].hiddenLabel = undefined;
     	        }
     	      }
-    	      
+
     	      for (var edgeId in allEdges) {
     	    	  allEdges[edgeId].color = undefined;
-    	    	  
-      	        
+
       	        	//console.log(allEdges[edgeId].color);
+      	        	console.log(allEdges[edgeId].color);
       	        	allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
       	        	allEdges[edgeId].hiddenLabel = undefined;
-      	        
+
       	      }
     	      highlightActive = false;
-    	    } 	  	  
+    	    }
 
-    	      
+
     	    // transform the object into an array
     	    var updateArray = [];
     	    for (nodeId in allNodes) {
     	      if (allNodes.hasOwnProperty(nodeId)) {
     	        updateArray.push(allNodes[nodeId]);
     	      }
-    	    }   	  
-    	        	    
+    	    }
+
     	    nodesDataset.update(updateArray);
-    	    
-    	    
+
+
     	    updateArray = [];
     	    for (edgeId in allEdges) {
     	      if (allEdges.hasOwnProperty(edgeId)) {
     	        updateArray.push(allEdges[edgeId]);
     	      }
     	    }
-    	    
-    	    edgesDataset.update(updateArray);  
+
+    	    edgesDataset.update(updateArray);
     	  }
-	    
-	      
-	    
-	    
+
+
+
+
 	  //  draw();
-	    
-	    
+
+
 	</script>
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
 }
@@ -710,16 +812,16 @@
 @main("Knowledge Graph", scripts){
 	<div id="jsonData" style="display: none;">@jsonData</div>
 	<div id="knowledgeGraph">
-	
+
 	   <div id="loadingBar" class="col-lg-3">
 	    <div class="outerBorder" >
 	        <div id="text">0%</div>
 	        <div id="border">
 	            <div id="bar"></div>
 	        </div>
-	    </div>	    
+	    </div>
 	   </div>
-	   
+
 	  <div id="mynetwork" class="col-lg-3"></div>
 	  <div class = "col-lg-offset-7">
 	        <button type="button" onclick="showBasicConfig()" class="btn btn-default  "><span class="glyphicon glyphicon-cog" aria-hidden="true">
@@ -727,20 +829,22 @@
 	        <button type="button" onclick="showAdvancedConfig()" class="btn btn-default  "><span class="glyphicon glyphicon-wrench" aria-hidden="true">
 	        </span> Show Advanced Settings </button>
 	  </div>
-	  
+
 	  <div id="basicConf" class="col-lg-offset-7">
 	  	<br>
   			<div class="col-lg-8">
-  				<label>Graph Level</label>		     
-			    <div class="input-group col-lg-5">	
+  				<label>Graph Level</label>
+			    <div class="input-group col-lg-5">
 			    <input type="number" class="form-control" placeholder="1~2" id = "graphLevel">
 			      <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
 			      </span>
 			    </div>
 			    <div class="input-group col-lg-6">
-					<label>Actions</label>		     
+
+					<label>Actions</label>
 					<button type="button" onclick="getParameters()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
+
 			        </span> Clear All Node </button>
 	        	</div>
 	        	<br>
@@ -762,7 +866,7 @@
 				<div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="findShortestPath()">Shortest Path</button>
                 </div>
-                <br>	
+                <br>
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="findKthShortestPath()">Kth Shortest Path</button>
                 </div>
@@ -788,7 +892,7 @@
 	             					<input type="radio" id="datasetNameW" name="customizedChoiceW" checked="checked" value="datasetNameW" /> Dataset Name
 	                                &nbsp;
 	             					<input type="radio" id="variableNameW" name="customizedChoiceW" value="variableNameW" /> Variable Name
-	             				
+
 	             				</div>
 	             				<br>
              				</div>
@@ -798,24 +902,25 @@
 	            	</form>
 	            	<br>
 	            	<br>
-				</div>				
-					    
-			</div>
-			
-				
-	  </div>  
-  		
-	  <div id="config" class="row col-lg-offset-7"></div>  
-	</div>
-	
+				</div>
 
-	
+			</div>
+
+
+	  </div>
+
+	  <div id="config" class="row col-lg-offset-7"></div>
+	</div>
+
+
+
 	<div class = "row">
 		<br>
-		
-		
+
 		<div id="panel" class="col-lg-offset-7">  
 		  <div class="well col-lg-5">
+		<div id="panel" class="col-lg-offset-7">
+		  <div id="panelsub" class="well col-lg-5">
 		    <div class="text-center">
 		      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
 		    </div>
@@ -830,14 +935,48 @@
 		      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
 		    </ul>
 		    <div class="card-block">
-		      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a> 
+		      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a>
 		      <a href="#" class="card-link col-lg-6">Another link</a>
 		    </div>    
 		  </div>  
 		 </div>
 		 
 		<div id="edgeDataPanel" class="col-lg-offset-7"></div>
-	
+		    </div>
+
+				<div id="related">
+					<div>
+						<h4 class="card-title text-center"><strong>People also research:</strong></h4>
+					</div>
+
+					<div class="row" >
+
+						<div class="col-md-6" id="related1">
+							<div class="thumbnail">
+							<a id="relatedServiceHref1" href="climateService.getUrl()">
+								<img id="relatedServiceImg1" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
+								</a>
+								<div class="caption">
+									<h5 id="relatedServiceName1">null</h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6" id="related2">
+							<div class="thumbnail">
+							<a id="relatedServiceHref2" href="climateService.getUrl()">
+								<img id="relatedServiceImg2" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
+								</a>
+								<div class="caption">
+									<h5 id="relatedServiceName2">null</h5>
+								</div>
+							</div>
+						</div>
+
+				</div>
+		  </div>
+		</div>
+	</div>
 	<br>
 	</div>
 
@@ -881,4 +1020,10 @@
              </div>
        	</form>
 	</div>
+
+	<div id="edgeData">
+		<table id="edgeTable">
+		</table>
+	</div>
+
 }

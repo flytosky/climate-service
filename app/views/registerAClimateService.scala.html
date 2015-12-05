@@ -2,15 +2,15 @@
 @import helper._
 @scripts = {
 
-<script type="text/javascript">	
+<script type="text/javascript">
 	$(document).ready(function(){
 		$("#msg").hide();
 		$("#dependencyDetailForm").hide();
 		$("#cacheForm").hide();
 	});
-		
+
 	</script>
-} 
+}
 @main("Register A New Climate Service", scripts) {
 <script type="text/javascript">
 console.log("register started");
@@ -39,9 +39,9 @@ $(window).load(function(){
 <br>
 
 <div class="container col-md-6">
-    
 
-    
+
+
     @form(routes.ClimateServiceController.addClimateService()) {
     <div class="well">
     	<h4>Step 1 : Add Climate Service Metadata</h3>
@@ -77,13 +77,13 @@ $(window).load(function(){
         <div class="form-group">
             <label>Developers</label>
             <input type="text" class="form-control" id="delevopers" placeholder="Tom Smith, Mary Brown">
-        </div>        
+        </div>
         <div class="text-center">
-        	<div class="form-group">            
+        	<div class="form-group">
             	<button type="reset" class="btn btn-success">Reset</button>
         	</div>
         </div>
-     </div>   
+     </div>
         <div class="well">
             <h4>Step 2 : Configure Input Parameters</h4>
             <br>
@@ -104,11 +104,11 @@ $(window).load(function(){
                         <option value="Multiple selects">Multiple selects</option>
                         <option value="Radio button">Radio button</option>
                         <option value="Dropdown list">Dropdown list</option>
-                    </select>                
+                    </select>
 
                     <div class="col-log-12 " id = "dropdownNameDataDiv">
-                    
-                    <div class="radio">                   
+
+                    <div class="radio">
 					      <label>
 						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onchange="disableDropdownItem()" checked>
 						    Load backend API names <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here API names mean..."></span>
@@ -121,7 +121,7 @@ $(window).load(function(){
 						    Display descriptive names, embed backend API names <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here API names mean... and Descriptive names mean..."></span>
 					 		<button type="button" class="btn btn-primary btn-sm" onclick="showDropdownExample2()">Show example</button>
 					 		</label>
-					 </div>					 
+					 </div>
                       		<textarea class="form-control" rows="3" id="dropdownNameData" placeholder ="Placeholder for the js format data"></textarea>
                      </div>
                 </div>
@@ -138,18 +138,18 @@ $(window).load(function(){
                     <button type="reset" class="btn btn-success">Reset</button>
                 </div>
             </form>
-        </div>        
+        </div>
         <div class="well">
 
-            <h4>Step 3 : Rule Generator</h4>            
-            <h7>Help to build up dependencies among input parameters. Every time set up dependency between a pair of parameters. 
+            <h4>Step 3 : Rule Generator</h4>
+            <h7>Help to build up dependencies among input parameters. Every time set up dependency between a pair of parameters.
             One to many relationship is handled by accmulating multiple one to one dependency.</h7>
             <br>
             <br>
 			<div id="ruleAlert" class="alert alert-success">
 				<strong>Successfully added!</strong>
 			</div>
-			
+
 			<div class="well">
 					<div class="form-group">
 	                    <label>Parameter1</label> (API Parameter Name)
@@ -158,28 +158,29 @@ $(window).load(function(){
 	                <div class="form-group">
 	                    <label>Will decide parameter2 </label> (API Parameter Name)
 	                    <input type="text" class="form-control" id="dependence2" placeholder="Enter dependence2 API Name" value="test1">
-	                </div>	  
-	                <div>      
+	                </div>
+	                <div>
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button"
 								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="true">
 								Dependency Type Selection<span class="caret"></span>
 							</button>
-							
+
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 								<li><a onclick="Javascript:addDependency()">Add dropdown-dropdown dependency</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a onclick="Javascript:addDependencyInputArea()">Add dropdown-input dependency</a></li>
-								<li role="separator" class="divider"></li>											
+								<li role="separator" class="divider"></li>
+								<li><a onclick="Javascript:addDependencyDisable()">Add dropdown-disable-input dependency</a></li>
 							</ul>
-							
+
 							<button type="button" class="btn btn-success" onclick="">Reset dependency</button>
-						</div>	  
-					</div>                      
+						</div>
+					</div>
              </div>
-             
-             <div class="radio">                   
+
+             <div class="radio">
 			      <label>
 				    <input type="radio" name="dependencyRadio" id="dependencyRadio1" value="option1" onchange="disableDependencyItem()" checked>
 				    Disable Smart Input<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here I mean..."></span>
@@ -192,15 +193,15 @@ $(window).load(function(){
 				    Enable Smart Input<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="Here I mean..."></span>
 			 		<button type="button" class="btn btn-primary btn-sm" onclick="showDependencyExample2()">Show example</button>
 			 		</label>
-			 </div>	
-					 
-			<div class="well " id = "dependencyDetailForm">				
+			 </div>
+
+			<div class="well " id = "dependencyDetailForm">
 				<div class = "row">
 		            <form class="col-lg-8">
 		            	<div class="form-group">
 		                    <label>Data source</label>
 		                    <input type="text" class="form-control" id="dataSource" placeholder="Enter Data Source" value="GFDL/ESM2G">
-		                </div>		                
+		                </div>
 		                <div class="text-center">
 		                    <button type="button" class="btn btn-primary" onclick="Javascript:addDataSource()">Add data source</button>
 		                    <button type="button" class="btn btn-success" onclick="Javascript:resetDataSource()">Reset data source</button>
@@ -221,41 +222,41 @@ $(window).load(function(){
 		                <div class="text-center">
 		                    <button type="button" class="btn btn-primary" onclick="Javascript:addVariable()">Add variable</button>
 		                    <button type="button" class="btn btn-success" onclick="Javascript:resetVariable()">Reset variable</button>
-		                    
-		                </div>       
+
+		                </div>
 		            </form>
 		            <form class="well col-offset-lg-8 col-lg-4">
-		            	<br><br><br><br><br><br>		            	
-		            	<button type="button" class="btn  btn-primary " onclick="Javascript:continue1()">Add one rule</button>		            	
+		            	<br><br><br><br><br><br>
+		            	<button type="button" class="btn  btn-primary " onclick="Javascript:continue1()">Add one rule</button>
 		            	<br><br>
 		            	<button type="button" class="btn btn-primary " onclick="Javascript:oneClickAdd()">One-click add</button>
 		            	<br><br><br><br><br><br>
 	            	</form>
-	            </div>	
-	            <br>            
+	            </div>
+	            <br>
             </div>
-           	
+
             <div class="well" >
                 <label>Rule Preview</label>
                 <textarea class="form-control" rows="10" id="preview" placeholder ="Placeholder for the json data"></textarea>
-            
+
                 <div class="input-group">
                     <input type="text" id="valid" class="form-control" placeholder="Valiadtion Result">
                     <span class="input-group-btn">
                     <button class="btn btn-primary" onclick="Javascript:validate()" type="button">Validate Json Format and Save</button>
                     </span>
                 </div><!-- /input-group -->
-			
+
             </div>
-            
+
 			<div class="well" >
                 <div class="text-left">
                 	<button type="button" class="btn  btn-primary" onclick="Javascript:addDataListContinue()">Continue adding rule list for current parameter1</button><br><br>
-                    or <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list for another parameter1</button> &nbsp;or                   
-                   	<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>	                
+                    or <button type="button" class="btn  btn-primary" onclick="Javascript:addDataList()">Add rule list for another parameter1</button> &nbsp;or
+                   	<button type="button" class="btn  btn-success" onclick="Javascript:deleteAllData()">Reset rule</button>
                 </div>
             </div>
-            
+
             <div class="well" id = "cacheForm">
                 <div class="form-group">
                     <label>Show Cache</label>
@@ -263,10 +264,10 @@ $(window).load(function(){
                 </div>
                 <label>Para Preview</label>
                 <textarea class="form-control" rows="10" id="previewPara" placeholder ="Placeholder for the Para data"></textarea>
-            </div>            
-            
+            </div>
+
         </div>
-        
+
         <div class="well">
         	<h4>Step 4 : Configure Output Parameters</h4>
         	<br>
@@ -279,17 +280,17 @@ $(window).load(function(){
                     <label>Output Button Key</label>
                     <input type="text" class="form-control" id="outputUrl" placeholder="Enter Output Button Url">
                 </div>
-                
+
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="Javascript:addButton()">Add Output Button</button>
                     <button type="reset" class="btn btn-success">Reset</button>
                 </div>
             </form>
         </div>
-        
-        
-        
-        
+
+
+
+
     }
 </div>
 
@@ -330,7 +331,7 @@ $(window).load(function(){
             <tbody id="tbody"></tbody>
         </table>
     </form>
-    
+
     <h3> Output Part Preview</h3>
     <form>
         <table class="table table-bordered table-striped">
@@ -367,18 +368,18 @@ $(window).load(function(){
         </div>
         <br>
         <div class="text-center" id="output">
-            
+
         </div>
     </form>
-    
+
     <div id="msg" class="alert alert-danger fade in">
 	    <strong></strong> Please fill out all blanks with *.
 	</div>
-    
+
     <div class="text-center">
          <button type="button" class="btn btn-primary btn-lg" id="addAClimateService">Add a Climate Service</button>
     </div>
-    
-    
+
+
 </div>
 }

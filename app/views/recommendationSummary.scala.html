@@ -53,6 +53,9 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 		function sendUserId() {
 			var userIdSent = $("#UserIdForRecommend").val();
 			var keyword = $("#keyword").val();
+			if (keyword == "") {
+				keyword = "climate";
+			}
 			window.location = "/climateService/recommendationSummary/" + userIdSent + "/userIdNumber/1" + "/keyword/" + keyword;
 		}
 	</script>
@@ -185,10 +188,12 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 
 		<div role="tabpanel" class="tab-pane " id="settings">
 			<br>
+			<h5>We will recommend datasets to you if you provide user id and interested focused areas.</h5>
 			<form class="form-inline" role="form">
 				<div class="form-group">
 					<label>User Id:</label> <select class="form-control"
 						id="UserIdForRecommend">
+						<option value="ochimborazo">--select user--</option>
 						<option value="ochimborazo">ochimborazo</option>
 						<option value="fcannon">fcannon</option>
 						<option value="kwillmot">kwillmot</option>
@@ -215,7 +220,7 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Keyword:</label>
+					<label>Keywords:</label>
 					<input type="text" class="form-control" id="keyword">
 				</div>
 				<button type="button" class="btn btn-info" onclick="sendUserId()">Recommend</button>
@@ -228,13 +233,11 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 				<div class="col-lg-offset-3 col-lg-6">
 					<div class="panel panel-info">
 
-						<div class="panel-heading">Recommended based on dataset
-							similarity and the user's past behavior</div>
+						<div class="panel-heading">Below please find <strong>ranked</strong> recommended dataset based on the semantic information of dataset,
+							 the user's past behavior and peer users' behaviors</div>
 						<div class="panel-body">
 							<p>The supporting algorithms are Latent Dirichlet Allocation
-								(LDA) and Collaborative Filtering (CF), which take into account
-								of semetic meaning of dataset as well as the user's past dataset
-								usage history.</p>
+								(LDA), Collaborative Filtering (CF) and social network analytics.</p>
 						</div>
 
 
@@ -368,10 +371,15 @@ List[String], itemBasedDataset : List[String], currentUser: String, userSimilarL
 
 	<div role="tabpanel" class="tab-pane" id="similarUsers">
 		<br>
+		<h5>We will find users sharing same research interests.</h5>
 		<form class="form-inline" role="form">
 			<div class="form-group">
 				<label>User Email:</label>
 				<input type="text" class="form-control" id="userEmail">
+			</div>
+			<div class="form-group">
+				<label>Keywords:</label>
+				<input type="text" class="form-control" id="keywordUser">
 			</div>
 			<button type="button" class="btn btn-info" onclick="sendUserEmail()">Search</button>
 		</form>

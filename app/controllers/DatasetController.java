@@ -32,16 +32,16 @@ import views.html.*;
 public class DatasetController extends Controller {
 	final static Form<Dataset> dataSetForm = Form
 			.form(Dataset.class);
-	
+
 	public static Result searchDataset(){
 		return ok(searchDataSet.render(dataSetForm));
 	}
-	
+
 	public static Result mostPopularDatasets() {
 		List<Dataset> datasets = queryFirstKDatasetsWithoutClimateService("", "", "", "", "", new Date(0), new Date(), Integer.MAX_VALUE);
 		return ok(dataSetListPopular.render(dataSetForm, datasets));
 	}
-	
+
 	public static Result showAllDatasets() {
 		List<Dataset> dataSetsList = new ArrayList<Dataset>();
 		JsonNode dataSetsNode = RESTfulCalls.getAPI(Constants.URL_HOST
@@ -65,7 +65,7 @@ public class DatasetController extends Controller {
 		return ok(allDatasets.render(dataSetsList,
 				dataSetForm));
 	}
-	
+
 	public static Result getSearchResult(){
 		Form<Dataset> dc = dataSetForm.bindFromRequest();
 		ObjectNode jsonData = Json.newObject();
@@ -77,7 +77,7 @@ public class DatasetController extends Controller {
 		String startTime = "";
 		String endTime = "";
 		Date dataSetStartTime = new Date(0), dataSetEndTime = new Date();
-		
+
 		try {
 			dataSetName = dc.field("Dataset Name").value();
 			//Logger.info("data "+dataSource);
@@ -87,7 +87,7 @@ public class DatasetController extends Controller {
 			gridDimension = dc.field("Grid Dimension").value();
 			startTime = dc.field("Dataset Start Time").value();
 			endTime = dc.field("Dataset End Time").value();
-			
+
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
 			if (!startTime.isEmpty()) {
 				try {
@@ -120,7 +120,7 @@ public class DatasetController extends Controller {
 					return badRequest("Wrong Date Format :" + endTime);
 				}
 			}
-			
+
 
 		} catch (IllegalStateException e) {
 //			e.printStackTrace();
@@ -136,9 +136,51 @@ public class DatasetController extends Controller {
 		List<Dataset> datasetsTopK = queryFirstKDatasets(dataSetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime, k);
 		return ok(dataSetList.render(response, dataSetForm, datasetsTopK));
 	}
-	
+
+public static Result getRelatedServiceOfDataset() {
+		String dataSetName = "";
+		String agency = "";
+		String instrument = "";
+		String physicalVariable = "";
+		String gridDimension = "";
+		Date dataSetStartTime = new Date(0), dataSetEndTime = new Date();
+
+		String datasetName = request().body().asJson().get("datasetName").toString();
+		datasetName = datasetName.substring(1, datasetName.length()-1);
+		System.out.println("seesee0" + datasetName);
+		int k = 1; // Set the first popular K datasets
+		List<Dataset> datasetsTopK = queryFirstKDatasets(datasetName, agency, instrument, physicalVariable, gridDimension, dataSetStartTime, dataSetEndTime, k);
+
+		String[] url = new String[2];
+		String[] imageUrl = new String[2];
+		String[] name = new String[2];
+
+		for (Dataset ds : datasetsTopK) {
+			int cnt = 0;
+			for (ClimateService cs : ds.getClimateServices()) {
+				url[cnt] = cs.getUrl();
+				imageUrl[cnt] = cs.getImageURL();
+				name[cnt] = cs.getName();
+				System.out.println("seesee" + cs.getUrl());
+				System.out.println("seesee" + cs.getImageURL());
+				System.out.println("seesee" + cs.getName());
+				cnt++;
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode respondJson = mapper.createObjectNode();
+		respondJson.put("url0", url[0]);
+		respondJson.put("url1", url[1]);
+		respondJson.put("imageUrl0", imageUrl[0]);
+		respondJson.put("imageUrl1", imageUrl[1]);
+		respondJson.put("name0", name[0]);
+		respondJson.put("name1", name[1]);
+
+		return ok(respondJson);
+}
+
 public static List<Dataset> queryDataSet(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime) {
-		
+
 		List<Dataset> dataset = new ArrayList<Dataset>();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode queryJson = mapper.createObjectNode();
@@ -170,7 +212,7 @@ public static List<Dataset> queryDataSet(String dataSetName, String agency, Stri
 	}
 
 public static List<Dataset> queryFirstKDatasets(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime, int k) {
-	
+
 	List<Dataset> dataset = new ArrayList<Dataset>();
 	ObjectMapper mapper = new ObjectMapper();
 	ObjectNode queryJson = mapper.createObjectNode();
@@ -211,9 +253,9 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 	}
 	return dataset;
 }
-	
+
 	public static List<Dataset> queryFirstKDatasetsWithoutClimateService(String dataSetName, String agency, String instrument, String physicalVariable, String gridDimension, Date dataSetStartTime, Date dataSetEndTime, int k) {
-		
+
 		List<Dataset> dataset = new ArrayList<Dataset>();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode queryJson = mapper.createObjectNode();
@@ -235,7 +277,7 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 				|| !dataSetNode.isArray()) {
 			return dataset;
 		}
-	
+
 		// parse the json string into object
 		for (int i = 0; i < dataSetNode.size(); i++) {
 			JsonNode json = dataSetNode.path(i);
@@ -268,39 +310,39 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 		String endTime = json.get("endTime").asText();
 		Date tmpStartTime = null;
 		Date tmpEndTime = null;
-		
+
 		try {
 			tmpStartTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(startTime);
-			
+
 			if (tmpStartTime != null) {
 				newDataSet.setStartTime(new SimpleDateFormat("YYYY-MM").format(tmpStartTime));
 			}
-	    } catch (ParseException e){	    
+	    } catch (ParseException e){
 	    	System.out.println(e);
 	    }
-		
+
 		try {
 			tmpEndTime = (new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")).parse(endTime);
-			
+
 			if (tmpEndTime != null) {
 				newDataSet.setEndTime(new SimpleDateFormat("YYYY-MM").format(tmpEndTime));
 			}
-	    } catch (ParseException e){	    
+	    } catch (ParseException e){
 	    	System.out.println(e);
 	    }
-		
-		DateTime dateTimeFrom = new DateTime(tmpStartTime);  
-        DateTime dateTimeTo = new DateTime(tmpEndTime); 
+
+		DateTime dateTimeFrom = new DateTime(tmpStartTime);
+        DateTime dateTimeTo = new DateTime(tmpEndTime);
         Period period = new Period(dateTimeFrom, dateTimeTo).minusYears(1);
-        PeriodFormatter formatter = new PeriodFormatterBuilder()  
+        PeriodFormatter formatter = new PeriodFormatterBuilder()
         .appendYears().appendSuffix(" year "," years ")
         .appendMonths().appendSuffix(" month "," months ")
-        .printZeroNever()  
+        .printZeroNever()
         .toFormatter();
 		String duration = String.valueOf(formatter.print(period));
 		newDataSet.setDuration(duration);
-		
+
 		return newDataSet;
 	}
-	
+
 }

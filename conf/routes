@@ -50,7 +50,7 @@ GET     /dataSet/allDatasets                        controllers.DatasetControlle
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
 GET     /dataSet/mostPopularDatasets				controllers.DatasetController.mostPopularDatasets()
-
+POST  /getRelatedServiceOfDataset      controllers.DatasetController.getRelatedServiceOfDataset()
 # Dataset Log
 GET		/datasetLog/allDatasetLogs					controllers.DatasetLogController.getAllDatasetLogs()
 
@@ -68,6 +68,7 @@ POST	/getDoubleClickedNodeKnowledgeGraph			controllers.AnalyticsController.getDo
 POST    /getKthShortestPath                         controllers.AnalyticsController.getKthShortestPath()
 POST	/getEdgeData								controllers.AnalyticsController.getEdgeData()
 POST	/getCustomizedNodeKnowledgeGraph			controllers.AnalyticsController.getCustomizedNodeKnowledgeGraph()
+
 
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
