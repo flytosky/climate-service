@@ -109,11 +109,11 @@
 	var responseJson = null;
     var jsonString = null;
     var edgeData = null;
-	$(document).ready(function() {  
-	    $("#panel").hide();
-	    $("#edgeDataPanel").hide();
 	$(document).ready(function() {
 	    $("#panel").hide();
+	    $("#edgeDataPanel").hide();
+
+
 	    $("#config").hide();
 			$("#related").hide();
 	    $("#basicConf").hide();
@@ -557,33 +557,23 @@
 		        	console.log("success");
 		        	edgeDatas = JSON.parse(data);
 		        	console.log(edgeDatas);
-		        	
+
 		        	$('#edgeDataPanel').html("");
 		        	var tr = null;
-		        	tr = "<table class=\"table table-striped\"><thead>" + 
+		        	tr = "<table class=\"table table-striped\"><thead>" +
         			"<tr><th>Service Name</th></tr></thead><tbody>";
-        			
+
 		        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
 		        		console.log(edgeDatas[i].climateService.name);
 		        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td></tr>";
 		        		//$('#edgeDataPanel').append("<tr><td>"+edgeDatas[i].climateService.name+"</td></tr>");
 		        	}
 		        	tr += "</tbody></table>";
-		        	
+
 		        	$('#edgeDataPanel').append(tr);
 		        	$("#edgeDataPanel").show();
 
-		        	edgeData = JSON.parse(data);
-		        	console.log(edgeData);
-		        	var edgeTable = document.getElementById("edgeTable");
-		        	edgeTable.innerHTML = "";
-		            /* for (var i = 0; i < edgeData.length; i++) {
-		            	var tr = "<tr>";
-		                tr += "<td>" + edgeData[i].id + "</td>";
-		                tr += "<td>" + edgeData[i].climateService.name + "</td>";
-		                tr += "</tr>";
-		                $('#edgeTable').append(tr);
-		            } */
+		        	
 
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
@@ -730,18 +720,11 @@
 	    			break;
 	    		default:
 	    			break;
-	    		}  
-    	      		  	      
-	    	  $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
-	  	      $("#nodeName").text(curNode.title);
-	  	      $("#id").text(id);
-		  	  $("#nodeId").text(curNode.id);
-	  	      $("#cluster").text(curNode.cluster);
-	  	      $("#label").text(curNode.label);
-	  	      console.log("*************show node");
-  	          $("#panel").show();
-
 	    		}
+
+
+
+
 
 
     	      // the main node gets its own color and its label back.
@@ -753,7 +736,7 @@
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
 
-    	    }    else if (highlightActive === true) {
+    	    }else if (highlightActive === true) {
     	      // reset all nodes
 
     	      for (var nodeId in allNodes) {
@@ -813,7 +796,7 @@
 	<div id="jsonData" style="display: none;">@jsonData</div>
 	<div id="knowledgeGraph">
 
-	   <div id="loadingBar" class="col-lg-3">
+   	<div id="loadingBar" class="col-lg-3">
 	    <div class="outerBorder" >
 	        <div id="text">0%</div>
 	        <div id="border">
@@ -835,79 +818,73 @@
   			<div class="col-lg-8">
   				<label>Graph Level</label>
 			    <div class="input-group col-lg-5">
-			    <input type="number" class="form-control" placeholder="1~2" id = "graphLevel">
-			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
-			      </span>
+				    <input type="number" class="form-control" placeholder="1~2" id = "graphLevel">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" onclick="setGraphLevel()">Go!</button>
+				      </span>
 			    </div>
 			    <div class="input-group col-lg-6">
-
-					<label>Actions</label>
-					<button type="button" onclick="getParameters()" class="btn btn-default  "><span class="glyphicon glyphicon-star" aria-hidden="true">
-
-			        </span> Clear All Node </button>
-	        	</div>
-	        	<br>
-	        	<div class="input-group">
-				  <span class="input-group-addon" id="basic-addon1">Start Point</span>
-				  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon1" id="startPoint">
+						<label>Actions</label>
+						<button type="button" onclick="getParameters()" class="btn btn-default  ">
+							<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Clear All Node
+						</button>
+        	</div>
+        	<br>
+        	<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1">Start Point</span>
+						  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon1" id="startPoint">
 			    </div>
 			    <br>
 			    <div class="input-group">
-				  <span class="input-group-addon" id="basic-addon2">End Point</span>
-				  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon2" id="endPoint">
-				</div>
-				<br>
-				<div class="input-group">
-				  <span class="input-group-addon" id="basic-addon3">Kth</span>
-				  <input type="number" class="form-control" placeholder="kth" aria-describedby="basic-addon3" id="kth">
-				</div>
-				<br>
-				<div class="text-center">
-                    <button type="button" class="btn btn-primary" onclick="findShortestPath()">Shortest Path</button>
-                </div>
-                <br>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" onclick="findKthShortestPath()">Kth Shortest Path</button>
-                </div>
-				<br>
+					  <span class="input-group-addon" id="basic-addon2">End Point</span>
+					  <input type="text" class="form-control" placeholder="Type in Node Id" aria-describedby="basic-addon2" id="endPoint">
+					</div>
+					<br>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Kth</span>
+					  <input type="number" class="form-control" placeholder="kth" aria-describedby="basic-addon3" id="kth">
+					</div>
+					<br>
+					<div class="text-center">
+            <button type="button" class="btn btn-primary" onclick="findShortestPath()">Shortest Path</button>
+          </div>
+          <br>
+          <div class="text-center">
+              <button type="button" class="btn btn-primary" onclick="findKthShortestPath()">Kth Shortest Path</button>
+          </div>
+					<br>
 			    <div class="col-lg-offset-0">
 				    <form>
 					    <label>Rational Graph</label>
-			                <div class="form-group">
-			                    <select onchange="schedule(this.value)" class="form-control" id="paramCombination">
-			                    	<option value="User Dataset Service">User × Dataset | Service</option>
-			                        <option value="User Service Dataset">User × Service | Dataset</option>
-			                        <option value="Dataset Service User">Dataset × Service | User</option>
-			                        <option value="User User Dataset">User × User | Dataset</option>
-			                        <option value="User User Service">User × User | Service</option>
-			                        <option value="Dataset Dataset User">Dataset × Dataset | User</option>
-			                        <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
-			                        <option value="Service Service User">Service × Service | User</option>
-			                        <option value="Service Service Dataset">Service × Service | Dataset</option>
-			                    </select>
-			                </div>
-			                <div id = "setWholeShownName" class="row col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
-				                <div>
-	             					<input type="radio" id="datasetNameW" name="customizedChoiceW" checked="checked" value="datasetNameW" /> Dataset Name
-	                                &nbsp;
-	             					<input type="radio" id="variableNameW" name="customizedChoiceW" value="variableNameW" /> Variable Name
-
-	             				</div>
-	             				<br>
-             				</div>
-			                <div class="text-center">
-			                    <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
-			                </div>
-	            	</form>
-	            	<br>
-	            	<br>
+              <div class="form-group">
+                  <select onchange="schedule(this.value)" class="form-control" id="paramCombination">
+                  	<option value="User Dataset Service">User × Dataset | Service</option>
+                      <option value="User Service Dataset">User × Service | Dataset</option>
+                      <option value="Dataset Service User">Dataset × Service | User</option>
+                      <option value="User User Dataset">User × User | Dataset</option>
+                      <option value="User User Service">User × User | Service</option>
+                      <option value="Dataset Dataset User">Dataset × Dataset | User</option>
+                      <option value="Dataset Dataset Service">Dataset × Dataset | Service</option>
+                      <option value="Service Service User">Service × Service | User</option>
+                      <option value="Service Service Dataset">Service × Service | Dataset</option>
+                  </select>
+              </div>
+              <div id = "setWholeShownName" class="row col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+                <div>
+         					<input type="radio" id="datasetNameW" name="customizedChoiceW" checked="checked" value="datasetNameW" > Dataset Name &nbsp;
+         					<input type="radio" id="variableNameW" name="customizedChoiceW" value="variableNameW" > Variable Name
+       					</div>
+       					<br>
+     					</div>
+              <div class="text-center">
+                  <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
+              </div>
+  					</form>
+          	<br>
+          	<br>
+					</div>
 				</div>
-
-			</div>
-
-
-	  </div>
+	  	</div>
 
 	  <div id="config" class="row col-lg-offset-7"></div>
 	</div>
@@ -916,114 +893,114 @@
 
 	<div class = "row">
 		<br>
-
-		<div id="panel" class="col-lg-offset-7">  
-		  <div class="well col-lg-5">
-		<div id="panel" class="col-lg-offset-7">
-		  <div id="panelsub" class="well col-lg-5">
-		    <div class="text-center">
-		      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
-		    </div>
-		    <div class="card-block text-center">
-		      <h4 class="card-title" id="nodeName">card</h4>
-		      <p class="card-text text-muted" ><code id="description"></code></p>
-		    </div>
-		    <ul class="list-group list-group-flush">
-		      <li class="list-group-item"><strong id="groupId"></strong><code id="id"></code></li>
-		      <li class="list-group-item"><strong>Node Id:</strong><code id="nodeId"></code></li>
-		      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
-		      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
-		    </ul>
-		    <div class="card-block">
-		      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a>
-		      <a href="#" class="card-link col-lg-6">Another link</a>
-		    </div>    
-		  </div>  
-		 </div>
-		 
 		<div id="edgeDataPanel" class="col-lg-offset-7"></div>
-		    </div>
+		<div id="panel" class="col-lg-offset-7">
 
-				<div id="related">
-					<div>
-						<h4 class="card-title text-center"><strong>People also research:</strong></h4>
+			  <div id="panelsub" class="well col-lg-5">
+			    <div class="text-center">
+			      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
+			    </div>
+			    <div class="card-block text-center">
+			      <h4 class="card-title" id="nodeName">card</h4>
+			      <p class="card-text text-muted" ><code id="description"></code></p>
+			    </div>
+			    <ul class="list-group list-group-flush">
+			      <li class="list-group-item"><strong id="groupId"></strong><code id="id"></code></li>
+			      <li class="list-group-item"><strong>Node Id:</strong><code id="nodeId"></code></li>
+			      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
+			      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
+			    </ul>
+			    <div class="card-block">
+			      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a>
+			      <a href="#" class="card-link col-lg-6">Another link</a>
+			    </div>
+
+					<div id="related">
+						<div>
+							<h4 class="card-title text-center"><strong>People also research:</strong></h4>
+						</div>
+
+						<div class="row" >
+
+							<div class="col-md-6" id="related1">
+								<div class="thumbnail">
+								<a id="relatedServiceHref1" href="climateService.getUrl()">
+									<img id="relatedServiceImg1" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
+									</a>
+									<div class="caption">
+										<h5 id="relatedServiceName1">null</h5>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-6" id="related2">
+								<div class="thumbnail">
+								<a id="relatedServiceHref2" href="climateService.getUrl()">
+									<img id="relatedServiceImg2" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
+									</a>
+									<div class="caption">
+										<h5 id="relatedServiceName2">null</h5>
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
 
-					<div class="row" >
+			  </div>
 
-						<div class="col-md-6" id="related1">
-							<div class="thumbnail">
-							<a id="relatedServiceHref1" href="climateService.getUrl()">
-								<img id="relatedServiceImg1" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
-								</a>
-								<div class="caption">
-									<h5 id="relatedServiceName1">null</h5>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-6" id="related2">
-							<div class="thumbnail">
-							<a id="relatedServiceHref2" href="climateService.getUrl()">
-								<img id="relatedServiceImg2" src='@routes.Assets.at("images/bug.png")' style="height: 150px; width: 150px">
-								</a>
-								<div class="caption">
-									<h5 id="relatedServiceName2">null</h5>
-								</div>
-							</div>
-						</div>
-
-				</div>
-		  </div>
-		</div>
+	 	</div>
 	</div>
 	<br>
-	</div>
+
 
 	<div id="userConfig" class="col-lg-8">
-	<form>
-   		<label>Customized ID</label>
+		<form>
+   			<label>Customized ID</label>
    			<div class="row">
-   			<div class="col-sm-4 col-md-2">
-	             <div class="form-group">
-	                 <select class="form-control" id="paramCombination1">
-	                     <option value="user">User</option>
-	                     <option value="service">Service</option>
-	                     <option value="dataset">Dataset</option>
-	                 </select>
-	             </div>
+ 					<div class="col-sm-4 col-md-2">
+             <div class="form-group">
+                 <select class="form-control" id="paramCombination1">
+                     <option value="user">User</option>
+                     <option value="service">Service</option>
+                     <option value="dataset">Dataset</option>
+                 </select>
              </div>
-             <div class="col-sm-4 col-md-4">
-             	<input type="text" class="form-control col-lg-4" id="userConfId" placeholder="User/Dataset/Service Id">
-             </div>
-             </div>
-             <div class="row">
-             <div class="col-sm-4 col-md-4">
-                <label>Start Time</label>
-             	<input type="text" class="form-control col-lg-4" id="startTime" placeholder="MM/DD/YYYY hh:mm">
-             </div>
-             <div class="col-sm-4 col-md-4">
-                <label>End Time</label>
-             	<input type="text" class="form-control col-lg-4" id="endTime" placeholder="MM/DD/YYYY hh:mm">
-             </div>
-             </div>
-             <br>
-             <div class="row">
-                <div id = "setShownName" class="col-sm-4 col-md-4">
-             		<input type="radio" id="datasetNameC" name="customizedChoice" checked="checked" value="datasetName" /> Dataset Name
-             		&nbsp;
-             		<input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
-             	</div>
-	             <div class="col-sm-4 col-md-4">
-	                 <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectCustomizedNode()">Show</button>
-	             </div>
-             </div>
-       	</form>
-	</div>
+          </div>
 
-	<div id="edgeData">
-		<table id="edgeTable">
-		</table>
-	</div>
+          <div class="col-sm-4 col-md-4">
+         		 <input type="text" class="form-control col-lg-4" id="userConfId" placeholder="User/Dataset/Service Id">
+          </div>
+
+        </div>
+
+       <div class="row">
+         <div class="col-sm-4 col-md-4">
+            <label>Start Time</label>
+         		<input type="text" class="form-control col-lg-4" id="startTime" placeholder="MM/DD/YYYY hh:mm">
+         </div>
+
+         <div class="col-sm-4 col-md-4">
+            <label>End Time</label>
+         		<input type="text" class="form-control col-lg-4" id="endTime" placeholder="MM/DD/YYYY hh:mm">
+         </div>
+
+       </div>
+       <br>
+       <div class="row">
+          <div id = "setShownName" class="col-sm-4 col-md-4">
+         		<input type="radio" id="datasetNameC" name="customizedChoice" checked="checked" value="datasetName" /> Dataset Name
+         		&nbsp;
+         		<input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
+         	</div>
+           <div class="col-sm-4 col-md-4">
+               <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectCustomizedNode()">Show</button>
+           </div>
+       </div>
+
+       	</form>
+		</div>
+
+
 
 }
