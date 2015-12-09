@@ -49,7 +49,6 @@ public class ServiceExecutionLogController extends Controller {
 
 			// Call API
 			JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.SERVICE_EXECUTION_LOG + Constants.SERVICE_EXECUTION_LOG_GET + "/" + logId);
-			System.out.println("Print service response: " + response);
 			int configurationId = response.get("serviceConfiguration").get("id").asInt();
 			
 			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
