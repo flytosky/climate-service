@@ -358,17 +358,15 @@
 
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      allEdges = edgesDataset.get({returnType:"Object"});
-	      //console.log(allEdges);
 	      network.on('selectNode', neighbourhoodHighlight);
 	      network.on('doubleClick', selectDoubleClickedNode);
 	      network.on('selectEdge', selectTheEdge);
-
+			
 	    }
 
 	    function findShortestPath() {
 	    	var startId = $("#startPoint").val();
 	    	var endId = $("#endPoint").val();
-	    	//console.log(startId + endId);
 
 	    	var ids = {
 	    			startId : startId,
@@ -397,7 +395,6 @@
 	    	var startId = $("#startPoint").val();
 	    	var endId = $("#endPoint").val();
 	    	var kth = $("#kth").val();
-	    	//console.log(startId + endId);
 	    	var k = parseInt(kth) - 1;
 	    	var ids = {
 	    			startId : startId,
@@ -428,7 +425,6 @@
 	    function selectDoubleClickedNode(params) {
 	    	$("#edgeDataPanel").hide();
 	    	 if (params.nodes.length > 0) {
-	    		console.log("TTT");
 
 	    		var node1 = params.nodes[0];
 	    		var group = allNodes[node1].group;
@@ -529,7 +525,6 @@
 	    }
 
 		function selectTheEdge(params) {
-			console.log("EDGE!!!");
 			$("#panel").hide();
 			//$("#edgeDataPanel").show();
 			if (params.edges.length > 0) {
@@ -557,25 +552,46 @@
 		        }).done(function(data) {
 		        	console.log("success");
 		        	edgeDatas = JSON.parse(data);
-		        	console.log(edgeDatas);
-
 		        	$('#edgeDataPanel').html("");
 		        	var tr = null;
-		        	tr = "<table class=\"table table-striped\"><thead>" +
-        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
-					console.log(edgeDatas);
-		        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-		        		console.log(edgeDatas[i].climateService.name);
-		        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
-		        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
-		        		
-		        		tr += "<td>";
-		        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
-		        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-		        		tr += "value=\"" + edgeDatas[i].id + "\">";
-		        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+		        	if(p3 == "Service") {
+			        	tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
+			        		
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "Dataset") {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+			        		
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "User") {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
 		        	}
-		        	tr += "</tbody></table>";
 
 		        	$('#edgeDataPanel').append(tr);
 		        	$("#edgeDataPanel").show();
@@ -592,14 +608,12 @@
 	    }
 
 	    function neighbourhoodHighlight(params) {
-	    	console.log("NODE!!!");
 	    	$("#edgeDataPanel").hide();
     	     // if something is selected:
     	    if (params.nodes.length > 0) {
     	      highlightActive = true;
     	      var i,j;
     	      var selectedNode = params.nodes[0];
-    	      //console.log(selectedNode);
 
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
@@ -687,10 +701,7 @@
 								data: JSON.stringify(obj),
 								dataType: "text"
 						}).done(function(data) {
-								console.log("seesee");
-								console.log(data);
 								data = JSON.parse(data);
-								console.log(data.name1);
 								$("#relatedServiceHref1").attr("href", data.url0);
 								$("#relatedServiceImg1").attr("src", data.imageUrl0);
 								$("#relatedServiceName1").html(data.name0);
@@ -758,11 +769,8 @@
 
     	      for (var edgeId in allEdges) {
     	    	  allEdges[edgeId].color = undefined;
-
-      	        	//console.log(allEdges[edgeId].color);
-      	        	console.log(allEdges[edgeId].color);
-      	        	allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
-      	        	allEdges[edgeId].hiddenLabel = undefined;
+      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+      	          allEdges[edgeId].hiddenLabel = undefined;
 
       	      }
     	      highlightActive = false;
