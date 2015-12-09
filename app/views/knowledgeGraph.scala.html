@@ -359,6 +359,7 @@
 	      allNodes = nodesDataset.get({returnType:"Object"});
 	      allEdges = edgesDataset.get({returnType:"Object"});
 	      network.on('selectNode', neighbourhoodHighlight);
+	      network.on('select', recover);
 	      network.on('doubleClick', selectDoubleClickedNode);
 	      network.on('selectEdge', selectTheEdge);
 			
@@ -606,6 +607,47 @@
 		        })
 			}
 	    }
+		
+		function recover(params) {
+			if(params.nodes.length == 0 && params.edges.length == 0) {
+				for (var nodeId in allNodes) {
+	    	        allNodes[nodeId].color = undefined;
+
+	    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
+	    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+	    	          allNodes[nodeId].hiddenLabel = undefined;
+	    	        }
+	    	      }
+
+	    	      for (var edgeId in allEdges) {
+	    	    	  allEdges[edgeId].color = undefined;
+	      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+	      	          allEdges[edgeId].hiddenLabel = undefined;
+
+	      	      }
+	    	      highlightActive = false;
+			}
+			
+			var updateArray = [];
+    	    for (nodeId in allNodes) {
+    	      if (allNodes.hasOwnProperty(nodeId)) {
+    	        updateArray.push(allNodes[nodeId]);
+    	      }
+    	    }
+
+    	    nodesDataset.update(updateArray);
+
+
+    	    updateArray = [];
+    	    for (edgeId in allEdges) {
+    	      if (allEdges.hasOwnProperty(edgeId)) {
+    	        updateArray.push(allEdges[edgeId]);
+    	      }
+    	    }
+
+    	    edgesDataset.update(updateArray);
+			
+		}
 
 	    function neighbourhoodHighlight(params) {
 	    	$("#edgeDataPanel").hide();
@@ -755,28 +797,8 @@
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
 
-    	    }else if (highlightActive === true) {
-    	      // reset all nodes
-
-    	      for (var nodeId in allNodes) {
-    	        allNodes[nodeId].color = undefined;
-
-    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
-    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
-    	          allNodes[nodeId].hiddenLabel = undefined;
-    	        }
-    	      }
-
-    	      for (var edgeId in allEdges) {
-    	    	  allEdges[edgeId].color = undefined;
-      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
-      	          allEdges[edgeId].hiddenLabel = undefined;
-
-      	      }
-    	      highlightActive = false;
     	    }
-
-
+    	     
     	    // transform the object into an array
     	    var updateArray = [];
     	    for (nodeId in allNodes) {
