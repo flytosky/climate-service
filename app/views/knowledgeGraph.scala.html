@@ -148,7 +148,17 @@
 	    	if(p1 == "Dataset" || p2 == "Dataset") {
 	    		choice = $('input[name="customizedChoiceW"]:checked').val();
 	    	}
-
+	    	
+	    	if(choice == "variableNameW") {
+	    		if(p1 == "Dataset")
+	    			document.getElementById("header").innerHTML =  "Variable × " + p2 + " | " + p3;
+	    		if(p2 == "Dataset")
+	    			document.getElementById("header").innerHTML =  p1 + " × Variable" + " | " + p3;
+	    	}
+	    	else {
+	    		document.getElementById("header").innerHTML = p1 + " × " + p2 + " | " + p3;
+	    	}
+	    	
 	    	var parameters = {
 	    			param1:p1,
 	    			param2:p2,
@@ -873,6 +883,7 @@
 
 @main("Knowledge Graph", scripts){
 	<div id="jsonData" style="display: none;">@jsonData</div>
+	<h2 id="header">User × Dataset | Service</h2>
 	<div id="knowledgeGraph">
 
    	<div id="loadingBar" class="col-lg-3">
