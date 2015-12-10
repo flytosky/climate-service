@@ -301,10 +301,13 @@
    			  },
 	         groups: {
 	          dataset: {
-	            color:"rgba(0,0,255,0.3)"
+	            color:"rgba(0,0,255,0.7)"
 	          },
 	          user: {
-	        	color:"rgba(255,0,0,0.3)"
+	        	color:"rgba(255,0,0,0.7)"
+	          },
+	          service: {
+	        	color:"rgba(0,255,0,0.7)"
 	          }
 	        },
 
@@ -707,6 +710,8 @@
     	      highlightActive = true;
     	      var i,j;
     	      var selectedNode = params.nodes[0];
+    	      var selectedNodeGroup = allNodes[selectedNode].group;
+    	      var firstLevelNodeGroup = null;
 
     	      // mark all nodes as hard to read.
     	      for (var nodeId in allNodes) {
@@ -729,6 +734,9 @@
     	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
 
     	      var connectedNodes = network.getConnectedNodes(selectedNode);
+    	      if(connectedNodes.length != 0) {
+    	    	  firstLevelNodeGroup = allNodes[connectedNodes[0]].group;
+    	      }
     	      var allConnectedNodes = [];
 
     	      // get the second degree nodes
@@ -740,16 +748,28 @@
 
     	      // all second degree nodes get a different color and their label back
     	      for (i = 0; i < allConnectedNodes.length; i++) {
-    	        allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.9)';
+    	    	  if(selectedNodeGroup == "user") {
+    	    	  	  allNodes[allConnectedNodes[i]].color = 'rgba(255,0,0,0.2)';
+    	    	  }else if(selectedNodeGroup == "dataset"){
+    	    		  allNodes[allConnectedNodes[i]].color = 'rgba(0,0,255,0.2)';
+    	    	  }else {
+    	    		  allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.2)';
+    	    	  }
     	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
     	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
     	        }
     	      }
-
+  
     	      // all first degree nodes get their own color and their label back
     	      for (i = 0; i < connectedNodes.length; i++) {
-    	        allNodes[connectedNodes[i]].color = 'rgba(255,255,0,0.9)';
+    	    	  if(firstLevelNodeGroup == "user") {
+    	    	  	  allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.7)';
+    	    	  }else if(firstLevelNodeGroup == "dataset") {
+    	    		  allNodes[connectedNodes[i]].color = 'rgba(0,0,255,0.7)';
+    	    	  }else {
+    	    		  allNodes[connectedNodes[i]].color = 'rgba(0,255,0,0.7)';
+    	    	  }
     	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
     	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
     	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
@@ -840,9 +860,13 @@
 
 
     	      // the main node gets its own color and its label back.
-
-
-    	      allNodes[selectedNode].color = 'rgba(255,0,255,0.9)'
+			  if(selectedNodeGroup == "user") {
+    	    	  	  allNodes[selectedNode].color = 'rgba(255,0,0,0.7)';
+    	    	  }else if(selectedNodeGroup == "dataset"){
+    	    		  allNodes[selectedNode].color = 'rgba(0,0,255,0.7)';
+    	    	  }else {
+    	    		  allNodes[selectedNode].color = 'rgba(0,255,0,0.7)';
+    	    	  }
     	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
