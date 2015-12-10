@@ -60,14 +60,18 @@
 	
 	   
     <h1 style="margin-left:540px">Search</h1>
+    @helper.form(routes.WorkflowController.getServiceLogsByUser()) {
 
     	<div class="ui-widget col-sm-offset-3 col-sm-7">
        	<div class = "form-group">
-       		@inputText(serviceLogForm("User Id"), 'class -> "form-control", 'id -> "userId", '_label -> Messages("User Id"), 'placeholder -> "CCS student 1", 'size->70)
+       		@inputText(serviceLogForm("User Name"), 'class -> "form-control", 'id -> "userName", '_label -> Messages("User Name"), 'placeholder -> "admin", 'size->70)
 	    </div>
 	    <div class = "form-group">
-	    	@inputText(serviceLogForm("Start Time"), 'class -> "form-control", 'id -> "startTime", '_label -> Messages("Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
-	    	@inputText(serviceLogForm("End Time"), 'class -> "form-control", 'id -> "endTime", '_label -> Messages("End Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+       		@inputText(serviceLogForm("Service Name"), 'class -> "form-control", 'id -> "serviceName", '_label -> Messages("Service Name"), 'placeholder -> "twoDimSlice3D", 'size->70)
+	    </div>
+	    <div class = "form-group">
+	    	@inputText(serviceLogForm("Execution Start Time"), 'class -> "form-control", 'id -> "startTime", '_label -> Messages("Execution Start Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
+	    	@inputText(serviceLogForm("Execution End Time"), 'class -> "form-control", 'id -> "endTime", '_label -> Messages("Execution End Time"), 'placeholder -> "mm/dd/yyyy hh:mm", 'size->70)
 	    	<div id="show" style="display: none;">
 	    		<textarea style="width: 640px" rows="4" id="content"></textarea>
 	    	</div>
@@ -77,4 +81,5 @@
 	    <input class="btn" type="submit" value="Search" >
 	    </div>
 	    </div>
+	}
 }

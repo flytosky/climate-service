@@ -69,7 +69,6 @@ POST    /getKthShortestPath                         controllers.AnalyticsControl
 POST	/getEdgeData								controllers.AnalyticsController.getEdgeData()
 POST	/getCustomizedNodeKnowledgeGraph			controllers.AnalyticsController.getCustomizedNodeKnowledgeGraph()
 
-
 # Users
 GET		/scientist/allUsers							controllers.UsersController.getAllUsers()
 GET		/scientist/searchUser 					 	controllers.UsersController.searchUser()
@@ -94,3 +93,6 @@ POST        /solve/report                                        controllers.Bug
 
 # AddParameters
 POST	/climateService/addAllParameters							controllers.ClimateServiceController.addAllParameters()
+
+# Workflow
+GET		/workflow/getServiceLogsByUser						controllers.WorkflowController.getServiceLogsByUser()

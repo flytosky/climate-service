@@ -526,6 +526,46 @@
 	    }
 
 		function selectTheEdge(params) {
+			console.log("Edge!!!");
+			// reset all nodes and edges
+			for (var nodeId in allNodes) {
+    	        allNodes[nodeId].color = undefined;
+
+    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
+    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+    	          allNodes[nodeId].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = undefined;
+      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+      	          allEdges[edgeId].hiddenLabel = undefined;
+
+      	      }
+    	      highlightActive = false;
+    	      var updateArray = [];
+      	    for (nodeId in allNodes) {
+      	      if (allNodes.hasOwnProperty(nodeId)) {
+      	        updateArray.push(allNodes[nodeId]);
+      	      }
+      	    }
+
+      	    nodesDataset.update(updateArray);
+
+
+      	    updateArray = [];
+      	    for (edgeId in allEdges) {
+      	      if (allEdges.hasOwnProperty(edgeId)) {
+      	        updateArray.push(allEdges[edgeId]);
+      	      }
+      	    }
+
+      	    edgesDataset.update(updateArray);
+    	      
+    	      
+    	    // select edges
+			
 			$("#panel").hide();
 			//$("#edgeDataPanel").show();
 			if (params.edges.length > 0) {
@@ -650,6 +690,7 @@
 		}
 
 	    function neighbourhoodHighlight(params) {
+	    	console.log("Node!!!");
 	    	$("#edgeDataPanel").hide();
     	     // if something is selected:
     	    if (params.nodes.length > 0) {

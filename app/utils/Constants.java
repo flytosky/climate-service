@@ -101,4 +101,7 @@ public class Constants {
 	public static final String GET_TOP_K_ITEM_BASED_DATASET2 = "&top_num=";
 	public static final String GET_TOP_K_FEATURE_BASED_DATASET1 = "/getTopKLDABasedRecommendedDatasetByUsername?username=";
 	public static final String GET_TOP_K_FEATURE_BASED_DATASET2 = "&top_num=";
+	
+	//workflow
+	public static final String SEARCH_EXECUTION_LOGS_BY_USER = "/serviceExecutionLog/queryExecutionLogsByUser";
 }
