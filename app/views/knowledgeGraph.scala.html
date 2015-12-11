@@ -150,13 +150,14 @@
 	    	}
 	    	
 	    	if(choice == "variableNameW") {
+	    		
 	    		if(p1 == "Dataset")
-	    			document.getElementById("header").innerHTML =  "Variable × " + p2 + " | " + p3;
+	    			document.getElementById("header").innerHTML =  "Variable × " + p2.toLowerCase() + " | " + p3.toLowerCase() + " <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
 	    		if(p2 == "Dataset")
-	    			document.getElementById("header").innerHTML =  p1 + " × Variable" + " | " + p3;
+	    			document.getElementById("header").innerHTML =  p1.toLowerCase() + " × Variable" + " | " + p3.toLowerCase() + " <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
 	    	}
 	    	else {
-	    		document.getElementById("header").innerHTML = p1 + " × " + p2 + " | " + p3;
+	    		document.getElementById("header").innerHTML = "Network of " + p1.toLowerCase() + " and " + p2.toLowerCase() + " based on " + p3.toLowerCase() + " usage <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
 	    	}
 	    	
 	    	var parameters = {
@@ -907,7 +908,7 @@
 
 @main("Knowledge Graph", scripts){
 	<div id="jsonData" style="display: none;">@jsonData</div>
-	<h2 id="header">User × Dataset | Service</h2>
+	<h4 id="header">Network of user and dataset based on service usage <img src="/assets/images/Legend.jpg" height="20" width="190"/><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title="... ..."></span></h4>
 	<div id="knowledgeGraph">
 
    	<div id="loadingBar" class="col-lg-3">
