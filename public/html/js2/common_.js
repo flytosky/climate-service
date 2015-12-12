@@ -2,10 +2,8 @@
 //
 // enable_download data button
 // disable_pres1__
-// enable_pres1__(ID)
 // put_data__
 // data_block_str__
-// change_datan_
 // put_var__
 // is3D__
 // select_var__
@@ -19,13 +17,7 @@
 // select_all_months__
 // select_months__
 // getMonthStr__
-// select_months_from_str__
-// num2scale__
-// scale2num__
 // parse_pres__
-// get_querystring__
-// showUrl__
-// processQueryStr__
 
 var naValue = "-999999";
 
@@ -53,36 +45,23 @@ function disable_pres1(ID)
     x=document.getElementById("pres"+ID);
     x.value = "N/A";
     x.disabled=true;
-    var y=document.getElementById("pressureLabel"+ID);
-    y.innerHTML = "pressure:";
   }
   catch(err) {}
 }
 
 // enable pressure level box for 3D var
-// enable_pres1__(ID)
 function enable_pres1(ID)
 {
   var var_string = $("#var"+ID).val();
   var oceanStr = "";
 
-  try { 
-    var rangeStr0 = eval("rangeStr"+ID); 
-  } catch(err) { 
-    var rangeStr0 = "";
-  }
-
-  try {
-    var y=document.getElementById("pressureLabel"+ID);
-  //alert(y.value);
-    y.innerHTML = "atmospheric pressure " + rangeStr0 + "(hPa):";
-  } catch(err) {}
+  var y=document.getElementById("pressureStr"+ID);
+  alert(y.value);
+  y.innerHTML = "pressure (hPa):";
 
   if (varList[var_string][1]==="ocean") {
     oceanStr = "o";
-    try {
-    y.innerHTML = "ocean pressure " + rangeStr0 + "(dbar):";
-    } catch(err) {}
+    y.innerHTML = "pressure (dbar):";
   } 
 
   // there can be no pressure widget, so there is a error catch here.
@@ -143,24 +122,6 @@ function put_data(ID){
   }
 }
 
-// change_datan_
-function change_datan(numTB, titleStr){
-  var nVar=Number( document.getElementById("nVar").value );
-  //alert(nVar);
-
-  for (var i=0; i<nVar; i++) {
-    var str1 = data_block_str(String(i+2), numTB, titleStr+" "+String(i+1), "", 500);
-    //alert(str1);
-    document.getElementById("datan"+(i+1)).innerHTML = str1;
-    put_data(i+2);
-    put_var(i+2);
-    select_var(i+2);
-  }
-  for (var i=nVar; i<10; i++) {
-    document.getElementById("datan"+(i+1)).innerHTML = "";
-  }
-}
-
 // data_block_str__
 function data_block_str(ID, numTB, dataTitle, isRange, pressDf){
 var temp1= '';
@@ -191,9 +152,8 @@ temp1 += '  </div> <!-- col-sm-6 level2-->\n';
 temp1 += '</div> <!-- row -->\n';
 
 temp1 += '<div class="row">\n';
-temp1 += '  <div class="col-sm-4 right1" id="pressureLabel' + ID + '">\n';
-//temp1 += '    pressure ' + isRange + '(atmosphere hPa) <br> or (ocean dbar):\n';
-temp1 += '    pressure ' + isRange +':\n';
+temp1 += '  <div class="col-sm-4 right1" id="pressureStr"+ID>\n';
+temp1 += '    pressure ' + isRange + '(atmosphere hPa) <br> or (ocean dbar):\n';
 temp1 += '  </div> <!-- col-sm-6 level2-->\n';
 temp1 += '  <div class="col-sm-8 left1">\n';
 temp1 += '    <input id="pres' + ID + '" value="' + pressDf + '" alt="pressure"/>\n';
@@ -255,6 +215,7 @@ function select_var(ID)
 {
   // if there isOnly2d is defined, there is no pressure widget.
   try {
+alert(is3D(ID));
     //var var_string = $("#var"+ID).val();
     //alert(is3D(ID));
     if (is3D(ID)) {
@@ -297,9 +258,6 @@ function time_range2() {
   var var_string2 = $("#var"+2).val();
   var data_string1 = $("#data"+1).val();
   var data_string2 = $("#data"+2).val();
-  //alert(data_string1);
-  //alert(data_string2);
-  
 
   var sTime = Math.max( Number(dataList[data_string1][2][var_string1][0]),
                         Number(dataList[data_string2][2][var_string2][0]) ).toString();
@@ -353,24 +311,7 @@ var monthList = [
 "Dec",
 ];
 
-var monthList2 = {
-"Jan":"1",
-"Feb":"2",
-"Mar":"3",
-"Apr":"4",
-"May":"5",
-"Jun":"6",
-"Jul":"7",
-"Aug":"8",
-"Sep":"9",
-"Oct":"10",
-"Nov":"11",
-"Dec":"12",
-};
-
-
 // fillMonth__
-// better to write it out.
 function fillMonth() { 
   var temp1 = 'select months:\
 <select name="months" id="months" onchange="select_months()">\
@@ -473,79 +414,6 @@ function select_months()
 
 }
 
-// select_months_from_str__
-function select_months_from_str(str1)
-{
-  reset_months();
-  // even for an empty str1, temp2.length=1
-  var temp2 = str1.split(",");
-  var ii;
-  for (var i=0; i<temp2.length; i++) {
-    try {
-      ii = Number(temp2[i]);
-      document.getElementById(monthList[ii-1]).checked = true;
-    } catch(err) {}
-  }
-}
-
-// num2scale__
-function num2scale(ii)
-{
-  if (displayOpt=="1") {
-    if (ii==0) { 
-      document.getElementById("radioLin").checked = true;
-    } else if ( ii==2 ) {
-      document.getElementById("radioLog").checked = true;
-    }
-
-  } else if (displayOpt=="2") {
-    if (ii==0) { 
-      document.getElementById("radioLin").checked = true;
-      document.getElementById("radioLin2").checked = true;
-    } else if ( ii==1 ) {
-      document.getElementById("radioLin").checked = true;
-      document.getElementById("radioLog2").checked = true;
-    } else if ( ii==2 ) {
-      document.getElementById("radioLog").checked = true;
-      document.getElementById("radioLin2").checked = true;
-    } else if ( ii==3 ) {
-      document.getElementById("radioLog").checked = true;
-      document.getElementById("radioLog2").checked = true;
-    }
-  }
-}
-
-// scale2num__
-function scale2num() {
-  var out1, t1, t2; 
-
-  if (displayOpt=="1") {
-    if ( document.getElementById("radioLin").checked ) {
-      t1 = 0;
-    } else { 
-      t1 = 2;
-    }
-    return t1;
-
-  } else if (displayOpt=="2") {
-    if ( document.getElementById("radioLin").checked ) {
-      t1 = 0;
-    } else { 
-      t1 = 2;
-    }
-
-    if ( document.getElementById("radioLin2").checked ) {
-      t2 = 0;
-    } else { 
-      t2 = 1;
-    }
-
-    return  t1 + t2;
-  }
-}
-
-
-
 // getMonthStr__
 function getMonthStr() {
         // get months checked by client
@@ -587,116 +455,3 @@ function parse_pres(pres10) {
   return pres1;
 }
 
-// get_querystring__
-function get_querystring() {
-  var queries = {};
-  //var temp1 = document.location.search.substr(1).split('&');
-  //alert(temp1.length);
-  $.each(document.location.search.substr(1).split('&'),function(c,q){
-    var i = q.split('=');
-    //alert(i.length);
-    try { 
-    //if (i.lengh==2) { 
-      queries[i[0].toString()] = i[1].toString();
-    //}
-    } catch(err) {}
-  });
-  return queries;
-}
-
-
-// showUrl__
-function showUrl(inputs) {
-  var vq, v2, key0, key1;
-  try {
-    var temp1 = "";
-    //for (var i=0; i<inputs.length; i++) {
-    for (key0 in inputs) {
-      if (!inputs.hasOwnProperty(key0)) { continue; }
-      if ( key0 == "Image" || key0 == "data_url" ) { continue; }
-      key1 = inputs[key0];
-
-      try {
-        vq = $("#"+key1).val();
-
-        if ( key0.slice(0,5) == "model" ) {
-          vq = vq.replace("/", "_");
-
-        } else if ( key0 == "startT" || key0 == "endT" ) {
-          vq = vq.replace("-", "");
-
-        } else if ( key0 == "purpose" ) {
-          vq = escape(vq);
-
-        } else if ( key0 == "months" ) {
-          vq = getMonthStr();
-
-        } else if ( key0 == "scale" ) {
-          vq = scale2num();
-
-        }
-/*
-        if ( key0.slice(0,4) == "pres" ) {
-          if ( Number(v1q) == NaN ) {
-            vq = "-999999";
-          }
-        }
-*/
-        temp1 += key0 + "=" + vq + "&";
-      } catch(err) {}
-    }
-    temp1 = temp1.slice(0,-1);
-  } catch(err) { 
-    var temp1 = document.location.search.substr(1);
-  }
-
-  document.getElementById("actionUrl").innerHTML = document.location.href.split('?')[0] + "?" + temp1;
-}
-
-// processQueryStr__
-// it is a reverse process of showUrl()
-function processQueryStr(inputs) {
-  queries = get_querystring();
-
-  var key0, key1, vq;
-
-  for (key0 in queries) {
-    if (!queries.hasOwnProperty(key0)) { continue; }
-    if (!inputs.hasOwnProperty(key0)) { continue; }
-    key1 = inputs[key0];
-    vq = queries[key0];
-    vq = vq.trim();
-
-    if ( key0.slice(0,5) == "model" ) {
-      vq = vq.replace("_", "/");
-    }
-
-    if ( key0 == "startT" || key0 == "endT" ) {
-      vq = vq.slice(0,4) + "-" + vq.slice(4,6);
-    }
-
-    if ( key0 == "purpose" ) {
-      vq = unescape(vq);
-    }
-
-    //try {
-      if ( key1 == "Image" ) {
-        $("#"+key1).html( "<img src='" + vq + "' width='820'/>" );
-
-      } else if ( key1 == "data_url" ) {
-        $("#"+key1).val( vq );
-        enable_download_button();
-
-      } else if ( key1 == "months" ) {
-        select_months_from_str(vq);
-
-      } else if ( key1 == "scale" ) {
-        num2scale(Number(vq));
-
-      } else {
-        $("#"+key1).val(vq);
-        $("#"+key1).change();
-      }
-    //} catch(err) {}
-  }
-}
