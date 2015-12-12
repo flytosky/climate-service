@@ -148,9 +148,9 @@
 	    	if(p1 == "Dataset" || p2 == "Dataset") {
 	    		choice = $('input[name="customizedChoiceW"]:checked').val();
 	    	}
-	    	
+
 	    	if(choice == "variableNameW") {
-	    		
+
 	    		if(p1 == "Dataset")
 	    			document.getElementById("header").innerHTML =  "Variable × " + p2.toLowerCase() + " | " + p3.toLowerCase() + " <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
 	    		if(p2 == "Dataset")
@@ -159,7 +159,7 @@
 	    	else {
 	    		document.getElementById("header").innerHTML = "Network of " + p1.toLowerCase() + " and " + p2.toLowerCase() + " based on " + p3.toLowerCase() + " usage <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
 	    	}
-	    	
+
 	    	var parameters = {
 	    			param1:p1,
 	    			param2:p2,
@@ -376,7 +376,7 @@
 	      network.on('select', recover);
 	      network.on('doubleClick', selectDoubleClickedNode);
 	      network.on('selectEdge', selectTheEdge);
-			
+
 	    }
 
 	    function findShortestPath() {
@@ -576,10 +576,10 @@
       	    }
 
       	    edgesDataset.update(updateArray);
-    	      
-    	      
+
+
     	    // select edges
-			
+
 			$("#panel").hide();
 			//$("#edgeDataPanel").show();
 			if (params.edges.length > 0) {
@@ -615,7 +615,7 @@
 			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
 			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
 			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
-			        		
+
 			        		tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
 			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
@@ -629,7 +629,7 @@
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
 			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
 			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
-			        		
+
 			        		tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
 			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
@@ -651,7 +651,7 @@
 		        	$('#edgeDataPanel').append(tr);
 		        	$("#edgeDataPanel").show();
 
-		        	
+
 
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
@@ -661,7 +661,7 @@
 		        })
 			}
 	    }
-		
+
 		function recover(params) {
 			if(params.nodes.length == 0 && params.edges.length == 0) {
 				for (var nodeId in allNodes) {
@@ -681,7 +681,7 @@
 	      	      }
 	    	      highlightActive = false;
 			}
-			
+
 			var updateArray = [];
     	    for (nodeId in allNodes) {
     	      if (allNodes.hasOwnProperty(nodeId)) {
@@ -700,7 +700,7 @@
     	    }
 
     	    edgesDataset.update(updateArray);
-			
+
 		}
 
 	    function neighbourhoodHighlight(params) {
@@ -761,7 +761,7 @@
     	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
     	        }
     	      }
-  
+
     	      // all first degree nodes get their own color and their label back
     	      for (i = 0; i < connectedNodes.length; i++) {
     	    	  if(firstLevelNodeGroup == "user") {
@@ -874,7 +874,7 @@
     	      }
 
     	    }
-    	     
+
     	    // transform the object into an array
     	    var updateArray = [];
     	    for (nodeId in allNodes) {
@@ -1012,9 +1012,11 @@
 		<div id="panel" class="col-lg-offset-7">
 
 			  <div id="panelsub" class="well col-lg-5">
-			    <div class="text-center">
+
+			    <!-- <div class="text-center">
 			      <img class="card-img-top" style=" width:60%;" src="/assets/images/data.png">
-			    </div>
+			    </div> -->
+
 			    <div class="card-block text-center">
 			      <h4 class="card-title" id="nodeName">card</h4>
 			      <p class="card-text text-muted" ><code id="description"></code></p>
@@ -1025,14 +1027,11 @@
 			      <li class="list-group-item"><strong>Cluster:</strong><code id="cluster"></code></li>
 			      <li class="list-group-item"><strong>Label:</strong><code id="label"></code></li>
 			    </ul>
-			    <div class="card-block">
-			      <a href="#" class="card-link col-lg-offset-0 col-lg-6">Card link</a>
-			      <a href="#" class="card-link col-lg-6">Another link</a>
-			    </div>
+
 
 					<div id="related">
 						<div>
-							<h4 class="card-title text-center"><strong>People also research:</strong></h4>
+							<h4 class="card-title text-center"><strong>Mostly used by </strong></h4>
 						</div>
 
 						<div class="row" >
