@@ -391,7 +391,10 @@ function appendSelects(name, nameFunc, values, defaultValues, indexInService) {
     }
 
     // generate value array
-    var array = values.value.split(",");
+
+    var arrayTemp = values.value.split(";");
+    var arrayDescriptive = arrayTemp[0].split(",");
+    var array = arrayTemp[1].split(",");
 
     // generate default value array
     var defaultValueArray = defaultValues.value.split(",");
@@ -410,7 +413,7 @@ function appendSelects(name, nameFunc, values, defaultValues, indexInService) {
         if (defaultValueSet[array[i].trim()]) {
             str += ' checked';
         }
-        str += '>' + array[i] + '</label>';
+        str += '>' + arrayDescriptive[i] + '</label>';
     }
     str += '</td>';
 
@@ -431,7 +434,9 @@ function appendRadioButton(name, nameFunc, values, defaultValues, indexInService
     }
 
     // generate value array
-    var array = values.value.split(",");
+    var arrayTemp = values.value.split(";");
+    var arrayDescriptive = arrayTemp[0].split(",");
+    var array = arrayTemp[1].split(",");
 
     var str = "";
     str += '<tr id = "'+ nameFunc.value + sufTrID +'" ><td id = "' + nameFunc.value + '">' + name.value + '</td>';
@@ -444,7 +449,7 @@ function appendRadioButton(name, nameFunc, values, defaultValues, indexInService
         if (array[i].trim() == defaultValues.value.trim()) {
             str += ' checked';
         }
-        str += '>' + array[i] + '</label>';
+        str += '>' + arrayDescriptive[i] + '</label>';
     }
     str += '</td>';
 
