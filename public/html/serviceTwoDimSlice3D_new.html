@@ -1,0 +1,193 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Climate Service</title>
+
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/assets/javascripts/parameter.js"></script>
+<script>
+function put_var(thisID, thatID, rule) {
+	var thatList=document.getElementById(thatID);
+	
+	for (var i=thatList.length-1; i>=0; i--) {
+	  	thatList.remove(i);
+	} 
+
+	var thisStr =  document.getElementById(thisID).value;
+	var thatListTobe = rule[thisStr][1];  
+	for (var i=0; i<thatListTobe.length; i++) {
+	  	var k = thatListTobe[i];
+	  	thatList.add(new Option(k,k));
+	  	
+	}
+}
+var dataList = {"NASA_AIRS":[["Model: Historical"],["ta","hus"]],"NASA_MLS":[["Model: Historical"],["test1","test2","test3"]],"NASA_MODIS":[["Model: Historical"],["test2","test3","test4"]],"ARGO_ARGO":[["Model: Historical"],["test3","test4","test5"]]}
+</script>
+<!-- Bootstrap -->
+<link href="/assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+	<h2 class="text-center">newTwoDimSlice3D</h2>
+
+	<p class="text-center col-md-8 col-md-offset-2">test</p>
+
+	<div class="container col-md-6">
+		<form>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="col-md-2">Parameter Name</th>
+						<th class="col-md-4">Value</th>
+					</tr>
+				</thead>
+				<tbody id="dynamicTBody">
+					<tr id="model_trID">
+						<td id="model">data source</td>
+						<td><select id = "test" class="form-control" onchange="put_var('test','test1', dataList)" ><option selected="">NASA_AIRS</option>
+								<option>NASA_MLS</option>
+								<option>NASA_MODIS</option>
+								<option>ARGO_ARGO</option></select></td>
+					</tr>
+					<tr id="var_trID">
+						<td id="var">variable name</td>
+						<td><select class="form-control" id = "test1"><option selected="">ta</option>
+								<option>hus</option>
+								<option>test1</option>
+								<option>test2</option>
+								<option>test3</option>
+								<option>test4</option>
+								<option>test5</option></select></td>
+					</tr>
+					<tr id="start_time_trID">
+						<td id="start_time">start time</td>
+						<td><input type="text" class="form-control"
+							id="startTime_detail" placeholder="200401"></td>
+					</tr>
+					<tr id="end_time_trID">
+						<td id="end_time">end time</td>
+						<td><input type="text" class="form-control"
+							id="endTime_detail" placeholder="200412"></td>
+					</tr>
+					<tr id="pr_trID">
+						<td id="pr">pressure level</td>
+						<td><input type="text" class="form-control"
+							id="pressureLevel_detail" placeholder="50000"></td>
+					</tr>
+					<tr id="lon1_trID">
+						<td id="lon1">start lon</td>
+						<td><input type="text" class="form-control"
+							id="startLon_detail" placeholder="0"></td>
+					</tr>
+					<tr id="lon2_trID">
+						<td id="lon2">end lon</td>
+						<td><input type="text" class="form-control"
+							id="endLon_detail" placeholder="360"></td>
+					</tr>
+					<tr id="lat1_trID">
+						<td id="lat1">start lat</td>
+						<td><input type="text" class="form-control"
+							id="startLat_detail" placeholder="-90"></td>
+					</tr>
+					<tr id="lat2_trID">
+						<td id="lat2">end lat</td>
+						<td><input type="text" class="form-control"
+							id="endLat_detail" placeholder="90"></td>
+					</tr>
+					<tr id="months_trID">
+						<td id="months">months</td>
+						<td><label class="checkbox-inline"><input
+								type="checkbox" id="months_detail0" value="1">1</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail1" value="2">2</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail2" value="3" checked="">3</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail3" value="4" checked="">4</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail4" value="5" checked="">5</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail5" value="6">6</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail6" value="7">7</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail7" value="8">8</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail8" value="9">9</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail9" value="10">10</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail10" value="11">11</label><label
+							class="checkbox-inline"><input type="checkbox"
+								id="months_detail11" value="12">12</label></td>
+					</tr>
+					<tr id="scale_trID">
+						<td id="scale">color scale</td>
+						<td><label class="radio-inline"><input type="radio"
+								id="colorScale_detail0" value="0" name="colorScale_detail"
+								checked="">0</label><label class="radio-inline"><input
+								type="radio" id="colorScale_detail1" value="4"
+								name="colorScale_detail">4</label></td>
+					</tr>
+					<tr id="purpose_trID">
+						<td id="purpose">purpose</td>
+						<td><textarea class="form-control" rows="5"
+								id="purpose_detail"></textarea></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<div class="text-center">
+			<button type="submit" class="btn btn-success btn-lg"
+				onclick="Javascript:sendValues('http://einstein.sv.cmu.edu:9002/svc/newTwoDimSlice3D')">Request
+				Service</button>
+		</div>
+	</div>
+
+	<div class="container col-md-6">
+		<form>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Output</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a id="serviceImgLink" href=""> <img src=""
+								id="serviceImg" class="img-responsive">
+						</a></td>
+					</tr>
+					<tr>
+						<td><a id="commentLink" href=""> <textarea
+									class="form-control" rows="3" id="comment"></textarea>
+						</a></td>
+					</tr>
+					<tr>
+						<td><textarea class="form-control" rows="10" id="message"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-center">
+				<button id="downloadButton" type="button"
+					class="btn btn-success btn-lg">Download Data</button>
+			</div>
+			<br>
+			<div class="text-center" id="output"></div>
+		</form>
+	</div>
+
+
+</body>
+</html>
