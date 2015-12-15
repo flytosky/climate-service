@@ -57,6 +57,12 @@ public class ServiceExecutionLogController extends Controller {
 				JsonNode json = responseConfigItems.path(i);
 				String paramName = json.get("parameter").get("name").asText();
 				String paramValue = json.findPath("value").asText();
+				if(paramName.endsWith("model")) {
+					paramName = "model1";
+				}
+				if(paramName.endsWith("var")) {
+					paramName = "var1";
+				}
 				url += "&" + paramName + "=" + paramValue;
 			}	
 			pageUrl = Constants.URL_SERVER
