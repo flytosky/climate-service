@@ -65,6 +65,7 @@ public class ServiceExecutionLogController extends Controller {
 				if(paramName.endsWith("var")) {
 					paramName = "var1";
 				}
+				if(paramName.contains("model")) paramName = paramName.toUpperCase();
 				url += "&" + paramName + "=" + paramValue;
 			}
 			url += "&purpose=" + purpose;
