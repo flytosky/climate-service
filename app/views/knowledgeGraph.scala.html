@@ -617,7 +617,7 @@
 			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
 
 			        		tr += "<td>";
-			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<form action=\"/getServiceExecutionLogUrlById\" method=\"GET\">";
 			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
 			        		tr += "value=\"" + edgeDatas[i].id + "\">";
 			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
@@ -625,16 +625,16 @@
 			        	tr += "</tbody></table>";
 		        	}else if(p3 == "Dataset") {
 		        		tr = "<table class=\"table table-striped\"><thead>" +
-	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
 			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
 			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
 
-			        		tr += "<td>";
+			        		/* tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
 			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
 			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
-			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>"; */
 			        	}
 			        	tr += "</tbody></table>";
 		        	}else if(p3 == "User") {
