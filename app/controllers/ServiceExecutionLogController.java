@@ -30,7 +30,53 @@ public class ServiceExecutionLogController extends Controller {
 	final static Form<ServiceExecutionLog> serviceLogForm = Form
 			.form(ServiceExecutionLog.class);
 	
-	
+	public static void getServiceExecutionLogUrlById() {	
+		ServiceExecutionLog serviceLog = new ServiceExecutionLog();
+		String serviceName = null;
+		String url = "?";
+		String pageUrl = "";
+		
+		try {
+			DynamicForm df = DynamicForm.form().bindFromRequest();
+			String logId = df.field("logId").value();
+
+			if (logId == null || logId.isEmpty()) {
+				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+				return;
+			}
+
+			// Call API
+			JsonNode response = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.SERVICE_EXECUTION_LOG + Constants.SERVICE_EXECUTION_LOG_GET + "/" + logId);
+			serviceLog = deserializeJsonToServiceLog(response);
+			long configurationId = response.get("serviceConfiguration").get("id").asLong();
+			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
+			
+			serviceName = response.get("climateService").get("name").asText();
+			
+			for (int i = 0; i < responseConfigItems.size(); i++) {
+				JsonNode json = responseConfigItems.path(i);
+				String paramName = json.get("parameter").get("name").asText();
+				String paramValue = json.findPath("value").asText();
+				url += "&" + paramName + "=" + paramValue;
+			}	
+			pageUrl = Constants.URL_SERVER
+					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+					+ serviceName.substring(0, 1).toUpperCase()
+					+ serviceName.substring(1) + ".html" + url;
+			
+			System.out.println("Url: " + pageUrl);			
+			
+		}catch (IllegalStateException e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls
+					.createResponse(ResponseType.CONVERSIONERROR));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
+		}
+
+		redirect(pageUrl);
+	}
 
 	public static Result getConfigurationByConfId() {
 		
