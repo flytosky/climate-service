@@ -59,10 +59,10 @@ public class ServiceExecutionLogController extends Controller {
 				JsonNode json = responseConfigItems.path(i);
 				String paramName = json.get("parameter").get("name").asText();
 				String paramValue = json.findPath("value").asText();
-				if(paramName.endsWith("model")) {
+				if(paramName.equals("model")) {
 					paramName = "model1";
 				}
-				if(paramName.endsWith("var")) {
+				if(paramName.equals("var")) {
 					paramName = "var1";
 				}
 				if(paramName.contains("model")) paramValue = paramValue.toUpperCase();
