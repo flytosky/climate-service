@@ -30,7 +30,7 @@ public class ServiceExecutionLogController extends Controller {
 	final static Form<ServiceExecutionLog> serviceLogForm = Form
 			.form(ServiceExecutionLog.class);
 	
-	public static void getServiceExecutionLogUrlById() {	
+	public static Result getServiceExecutionLogUrlById() {	
 		ServiceExecutionLog serviceLog = new ServiceExecutionLog();
 		String serviceName = null;
 		String url = "?";
@@ -42,7 +42,7 @@ public class ServiceExecutionLogController extends Controller {
 
 			if (logId == null || logId.isEmpty()) {
 				Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
-				return;
+				return notFound("confId is null or empty");
 			}
 
 			// Call API
@@ -75,7 +75,7 @@ public class ServiceExecutionLogController extends Controller {
 			Application.flashMsg(RESTfulCalls.createResponse(ResponseType.UNKNOWN));
 		}
 
-		redirect(pageUrl);
+		return redirect(pageUrl);
 	}
 
 	public static Result getConfigurationByConfId() {
