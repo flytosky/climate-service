@@ -33,6 +33,7 @@ public class ServiceExecutionLogController extends Controller {
 	public static Result getServiceExecutionLogUrlById() {	
 		ServiceExecutionLog serviceLog = new ServiceExecutionLog();
 		String serviceName = null;
+		String purpose = "";
 		String url = "?";
 		String pageUrl = "";
 		
@@ -52,6 +53,7 @@ public class ServiceExecutionLogController extends Controller {
 			JsonNode responseConfigItems = RESTfulCalls.getAPI(Constants.URL_SERVER + Constants.CMU_BACKEND_PORT + Constants.CONFIG_ITEM + Constants.GET_CONFIG_ITEMS_BY_CONFIG + "/" + configurationId);
 			
 			serviceName = response.get("climateService").get("name").asText();
+			purpose = response.get("purpose").asText();
 			
 			for (int i = 0; i < responseConfigItems.size(); i++) {
 				JsonNode json = responseConfigItems.path(i);
@@ -64,7 +66,8 @@ public class ServiceExecutionLogController extends Controller {
 					paramName = "var1";
 				}
 				url += "&" + paramName + "=" + paramValue;
-			}	
+			}
+			url += "&purpose=" + purpose;
 			pageUrl = Constants.URL_SERVER
 					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
 					+ serviceName.substring(0, 1).toUpperCase()
