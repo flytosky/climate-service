@@ -28,12 +28,19 @@
 		<td><font size="2">@datasetLog.getDatasetStudyStartTime()</font></td>
 		<td><font size="2">@datasetLog.getDatasetStudyEndTime()</font></td>
 		<td>
-		@form(routes.ServiceExecutionLogController.getConfigurationByConfId()){
-		<input
-			name="logId" class="hidden" type="hidden"
-			value="@datasetLog.getServiceExecutionLogId()">
-		<input
-			type="submit"  value="see details">
+		@if(datasetLog.getUrl() != null){
+			<form method="post" action="@datasetLog.getUrl">
+				<input type="submit"  value="see details">
+			</form>
+		
+		}else{
+			@form(routes.ServiceExecutionLogController.getServiceExecutionLogUrlById()){
+				<input
+					name="logId" class="hidden" type="hidden"
+					value="@datasetLog.getServiceExecutionLogId">
+				<input
+					type="submit"  value="see details">
+			}
 		}
 		</td>
 	</tr>

@@ -12,6 +12,7 @@ public class DatasetLog {
 	private String dataUrl;
 	private long originalDatasetId;
 	private long outputDatasetId;
+	private String url;
 	
 	private String datasetStudyStartTime;
 	private String datasetStudyEndTime;
@@ -133,6 +134,14 @@ public class DatasetLog {
 
 	public void setDatasetStudyEndTime(String datasetStudyEndTime) {
 		this.datasetStudyEndTime = datasetStudyEndTime;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override

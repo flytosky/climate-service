@@ -75,6 +75,15 @@ public class DatasetLogController extends Controller {
 //	    	e.printStackTrace();
 	    }
 		
+		if(json.get("serviceExecutionLog").get("url") != null) {
+			String serviceName = json.get("serviceExecutionLog").get("climateService").get("name").asText();
+			String pageUrl = Constants.URL_SERVER
+					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+					+ serviceName.substring(0, 1).toUpperCase()
+					+ serviceName.substring(1) + ".html" + json.get("serviceExecutionLog").get("url").asText();
+			newDatasetLog.setUrl(pageUrl);
+		}
+		
 		return newDatasetLog;
 	
 	}
