@@ -44,6 +44,7 @@ public class DatasetLogController extends Controller {
 	private static DatasetLog deserializeJsonToDatasetLog(JsonNode json) {
 		DatasetLog newDatasetLog = new DatasetLog();
 		newDatasetLog.setId(json.get("id").asLong());
+		newDatasetLog.setDatasetId(json.get("dataset").get("id").asLong());
 		newDatasetLog.setServiceExecutionLogId(json.get("serviceExecutionLog").get("id").asLong());
 		newDatasetLog.setDatasetName(json.get("dataset").get("name").asText());
 		newDatasetLog.setDatasetSource(json.get("dataset").get("dataSourceNameinWebInterface").asText());
