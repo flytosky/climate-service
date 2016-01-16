@@ -4,6 +4,7 @@ public class DatasetLog {
 	
 	private long id;
 	private long serviceExecutionLogId;
+	private long datasetId;
 	private String datasetName;
 	private String datasetSource;
 	private String datasetVariable;
@@ -12,6 +13,7 @@ public class DatasetLog {
 	private String dataUrl;
 	private long originalDatasetId;
 	private long outputDatasetId;
+	private String url;
 	
 	private String datasetStudyStartTime;
 	private String datasetStudyEndTime;
@@ -45,6 +47,14 @@ public class DatasetLog {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getDatasetId() {
+		return datasetId;
+	}
+
+	public void setDatasetId(long datasetId) {
+		this.datasetId = datasetId;
 	}
 
 	public long getServiceExecutionLogId() {
@@ -135,16 +145,27 @@ public class DatasetLog {
 		this.datasetStudyEndTime = datasetStudyEndTime;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
-		return "DatasetLog [id=" + id + ", serviceExecutionLog="
-				+ serviceExecutionLogId + ", datasetName=" + datasetName
-				+ ", datasetSource=" + datasetSource + ", datasetVariable="
-				+ datasetVariable + ", userName=" + userName + ", plotUrl="
-				+ plotUrl + ", dataUrl=" + dataUrl + ", originalDatasetId="
+		return "DatasetLog [id=" + id + ", serviceExecutionLogId="
+				+ serviceExecutionLogId + ", datasetId=" + datasetId
+				+ ", datasetName=" + datasetName + ", datasetSource="
+				+ datasetSource + ", datasetVariable=" + datasetVariable
+				+ ", userName=" + userName + ", plotUrl=" + plotUrl
+				+ ", dataUrl=" + dataUrl + ", originalDatasetId="
 				+ originalDatasetId + ", outputDatasetId=" + outputDatasetId
-				+ ", datasetStudyStartTime=" + datasetStudyStartTime
-				+ ", datasetStudyEndTime=" + datasetStudyEndTime + "]";
+				+ ", url=" + url + ", datasetStudyStartTime="
+				+ datasetStudyStartTime + ", datasetStudyEndTime="
+				+ datasetStudyEndTime + "]";
 	}
+
 	
 }

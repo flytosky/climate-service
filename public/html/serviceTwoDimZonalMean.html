@@ -231,7 +231,11 @@
           arglist = arglist.concat('0');
         else
           arglist = arglist.concat('2');
-
+        
+        var purpose = $("#purpose").val();
+        arglist = arglist.concat("&purpose=");
+        arglist = arglist.concat(purpose);
+        
         // url = url + encodeURIComponent(arglist);
         url = url + encodeURI(arglist);
         // url = url + arglist;

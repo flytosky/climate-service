@@ -44,6 +44,7 @@ public class DatasetLogController extends Controller {
 	private static DatasetLog deserializeJsonToDatasetLog(JsonNode json) {
 		DatasetLog newDatasetLog = new DatasetLog();
 		newDatasetLog.setId(json.get("id").asLong());
+		newDatasetLog.setDatasetId(json.get("dataset").get("id").asLong());
 		newDatasetLog.setServiceExecutionLogId(json.get("serviceExecutionLog").get("id").asLong());
 		newDatasetLog.setDatasetName(json.get("dataset").get("name").asText());
 		newDatasetLog.setDatasetSource(json.get("dataset").get("dataSourceNameinWebInterface").asText());
@@ -74,6 +75,15 @@ public class DatasetLogController extends Controller {
 	    } catch (ParseException e){	    
 //	    	e.printStackTrace();
 	    }
+		
+		if(json.get("serviceExecutionLog").get("url") != null) {
+			String serviceName = json.get("serviceExecutionLog").get("climateService").get("name").asText();
+			String pageUrl = Constants.URL_SERVER
+					+ Constants.LOCAL_HOST_PORT + "/assets/html/service"
+					+ serviceName.substring(0, 1).toUpperCase()
+					+ serviceName.substring(1) + ".html" + json.get("serviceExecutionLog").get("url").asText();
+			newDatasetLog.setUrl(pageUrl);
+		}
 		
 		return newDatasetLog;
 	

@@ -44,6 +44,7 @@ GET     	/serviceLog                                          	controllers.Servi
 GET    	/searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
 GET		/searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
 GET 		/getConfigurationByConfId                               controllers.ServiceExecutionLogController.getConfigurationByConfId()
+GET			/getServiceExecutionLogUrlById							controllers.ServiceExecutionLogController.getServiceExecutionLogUrlById()
 
 # Dataset
 GET     /dataSet/allDatasets                        controllers.DatasetController.showAllDatasets()

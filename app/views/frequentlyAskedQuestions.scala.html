@@ -4,68 +4,197 @@
 
    <h2>Frequently Requested Queries</h2>
    <div class="container">
-   <h3>Visualize Relationship in Knowledge Graph</h3>
-   <ul>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>Visualize relationship between user and dataset, based on service usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "Service", "Dataset")'>Visualize relationship between user and service, based on dataset usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Service", "User")'>Visualize relationship between dataset and service, based on user</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "User", "Dataset")'>Visualize relationship between user and user, based on dataset usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "User", "Service")'>Visualize relationship between user and user, based on service usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Dataset", "Service")'>Visualize relationship between dataset and dataset, based on service usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Dataset", "User")'>Visualize relationship between dataset and dataset, based on user</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("Service", "Service", "Dataset")'>Visualize relationship between service and service, based on dataset usage</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph("Service", "Service", "User")'>Visualize relationship between service and service, based on user</a>
-   </li>
-   </ul>
-
-   <h3>Search in Knowledge Graph</h3>
-   <ul>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.ClimateServiceController.searchClimateServices()'>Search on service based on features</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.DatasetController.searchDataset()'>Search on dataset based on features</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.ServiceExecutionLogController.searchServiceLog'>Search on service execution log based on criteria</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>Visualize user behavior on dataset within a time range</a>
-   </li>
-   </ul>
-
-   <h3>Dynamic Statistics</h3>
-   <ul>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.ClimateServiceController.mostPopularServices()'>Most popular service</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.DatasetController.mostPopularDatasets()'>Most popular dataset</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.UsersController.getAllUsers()'>Most active user</a>
-   </li>
-   <li style="margin-bottom: 5px;">
-   <a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo", 1, "climate")'>ML Based Recommendation</a>
-   </li>
-   </ul>
-
+   
+   <div class="container">
+   		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Get Started</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+		  	  <li style="margin-bottom: 5px;">
+			   <a href='@routes.Application.signup()'>create a new account</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.Application.login()'>login with an account</a>
+			   </li>
+			</ul>
+		  </div>
+		</div>
+   </div>
+   
+   
+   <div class="container">
+   <div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Use Climate Services</h3>
+	  </div>
+	  <div class="panel-body">
+	  	<ul>
+		  	<li style="margin-bottom: 5px;">
+			<a href='@routes.ClimateServiceController.showAllClimateServices()'>show all services</a>
+			</li>
+			<li style="margin-bottom: 5px;">
+		    <a href='@routes.ClimateServiceController.addAClimateService()'>register your own services</a>
+		    </li>
+		    <li style="margin-bottom: 5px;">
+		    <a href='@routes.ClimateServiceController.searchClimateServices()'>search on service based on features</a>
+		    </li>
+		</ul>
+	  </div>
+	</div>
+	
+	 <div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Explore Service Execution Logs</h3>
+	  </div>
+	  <div class="panel-body">
+	  	<ul>
+		  	<li style="margin-bottom: 5px;">
+   			<a href='@routes.ServiceExecutionLogController.getServiceLog()'>show all service execution logs</a>
+   			</li>
+			<li style="margin-bottom: 5px;">
+   			<a href='@routes.ServiceExecutionLogController.searchServiceLog()'>search on service execution log based on criteria</a>
+   			</li>
+		</ul>
+	  </div>
+	</div>
+	</div>
+	
+	<div class="container">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Access Datasets</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			  	<li style="margin-bottom: 5px;">
+	   			<a href='@routes.DatasetController.showAllDatasets()'>show all datasets</a>
+	   			</li>
+				<li style="margin-bottom: 5px;">
+	   			<a href='@routes.DatasetController.searchDataset()'>search on dataset based on features</a>
+	   			</li>
+			</ul>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Explore Social Network</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			  	<li style="margin-bottom: 5px;">
+			   	<a href='@routes.UsersController.getAllUsers()'>show all users</a>
+			   	</li>
+			   	<li style="margin-bottom: 5px;">
+			   	<a href='@routes.UsersController.searchUser()'>search on user based on properties</a>
+			   	</li>
+			</ul>
+		  </div>
+		</div>
+   </div>
+   
+   <div class="container">
+   		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Visualize Relationship in Knowledge Graph</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>visualize relationship between user and dataset, based on service usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "Service", "Dataset")'>visualize relationship between user and service, based on dataset usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Service", "User")'>visualize relationship between dataset and service, based on user</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "User", "Dataset")'>visualize relationship between user and user, based on dataset usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("User", "User", "Service")'>visualize relationship between user and user, based on service usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Dataset", "Service")'>visualize relationship between dataset and dataset, based on service usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("Dataset", "Dataset", "User")'>visualize relationship between dataset and dataset, based on user</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("Service", "Service", "Dataset")'>visualize relationship between service and service, based on dataset usage</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph("Service", "Service", "User")'>visualize relationship between service and service, based on user</a>
+			   </li>
+			</ul>
+		  </div>
+		</div>
+   </div>
+   
+   <div class="container">
+   		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Functions in Knowledge Graph</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>visualize user behavior on dataset within a time range</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>find Kth shortest path between two nodes in the graph</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>set graph based on your configuration through "Advanced Setting"</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>show node information by clicking one node</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>show edge information by clicking one edge</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.AnalyticsController.getKnowledgeGraph()'>show subgraph of the node by double-clicking one node</a>
+			   </li>
+			</ul>
+		  </div>
+		</div>
+   </div>
+   
+   <div class="container">
+   		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Recommendation and Dynamic Statistics</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.ClimateServiceController.mostPopularServices()'>recommend most popular service</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.DatasetController.mostPopularDatasets()'>recommend most popular dataset</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.UsersController.getAllUsers()'>recommend most active user</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo", 1, "climate")'>recommend dataset based on the semantic information of dataset, the user's past behavior and peer users' behaviors</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.ClimateServiceController.recommendationSummary("ochimborazo", 1, "climate")'>recommend users sharing same research interests</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.ClimateServiceController.mostRecentlyAddedClimateServices()'>show most recently added service</a>
+			   </li>
+			   <li style="margin-bottom: 5px;">
+			   <a href='@routes.ClimateServiceController.mostRecentlyUsedClimateServices()'>show most recently used service</a>
+			   </li>
+			</ul>
+		  </div>
+		</div>
+   </div>
 	</div>
 }
