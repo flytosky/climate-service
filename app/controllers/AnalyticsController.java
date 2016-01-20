@@ -317,20 +317,10 @@ public class AnalyticsController extends Controller{
 		long serviceId2 = json.path("serviceId2").asLong();
 		long p3number = json.path("p3number").asLong();
 		JsonNode response = null;
+		System.out.println("aaaaaaa" + p3number);
 		try {
-			if(userId1 == 0 && userId2 == 0) {
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-					+ Constants.CMU_BACKEND_PORT + "/datasetLog/getUsersByServiceAndDataset/serviceId/" + (serviceId1 == 0 ? serviceId2 : serviceId1) + "/datasetId/" + (datasetId1 == 0 ? datasetId2 : datasetId1) +"/json");
-			}
-			else if(datasetId1 == 0 && datasetId2 == 0) {
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByServiceAndUser/serviceId/" + (serviceId1 == 0 ? serviceId2 : serviceId1) + "/userId/" + (userId1 == 0 ? userId2 : userId1) + "/json");
-			}
-			else if(serviceId1 == 0 && serviceId2 == 0){
-				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getServiceExecutionLogsByDatasetAndUser/datasetId/" + (datasetId1 == 0 ? datasetId2 : datasetId1)+ "/userId/" + (userId1 == 0 ? userId2 : userId1) + "/json");
-			}//change FOLLOWING~~~~~~~~~~~~~~~~~~~~~
-			else if(userId1 != 0 && userId2 != 0 && p3number == 2){
+
+			if(userId1 != 0 && userId2 != 0 && p3number == 2){
 				/*
 				if (p3 == "Service") {
 					int p3number = 1;
@@ -340,10 +330,11 @@ public class AnalyticsController extends Controller{
 					int p3number = 3;
 				}
 				*/
+				System.out.println("hhhhhhhhhhhh");
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + "/datasetAndUser/getDatasetsByUserAndUser/userId1/" + userId1+ "/userId2/" + userId2 + "/json");
 			}
-			else if(userId1 != 0 && userId2 != 0 && p3number == 3){
+			else if(userId1 != 0 && userId2 != 0 && p3number == 1){
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getServiceExecutionLogsByUserAndUser/userId1/" + userId1+ "/userId2/" + userId2 + "/json");
 			}
@@ -363,6 +354,18 @@ public class AnalyticsController extends Controller{
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
 						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByServiceAndService/serviceId1/" + serviceId1+ "/serviceId2/" + serviceId2 + "/json");
 			}
+			else if(p3number == 3) {
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+					+ Constants.CMU_BACKEND_PORT + "/datasetLog/getUsersByServiceAndDataset/serviceId/" + (serviceId1 == 0 ? serviceId2 : serviceId1) + "/datasetId/" + (datasetId1 == 0 ? datasetId2 : datasetId1) +"/json");
+			}
+			else if(p3number == 2) {
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByServiceAndUser/serviceId/" + (serviceId1 == 0 ? serviceId2 : serviceId1) + "/userId/" + (userId1 == 0 ? userId2 : userId1) + "/json");
+			}
+			else if(p3number == 1){
+				response = RESTfulCalls.getAPI(Constants.URL_HOST
+						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getServiceExecutionLogsByDatasetAndUser/datasetId/" + (datasetId1 == 0 ? datasetId2 : datasetId1)+ "/userId/" + (userId1 == 0 ? userId2 : userId1) + "/json");
+			}//change FOLLOWING~~~~~~~~~~~~~~~~~~~~~
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			Application.flashMsg(RESTfulCalls

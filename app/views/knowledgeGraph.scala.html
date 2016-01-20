@@ -143,15 +143,15 @@
             var temp1 = document.getElementById("paramCombination").value;
             var choice = null;
             var temp2 = temp1.split(" ");
-            if (document.getElementById('filterCombination') != null) {    
+            if (document.getElementById('filterCombination') != null) {
                 var filteredChoice = document.getElementById("filterCombination").value;
             } else {
-                var filteredChoice = null;          
+                var filteredChoice = null;
             }
-            if (document.getElementById('filterId') != null) {    
+            if (document.getElementById('filterId') != null) {
                 var filteredId = document.getElementById("filterId").value;
             } else {
-                var filteredId = null;          
+                var filteredId = null;
             }
             document.getElementById("filterCombination").selectedIndex = 0;
             $('#filterId').val("");
@@ -609,7 +609,7 @@
 	    	    if(node2.group == "dataset")	datasetId2 = node2.datasetId;
 	    	    if(node2.group == "service")	serviceId2 = node2.serviceId;
 
-						if (p3 == "Service") { //prevent errors in parsing JSON 
+						if (p3 == "Service") { //prevent errors in parsing JSON
 							var p3number = 1;
 						}else if(p3 == "Dataset") {
 							var p3number = 2;
@@ -628,6 +628,12 @@
 								p3number: p3number
 		    		}
 
+						// console.log(p3number);
+						// console.log(userId1);
+						// console.log(userId2);
+						// console.log(datasetId1);
+						// console.log(datasetId2);
+
 	    	    $.ajax({
 		            url: "/getEdgeData",
 		            type: "POST",
@@ -639,47 +645,13 @@
 		        	edgeDatas = JSON.parse(data);
 		        	$('#edgeDataPanel').html("");
 		        	var tr = null;
-		        	if(p3 == "Service" && userId1 == null && userId2 == null) {//change
-			        	tr = "<table class=\"table table-striped\"><thead>" +
-	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
-			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
 
-			        		tr += "<td>";
-			        		tr += "<form action=\"/getServiceExecutionLogUrlById\" method=\"GET\">";
-			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-			        		tr += "value=\"" + edgeDatas[i].id + "\">";
-			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
-			        	}
-			        	tr += "</tbody></table>";
-		        	}else if(p3 == "Dataset" && datasetId1 == null && datasetId2 == null) {
-		        		tr = "<table class=\"table table-striped\"><thead>" +
-	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
-		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+							console.log(data.length);
+							if (data.length == 2) {
+								$('#edgeDataPanel').append("<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Not</th><th>Found</th></tr></thead><tbody>");
+							}else if(userId1 != null && userId2 != null && p3number == 2) {
 
-			        		/* tr += "<td>";
-			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
-			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
-			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>"; */
-			        	}
-			        	tr += "</tbody></table>";
-		        	}else if(p3 == "User" && serviceId1 == null && serviceId2 == null) {
-		        		tr = "<table class=\"table table-striped\"><thead>" +
-	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
-		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
-			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
-			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
-			        	}
-			        	tr += "</tbody></table>";
-								/****************************************
-								*****************************************
-								*****************************************/
-		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
 								tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
@@ -694,7 +666,7 @@
 									*/
 			        	}
 			        	tr += "</tbody></table>";
-		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        	}else if(userId1 != null && userId2 != null && p3number == 1) {
 								tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
 			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
@@ -708,7 +680,7 @@
 			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
 			        	}
 			        	tr += "</tbody></table>";
-		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        	}else if(userId1 != null && userId2 != null && p3number == 3) {
 		        		tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
 								for(var i=0; i<Object.keys(edgeDatas).length; i++) {
@@ -717,7 +689,7 @@
 			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
 			        	}
 			        	tr += "</tbody></table>";
-		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        	}else if(userId1 != null && userId2 != null && p3number == 1) {
 								tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
 			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
@@ -731,7 +703,7 @@
 			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
 			        	}
 			        	tr += "</tbody></table>";
-		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        	}else if(userId1 != null && userId2 != null && p3number == 3) {
 		        		tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
 								for(var i=0; i<Object.keys(edgeDatas).length; i++) {
@@ -755,6 +727,46 @@
 									*/
 			        	}
 			        	tr += "</tbody></table>";
+		        	}else if(p3 == "Service") {//change
+			        	tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
+
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getServiceExecutionLogUrlById\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "Dataset") {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+
+			        		/* tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>"; */
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "User") {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+								/****************************************
+								*****************************************
+								*****************************************/
 		        	}
 
 		        	$('#edgeDataPanel').append(tr);
@@ -1100,7 +1112,7 @@
                             </div>
                             <br>
                         </div>
-                        <div id="filter">                   
+                        <div id="filter">
                             <label>Filter Results</label>
                                 <div class="form-group">
                                     <select class="form-control" id="filterCombination">
@@ -1112,9 +1124,9 @@
                                 </div>
                             <div class="input-group">
                                 <input type="text" class="form-control col-lg-4" id="filterId" placeholder="User/Dataset/Service Id">
-                            </div>              
-                        </div>     
-                        <br>                 
+                            </div>
+                        </div>
+                        <br>
                         <div class="text-center">
                             <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
                         </div>
