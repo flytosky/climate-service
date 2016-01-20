@@ -646,24 +646,18 @@
 		        	$('#edgeDataPanel').html("");
 		        	var tr = null;
 
-							console.log(data.length);
+							console.log(edgeDatas);
 							if (data.length == 2) {
 								$('#edgeDataPanel').append("<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Not</th><th>Found</th></tr></thead><tbody>");
 							}else if(userId1 != null && userId2 != null && p3number == 2) {
 
 								tr = "<table class=\"table table-striped\"><thead>" +
-	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+	        			"<tr><th>Dataset Name</th><th>Dataset Start Time</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
-									/*
-			        		tr += "<td>";
-			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
-			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
-			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
-									*/
+			        		tr += "<tr><td>"+edgeDatas[i].name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].startTime+"</td>";
+
 			        	}
 			        	tr += "</tbody></table>";
 		        	}else if(userId1 != null && userId2 != null && p3number == 1) {
