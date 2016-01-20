@@ -341,7 +341,7 @@ public class AnalyticsController extends Controller{
 				}
 				*/
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByUserAndUser/userId1/" + userId1+ "/userId2/" + userId2 + "/json");
+						+ Constants.CMU_BACKEND_PORT + "/datasetAndUser/getDatasetsByUserAndUser/userId1/" + userId1+ "/userId2/" + userId2 + "/json");
 			}
 			else if(userId1 != 0 && userId2 != 0 && p3number == 3){
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
