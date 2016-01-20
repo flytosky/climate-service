@@ -34,6 +34,8 @@ public class AnalyticsController extends Controller{
 			jsonData.put("param2", parameter2);
 			jsonData.put("param3", parameter3);
 			jsonData.put("choice", "datasetNameW");
+			jsonData.put("fChoice", "");
+			jsonData.put("fId", "");
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 			
@@ -142,6 +144,8 @@ public class AnalyticsController extends Controller{
 		String parameter2 = json.path("param2").asText();
 		String parameter3 = json.path("param3").asText();
 		String choice = json.path("choice").asText();
+		String filteredChoice = json.path("fChoice").asText();
+		String filteredId = json.path("fId").asText();
 		
 		JsonNode response = null;
 		ObjectNode jsonData = Json.newObject();
@@ -150,6 +154,8 @@ public class AnalyticsController extends Controller{
 			jsonData.put("param2", parameter2);
 			jsonData.put("param3", parameter3);
 			jsonData.put("choice", choice);
+			jsonData.put("fChoice", filteredChoice);
+			jsonData.put("fId", filteredId);
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 
