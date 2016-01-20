@@ -109,43 +109,44 @@
     var responseJson = null;
     var jsonString = null;
     var edgeData = null;
-    $(document).ready(function() {
-        $("#panel").hide();
-        $("#edgeDataPanel").hide();
+
+	$(document).ready(function() {
+	    $("#panel").hide();
+	    $("#edgeDataPanel").hide();
 
 
-        $("#config").hide();
-            $("#related").hide();
-        $("#basicConf").hide();
-        jsonString =  $('#jsonData').text();
-        draw();
-      })
+	    $("#config").hide();
+			$("#related").hide();
+	    $("#basicConf").hide();
+	    jsonString =  $('#jsonData').text();
+	    draw();
+	  })
 
-        var p1 = "User";
-        var p2 = "Dataset";
-        var p3 = "Service";
+	  	var p1 = "User";
+		var p2 = "Dataset";
+	    var p3 = "Service";
 
 
-        var degrees = 1;// graph level setting
-        var nodes = null;
-        var edges = null;
-        var network = null;
-        var allNodes;
-        var allEdges;
-        var highlightActive = false;
-        var nodesDataset = new vis.DataSet(nodes);
-        var edgesDataset = new vis.DataSet(edges);
-        var visAdvancedConfig = 1;
-        var visBasicConfig = 1;
+		var degrees = 1;// graph level setting
+	    var nodes = null;
+	    var edges = null;
+	    var network = null;
+		var allNodes;
+		var allEdges;
+		var highlightActive = false;
+	    var nodesDataset = new vis.DataSet(nodes);
+	    var edgesDataset = new vis.DataSet(edges);
+	    var visAdvancedConfig = 1;
+	    var visBasicConfig = 1;
 
-        function getParameters() {
+	    function getParameters() {
             var temp1 = document.getElementById("paramCombination").value;
             var choice = null;
             var temp2 = temp1.split(" ");
             if (document.getElementById('filterCombination') != null) {    
                 var filteredChoice = document.getElementById("filterCombination").value;
             } else {
-                var filteredChoice = null;         	
+                var filteredChoice = null;          
             }
             if (document.getElementById('filterId') != null) {    
                 var filteredId = document.getElementById("filterId").value;
@@ -206,713 +207,812 @@
         }
 
 
-        function showBasicConfig() {
-            if (visBasicConfig == 0) {
-                $("#basicConf").hide();
-                visBasicConfig =1;
-            }else {
-                $("#basicConf").show();
-                visBasicConfig =0;
-            }
-        }
-
-        function showAdvancedConfig() {
-            if (visAdvancedConfig == 0) {
-                $("#config").hide();
-                visAdvancedConfig =1;
-            }else {
-                $("#config").show();
-                visAdvancedConfig =0;
-            }
-        }
-
-        function setGraphLevel() {
-            degrees = $("#graphLevel").val();
-            //alert(degrees);
-        }
-
-        function draw() {
-            "use strict";
-            console.log("draw");
-          // create people.
-          // value corresponds with the age of the person
-          var test = jsonString;
-
-          //test = JSON.stringify(test);
-          test = JSON.parse(test);
-          var nodes = test.nodes;
-
-          var edges = test.edges;
-
-
-          nodesDataset = new vis.DataSet(nodes);
-          edgesDataset = new vis.DataSet(edges);
-
-          // Instantiate our network object.
-          var container = document.getElementById('mynetwork');
-          var data = {
-            nodes: nodesDataset,
-            edges: edgesDataset
-          };
-          var options = {
-          nodes: {
-                color: {
-                  highlight: {
-                    border: "rgba(255,0,255,0.3)",
-                    background: "rgba(255,0,255,0.3)"
-                  }
-                },
-                scaling: {
-                  min: 10,
-                  max: 50,
-                  label: {
-                    enabled: false,
-                    min: 14,
-                    max: 40,
-                    maxVisible: 40,
-                    drawThreshold: 5
-                  },
-                  customScalingFunction: function (min,max,total,value) {
-                    if (max === min) {
-                      return 0.5;
-                    }
-                    else {
-                      let scale = 1 / (max - min);
-                      return Math.max(0,(value - min)*scale);
-                    }
-                  }
-                },
-                shadow: {
-                  enabled: false,
-                  size: 8
-                },
-                 font: {
-                  color: "rgba(52,52,52,1)",
-                  size: 10,
-                  strokeWidth: 4
-                },
-                shape: "dot",
-                shapeProperties: {
-                  borderRadius: 5
-                }
-              },
-              edges: {
-                 color: 'rgba(120,120,120,1)',
-                arrows: {
-
-                  to: {
-                    enabled: false,
-                    scaleFactor: 0.4
-                  }
-                },
-
-              smooth: {
-                  type: "continuous",
-                  forceDirection: "vertical"
-                }
-              },
-              interaction: {
-                multiselect: true
-              },
-             groups: {
-              dataset: {
-                color:"rgba(0,0,255,0.7)"
-              },
-              user: {
-                color:"rgba(255,0,0,0.7)"
-              },
-              service: {
-                color:"rgba(0,255,0,0.7)"
-              }
-            },
-
-            physics: {
-              hierarchicalRepulsion: {
-                  springConstant: 0.01,
-                  centralGravity: 1.75,
-
-                  nodeDistance: 140,
-
-
-              },
-                maxVelocity: 10,
-                minVelocity: 0.75,
-                solver: "hierarchicalRepulsion",
-              stabilization: {
-                enabled:true,
-                iterations:200,
-                updateInterval:1
-              }
-            },
-            configure: {
-              filter:function (option, path) {
-                if (path.indexOf('physics') !== -1 || option === 'physics') {
-                  return true;
-                }
-                if (path.indexOf('smooth') !== -1 || option === 'smooth') {
-                  return true;
-                }
-                if (path.indexOf('layout') !== -1 || option === 'layout') {
-                      return true;
-                    }
-                return false;
-              },
-              container: document.getElementById('config')
-            }
-          };
-
-
-
-          $("#config").html("");
-
-          network = new vis.Network(container, data, options);
-
-          network.on("stabilizationProgress", function(params) {
-                    var maxWidth = 496;
-                    var minWidth = 20;
-                    var widthFactor = params.iterations/params.total;
-                    var width = Math.max(minWidth,maxWidth * widthFactor);
-
-                    document.getElementById('bar').style.width = width + 'px';
-                    document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
-                });
-                network.once("stabilizationIterationsDone", function() {
-                    document.getElementById('text').innerHTML = '100%';
-                    document.getElementById('bar').style.width = '496px';
-                    document.getElementById('loadingBar').style.opacity = 0;
-                    // really clean the dom element
-                    setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
-                });
-
-          allNodes = nodesDataset.get({returnType:"Object"});
-          allEdges = edgesDataset.get({returnType:"Object"});
-          network.on('selectNode', neighbourhoodHighlight);
-          network.on('select', recover);
-          network.on('doubleClick', selectDoubleClickedNode);
-          network.on('selectEdge', selectTheEdge);
-
-        }
-
-        function findShortestPath() {
-            var startId = $("#startPoint").val();
-            var endId = $("#endPoint").val();
-
-            var ids = {
-                    startId : startId,
-                    endId : endId
-                }
-
-            $.ajax({
-                url: "/getShortestPath",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(ids),
-                dataType: "text"
-            }).done(function(data1) {
-                console.log("success");
-                jsonString = data1;
-                draw();
-            }).fail(function(xhr, textStatus, errorThrown) {
-                console.log("error!");
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-            })
-        }
-
-        function findKthShortestPath() {
-            var startId = $("#startPoint").val();
-            var endId = $("#endPoint").val();
-            var kth = $("#kth").val();
-            var k = parseInt(kth) - 1;
-            var ids = {
-                    startId : startId,
-                    endId : endId,
-                    kth : kth
-                }
-
-            $.ajax({
-                url: "/getKthShortestPath",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(ids),
-                dataType: "text"
-            }).done(function(data1) {
-                console.log("success");
-                var jsonTmp = JSON.parse(data1);
-                jsonString = JSON.stringify(jsonTmp[k]);
-                console.log(JSON.stringify(jsonTmp[k]));
-                draw();
-            }).fail(function(xhr, textStatus, errorThrown) {
-                console.log("error!");
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-            })
-        }
-
-        function selectDoubleClickedNode(params) {
-            $("#edgeDataPanel").hide();
-             if (params.nodes.length > 0) {
-
-                var node1 = params.nodes[0];
-                var group = allNodes[node1].group;
-                var startTime = "";
-                var endTime = "";
-
-                var id = null;
-
-                switch(group) {
-                case "service":
-                    id = allNodes[node1].serviceId;
-                    break;
-                case "dataset":
-                    id = allNodes[node1].datasetId;
-                    break;
-                case "user":
-                    id = allNodes[node1].userId;
-                    break;
-                case "variable":
-                    id = allNodes[node1].variableId;
-                    break;
-                default:
-                    break;
-                }
-
-                var parameters = {
-                        param1:p1,
-                        param2:p2,
-                        id:id,
-                        groupName:group,
-                        startTime:startTime,
-                        endTime:endTime
-                }
-                $.ajax({
-                    url: "/getDoubleClickedNodeKnowledgeGraph",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(parameters),
-                    dataType: "text"
-                }).done(function(data1) {
-                    console.log("success");
-                    jsonString = data1;
-                    draw();
-                }).fail(function(xhr, textStatus, errorThrown) {
-                    console.log("error!");
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                })
-
-             }
-
-          }
-
-        function selectCustomizedNode() {
-
-             var group = document.getElementById("paramCombination1").value;
-             var id = document.getElementById("userConfId").value;
-             var startTime = document.getElementById("startTime").value;
-             var endTime = document.getElementById("endTime").value;
-             var choice = $('input[name="customizedChoice"]:checked').val();
-
-                var parameters = {
-                        param1:p1,
-                        param2:p2,
-                        id:id,
-                        groupName:group,
-                        startTime:startTime,
-                        endTime:endTime,
-                        choice:choice
-                }
-                $.ajax({
-                    url: "/getCustomizedNodeKnowledgeGraph",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(parameters),
-                    dataType: "text"
-                }).done(function(data1) {
-                    console.log("success");
-                    jsonString = data1;
-                    draw();
-                }).fail(function(xhr, textStatus, errorThrown) {
-                    console.log("error!");
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                })
-
-          }
-
-        function schedule(selectedValue){
-            var parameter = selectedValue.split(" ");
-            if(parameter[0] === "Dataset" || parameter[1] == "Dataset") {
-                $("#setWholeShownName").show();
-            }else {
-                $("#setWholeShownName").hide();
-            }
-        }
-
-        function selectTheEdge(params) {
-            console.log("Edge!!!");
-            // reset all nodes and edges
-            for (var nodeId in allNodes) {
-                allNodes[nodeId].color = undefined;
-
-                if (allNodes[nodeId].hiddenLabel !== undefined) {
-                  allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
-                  allNodes[nodeId].hiddenLabel = undefined;
-                }
-              }
-
-              for (var edgeId in allEdges) {
-                  allEdges[edgeId].color = undefined;
-                  allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
-                  allEdges[edgeId].hiddenLabel = undefined;
-
-              }
-              highlightActive = false;
-              var updateArray = [];
-            for (nodeId in allNodes) {
-              if (allNodes.hasOwnProperty(nodeId)) {
-                updateArray.push(allNodes[nodeId]);
-              }
-            }
-
-            nodesDataset.update(updateArray);
-
-
-            updateArray = [];
-            for (edgeId in allEdges) {
-              if (allEdges.hasOwnProperty(edgeId)) {
-                updateArray.push(allEdges[edgeId]);
-              }
-            }
-
-            edgesDataset.update(updateArray);
-
-
-            // select edges
-
-            $("#panel").hide();
-            //$("#edgeDataPanel").show();
-            if (params.edges.length > 0) {
-                var selectedEdge = allEdges[params.edges[0]];
-                var node1 = allNodes[selectedEdge.from];
-                var node2 = allNodes[selectedEdge.to];
-                var userId = null, serviceId = null, datasetId = null;
-                if(node1.group == "user")   userId = node1.userId;
-                if(node1.group == "dataset")    datasetId = node1.datasetId;
-                if(node1.group == "service")    serviceId = node1.serviceId;
-                if(node2.group == "user")   userId = node2.userId;
-                if(node2.group == "dataset")    datasetId = node2.datasetId;
-                if(node2.group == "service")    serviceId = node2.serviceId;
-                var parameters = {
-                        userId: userId,
-                        datasetId: datasetId,
-                        serviceId: serviceId,
-                }
-                $.ajax({
-                    url: "/getEdgeData",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(parameters),
-                    dataType: "text"
-                }).done(function(data) {
-                    console.log("success");
-                    edgeDatas = JSON.parse(data);
-                    $('#edgeDataPanel').html("");
-                    var tr = null;
-                    if(p3 == "Service") {
-                        tr = "<table class=\"table table-striped\"><thead>" +
-                        "<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
-                        for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-                            tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
-                            tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
-
-                            tr += "<td>";
-                            tr += "<form action=\"/getServiceExecutionLogUrlById\" method=\"GET\">";
-                            tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-                            tr += "value=\"" + edgeDatas[i].id + "\">";
-                            tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
-                        }
-                        tr += "</tbody></table>";
-                    }else if(p3 == "Dataset") {
-                        tr = "<table class=\"table table-striped\"><thead>" +
-                        "<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
-                        for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-                            tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
-                            tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
-
-                            /* tr += "<td>";
-                            tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
-                            tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
-                            tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
-                            tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>"; */
-                        }
-                        tr += "</tbody></table>";
-                    }else if(p3 == "User") {
-                        tr = "<table class=\"table table-striped\"><thead>" +
-                        "<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
-                        for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-                            tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
-                            tr += "<td>"+edgeDatas[i].firstName+"</td>";
-                            tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
-                        }
-                        tr += "</tbody></table>";
-                    }
-
-                    $('#edgeDataPanel').append(tr);
-                    $("#edgeDataPanel").show();
-
-
-
-                }).fail(function(xhr, textStatus, errorThrown) {
-                    console.log("error!");
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                })
-            }
-        }
-
-        function recover(params) {
-            if(params.nodes.length == 0 && params.edges.length == 0) {
-                for (var nodeId in allNodes) {
-                    allNodes[nodeId].color = undefined;
-
-                    if (allNodes[nodeId].hiddenLabel !== undefined) {
-                      allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
-                      allNodes[nodeId].hiddenLabel = undefined;
-                    }
-                  }
-
-                  for (var edgeId in allEdges) {
-                      allEdges[edgeId].color = undefined;
-                      allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
-                      allEdges[edgeId].hiddenLabel = undefined;
-
-                  }
-                  highlightActive = false;
-            }
-
-            var updateArray = [];
-            for (nodeId in allNodes) {
-              if (allNodes.hasOwnProperty(nodeId)) {
-                updateArray.push(allNodes[nodeId]);
-              }
-            }
-
-            nodesDataset.update(updateArray);
-
-
-            updateArray = [];
-            for (edgeId in allEdges) {
-              if (allEdges.hasOwnProperty(edgeId)) {
-                updateArray.push(allEdges[edgeId]);
-              }
-            }
-
-            edgesDataset.update(updateArray);
-
-        }
-
-        function neighbourhoodHighlight(params) {
-            console.log("Node!!!");
-            $("#edgeDataPanel").hide();
-             // if something is selected:
-            if (params.nodes.length > 0) {
-              highlightActive = true;
-              var i,j;
-              var selectedNode = params.nodes[0];
-              var selectedNodeGroup = allNodes[selectedNode].group;
-              var firstLevelNodeGroup = null;
-
-              // mark all nodes as hard to read.
-              for (var nodeId in allNodes) {
-                allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
-                if (allNodes[nodeId].hiddenLabel == undefined) {
-                  allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
-                  allNodes[nodeId].label = undefined;
-                }
-              }
-
-              for (var edgeId in allEdges) {
-                  allEdges[edgeId].color = 'rgba(192,192,192,0.3)';
-                if (allEdges[edgeId].hiddenLabel == undefined) {
-                    allEdges[edgeId].hiddenLabel = allEdges[edgeId].label;
-                    allEdges[edgeId].label = undefined;
-                }
-              }
-
-
-              allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
-
-              var connectedNodes = network.getConnectedNodes(selectedNode);
-              if(connectedNodes.length != 0) {
-                  firstLevelNodeGroup = allNodes[connectedNodes[0]].group;
-              }
-              var allConnectedNodes = [];
-
-              // get the second degree nodes
-              for (i = 1; i < degrees; i++) {
-                for (j = 0; j < connectedNodes.length; j++) {
-                  allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
-                }
-              }
-
-              // all second degree nodes get a different color and their label back
-              for (i = 0; i < allConnectedNodes.length; i++) {
-                  if(selectedNodeGroup == "user") {
-                      allNodes[allConnectedNodes[i]].color = 'rgba(255,0,0,0.2)';
-                  }else if(selectedNodeGroup == "dataset"){
-                      allNodes[allConnectedNodes[i]].color = 'rgba(0,0,255,0.2)';
-                  }else {
-                      allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.2)';
-                  }
-                if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
-                  allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
-                  allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
-                }
-              }
-
-              // all first degree nodes get their own color and their label back
-              for (i = 0; i < connectedNodes.length; i++) {
-                  if(firstLevelNodeGroup == "user") {
-                      allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.7)';
-                  }else if(firstLevelNodeGroup == "dataset") {
-                      allNodes[connectedNodes[i]].color = 'rgba(0,0,255,0.7)';
-                  }else {
-                      allNodes[connectedNodes[i]].color = 'rgba(0,255,0,0.7)';
-                  }
-                if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
-                  allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
-                  allNodes[connectedNodes[i]].hiddenLabel = undefined;
-                }
-              }
-
-              var curNode = allNodes[selectedNode];
-              var group = curNode.group;
-                var id = null;
-                switch(group) {
-                case "service":
-                    $("#panelsub").attr("class", "well col-lg-5");
-                    id = curNode.serviceId;
-                    $("#description").text("Service ");
-                        $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
-                  $("#nodeName").text(curNode.title);
-                  $("#id").text(id);
-                  $("#nodeId").text(curNode.id);
-                  $("#cluster").text(curNode.cluster);
-                  $("#label").text(curNode.label);
-                  $("#panel").show();
-                                $("#related").hide();
-                    break;
-                case "dataset":
-                        $("#panelsub").attr("class", "well col-lg-8");
-                    id = curNode.datasetId;
-                    $("#description").text("Dataset ");
-                        $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
-              $("#nodeName").text(curNode.title);
-              $("#id").text(id);
-                  $("#nodeId").text(curNode.id);
-              $("#cluster").text(curNode.cluster);
-              $("#label").text(curNode.label);
-
-                        var obj = {
-                            datasetName : curNode.title
-                        }
-                        $.ajax({
-                                url: "getRelatedServiceOfDataset",
-                                type: "POST",
-                                contentType: "application/json",
-                                data: JSON.stringify(obj),
-                                dataType: "text"
-                        }).done(function(data) {
-                                data = JSON.parse(data);
-                                $("#relatedServiceHref1").attr("href", data.url0);
-                                $("#relatedServiceImg1").attr("src", data.imageUrl0);
-                                $("#relatedServiceName1").html(data.name0);
-
-                                if (data.name1 == null) {
-                                    $("#related2").hide();
-                                }else {
-                                    $("#related2").show();
-                                }
-                                $("#relatedServiceHref2").attr("href", data.url1);
-                                $("#relatedServiceImg2").attr("src", data.imageUrl1);
-                                $("#relatedServiceName2").html(data.name1);
-
-                                $("#related").show();
-                                $("#panel").show();
-                        });
-
-                    break;
-                case "user":
-                        $("#panelsub").attr("class", "well col-lg-5");
-                    id = curNode.userId;
-                    $("#description").text("User");
-                        $("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
-                  $("#nodeName").text(curNode.title);
-                  $("#id").text(id);
-                  $("#nodeId").text(curNode.id);
-                  $("#cluster").text(curNode.cluster);
-                  $("#label").text(curNode.label);
-                  $("#panel").show();
-                                $("#related").hide();
-                    break;
-                case "variable":
-                    id = curNode.variableId;
-                    $("#description").text("Variable");
-                    break;
-                default:
-                    break;
-                }
-
-              // the main node gets its own color and its label back.
-              if(selectedNodeGroup == "user") {
-                      allNodes[selectedNode].color = 'rgba(255,0,0,0.7)';
-                  }else if(selectedNodeGroup == "dataset"){
-                      allNodes[selectedNode].color = 'rgba(0,0,255,0.7)';
-                  }else {
-                      allNodes[selectedNode].color = 'rgba(0,255,0,0.7)';
-                  }
-              if (allNodes[selectedNode].hiddenLabel !== undefined) {
-                allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
-                allNodes[selectedNode].hiddenLabel = undefined;
-              }
-
-            }
-
-            // transform the object into an array
-            var updateArray = [];
-            for (nodeId in allNodes) {
-              if (allNodes.hasOwnProperty(nodeId)) {
-                updateArray.push(allNodes[nodeId]);
-              }
-            }
-
-            nodesDataset.update(updateArray);
-
-
-            updateArray = [];
-            for (edgeId in allEdges) {
-              if (allEdges.hasOwnProperty(edgeId)) {
-                updateArray.push(allEdges[edgeId]);
-              }
-            }
-
-            edgesDataset.update(updateArray);
-          }
-
-
-
-
-      //  draw();
-
-
-    </script>
-    <script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
+	    function showBasicConfig() {
+	        if (visBasicConfig == 0) {
+	            $("#basicConf").hide();
+	            visBasicConfig =1;
+	        }else {
+	            $("#basicConf").show();
+	            visBasicConfig =0;
+	        }
+	    }
+
+	    function showAdvancedConfig() {
+	        if (visAdvancedConfig == 0) {
+	            $("#config").hide();
+	            visAdvancedConfig =1;
+	        }else {
+	            $("#config").show();
+	            visAdvancedConfig =0;
+	        }
+	    }
+
+	    function setGraphLevel() {
+	    	degrees = $("#graphLevel").val();
+	    	//alert(degrees);
+	    }
+
+	    function draw() {
+	    	"use strict";
+	    	console.log("draw");
+	      // create people.
+	      // value corresponds with the age of the person
+	      var test = jsonString;
+
+	      //test = JSON.stringify(test);
+	      test = JSON.parse(test);
+	      var nodes = test.nodes;
+
+	      var edges = test.edges;
+
+
+	      nodesDataset = new vis.DataSet(nodes);
+	      edgesDataset = new vis.DataSet(edges);
+
+	      // Instantiate our network object.
+	      var container = document.getElementById('mynetwork');
+	      var data = {
+	        nodes: nodesDataset,
+	        edges: edgesDataset
+	      };
+	      var options = {
+   		  nodes: {
+   			    color: {
+   			      highlight: {
+   			        border: "rgba(255,0,255,0.3)",
+   			        background: "rgba(255,0,255,0.3)"
+   			      }
+   			    },
+   			    scaling: {
+   			      min: 10,
+   			      max: 50,
+   			      label: {
+   			        enabled: false,
+   			        min: 14,
+   			        max: 40,
+   			        maxVisible: 40,
+   			        drawThreshold: 5
+   			      },
+   			      customScalingFunction: function (min,max,total,value) {
+   			        if (max === min) {
+   			          return 0.5;
+   			        }
+   			        else {
+   			          let scale = 1 / (max - min);
+   			          return Math.max(0,(value - min)*scale);
+   			        }
+   			      }
+   			    },
+   			    shadow: {
+   			      enabled: false,
+   			      size: 8
+   			    },
+	   			 font: {
+	   		      color: "rgba(52,52,52,1)",
+	   		      size: 10,
+	   		      strokeWidth: 4
+	   		    },
+   			    shape: "dot",
+   			    shapeProperties: {
+   			      borderRadius: 5
+   			    }
+   			  },
+   			  edges: {
+   				 color: 'rgba(120,120,120,1)',
+   			    arrows: {
+
+   			      to: {
+   			        enabled: false,
+   			        scaleFactor: 0.4
+   			      }
+   			    },
+
+		      smooth: {
+ 			      type: "continuous",
+ 			      forceDirection: "vertical"
+ 			    }
+   			  },
+   			  interaction: {
+   			    multiselect: true
+   			  },
+	         groups: {
+	          dataset: {
+	            color:"rgba(0,0,255,0.7)"
+	          },
+	          user: {
+	        	color:"rgba(255,0,0,0.7)"
+	          },
+	          service: {
+	        	color:"rgba(0,255,0,0.7)"
+	          }
+	        },
+
+	        physics: {
+   			  hierarchicalRepulsion: {
+   				  springConstant: 0.01,
+   		      	  centralGravity: 1.75,
+
+   		      	  nodeDistance: 140,
+
+
+   		      },
+   			 	maxVelocity: 10,
+   			    minVelocity: 0.75,
+   			    solver: "hierarchicalRepulsion",
+	          stabilization: {
+	            enabled:true,
+	            iterations:200,
+	            updateInterval:1
+	          }
+	        },
+	        configure: {
+	          filter:function (option, path) {
+	            if (path.indexOf('physics') !== -1 || option === 'physics') {
+	              return true;
+	            }
+	            if (path.indexOf('smooth') !== -1 || option === 'smooth') {
+	              return true;
+	            }
+	            if (path.indexOf('layout') !== -1 || option === 'layout') {
+		              return true;
+		            }
+	            return false;
+	          },
+	          container: document.getElementById('config')
+	        }
+	      };
+
+
+
+	      $("#config").html("");
+
+	      network = new vis.Network(container, data, options);
+
+	      network.on("stabilizationProgress", function(params) {
+	                var maxWidth = 496;
+	                var minWidth = 20;
+	                var widthFactor = params.iterations/params.total;
+	                var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	                document.getElementById('bar').style.width = width + 'px';
+	                document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	            });
+	            network.once("stabilizationIterationsDone", function() {
+	                document.getElementById('text').innerHTML = '100%';
+	                document.getElementById('bar').style.width = '496px';
+	                document.getElementById('loadingBar').style.opacity = 0;
+	                // really clean the dom element
+	                setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	            });
+
+	      allNodes = nodesDataset.get({returnType:"Object"});
+	      allEdges = edgesDataset.get({returnType:"Object"});
+	      network.on('selectNode', neighbourhoodHighlight);
+	      network.on('select', recover);
+	      network.on('doubleClick', selectDoubleClickedNode);
+	      network.on('selectEdge', selectTheEdge);
+
+	    }
+
+	    function findShortestPath() {
+	    	var startId = $("#startPoint").val();
+	    	var endId = $("#endPoint").val();
+
+	    	var ids = {
+	    			startId : startId,
+	    			endId : endId
+	    		}
+
+	    	$.ajax({
+	            url: "/getShortestPath",
+	            type: "POST",
+	            contentType: "application/json",
+	            data: JSON.stringify(ids),
+	            dataType: "text"
+	        }).done(function(data1) {
+	        	console.log("success");
+	        	jsonString = data1;
+	        	draw();
+	        }).fail(function(xhr, textStatus, errorThrown) {
+	        	console.log("error!");
+	        	console.log(xhr);
+	        	console.log(textStatus);
+	            console.log(errorThrown);
+	        })
+	    }
+
+	    function findKthShortestPath() {
+	    	var startId = $("#startPoint").val();
+	    	var endId = $("#endPoint").val();
+	    	var kth = $("#kth").val();
+	    	var k = parseInt(kth) - 1;
+	    	var ids = {
+	    			startId : startId,
+	    			endId : endId,
+	    			kth : kth
+	    		}
+
+	    	$.ajax({
+	            url: "/getKthShortestPath",
+	            type: "POST",
+	            contentType: "application/json",
+	            data: JSON.stringify(ids),
+	            dataType: "text"
+	        }).done(function(data1) {
+	        	console.log("success");
+	        	var jsonTmp = JSON.parse(data1);
+	        	jsonString = JSON.stringify(jsonTmp[k]);
+	        	console.log(JSON.stringify(jsonTmp[k]));
+	        	draw();
+	        }).fail(function(xhr, textStatus, errorThrown) {
+	        	console.log("error!");
+	        	console.log(xhr);
+	        	console.log(textStatus);
+	            console.log(errorThrown);
+	        })
+	    }
+
+	    function selectDoubleClickedNode(params) {
+	    	$("#edgeDataPanel").hide();
+	    	 if (params.nodes.length > 0) {
+
+	    		var node1 = params.nodes[0];
+	    		var group = allNodes[node1].group;
+	    		var startTime = "";
+		    	var endTime = "";
+
+	    		var id = null;
+
+	    		switch(group) {
+	    		case "service":
+	    			id = allNodes[node1].serviceId;
+	    			break;
+	    		case "dataset":
+	    			id = allNodes[node1].datasetId;
+	    			break;
+	    		case "user":
+	    			id = allNodes[node1].userId;
+	    			break;
+	    		case "variable":
+	    			id = allNodes[node1].variableId;
+	    			break;
+	    		default:
+	    			break;
+	    		}
+
+	    		var parameters = {
+		    			param1:p1,
+		    			param2:p2,
+		    			id:id,
+		    			groupName:group,
+		    			startTime:startTime,
+		    			endTime:endTime
+		    	}
+	    		$.ajax({
+		            url: "/getDoubleClickedNodeKnowledgeGraph",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data1) {
+		        	console.log("success");
+		        	jsonString = data1;
+		        	draw();
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+
+	    	 }
+
+	      }
+
+	    function selectCustomizedNode() {
+
+	    	 var group = document.getElementById("paramCombination1").value;
+	    	 var id = document.getElementById("userConfId").value;
+	    	 var startTime = document.getElementById("startTime").value;
+	    	 var endTime = document.getElementById("endTime").value;
+	    	 var choice = $('input[name="customizedChoice"]:checked').val();
+
+	    		var parameters = {
+		    			param1:p1,
+		    			param2:p2,
+		    			id:id,
+		    			groupName:group,
+		    			startTime:startTime,
+		    			endTime:endTime,
+		    			choice:choice
+		    	}
+	    		$.ajax({
+		            url: "/getCustomizedNodeKnowledgeGraph",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data1) {
+		        	console.log("success");
+		        	jsonString = data1;
+		        	draw();
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+
+	      }
+
+	    function schedule(selectedValue){
+	        var parameter = selectedValue.split(" ");
+	        if(parameter[0] === "Dataset" || parameter[1] == "Dataset") {
+	        	$("#setWholeShownName").show();
+	        }else {
+	        	$("#setWholeShownName").hide();
+	        }
+	    }
+
+		function selectTheEdge(params) {
+			console.log("Edge!!!");
+			// reset all nodes and edges
+			for (var nodeId in allNodes) {
+    	        allNodes[nodeId].color = undefined;
+
+    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
+    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+    	          allNodes[nodeId].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = undefined;
+      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+      	          allEdges[edgeId].hiddenLabel = undefined;
+
+      	      }
+    	      highlightActive = false;
+    	      var updateArray = [];
+      	    for (nodeId in allNodes) {
+      	      if (allNodes.hasOwnProperty(nodeId)) {
+      	        updateArray.push(allNodes[nodeId]);
+      	      }
+      	    }
+
+      	    nodesDataset.update(updateArray);
+
+
+      	    updateArray = [];
+      	    for (edgeId in allEdges) {
+      	      if (allEdges.hasOwnProperty(edgeId)) {
+      	        updateArray.push(allEdges[edgeId]);
+      	      }
+      	    }
+
+      	    edgesDataset.update(updateArray);
+
+
+    	    // select edges
+
+			$("#panel").hide();
+			//$("#edgeDataPanel").show();
+			if (params.edges.length > 0) {
+				var selectedEdge = allEdges[params.edges[0]];
+	    	    var node1 = allNodes[selectedEdge.from];
+	    	    var node2 = allNodes[selectedEdge.to];
+	    	    var userId1 = null, serviceId1 = null, datasetId1 = null, userId2 = null, serviceId2 = null, datasetId2 = null;
+	    	    if(node1.group == "user")	userId1 = node1.userId; //changed
+	    	    if(node1.group == "dataset")	datasetId1 = node1.datasetId;
+	    	    if(node1.group == "service")	serviceId1 = node1.serviceId;
+	    	    if(node2.group == "user")	userId2 = node2.userId;
+	    	    if(node2.group == "dataset")	datasetId2 = node2.datasetId;
+	    	    if(node2.group == "service")	serviceId2 = node2.serviceId;
+
+						if (p3 == "Service") { //prevent errors in parsing JSON 
+							int p3number = 1;
+						}else if(p3 == "Dataset") {
+							int p3number = 2;
+						}else {
+							int p3number = 3;
+						}
+
+
+	    	    var parameters = {
+	    	    		userId1: userId1,
+	    	    		datasetId1: datasetId1,
+	    	    		serviceId1: serviceId1,
+								userId2: userId2,
+	    	    		datasetId2: datasetId2,
+	    	    		serviceId2: serviceId2,
+								p3number: p3number
+		    		}
+
+	    	    $.ajax({
+		            url: "/getEdgeData",
+		            type: "POST",
+		            contentType: "application/json",
+		            data: JSON.stringify(parameters),
+		            dataType: "text"
+		        }).done(function(data) {
+		        	console.log("success");
+		        	edgeDatas = JSON.parse(data);
+		        	$('#edgeDataPanel').html("");
+		        	var tr = null;
+		        	if(p3 == "Service" && userId1 == null && userId2 == null) {//change
+			        	tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
+
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getServiceExecutionLogUrlById\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "Dataset" && datasetId1 == null && datasetId2 == null) {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+
+			        		/* tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>"; */
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(p3 == "User" && serviceId1 == null && serviceId2 == null) {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+								/****************************************
+								*****************************************
+								*****************************************/
+		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+								tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+									/*
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+									*/
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+								tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
+
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
+								for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+								tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Service Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+			        	for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].climateService.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].executionStartTime+"</td>";
+
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(userId1 != null && userId2 != null && p3number == 2) {
+		        		tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>User Name</th><th>First Name</th><th>Last Name</th></tr></thead><tbody>";
+								for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].userName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].firstName+"</td>";
+			        		tr += "<td>"+edgeDatas[i].lastName+"</td></tr>";
+			        	}
+			        	tr += "</tbody></table>";
+		        	}else if(serviceId1 != null && serviceId2 != null && p3number == 2) {
+								tr = "<table class=\"table table-striped\"><thead>" +
+	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
+		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+									/*
+			        		tr += "<td>";
+			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
+			        		tr += "<input name=\"logId\" class=\"hidden\" type=\"hidden\"";
+			        		tr += "value=\"" + edgeDatas[i].serviceExecutionLog.id + "\">";
+			        		tr += "<input type=\"submit\"  value=\"see details\"></form></td></tr>";
+									*/
+			        	}
+			        	tr += "</tbody></table>";
+		        	}
+
+		        	$('#edgeDataPanel').append(tr);
+		        	$("#edgeDataPanel").show();
+
+
+
+		        }).fail(function(xhr, textStatus, errorThrown) {
+		        	console.log("error!");
+		        	console.log(xhr);
+		        	console.log(textStatus);
+		            console.log(errorThrown);
+		        })
+			}
+	    }
+
+		function recover(params) {
+			if(params.nodes.length == 0 && params.edges.length == 0) {
+				for (var nodeId in allNodes) {
+	    	        allNodes[nodeId].color = undefined;
+
+	    	        if (allNodes[nodeId].hiddenLabel !== undefined) {
+	    	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+	    	          allNodes[nodeId].hiddenLabel = undefined;
+	    	        }
+	    	      }
+
+	    	      for (var edgeId in allEdges) {
+	    	    	  allEdges[edgeId].color = undefined;
+	      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
+	      	          allEdges[edgeId].hiddenLabel = undefined;
+
+	      	      }
+	    	      highlightActive = false;
+			}
+
+			var updateArray = [];
+    	    for (nodeId in allNodes) {
+    	      if (allNodes.hasOwnProperty(nodeId)) {
+    	        updateArray.push(allNodes[nodeId]);
+    	      }
+    	    }
+
+    	    nodesDataset.update(updateArray);
+
+
+    	    updateArray = [];
+    	    for (edgeId in allEdges) {
+    	      if (allEdges.hasOwnProperty(edgeId)) {
+    	        updateArray.push(allEdges[edgeId]);
+    	      }
+    	    }
+
+    	    edgesDataset.update(updateArray);
+
+		}
+
+	    function neighbourhoodHighlight(params) {
+	    	console.log("Node!!!");
+	    	$("#edgeDataPanel").hide();
+    	     // if something is selected:
+    	    if (params.nodes.length > 0) {
+    	      highlightActive = true;
+    	      var i,j;
+    	      var selectedNode = params.nodes[0];
+    	      var selectedNodeGroup = allNodes[selectedNode].group;
+    	      var firstLevelNodeGroup = null;
+
+    	      // mark all nodes as hard to read.
+    	      for (var nodeId in allNodes) {
+    	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
+    	        if (allNodes[nodeId].hiddenLabel == undefined) {
+    	          allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+    	          allNodes[nodeId].label = undefined;
+    	        }
+    	      }
+
+    	      for (var edgeId in allEdges) {
+    	    	  allEdges[edgeId].color = 'rgba(192,192,192,0.3)';
+      	        if (allEdges[edgeId].hiddenLabel == undefined) {
+      	        	allEdges[edgeId].hiddenLabel = allEdges[edgeId].label;
+      	        	allEdges[edgeId].label = undefined;
+      	        }
+      	      }
+
+
+    	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+
+    	      var connectedNodes = network.getConnectedNodes(selectedNode);
+    	      if(connectedNodes.length != 0) {
+    	    	  firstLevelNodeGroup = allNodes[connectedNodes[0]].group;
+    	      }
+    	      var allConnectedNodes = [];
+
+    	      // get the second degree nodes
+    	      for (i = 1; i < degrees; i++) {
+    	        for (j = 0; j < connectedNodes.length; j++) {
+    	          allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
+    	        }
+    	      }
+
+    	      // all second degree nodes get a different color and their label back
+    	      for (i = 0; i < allConnectedNodes.length; i++) {
+    	    	  if(selectedNodeGroup == "user") {
+    	    	  	  allNodes[allConnectedNodes[i]].color = 'rgba(255,0,0,0.2)';
+    	    	  }else if(selectedNodeGroup == "dataset"){
+    	    		  allNodes[allConnectedNodes[i]].color = 'rgba(0,0,255,0.2)';
+    	    	  }else {
+    	    		  allNodes[allConnectedNodes[i]].color = 'rgba(0,255,0,0.2)';
+    	    	  }
+    	        if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+    	          allNodes[allConnectedNodes[i]].label = allNodes[allConnectedNodes[i]].hiddenLabel;
+    	          allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      // all first degree nodes get their own color and their label back
+    	      for (i = 0; i < connectedNodes.length; i++) {
+    	    	  if(firstLevelNodeGroup == "user") {
+    	    	  	  allNodes[connectedNodes[i]].color = 'rgba(255,0,0,0.7)';
+    	    	  }else if(firstLevelNodeGroup == "dataset") {
+    	    		  allNodes[connectedNodes[i]].color = 'rgba(0,0,255,0.7)';
+    	    	  }else {
+    	    		  allNodes[connectedNodes[i]].color = 'rgba(0,255,0,0.7)';
+    	    	  }
+    	        if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+    	          allNodes[connectedNodes[i]].label = allNodes[connectedNodes[i]].hiddenLabel;
+    	          allNodes[connectedNodes[i]].hiddenLabel = undefined;
+    	        }
+    	      }
+
+    	      var curNode = allNodes[selectedNode];
+    	      var group = curNode.group;
+	    		var id = null;
+	    		switch(group) {
+	    		case "service":
+					$("#panelsub").attr("class", "well col-lg-5");
+	    			id = curNode.serviceId;
+	    			$("#description").text("Service ");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+		  	      $("#nodeName").text(curNode.title);
+		  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+		  	      $("#cluster").text(curNode.cluster);
+		  	      $("#label").text(curNode.label);
+	  	          $("#panel").show();
+								$("#related").hide();
+	    			break;
+	    		case "dataset":
+						$("#panelsub").attr("class", "well col-lg-8");
+	    			id = curNode.datasetId;
+	    			$("#description").text("Dataset ");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+	  	      $("#nodeName").text(curNode.title);
+	  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+	  	      $("#cluster").text(curNode.cluster);
+	  	      $("#label").text(curNode.label);
+
+						var obj = {
+							datasetName : curNode.title
+						}
+						$.ajax({
+								url: "getRelatedServiceOfDataset",
+								type: "POST",
+								contentType: "application/json",
+								data: JSON.stringify(obj),
+								dataType: "text"
+						}).done(function(data) {
+								data = JSON.parse(data);
+								$("#relatedServiceHref1").attr("href", data.url0);
+								$("#relatedServiceImg1").attr("src", data.imageUrl0);
+								$("#relatedServiceName1").html(data.name0);
+
+								if (data.name1 == null) {
+									$("#related2").hide();
+								}else {
+									$("#related2").show();
+								}
+								$("#relatedServiceHref2").attr("href", data.url1);
+								$("#relatedServiceImg2").attr("src", data.imageUrl1);
+								$("#relatedServiceName2").html(data.name1);
+
+								$("#related").show();
+								$("#panel").show();
+						});
+
+	    			break;
+	    		case "user":
+						$("#panelsub").attr("class", "well col-lg-5");
+	    			id = curNode.userId;
+	    			$("#description").text("User");
+						$("#groupId").text(group.charAt(0).toUpperCase()+group.substring(1) + " Id:" );
+		  	      $("#nodeName").text(curNode.title);
+		  	      $("#id").text(id);
+			  	  $("#nodeId").text(curNode.id);
+		  	      $("#cluster").text(curNode.cluster);
+		  	      $("#label").text(curNode.label);
+	  	          $("#panel").show();
+								$("#related").hide();
+	    			break;
+	    		case "variable":
+	    			id = curNode.variableId;
+	    			$("#description").text("Variable");
+	    			break;
+	    		default:
+	    			break;
+	    		}
+
+
+
+
+
+
+    	      // the main node gets its own color and its label back.
+			  if(selectedNodeGroup == "user") {
+    	    	  	  allNodes[selectedNode].color = 'rgba(255,0,0,0.7)';
+    	    	  }else if(selectedNodeGroup == "dataset"){
+    	    		  allNodes[selectedNode].color = 'rgba(0,0,255,0.7)';
+    	    	  }else {
+    	    		  allNodes[selectedNode].color = 'rgba(0,255,0,0.7)';
+    	    	  }
+    	      if (allNodes[selectedNode].hiddenLabel !== undefined) {
+    	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+    	        allNodes[selectedNode].hiddenLabel = undefined;
+    	      }
+
+    	    }
+
+    	    // transform the object into an array
+    	    var updateArray = [];
+    	    for (nodeId in allNodes) {
+    	      if (allNodes.hasOwnProperty(nodeId)) {
+    	        updateArray.push(allNodes[nodeId]);
+    	      }
+    	    }
+
+    	    nodesDataset.update(updateArray);
+
+
+    	    updateArray = [];
+    	    for (edgeId in allEdges) {
+    	      if (allEdges.hasOwnProperty(edgeId)) {
+    	        updateArray.push(allEdges[edgeId]);
+    	      }
+    	    }
+
+    	    edgesDataset.update(updateArray);
+    	  }
+
+
+
+
+	  //  draw();
+
+
+	</script>
+	<script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
 }
 
 @main("Knowledge Graph", scripts){
