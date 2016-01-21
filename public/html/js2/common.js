@@ -489,6 +489,7 @@ function select_months_from_str(str1)
 }
 
 // num2scale__
+// for radioLog=2  radioLog2=1
 function num2scale(ii)
 {
   if (displayOpt=="1") {
@@ -512,6 +513,25 @@ function num2scale(ii)
       document.getElementById("radioLog").checked = true;
       document.getElementById("radioLog2").checked = true;
     }
+  }
+}
+
+// num2scale2__
+// for radioLog=2  radioLog2=4
+function num2scale2(ii)
+{
+  if (ii==0) { 
+    document.getElementById("radioLin").checked = true;
+    document.getElementById("radioLin2").checked = true;
+  } else if ( ii==2 ) {
+    document.getElementById("radioLin").checked = true;
+    document.getElementById("radioLog2").checked = true;
+  } else if ( ii==4 ) {
+    document.getElementById("radioLog").checked = true;
+    document.getElementById("radioLin2").checked = true;
+  } else if ( ii==6 ) {
+    document.getElementById("radioLog").checked = true;
+    document.getElementById("radioLog2").checked = true;
   }
 }
 
@@ -542,6 +562,25 @@ function scale2num() {
 
     return  t1 + t2;
   }
+}
+
+// scale2num2__
+function scale2num2() {
+  var out1, t1, t2; 
+
+  if ( document.getElementById("radioLin").checked ) {
+    t1 = 0;
+  } else { 
+    t1 = 2;
+  }
+
+  if ( document.getElementById("radioLin2").checked ) {
+    t2 = 0;
+  } else { 
+    t2 = 4;
+  }
+
+  return  t1 + t2;
 }
 
 
@@ -631,8 +670,11 @@ function showUrl(inputs) {
         } else if ( key0 == "months" ) {
           vq = getMonthStr();
 
-        } else if ( key0 == "scale" ) {
+        } else if ( key1 == "scale" ) {
           vq = scale2num();
+
+        } else if ( key1 == "scale2" ) {
+          vq = scale2num2();
 
         }
 /*
@@ -692,6 +734,66 @@ function processQueryStr(inputs) {
 
       } else if ( key1 == "scale" ) {
         num2scale(Number(vq));
+
+      } else if ( key1 == "scale2" ) {
+        num2scale2(Number(vq));
+
+      } else {
+        $("#"+key1).val(vq);
+        $("#"+key1).change();
+      }
+    //} catch(err) {}
+  }
+}
+
+// for twoDimSlice3D
+function processQueryStr2(inputs) {
+  queries = get_querystring();
+
+  var key0, key1, vq;
+
+  for (key0 in queries) {
+    if (!queries.hasOwnProperty(key0)) { continue; }
+    if (!inputs.hasOwnProperty(key0)) { continue; }
+    key1 = inputs[key0];
+    vq = queries[key0];
+    vq = vq.trim();
+
+    if ( key0.slice(0,5) == "pres1" ) {
+      if (queries['var1'] == 'ot' || queries['var1'] == 'os')
+        vq = (Number(vq) / 10000).toString();
+      else
+        vq = (Number(vq) / 100).toString();
+    }
+
+    if ( key0.slice(0,5) == "model" ) {
+      vq = vq.replace("_", "/");
+    }
+
+    if ( key0 == "startT" || key0 == "endT" ) {
+      vq = vq.slice(0,4) + "-" + vq.slice(4,6);
+    }
+
+    if ( key0 == "purpose" ) {
+      vq = unescape(vq);
+    }
+
+    //try {
+      if ( key1 == "Image" ) {
+        $("#"+key1).html( "<img src='" + vq + "' width='820'/>" );
+
+      } else if ( key1 == "data_url" ) {
+        $("#"+key1).val( vq );
+        enable_download_button();
+
+      } else if ( key1 == "months" ) {
+        select_months_from_str(vq);
+
+      } else if ( key1 == "scale" ) {
+        num2scale(Number(vq));
+
+      } else if ( key1 == "scale2" ) {
+        num2scale2(Number(vq));
 
       } else {
         $("#"+key1).val(vq);

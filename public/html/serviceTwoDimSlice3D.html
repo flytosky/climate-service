@@ -19,7 +19,7 @@
 -->
 
   <!-- cmac related -->
-  <link rel="stylesheet" href="js2/common.css">
+  <link rel="stylesheet" href="common.css">
   <script src='js2/dataList1.js'></script>
   <script src='js2/varList.js'></script>
   <script src='js2/common.js'></script>
@@ -93,7 +93,8 @@
         $("#actionUrl0").hide();
         $("#showUrl1").hide();
       } else {
-        processQueryStr(inputs);
+// zzzz
+        processQueryStr2(inputs);
       }
     }
 
@@ -138,7 +139,7 @@
 
         // form url string
         // var url = "http://cmacws.jpl.nasa.gov:8090/svc/twoDimSlice3D?";
-        var url = "http://" + window.location.hostname + ":9002/svc/nasaTwoDimSlice3D?";
+        var url = "http://" + window.location.hostname + ":8890/svc/twoDimSlice3D?";
         // alert(url);
 
         var d1 = $("#data1").val();
@@ -272,7 +273,7 @@
         // alert("url: " + url);
 
 
-        var urlTimeBounds = "http://" + window.location.hostname + ":9002/svc/time_bounds?";
+        var urlTimeBounds = "http://" + window.location.hostname + ":8890/svc/time_bounds?";
         var arglistTB = "";
         arglistTB = arglistTB.concat("serviceType=");
         arglistTB = arglistTB.concat("1");
