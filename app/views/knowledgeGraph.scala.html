@@ -547,11 +547,26 @@
 
 	    function schedule(selectedValue){
 	        var parameter = selectedValue.split(" ");
-	        if(parameter[0] === "Dataset" || parameter[1] == "Dataset") {
+	        // When selecting an option, update filtered combinations accordingly
+	        document.getElementById("filterCombination").options.length = 0;
+	        document.getElementById("filterCombination").options[0] = new Option("Choose Filter","",true,false);
+	        document.getElementById("filterCombination").options[0].disabled = true;
+	        
+	        if (parameter[0] === "Dataset" || parameter[1] == "Dataset") {
 	        	$("#setWholeShownName").show();
-	        }else {
-	        	$("#setWholeShownName").hide();
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
+	        		new Option("Dataset","dataset");
+	        } else {
+	        	$ ("#setWholeShownName").hide();
 	        }
+	        if (parameter[0] === "User" || parameter[1] == "User") {
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
+	        		new Option("User","user");
+	        }
+			if (parameter[0] === "Service" || parameter[1] == "Service") {
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
+	        		new Option("Service","service");		        	
+	        }	        
 	    }
 
 		function selectTheEdge(params) {
@@ -1112,7 +1127,6 @@
                                     <select class="form-control" id="filterCombination">
                                         <option disabled selected>Choose Filter</option>
                                         <option value="user">User</option>
-                                        <option value="service">Service</option>
                                         <option value="dataset">Dataset</option>
                                     </select>
                                 </div>
