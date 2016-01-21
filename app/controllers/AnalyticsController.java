@@ -344,15 +344,15 @@ public class AnalyticsController extends Controller{
 			}
 			else if(datasetId1 != 0 && datasetId2 != 0 && p3number == 1){
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getServiceExecutionLogsByDatasetAndDataset/datasetId1/" + datasetId1+ "/datasetId2/" + datasetId2 + "/json");
+						+ Constants.CMU_BACKEND_PORT + "/datasetAndService/getServicesByDatasetAndDataset/datasetId1/" + datasetId1+ "/datasetId2/" + datasetId2 + "/json");
 			}
 			else if(serviceId1 != 0 && serviceId2 != 0 && p3number == 3){
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getUsersByServiceAndService/serviceId1/" + serviceId1+ "/serviceId2/" + serviceId2 + "/json");
+						+ Constants.CMU_BACKEND_PORT + "/serviceAndUser/getUserByServiceAndService/serviceId1/" + serviceId1+ "/serviceId2/" + serviceId2 + "/json");
 			}
 			else if(serviceId1 != 0 && serviceId2 != 0 && p3number == 2){
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
-						+ Constants.CMU_BACKEND_PORT + "/datasetLog/getDatasetLogsByServiceAndService/serviceId1/" + serviceId1+ "/serviceId2/" + serviceId2 + "/json");
+						+ Constants.CMU_BACKEND_PORT + "/datasetAndService/getDatasetByServiceAndService/serviceId1/" + serviceId1+ "/serviceId2/" + serviceId2 + "/json");
 			}
 			else if(p3number == 3) {
 				response = RESTfulCalls.getAPI(Constants.URL_HOST
