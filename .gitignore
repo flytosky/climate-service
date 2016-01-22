@@ -20,3 +20,6 @@ dist
 **/.settings/
 **/.project
 **/.classpath
+projectFilesBackup
+.sbtserver/*.log
+master.log
