@@ -551,22 +551,22 @@
 	        document.getElementById("filterCombination").options.length = 0;
 	        document.getElementById("filterCombination").options[0] = new Option("Choose Filter","",true,false);
 	        document.getElementById("filterCombination").options[0].disabled = true;
-	        
+
 	        if (parameter[0] === "Dataset" || parameter[1] == "Dataset") {
 	        	$("#setWholeShownName").show();
-	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] =
 	        		new Option("Dataset","dataset");
 	        } else {
 	        	$ ("#setWholeShownName").hide();
 	        }
 	        if (parameter[0] === "User" || parameter[1] == "User") {
-	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] =
 	        		new Option("User","user");
 	        }
 			if (parameter[0] === "Service" || parameter[1] == "Service") {
-	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] = 
-	        		new Option("Service","service");		        	
-	        }	        
+	        	document.getElementById("filterCombination").options[document.getElementById("filterCombination").options.length] =
+	        		new Option("Service","service");
+	        }
 	    }
 
 		function selectTheEdge(params) {
@@ -725,8 +725,8 @@
 								tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Dataset Name</th><th>Execution Time</th><th>Details</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+                  tr += "<tr><td>"+edgeDatas[i].name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].startTime+"</td>";
 									/*
 			        		tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
@@ -754,8 +754,8 @@
 		        		tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
+                  tr += "<tr><td>"+edgeDatas[i].name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].startTime+"</td>";
 
 			        		/* tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
