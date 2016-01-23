@@ -754,8 +754,8 @@
 		        		tr = "<table class=\"table table-striped\"><thead>" +
 	        			"<tr><th>Dataset Name</th><th>Execution Time</th></tr></thead><tbody>";
 		        		for(var i=0; i<Object.keys(edgeDatas).length; i++) {
-                  tr += "<tr><td>"+edgeDatas[i].name+"</td>";
-			        		tr += "<td>"+edgeDatas[i].startTime+"</td>";
+			        		tr += "<tr><td>"+edgeDatas[i].dataset.name+"</td>";
+			        		tr += "<td>"+edgeDatas[i].serviceExecutionLog.executionStartTime+"</td>";
 
 			        		/* tr += "<td>";
 			        		tr += "<form action=\"/getConfigurationByConfId\" method=\"GET\">";
