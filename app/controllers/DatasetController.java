@@ -165,6 +165,9 @@ public static Result getRelatedServiceOfDataset() {
 				System.out.println("seesee" + cs.getImageURL());
 				System.out.println("seesee" + cs.getName());
 				cnt++;
+				if (cnt>1) {
+					break;
+				}
 			}
 		}
 		ObjectMapper mapper = new ObjectMapper();
@@ -236,7 +239,7 @@ public static List<Dataset> queryFirstKDatasets(String dataSetName, String agenc
 	}
 
 	// parse the json string into object
-	for (int i = 0; i < dataSetNode.size(); i++) {
+	for (int i = 0; i < k; i++) {
 		JsonNode json = dataSetNode.path(i);
 		Dataset newDataSet = deserializeJsonToDataSet(json);
 		long id = newDataSet.getId();
