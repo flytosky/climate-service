@@ -553,8 +553,7 @@
 			console.log("Edge!!!");
 			// reset all nodes and edges
 			for (var nodeId in allNodes) {
-    	        allNodes[nodeId].color = undefined;
-
+    	        allNodes[nodeId].color = 'rgba(192,192,192,0.3)';
     	        if (allNodes[nodeId].hiddenLabel !== undefined) {
     	          allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
     	          allNodes[nodeId].hiddenLabel = undefined;
@@ -562,10 +561,14 @@
     	      }
 
     	      for (var edgeId in allEdges) {
-    	    	  allEdges[edgeId].color = undefined;
+                  if (params.edges.length > 0) {
+                      allEdges[edgeId].color = 'rgba(192,192,192,0.3)';                
+                  }
+                  else{
+                      allEdges[edgeId].color = undefined; 
+                  }
       	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
       	          allEdges[edgeId].hiddenLabel = undefined;
-
       	      }
     	      highlightActive = false;
     	      var updateArray = [];
@@ -587,22 +590,21 @@
 
       	    edgesDataset.update(updateArray);
 
-
     	    // select edges
-
 			$("#panel").hide();
 			//$("#edgeDataPanel").show();
 			if (params.edges.length > 0) {
 				var selectedEdge = allEdges[params.edges[0]];
+                selectedEdge.color = 'rgba(255,0,0,1)';
 	    	    var node1 = allNodes[selectedEdge.from];
 	    	    var node2 = allNodes[selectedEdge.to];
 	    	    var userId1 = null, serviceId1 = null, datasetId1 = null, userId2 = null, serviceId2 = null, datasetId2 = null;
-	    	    if(node1.group == "user")	userId1 = node1.userId; //changed
-	    	    if(node1.group == "dataset")	datasetId1 = node1.datasetId;
-	    	    if(node1.group == "service")	serviceId1 = node1.serviceId;
-	    	    if(node2.group == "user")	userId2 = node2.userId;
-	    	    if(node2.group == "dataset")	datasetId2 = node2.datasetId;
-	    	    if(node2.group == "service")	serviceId2 = node2.serviceId;
+	    	    if(node1.group == "user")	    userId1 = node1.userId, node1.color = 'rgba(255,0,0,0.7)'; //changed
+	    	    if(node1.group == "dataset")	datasetId1 = node1.datasetId, node1.color = 'rgba(0,0,255,0.7)';
+	    	    if(node1.group == "service")	serviceId1 = node1.serviceId, node1.color = 'rgba(0,255,0,0.7)';
+	    	    if(node2.group == "user")	    userId2 = node2.userId, node2.color = 'rgba(255,0,0,0.7)';
+	    	    if(node2.group == "dataset")	datasetId2 = node2.datasetId, node2.color = 'rgba(0,0,255,0.7)';
+	    	    if(node2.group == "service")	serviceId2 = node2.serviceId, node2.color = 'rgba(0,255,0,0.7)';
 
 						if (p3 == "Service") { //prevent errors in parsing JSON
 							var p3number = 1;
@@ -622,12 +624,6 @@
 	    	    		serviceId2: serviceId2,
 								p3number: p3number
 		    		}
-
-						// console.log(p3number);
-						// console.log(userId1);
-						// console.log(userId2);
-						// console.log(datasetId1);
-						// console.log(datasetId2);
 
 	    	    $.ajax({
 		            url: "/getEdgeData",
@@ -784,7 +780,7 @@
 	    	      }
 
 	    	      for (var edgeId in allEdges) {
-	    	    	  allEdges[edgeId].color = undefined;
+	    	    	  allEdges[edgeId].color = 'rgba(120,120,120,1)';
 	      	          allEdges[edgeId].label = allEdges[edgeId].hiddenLabel;
 	      	          allEdges[edgeId].hiddenLabel = undefined;
 
@@ -810,7 +806,6 @@
     	    }
 
     	    edgesDataset.update(updateArray);
-
 		}
 
 	    function neighbourhoodHighlight(params) {
@@ -840,7 +835,6 @@
       	        	allEdges[edgeId].label = undefined;
       	        }
       	      }
-
 
     	      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
 
@@ -966,10 +960,6 @@
 	    		}
 
 
-
-
-
-
     	      // the main node gets its own color and its label back.
 			  if(selectedNodeGroup == "user") {
     	    	  	  allNodes[selectedNode].color = 'rgba(255,0,0,0.7)';
@@ -982,7 +972,6 @@
     	        allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
     	        allNodes[selectedNode].hiddenLabel = undefined;
     	      }
-
     	    }
 
     	    // transform the object into an array
@@ -995,7 +984,6 @@
 
     	    nodesDataset.update(updateArray);
 
-
     	    updateArray = [];
     	    for (edgeId in allEdges) {
     	      if (allEdges.hasOwnProperty(edgeId)) {
@@ -1006,12 +994,7 @@
     	    edgesDataset.update(updateArray);
     	  }
 
-
-
-
 	  //  draw();
-
-
 	</script>
 	<script type="text/javascript" src='@routes.Assets.at("javascripts/googleAnalytics.js")'></script>
 }

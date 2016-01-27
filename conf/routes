@@ -17,11 +17,11 @@ POST	/isEmailExisted				controllers.Application.isEmailExisted()
 
 #recommendation overview
 GET		/climateService/recommendationSummary/:userId/userIdNumber/:id/keyword/:keyword				controllers.ClimateServiceController.recommendationSummary(userId: String, id: Integer, keyword: String)
-POST  /getUserByEmail                                             controllers.ClimateServiceController.getUserByEmail()
+POST    /getUserByEmail                                                                             controllers.ClimateServiceController.getUserByEmail()
 
 
 # Climate Service
-GET		/climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
+GET		    /climateService/allServices									controllers.ClimateServiceController.showAllClimateServices()
 POST		/climateService/add											controllers.ClimateServiceController.addClimateService()
 GET     	/climateService/addAClimateService          				controllers.ClimateServiceController.addAClimateService()
 POST		/climateService/savePage									controllers.ClimateServiceController.passPageStr()
@@ -30,10 +30,10 @@ POST		/climateService/serviceModels								controllers.ClimateServiceController.
 POST		/climateService/ruleEngineData									controllers.ClimateServiceController.ruleEngineData()
 
 GET     	/climateService/mostPopularServices						controllers.ClimateServiceController.mostPopularServices()
-GET		/climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
-GET		/climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
-GET		/climateService/searchClimateService 					 		controllers.ClimateServiceController.searchClimateServices()
-GET 	/climateService/getSearchResult				    controllers.ClimateServiceController.getSearchResult()
+GET		    /climateService/mostRecentlyUsedClimateServices			controllers.ClimateServiceController.mostRecentlyUsedClimateServices()
+GET		    /climateService/mostRecentlyAddedClimateServices		controllers.ClimateServiceController.mostRecentlyAddedClimateServices()
+GET		    /climateService/searchClimateService 					 		controllers.ClimateServiceController.searchClimateServices()
+GET 	    /climateService/getSearchResult				    controllers.ClimateServiceController.getSearchResult()
 
 #replace page
 POST 	/climateService/replaceFile								controllers.ClimateServiceController.replaceFile()
@@ -41,8 +41,8 @@ POST 	/climateService/replaceFile								controllers.ClimateServiceController.re
 
 # Service Execution Log
 GET     	/serviceLog                                          	controllers.ServiceExecutionLogController.getServiceLog()
-GET    	/searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
-GET		/searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
+GET    	    /searchServiceLog                                       controllers.ServiceExecutionLogController.searchServiceLog()
+GET		    /searchServiceLogResult									controllers.ServiceExecutionLogController.getSearchServiceLog()
 GET 		/getConfigurationByConfId                               controllers.ServiceExecutionLogController.getConfigurationByConfId()
 GET			/getServiceExecutionLogUrlById							controllers.ServiceExecutionLogController.getServiceExecutionLogUrlById()
 
@@ -51,7 +51,7 @@ GET     /dataSet/allDatasets                        controllers.DatasetControlle
 GET		/dataSet/searchDataSet 					 	controllers.DatasetController.searchDataset()
 GET 	/dataSet/getSearchResult				    controllers.DatasetController.getSearchResult()
 GET     /dataSet/mostPopularDatasets				controllers.DatasetController.mostPopularDatasets()
-POST  /getRelatedServiceOfDataset      controllers.DatasetController.getRelatedServiceOfDataset()
+POST    /getRelatedServiceOfDataset                 controllers.DatasetController.getRelatedServiceOfDataset()
 # Dataset Log
 GET		/datasetLog/allDatasetLogs					controllers.DatasetLogController.getAllDatasetLogs()
 
