@@ -146,9 +146,11 @@ public class AnalyticsController extends Controller{
 		String choice = json.path("choice").asText();
 		String filteredChoice = json.path("fChoice").asText();
 		String filteredId = json.path("fId").asText();
-
+		String startTime = json.path("startTime").asText();
+		String endTime = json.path("endTime").asText();
 		JsonNode response = null;
 		ObjectNode jsonData = Json.newObject();
+
 		try {
 			jsonData.put("param1", parameter1);
 			jsonData.put("param2", parameter2);
@@ -156,6 +158,8 @@ public class AnalyticsController extends Controller{
 			jsonData.put("choice", choice);
 			jsonData.put("fChoice", filteredChoice);
 			jsonData.put("fId", filteredId);
+			jsonData.put("startTime", startTime);
+			jsonData.put("endTime", endTime);
 			response = RESTfulCalls.postAPI(Constants.URL_HOST
 					+ Constants.CMU_BACKEND_PORT + Constants.GET_RELATIONAL_GRAPH, jsonData);
 

@@ -153,8 +153,22 @@
             } else {
                 var filteredId = null;
             }
+            if (document.getElementById('fStartTime') != null) {
+                var fStartTime = document.getElementById("fStartTime").value;
+            } else {
+                var fStartTime = null;
+            }
+            if (document.getElementById('fEndTime') != null) {
+                var fEndTime = document.getElementById("fEndTime").value;
+            } else {
+                var fEndTime = null;
+            }
+            @**** To reset the fields after click ****
             document.getElementById("filterCombination").selectedIndex = 0;
             $('#filterId').val("");
+            $('#fStartTime').val("");
+            $('#fEndTime').val("");
+            ****@
             p1 = temp2[0];
             p2 = temp2[1];
             p3 = temp2[2];
@@ -172,16 +186,18 @@
             else {
                 document.getElementById("header").innerHTML = "Network of " + p1.toLowerCase() + " and " + p2.toLowerCase() + " based on " + p3.toLowerCase() + " usage <img src=\"/assets/images/Legend.jpg\" height=\"20\" width=\"190\"/><span class=\"glyphicon glyphicon-question-sign\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"... ...\"></span>";
             }
-
+			
             var parameters = {
                     param1:p1,
                     param2:p2,
                     param3:p3,
                     choice:choice,
                     fChoice:filteredChoice,
-                    fId:filteredId
+                    fId:filteredId,
+                    startTime:fStartTime,
+                    endTime:fEndTime
             }
-
+			console.log(parameters);
             $.ajax({
                 url: "/getSpecifiedKnowledgeGraph",
                 type: "POST",
@@ -506,42 +522,6 @@
 		        })
 
 	    	 }
-
-	      }
-
-	    function selectCustomizedNode() {
-
-	    	 var group = document.getElementById("paramCombination1").value;
-	    	 var id = document.getElementById("userConfId").value;
-	    	 var startTime = document.getElementById("startTime").value;
-	    	 var endTime = document.getElementById("endTime").value;
-	    	 var choice = $('input[name="customizedChoice"]:checked').val();
-
-	    		var parameters = {
-		    			param1:p1,
-		    			param2:p2,
-		    			id:id,
-		    			groupName:group,
-		    			startTime:startTime,
-		    			endTime:endTime,
-		    			choice:choice
-		    	}
-	    		$.ajax({
-		            url: "/getCustomizedNodeKnowledgeGraph",
-		            type: "POST",
-		            contentType: "application/json",
-		            data: JSON.stringify(parameters),
-		            dataType: "text"
-		        }).done(function(data1) {
-		        	console.log("success");
-		        	jsonString = data1;
-		        	draw();
-		        }).fail(function(xhr, textStatus, errorThrown) {
-		        	console.log("error!");
-		        	console.log(xhr);
-		        	console.log(textStatus);
-		            console.log(errorThrown);
-		        })
 
 	      }
 
@@ -1130,11 +1110,21 @@
                                         <option value="dataset">Dataset</option>
                                     </select>
                                 </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control col-lg-4" id="filterId" placeholder="User/Dataset/Service Id">
-                            </div>
+                            <br>
+                            <label>Id</label>
+                            <input type="text" class="form-control col-lg-4" id="filterId" placeholder="User/Dataset/Service Id">                            
                         </div>
                         <br>
+				        <div id="filterTime">
+				            <label>Start Time</label>
+				            <input type="text" class="form-control col-lg-4" id="fStartTime" placeholder="MM/DD/YY HH:mm AM">
+				          		
+				          	<br>		 
+				          	<br>
+				          	<br>
+				            <label>End Time</label>
+				            <input type="text" class="form-control col-lg-4" id="fEndTime" placeholder="MM/DD/YY HH:mm AM">				          				 
+				        </div>                        
                         <div class="text-center">
                             <button type="button" class="btn btn-primary" onclick="Javascript:getParameters()">Finish</button>
                         </div>
@@ -1210,55 +1200,5 @@
         </div>
     </div>
     <br>
-
-
-    <div id="userConfig" class="col-lg-8">
-        <form>
-            <label>Customized ID</label>
-            <div class="row">
-                <div class="col-sm-4 col-md-2">
-          <div class="form-group">
-              <select class="form-control" id="paramCombination1">
-                  <option value="user">User</option>
-                  <option value="service">Service</option>
-                  <option value="dataset">Dataset</option>
-              </select>
-          </div>
-          </div>
-
-          <div class="col-sm-4 col-md-4">
-                 <input type="text" class="form-control col-lg-4" id="userConfId" placeholder="User/Dataset/Service Id">
-          </div>
-
-        </div>
-
-       <div class="row">
-         <div class="col-sm-4 col-md-4">
-            <label>Start Time</label>
-                <input type="text" class="form-control col-lg-4" id="startTime" placeholder="MM/DD/YYYY hh:mm">
-         </div>
-
-         <div class="col-sm-4 col-md-4">
-            <label>End Time</label>
-                <input type="text" class="form-control col-lg-4" id="endTime" placeholder="MM/DD/YYYY hh:mm">
-         </div>
-
-       </div>
-       <br>
-       <div class="row">
-          <div id = "setShownName" class="col-sm-4 col-md-4">
-                <input type="radio" id="datasetNameC" name="customizedChoice" checked="checked" value="datasetName" /> Dataset Name
-                &nbsp;
-                <input type="radio" id="variableNameC" name="customizedChoice" value="variableName" /> Variable Name
-            </div>
-           <div class="col-sm-4 col-md-4">
-               <button type="button" class="btn btn-primary col-lg-3" onclick="Javascript:selectCustomizedNode()">Show</button>
-           </div>
-       </div>
-
-        </form>
-        </div>
-
-
 
 }
