@@ -493,6 +493,10 @@ public class ClimateServiceController extends Controller {
 		for (int i = 0; i<userBasedHybrid.size(); i++) {
 			userBasedDatasetHybrid.add(userBasedHybrid.path(i).findValue("dataset").toString());
 		}
+		// //TEMPOARY USAGE!!!!!NEED MODIFY
+		// for (int i = 0; i<userBased.size(); i++) {
+		// 	userBasedDataset.add(userBasedHybrid.path(i).findValue("dataset").toString());
+		// }
 
 		JsonNode itemBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
