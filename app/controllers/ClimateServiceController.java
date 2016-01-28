@@ -377,25 +377,25 @@ public class ClimateServiceController extends Controller {
 	}
 
 
-	public static Result getServiceByKeyword() {
-		JsonNode result = request().body().asJson();
-		String keyword = result.get("keyword").toString();
-
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectNode queryJson = mapper.createObjectNode();
-		queryJson.put("keywords", keyword);
-
-		System.out.println("SEE getServiceByKeyword: " + queryJson);
-
-		JsonNode serviceNode = RESTfulCalls.postAPI("http://einstein.sv.cmu.edu:9020/serviceRecommendation", queryJson);
-
-		// parse the json string into object
-		JsonNode json = serviceNode.path(0);
-		String id = userIdNode.findPath("id").asText();
-		System.out.println("SEE getUserByEmail ID: " + id);
-
-		return ok(id);
-	}
+	// public static Result getServiceByKeyword() {
+	// 	JsonNode result = request().body().asJson();
+	// 	String keyword = result.get("keyword").toString();
+	//
+	// 	ObjectMapper mapper = new ObjectMapper();
+	// 	ObjectNode queryJson = mapper.createObjectNode();
+	// 	queryJson.put("keywords", keyword);
+	//
+	// 	System.out.println("SEE getServiceByKeyword: " + queryJson);
+	//
+	// 	JsonNode serviceNode = RESTfulCalls.postAPI("http://einstein.sv.cmu.edu:9020/serviceRecommendation", queryJson);
+	//
+	// 	// parse the json string into object
+	// 	JsonNode json = serviceNode.path(0);
+	// 	String id = userIdNode.findPath("id").asText();
+	// 	System.out.println("SEE getUserByEmail ID: " + id);
+	//
+	// 	return ok(id);
+	// }
 
 	public static Result recommendationSummary(String userId, int id, String keyword) {
 
@@ -514,10 +514,7 @@ public class ClimateServiceController extends Controller {
 		for (int i = 0; i<userBasedHybrid.size(); i++) {
 			userBasedDatasetHybrid.add(userBasedHybrid.path(i).findValue("dataset").toString());
 		}
-		// //TEMPOARY USAGE!!!!!NEED MODIFY
-		// for (int i = 0; i<userBased.size(); i++) {
-		// 	userBasedDataset.add(userBasedHybrid.path(i).findValue("dataset").toString());
-		// }
+
 
 		JsonNode itemBased = RESTfulCalls.getAPI(Constants.URL_SERVER
 				+ Constants.URL_FLASK
