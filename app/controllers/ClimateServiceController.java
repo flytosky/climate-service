@@ -376,6 +376,27 @@ public class ClimateServiceController extends Controller {
 		return ok(id);
 	}
 
+
+	public static Result getServiceByKeyword() {
+		JsonNode result = request().body().asJson();
+		String keyword = result.get("keyword").toString();
+
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode queryJson = mapper.createObjectNode();
+		queryJson.put("keywords", keyword);
+
+		System.out.println("SEE getServiceByKeyword: " + queryJson);
+
+		JsonNode serviceNode = RESTfulCalls.postAPI("http://einstein.sv.cmu.edu:9020/serviceRecommendation", queryJson);
+
+		// parse the json string into object
+		JsonNode json = serviceNode.path(0);
+		String id = userIdNode.findPath("id").asText();
+		System.out.println("SEE getUserByEmail ID: " + id);
+
+		return ok(id);
+	}
+
 	public static Result recommendationSummary(String userId, int id, String keyword) {
 
 		keyword = keyword.replaceAll(" ", "%20");
