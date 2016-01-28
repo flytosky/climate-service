@@ -365,7 +365,7 @@ public class ClimateServiceController extends Controller {
 
 		System.out.println("SEE getUserByEmail: " + queryJson);
 
-		JsonNode userIdNode = RESTfulCalls.postAPI(Constants.URL_SERVER
+		JsonNode userIdNode = RESTfulCalls.postAPI(Constants.URL_HOST
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_USER_BY_EMAIL, queryJson);
 
 		// parse the json string into object
@@ -487,7 +487,7 @@ public class ClimateServiceController extends Controller {
 
 		if (userBasedHybrid == null || userBasedHybrid.has("error")
 				|| !userBasedHybrid.isArray()) {
-			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, "No related topic found!"));
+			return ok(recommendationSummary.render(climateServices, dataSetsList, usersList, userBasedDataset, featureBasedDataset, itemBasedDataset, userId, userSimilarList, userBasedDatasetHybrid, "No related topic with '" + keyword + "'!"));
 		}
 
 		for (int i = 0; i<userBasedHybrid.size(); i++) {
