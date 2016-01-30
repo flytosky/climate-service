@@ -68,13 +68,14 @@ List[String], keyword: String)
 			},
 			type: "POST"
 		}).done(function(data) {
+			$("#recServiceTable tbody").empty();
 			console.log(data);
 			var serviceName = data.toString();
 			var res = serviceName.split("!");
 			res.pop();
 			var i;
 			for (i in res){
-				var row = 	"<tr><td>Id</td><td>" + res[i] + "</td><td>URL</td></tr>";
+				var row = 	"<tr><td>N/A</td><td>" + res[i] + "</td><td>N/A</td></tr>";
 				$("#recServiceTable tbody").append(row);
 			}
 		});
