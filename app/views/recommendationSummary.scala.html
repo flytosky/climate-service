@@ -56,16 +56,29 @@ List[String], keyword: String)
 	}
 
 	function sendKeyword() {
-		var keyword = $("#keywordForService").val();
-		if (keyword == "") {
-			keyword = "climate";
-		}
-		// $.ajax({
-		// 	url:
-		// })
-		window.location = "/climateService/recommendationSummary/" + userIdSent + "/userIdNumber/1" + "/keyword/" + keyword;
+		var userId = $("#UserIdForRecommendService").val();
+		var obj = {
+			"userId": userId
+		};
+		$.ajax({
+			url: "/getServiceByKeyword",
+			data: JSON.stringify(obj),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			type: "POST"
+		}).done(function(data) {
+			console.log(data);
+			var serviceName = data.toString();
+			var res = serviceName.split("!");
+			res.pop();
+			var i;
+			for (i in res){
+				var row = 	"<tr><td>Id</td><td>" + res[i] + "</td><td>URL</td></tr>";
+				$("#recServiceTable tbody").append(row);
+			}
+		});
 	}
-
 
 </script>
 }
@@ -461,10 +474,10 @@ List[String], keyword: String)
 					<label>Keywords:</label>
 					<input type="text" class="form-control" id="keywordForService">
 				</div>
-				<button type="button" class="btn btn-info" onclick="sendUserIdForService()">Recommend</button>
+				<button type="button" class="btn btn-info" onclick="sendKeyword()">Recommend</button>
 			</form>
 			<br>
-			<table class="table table-striped table-bordered table-condensed tablesorter" id="mostActUsersTable">
+			<table class="table table-striped table-bordered table-condensed tablesorter" id="recServiceTable">
 				<thead>
 					<tr>
 						<th class="col-md-1">Id</th>

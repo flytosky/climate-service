@@ -369,7 +369,6 @@ public class ClimateServiceController extends Controller {
 				+ Constants.CMU_BACKEND_PORT + Constants.GET_USER_BY_EMAIL, queryJson);
 
 		// parse the json string into object
-		JsonNode json = userIdNode.path(0);
 		String id = userIdNode.findPath("id").asText();
 		System.out.println("SEE getUserByEmail ID: " + id);
 
@@ -377,25 +376,29 @@ public class ClimateServiceController extends Controller {
 	}
 
 
-	// public static Result getServiceByKeyword() {
-	// 	JsonNode result = request().body().asJson();
-	// 	String keyword = result.get("keyword").toString();
-	//
-	// 	ObjectMapper mapper = new ObjectMapper();
-	// 	ObjectNode queryJson = mapper.createObjectNode();
-	// 	queryJson.put("keywords", keyword);
-	//
-	// 	System.out.println("SEE getServiceByKeyword: " + queryJson);
-	//
-	// 	JsonNode serviceNode = RESTfulCalls.postAPI("http://einstein.sv.cmu.edu:9020/serviceRecommendation", queryJson);
-	//
-	// 	// parse the json string into object
-	// 	JsonNode json = serviceNode.path(0);
-	// 	String id = userIdNode.findPath("id").asText();
-	// 	System.out.println("SEE getUserByEmail ID: " + id);
-	//
-	// 	return ok(id);
-	// }
+	public static Result getServiceByKeyword() {
+		System.out.println("xxxx");
+		JsonNode result = request().body().asJson();
+		System.out.println(result);
+		String userId = result.get("userId").toString();
+		userId = userId.substring(1,userId.length()-1);
+	
+		String url = "http://einstein.sv.cmu.edu:9043/getTopKUserBasedCFRecommendedServiceByUsername?username="+userId+"&top_num=5";
+	
+		JsonNode serviceNode = RESTfulCalls.getAPI(url);
+	
+		// parse the json string into object
+		String res = "";
+		for (int i = 0; i < serviceNode.size(); i++) {
+			JsonNode json = serviceNode.path(i);
+			String serviceName = json.findPath("dataset").asText();
+			res += serviceName + "!";
+		}
+		
+		System.out.println("SEE getUserByEmail ID: " + res);
+	
+		return ok(res);
+	}
 
 	public static Result recommendationSummary(String userId, int id, String keyword) {
 
