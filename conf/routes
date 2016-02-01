@@ -84,6 +84,7 @@ GET     /aboutUs					controllers.AboutController.aboutUs()
 GET     /aboutProject				controllers.AboutController.aboutProject()
 GET		/tutorial					controllers.AboutController.tutorial()
 GET		/FAQs						controllers.AboutController.FAQs()
+GET   /scienceUseCase      controllers.AboutController.scienceUseCase()
 
 # BugReporting
 GET         /bugs                                                controllers.BugReportController.reports()
