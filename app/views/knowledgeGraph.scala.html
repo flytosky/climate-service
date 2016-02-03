@@ -636,7 +636,6 @@
 		        	edgeDatas = JSON.parse(data);
 		        	$('#edgeDataPanel').html("");
 		        	var tr = null;
-
 							console.log(edgeDatas);
 							if (data.length == 2) {
 								$('#edgeDataPanel').append("<table class=\"table table-striped\"><thead>" +
@@ -649,7 +648,6 @@
 			        		tr += "<tr><td>"+edgeDatas[i].name+"</td>";
 			        		tr += "<td>"+edgeDatas[i].startTime+"</td>";
 			        		tr += "<tr><td>"+node1.group.toUpperCase()+": "+node1.title+"</td><td>"+node2.group.toUpperCase()+": "+node2.title+"</td></tr>";
-
 			        	}
 			        	tr += "</tbody></table>";
 		        	}else if(userId1 != null && userId2 != null && p3number == 1) {
@@ -766,8 +764,6 @@
 		        	$('#edgeDataPanel').append(tr);
 		        	$("#edgeDataPanel").show();
 
-
-
 		        }).fail(function(xhr, textStatus, errorThrown) {
 		        	console.log("error!");
 		        	console.log(xhr);
@@ -859,6 +855,12 @@
     	          allConnectedNodes = allConnectedNodes.concat(network.getConnectedNodes(connectedNodes[j]));
     	        }
     	      }
+
+              var connectedEdges = network.getConnectedEdges(selectedNode);
+              for (i = 0; i < connectedEdges.length; i++) {
+                console.log(connectedEdges[i]);
+                allEdges[connectedEdges[i]].color = 'rgba(255,0,0,1)';
+              }
 
     	      // all second degree nodes get a different color and their label back
     	      for (i = 0; i < allConnectedNodes.length; i++) {
