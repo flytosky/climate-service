@@ -382,21 +382,21 @@ public class ClimateServiceController extends Controller {
 		System.out.println(result);
 		String userId = result.get("userId").toString();
 		userId = userId.substring(1,userId.length()-1);
-	
+
 		String url = "http://einstein.sv.cmu.edu:9043/getTopKUserBasedCFRecommendedServiceByUsername?username="+userId+"&top_num=5";
-	
+
 		JsonNode serviceNode = RESTfulCalls.getAPI(url);
-	
+
 		// parse the json string into object
 		String res = "";
 		for (int i = 0; i < serviceNode.size(); i++) {
 			JsonNode json = serviceNode.path(i);
-			String serviceName = json.findPath("dataset").asText();
+			String serviceName = json.findPath("service").asText();
 			res += serviceName + "!";
 		}
-		
+
 		System.out.println("SEE getUserByEmail ID: " + res);
-	
+
 		return ok(res);
 	}
 
