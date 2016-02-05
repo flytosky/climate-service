@@ -858,7 +858,6 @@
 
               var connectedEdges = network.getConnectedEdges(selectedNode);
               for (i = 0; i < connectedEdges.length; i++) {
-                console.log(connectedEdges[i]);
                 allEdges[connectedEdges[i]].color = 'rgba(255,0,0,1)';
               }
 
@@ -970,7 +969,6 @@
 	    			break;
 	    		}
 
-
     	      // the main node gets its own color and its label back.
 			  if(selectedNodeGroup == "user") {
     	    	  	  allNodes[selectedNode].color = 'rgba(255,0,0,0.7)';
@@ -1003,6 +1001,8 @@
     	    }
 
     	    edgesDataset.update(updateArray);
+
+            network.selectEdges([1]);
     	  }
 
 	  //  draw();
